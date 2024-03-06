@@ -7,13 +7,11 @@
             <section class="promo">
                 <div class="wrapper">
                     <h1 class="main_title">
-                        Кафедра 
                         <span class="cathedra">
-                            <span style="color:white">O</span>
-                            7
+                            Кафедра<span>O</span>7
                         </span>
+                        Информационные системы и программная инженерия
                     </h1>
-                    <h2 class="subtitle">Информационные системы и программная инженерия</h2>
                     <p class="descr">Студенты в процессе обучения получают знания о последних технологиях и методах моделирования, осваивают навыки разработки информационных систем, компьютерной графики, а также программного обеспечения для автоматизированных систем.</p>
                 </div>
             </section>
@@ -52,20 +50,19 @@
 
 .main_title {
     font-size: 42px;
-    font-weight: 600;
-}
-
-.cathedra {
-    font-weight: 700;
-    letter-spacing: -6px;
-}
-
-.subtitle {
-    width: 522px;
-    margin-top: 15px;
-    font-weight: 600;
-    font-size: 41px;
     line-height: 37px;
+    font-weight: 600;
+    max-width: 540px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cathedra span {
+    font-weight: 700;
+    margin-left: 10px;
+    color: white;
 }
 
 .descr {
