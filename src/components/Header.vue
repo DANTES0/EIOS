@@ -6,11 +6,11 @@
     
         <div class="header-wrapper">
             <div class="header-wrapper-container">
-                <div class="title" @click="$router.push('/')">О<span style="color:#408AFA">7</div>
+                <div class="title" @click="$router.push('/')">О<span style="color:#408AFA">7</span></div>
                 <div class="page-header"> 
-                    <a class="page" @click="$router.push('/news')"> Главная новость</a>
-                    <a class="page" @click="$router.push('/entrants')"> Поступающим</a>
-                    <a class="page" @click="$router.push('/gallery')"> Фотогалерея</a>
+                    <a class="page" @click="$router.push('/news')">Новости</a>
+                    <a class="page" @click="$router.push('/entrants')">Поступающим</a>
+                    <a class="page" @click="$router.push('/gallery')">Фотогалерея</a>
                 </div>
             </div>
         </div>
@@ -42,6 +42,8 @@
         
     }
     .title {
+        margin-right: 40px;
+        font-size: 42px;
         cursor: pointer;
     }
     .page-header {

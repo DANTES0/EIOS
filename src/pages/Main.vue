@@ -38,6 +38,7 @@
     color: #408AFA;
 }
 .wrapper {
+    margin-top: 71px;
     width: 653px;
 }
 
