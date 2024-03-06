@@ -4,7 +4,7 @@
 <template>
     <div class="Main-page">
         <div class="container">
-            <div class="wrapper">
+            <div class="text_wrapper">
                 <h1 class="main_title">Кафедра 
                     <span class="cathedra">
                         <span style="color:white">O</span>
@@ -27,18 +27,14 @@
 </template>
 
 <style>
-.Main-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .container {
+    margin: 0 auto;
+    margin-top: 71px;
     max-width: 1390px;
     font-family: Jost;
     color: #408AFA;
 }
-.wrapper {
-    margin-top: 71px;
+.text_wrapper {
     width: 653px;
 }
 

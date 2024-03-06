@@ -39,7 +39,6 @@
         font-weight: 700;
         font-family: Jost;
         color: white;
-        
     }
     .title {
         margin-right: 40px;
