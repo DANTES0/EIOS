@@ -5,8 +5,13 @@
     <div class="Main-page">
         <div class="container">
             <div class="wrapper">
-                <h1 class="title">Кафедра O7</h1>
-                <div class="subtitle">Информационные системы и программная инженерия</div>
+                <h1 class="main_title">Кафедра 
+                    <span class="cathedra">
+                        <span style="color:white">O</span>
+                        7
+                    </span>
+                </h1>
+                <h2 class="subtitle">Информационные системы и программная инженерия</h2>
                 <div class="descr">Студенты в процессе обучения получают знания о последних технологиях и методах моделирования, осваивают навыки разработки информационных систем, компьютерной графики, а также программного обеспечения для автоматизированных систем.</div>
             </div>
 
@@ -27,9 +32,39 @@
     justify-content: center;
     align-items: center;
 }
-.container{
+.container {
     max-width: 1390px;
     font-family: Jost;
-    color: white;
+    color: #408AFA;
+}
+.wrapper {
+    width: 653px;
+}
+
+.main_title {
+    font-size: 42px;
+    font-weight: 600;
+}
+
+.cathedra {
+    font-weight: 700;
+    letter-spacing: -6px;
+}
+
+.subtitle {
+    width: 522px;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 41px;
+    line-height: 37px;
+}
+
+.descr {
+    margin-top: 56px;
+    color:white;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 34px;
+    letter-spacing: 1px;
 }
 </style>

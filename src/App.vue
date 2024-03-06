@@ -11,13 +11,13 @@ import  NavBar from './components/Header.vue';
 </template>
 
 <style scoped>
-* {
-  background-color: #151A31;
-}
+  * {
+    background-color: #151A31;
+  }
 
-    .text-vo {
-      width: 100%;
-      max-width: 1336px;
-      height: 400px;
-    }
+  .text-vo {
+    width: 100%;
+    max-width: 1336px;
+    height: 400px;
+  }
 </style>

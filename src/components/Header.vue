@@ -6,7 +6,7 @@
     
         <div class="header-wrapper">
             <div class="header-wrapper-container">
-                <div class="title" @click="$router.push('/')">О<span style="color:#408AFA">7</span></div>
+                <div class="title" @click="$router.push('/')">О<span style="color:#408AFA">7</div>
                 <div class="page-header"> 
                     <a class="page" @click="$router.push('/news')"> Главная новость</a>
                     <a class="page" @click="$router.push('/entrants')"> Поступающим</a>
@@ -42,9 +42,6 @@
         
     }
     .title {
-        margin-left: 54px;
-        margin-right: 40px;
-        font-size: 42px;
         cursor: pointer;
     }
     .page-header {
