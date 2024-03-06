@@ -4,16 +4,19 @@
 <template>
     <div class="Main-page">
         <div class="container">
-            <div class="text_wrapper">
-                <h1 class="main_title">Кафедра 
-                    <span class="cathedra">
-                        <span style="color:white">O</span>
-                        7
-                    </span>
-                </h1>
-                <h2 class="subtitle">Информационные системы и программная инженерия</h2>
-                <div class="descr">Студенты в процессе обучения получают знания о последних технологиях и методах моделирования, осваивают навыки разработки информационных систем, компьютерной графики, а также программного обеспечения для автоматизированных систем.</div>
-            </div>
+            <section class="promo">
+                <div class="wrapper">
+                    <h1 class="main_title">
+                        Кафедра 
+                        <span class="cathedra">
+                            <span style="color:white">O</span>
+                            7
+                        </span>
+                    </h1>
+                    <h2 class="subtitle">Информационные системы и программная инженерия</h2>
+                    <p class="descr">Студенты в процессе обучения получают знания о последних технологиях и методах моделирования, осваивают навыки разработки информационных систем, компьютерной графики, а также программного обеспечения для автоматизированных систем.</p>
+                </div>
+            </section>
 
             <div class="pictures">
                 <div class="debug"></div>
@@ -28,14 +31,23 @@
 
 <style>
 .container {
-    margin: 0 auto;
     margin-top: 71px;
     max-width: 1390px;
+    margin: 0 auto;
     font-family: Jost;
     color: #408AFA;
 }
-.text_wrapper {
+.wrapper {
     width: 653px;
+}
+
+.promo {
+    padding: 80px 0 160px;
+
+    background-image: url('../assets/pictures.png');
+    background-repeat: no-repeat;
+    background-size: auto calc(100% - 50px);
+    background-position: right 50px;
 }
 
 .main_title {
