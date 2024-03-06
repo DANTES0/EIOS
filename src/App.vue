@@ -6,6 +6,7 @@ import  NavBar from './components/Header.vue';
   <NavBar>
   </NavBar>
   <div class="main-background">
+    <router-view/>
   </div>
 </template>
 
@@ -13,11 +14,7 @@ import  NavBar from './components/Header.vue';
 * {
   background-color: #151A31;
 }
-.main-background{
-        width: auto;
-        height: auto;
 
-    }
     .text-vo {
       width: 100%;
       max-width: 1336px;
