@@ -20,6 +20,8 @@
 <style scoped>
     
     .header-wrapper {
+        /*position: sticky;
+        top: 0;*/
         width: 100%;
         height: 142px;
         background-color: #0d101f;

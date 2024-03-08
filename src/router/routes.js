@@ -12,17 +12,17 @@ const routes = [
     {
         path: '/news',
         name: "News",
-        component: Main
+        component: News
     },
     {
         path: '/entrants',
         name: "Entrants",
-        component: Main
+        component: Entrants
     },
     {
         path: '/gallery',
         name: "Gallery",
-        component: Main
+        component: Gallery
     }
 ]
 
