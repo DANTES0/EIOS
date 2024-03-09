@@ -2,8 +2,12 @@
 
 defineProps({
   id: Number,
-  headLine: String
+  headLine: String,
+  date: String,
+  category: String,
+  urls: Array
 })
+
 </script>
 
 <template>
@@ -12,14 +16,14 @@ defineProps({
         <div class="content-brief-news-wrapper">
             <div class="prev btn-news" style="margin-right: 58px;">{</div>
             <div class="content-brief-news-container">
-                <div class="image-block-brief-news">
+                <div class="image-block-brief-news" :style="{ backgroundImage: 'url(' +urls+ ')' }">
                     <div class="date-block-brief-news">
-                        <label class="text-date-block-brief-news">25.02.2024</label>
+                        <label class="text-date-block-brief-news">{{ date }}</label>
                     </div>
                 </div>
                 <div class="text-brief-news-container">
-                    <h2 class="description-text-brief-news">{{ id }}Началась регистрация участников юбилейной XV Международной олимпиады в сфере информационных технологий «IT-Планета 2024»</h2>
-                    <he class="teg-text-brief-news">мероприятия</he>
+                    <h2 class="description-text-brief-news">{{ headLine }}</h2>
+                    <he class="teg-text-brief-news">{{category}}</he>
                 </div>
             </div>
             <div class="next btn-news" style="margin-left: 58px;">}</div>
@@ -64,7 +68,8 @@ defineProps({
     margin-top: 85px;
 }
 .image-block-brief-news {
-    background-image: url("../assets/news.png");
+    background-image: url(${urls});
+    background-size: cover;
     width: 572px;
     height: 374px;
     border: 5px solid #408AFA;
@@ -72,6 +77,7 @@ defineProps({
     display: flex;
     justify-content: center;
     align-items: end;
+    background-repeat: no-repeat;
 }
 .date-block-brief-news {
     width: 195px;

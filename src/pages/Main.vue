@@ -4,28 +4,52 @@ import DepartamentInNumbers from '../components/DepartamentInNumbers.vue';
 import BriefNews from '../components/BriefNews.vue';
 import {useFetch} from '@vueuse/core'
 import { computed, ref } from 'vue';
+import { onMounted } from 'vue';
 const url = computed(( () =>  {
   return `http://25.61.98.183:8080/news/1`
 }))
-const aboba = async(id)  => { const response = await useFetch(url).json();
-    console.log(response.data.value)
-    id = response.data.value.id
-return response.data.value};
-let a;
-//console.log(aboba());
-a = ref(aboba())
-console.log(a.value);
+const extractedId = ref(null);
+const text = ref(null);
+const date = ref(null);
+const category = ref(null);
+const urls = ref(null);
 
+const aboba = async()  => { const response = await useFetch(url).json();
+    extractedId.value = response.data.value.id
+    console.log(response.data.value)
+    console.log(extractedId.value)
+    text.value = response.data.value.headLine
+    date.value = response.data.value.date
+    category.value = response.data.value.category
+    urls.value = response.data.value.urls
+    console.log(text.value);
+    console.log(JSON.parse(JSON.stringify(urls.value)));
+};
+
+
+// console.log(aboba());
+// a = ref(aboba())
+//console.log(a.value);
+//let id = 5;
 //console.log(id)
+onMounted(() => {
+  aboba();
+});
+
+//console.log(text)
 </script>
 
 <template>
     <div class="Main-page">
-        {{ id }}
+        {{ extractedId, text }}
         <div class="container">
             <WelomTitle></WelomTitle>
             <DepartamentInNumbers></DepartamentInNumbers>
-            <BriefNews :id = id></BriefNews>
+            <BriefNews :id = extractedId
+                       :headLine = text
+                       :date = date
+                       :category = category
+                       :urls = urls></BriefNews>
         </div>
     </div>
 </template>
