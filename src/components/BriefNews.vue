@@ -1,5 +1,9 @@
 <script setup>
 
+defineProps({
+  id: Number,
+  headLine: String
+})
 </script>
 
 <template>
@@ -14,7 +18,7 @@
                     </div>
                 </div>
                 <div class="text-brief-news-container">
-                    <h2 class="description-text-brief-news">Началась регистрация участников юбилейной XV Международной олимпиады в сфере информационных технологий «IT-Планета 2024»</h2>
+                    <h2 class="description-text-brief-news">{{ id }}Началась регистрация участников юбилейной XV Международной олимпиады в сфере информационных технологий «IT-Планета 2024»</h2>
                     <he class="teg-text-brief-news">мероприятия</he>
                 </div>
             </div>
