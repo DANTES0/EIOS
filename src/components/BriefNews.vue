@@ -1,16 +1,63 @@
 <script setup>
 
+// defineProps({
+//   id: Number,
+//   headLine: String,
+//   date: String,
+//   category: String,
+//   urls: Array
+// })
+
 defineProps({
-  id: Number,
-  headLine: String,
-  date: String,
-  category: String,
-  urls: Array
+    id: Number,
+    headline: String,
+    category: String,
+    date: String,
+    url: String
 })
 
 </script>
 
 <template>
+    <div class="wrapper-brief-news">
+        <h1 class="title-brief-news">НОВОСТИ</h1>
+        <div class="content-brief-news-wrapper">
+            <div 
+                class="prev btn-news" 
+                style="margin-right: 58px;"
+                @click="$emit('prev')">
+                {
+            </div>
+                <div class="content-brief-news-container">
+                    <div class="image-block-brief-news"
+                        :style="{ backgroundImage: 'url(' + url + ')' }">
+                        <div class="date-block-brief-news">
+                            <label class="text-date-block-brief-news">
+                                <!-- 25.02.2024 -->
+                                {{ date }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-brief-news-container">
+                        <h2 class="description-text-brief-news">
+                            {{headline}}
+                            <!-- {{url}} -->
+                            <!-- Началась регистрация участников юбилейной XV Международной олимпиады в сфере информационных технологий «IT-Планета 2024» -->
+                        </h2>
+                        <he class="teg-text-brief-news">{{category}}</he>
+                    </div>
+                </div>
+                <div
+                    class="next btn-news"
+                    style="margin-left: 58px;"
+                    @click="$emit('next')">
+                    }
+                </div>
+        </div>
+    </div>
+</template>
+
+<!-- <template>
     <div class="wrapper-brief-news">
         <h1 class="title-brief-news">НОВОСТИ</h1>
         <div class="content-brief-news-wrapper">
@@ -29,7 +76,7 @@ defineProps({
             <div class="next btn-news" style="margin-left: 58px;">}</div>
         </div>
     </div>
-</template>
+</template> -->
 
 <style>
 .wrapper-brief-news {

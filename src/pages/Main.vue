@@ -6,7 +6,8 @@ import {useFetch} from '@vueuse/core'
 import { computed, ref } from 'vue';
 import { onMounted } from 'vue';
 const url = computed(( () =>  {
-  return `http://25.61.98.183:8080/news/1`
+  //return `http://25.61.98.183:8080/news/1`
+  return `http://25.61.98.183:8080/news/shorts`
 }))
 const extractedId = ref(null);
 const text = ref(null);
@@ -14,18 +15,48 @@ const date = ref(null);
 const category = ref(null);
 const urls = ref(null);
 
-const aboba = async()  => { const response = await useFetch(url).json();
-    extractedId.value = response.data.value.id
-    console.log(response.data.value)
-    console.log(extractedId.value)
-    text.value = response.data.value.headLine
-    date.value = response.data.value.date
-    category.value = response.data.value.category
-    urls.value = response.data.value.urls
-    console.log(text.value);
-    console.log(JSON.parse(JSON.stringify(urls.value)));
+//массив для новостей
+let news = ref(null)
+const currentNewsIndex = ref(0);
+
+const nextNews = () => {
+    currentNewsIndex.value = (currentNewsIndex.value + 1) % news.value.length;
+    console.log(currentNewsIndex.value)
 };
 
+const prevNews = () => {
+    if(currentNewsIndex.value == 0) {
+        currentNewsIndex.value = news.value.length - 1;
+    } else {
+        currentNewsIndex.value = Math.abs((currentNewsIndex.value - 1) % news.value.length);
+    }
+  console.log(currentNewsIndex.value)
+};
+
+const currentNews = computed(() => (news.value ? news.value[currentNewsIndex.value] : null));
+
+// const aboba = async()  => { const response = await useFetch(url).json();
+//     extractedId.value = response.data.value.id
+//     console.log(response.data.value)
+//     console.log(extractedId.value)
+//     text.value = response.data.value.headLine
+//     date.value = response.data.value.date
+//     category.value = response.data.value.category
+//     urls.value = response.data.value.urls
+//     console.log(text.value);
+//     console.log(JSON.parse(JSON.stringify(urls.value)));
+// };
+
+const aboba = async()  => { const response = await useFetch(url).json();
+    //если url - новость по индексу
+    extractedId.value = response.data.value.id
+    text.value = response.data.value.headLine
+    //console.log(extractedId.value, text.value)
+
+    //если url - shorts
+    news.value = response.data.value
+    //console.log(news.value)
+};
 
 // console.log(aboba());
 // a = ref(aboba())
@@ -34,6 +65,8 @@ const aboba = async()  => { const response = await useFetch(url).json();
 //console.log(id)
 onMounted(() => {
   aboba();
+  console.log(news)
+  console.log(currentNewsIndex.value)
 });
 
 //console.log(text)
@@ -41,15 +74,24 @@ onMounted(() => {
 
 <template>
     <div class="Main-page">
-        {{ extractedId, text }}
         <div class="container">
             <WelomTitle></WelomTitle>
             <DepartamentInNumbers></DepartamentInNumbers>
-            <BriefNews :id = extractedId
+            <!-- <BriefNews :id = extractedId
                        :headLine = text
                        :date = date
                        :category = category
-                       :urls = urls></BriefNews>
+                       :urls = urls></BriefNews> -->
+            <BriefNews 
+                v-if="news && news.length > 1 && currentNewsIndex !== null" 
+                    :id = currentNews.id
+                    :headline = currentNews.headline
+                    :category = currentNews.category
+                    :date = currentNews.date
+                    :url = currentNews.url
+                    @next="nextNews"
+                    @prev="prevNews">
+            </BriefNews>
         </div>
     </div>
 </template>
