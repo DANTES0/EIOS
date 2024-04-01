@@ -16,6 +16,7 @@
                     <a class="page" id = "t"@click="$router.push('/gallery')"></a>
                 </div>
                 <div class="page-header-bottom">
+                    <a class="page" id="profile" data-title="Профиль"></a>
                     <a class="page" id="moodle" data-title="moodle"></a>
                 </div>
             </div>
@@ -23,7 +24,7 @@
                 <div class="pum">
                     <a class="title" @click="$router.push('/')">Кафедра <span style="color:white">О</span>7</a>
                     <!-- <img src="../assets/voenmeh2.svg" alt="" class="voenmeh-title"> -->
-                    <img src="../assets/voenmeh4.svg" class="page" id = "r"@click="$router.push('/gallery')"/>
+                    <img src="../assets/voenmeh.svg" class="page" id = "r"@click="$router.push('/gallery')"/>
                 </div>
             </div>
         </div>
@@ -36,7 +37,7 @@
     src: url("../assets/RussoOne-Regular.ttf");
 }
     #main {
-        background-image: url("../assets/home.svg");
+        background-image: url("../assets/header/home.svg");
         filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%) contrast(89%);
         margin-top: 15px;
     }
@@ -61,17 +62,16 @@
     .page:hover::before {
 
         content:'';
-    position:absolute;
-    left:45px; bottom:13px;
-    width:13px; height:13px;
-    background:#ffffff;
-    transform:rotate(45deg);
-    /* box-shadow: inset 1px -1px  rgb(0, 0, 0); */
-    filter: invert(11%) sepia(0%) saturate(1%) hue-rotate(112deg) brightness(98%) contrast(85%);
-    z-index: 99;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
-
+        position:absolute;
+        left:45px; bottom:13px;
+        width:13px; height:13px;
+        background:#ffffff;
+        transform:rotate(41deg);
+        /* box-shadow: inset 1px -1px  rgb(0, 0, 0); */
+        filter: invert(11%) sepia(0%) saturate(1%) hue-rotate(112deg) brightness(98%) contrast(85%);
+        z-index: 99;
+        border-left: 1px solid #000;
+        border-bottom: 1px solid #000;
 }
     .pum {
         margin-top: 10px;
@@ -84,13 +84,19 @@
         width: 100px;
     }
     #moodle {
-        background-image: url("../assets/moodle.svg");
+        background-image: url("../assets/header/bottom/moodle.svg");
         background-size: contain;
         transform: scale(1.3);
         filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%) contrast(89%);
     }
+    #profile {
+        background-image: url("../assets/header/bottom/profile.svg");
+        background-size: contain;
+        /* transform: scale(1); */
+        filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%) contrast(89%);
+    }
     #q {
-        background-image: url("../assets/second.svg");
+        background-image: url("../assets/header/second.svg");
         filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%) contrast(89%);
     }
     .page-header-bottom {
@@ -98,11 +104,11 @@
         flex-direction: column;
     }
     #w {
-        background-image: url("../assets/third.svg");
+        background-image: url("../assets/header/third.svg");
         filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%) contrast(89%);
     }
     #e {
-        background-image: url("../assets/fourth.svg");
+        background-image: url("../assets/header/fourth.svg");
         filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%) contrast(89%);
     }
     #r {
@@ -118,7 +124,9 @@
     }
     #moodle:hover {
         filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%) contrast(110%);;
-
+    }
+    #profile:hover {
+        filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%) contrast(110%);;
     }
     #e:hover::after {
         width: 100px;
