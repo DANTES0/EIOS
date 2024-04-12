@@ -1,31 +1,33 @@
 <script setup>
-import  NavBar from './components/Header.vue';
-import Footer from './components/Footer.vue';
+import NavBar from "./components/Header.vue"
+import Footer from "./components/Footer.vue"
 </script>
 
 <template>
   <div class="wrap">
-  <NavBar>
-  </NavBar>
+    <NavBar> </NavBar>
     <div class="main-background">
-      <router-view/>
+      <router-view />
     </div>
   </div>
   <Footer></Footer>
 </template>
 
 <style scoped>
-  * {
-    background-color: #151A31;
-    height: 100%;
-  }
-  .wrap {
-    display: flex;
-    flex-direction: row;
-  }
-  .text-vo {
-    width: 100%;
-    max-width: 1336px;
-    height: 400px;
-  }
+* {
+  background-color: #1f1f1f;
+  height: 100%;
+}
+.wrap {
+  display: flex;
+  flex-direction: row;
+}
+.text-vo {
+  width: 100%;
+  max-width: 1336px;
+  height: 400px;
+}
+.main-background {
+  width: 100vw;
+}
 </style>
