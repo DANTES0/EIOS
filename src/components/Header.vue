@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import HeaderAnchor from "./HeaderAnchor.vue"
+</script>
 
 <template>
   <div class="header-wrapper">
@@ -43,13 +45,16 @@
           >Кафедра <span style="color: white">О</span>7</a
         >
         <!-- <img src="../assets/voenmeh2.svg" alt="" class="voenmeh-title"> -->
-        <img
-          src="../assets/voenmeh.svg"
-          class="page"
-          id="r"
-          @click="$router.push('/gallery')"
-        />
+        <a href="https://www.voenmeh.ru/" class="voen">
+          <img
+            style="transform: scale(1.6)"
+            src="../assets/header/voenmeh.svg"
+            class="page"
+            id="r"
+          />
+        </a>
       </div>
+      <HeaderAnchor></HeaderAnchor>
     </div>
   </div>
 </template>
@@ -59,6 +64,7 @@
   font-family: Russo-One;
   src: url("../assets/RussoOne-Regular.ttf");
 }
+
 #main {
   background-image: url("../assets/header/home.svg");
   filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
@@ -146,7 +152,6 @@
 }
 #r {
   /* background-image: url("../assets/voenmeh3.svg"); */
-  margin-top: 15px;
   transform: scale(2.5);
   filter: invert(63%) sepia(92%) saturate(7299%) hue-rotate(215deg)
     brightness(99%) contrast(94%);
@@ -191,6 +196,7 @@
 }
 .header-wrapper {
   /* position: fixed; */
+  border-right: 1px solid #2b2b2b;
   position: sticky;
   top: 0;
   left: 0;

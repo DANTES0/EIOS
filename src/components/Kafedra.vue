@@ -3,7 +3,6 @@ import KafedraText from "./KafedraText.vue"
 </script>
 
 <template>
-  <div class="tabs"></div>
   <div class="wrapper">
     <div class="numbers-wrapper">
       <div class="numbers" v-for="i in 25">{{ i }}</div>
@@ -42,6 +41,11 @@ import KafedraText from "./KafedraText.vue"
   font-family: JetBrainsMono;
   src: url("../assets/JetBrainsMono.ttf");
 }
+@font-face {
+  font-family: Rubik;
+  src: url("../assets/Rubik.ttf");
+}
+
 .content-kafedra-wrapper {
   width: 100%;
 }
@@ -95,6 +99,7 @@ import KafedraText from "./KafedraText.vue"
   font-weight: 500;
   color: white;
   letter-spacing: 8px;
+  user-select: none;
 }
 
 .main_title {

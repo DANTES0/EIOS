@@ -1,5 +1,7 @@
 <script setup>
 import Kafedra from "../components/Kafedra.vue"
+import News from "../components/News.vue"
+import Tabs from "../components/Tabs.vue"
 import DepartamentInNumbers from "../components/DepartamentInNumbers.vue"
 import BriefNews from "../components/BriefNews.vue"
 import { useFetch } from "@vueuse/core"
@@ -80,8 +82,10 @@ onMounted(() => {
 <template>
   <div class="Main-page">
     <!-- <div class="container"> -->
+    <Tabs></Tabs>
     <Kafedra></Kafedra>
-    <DepartamentInNumbers></DepartamentInNumbers>
+    <News></News>
+    <!-- <DepartamentInNumbers></DepartamentInNumbers> -->
     <!-- <BriefNews :id = extractedId
                        :headLine = text
                        :date = date

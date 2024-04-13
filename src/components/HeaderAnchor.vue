@@ -1,0 +1,175 @@
+<script setup>
+import { ref } from "vue"
+const isShowDropDown = ref(null)
+function showDropDown() {
+  isShowDropDown.value = !isShowDropDown.value
+}
+// this.$refs.dropbtn.addEventListener("click", function (event) {
+//   document.getElementById("myDropdown").classList.toggle("show")
+//   console.log("click")
+// })
+//Закрыть раскрывающийся список, если пользователь щелкнет за его пределами.
+//window.onclick = function (event) {
+
+//   // if (!event.target.matches(".dropbtn")) {
+//   //   var dropdowns = document.getElementsByClassName("dropdown-content")
+//   //   var i
+
+//   //   for (i = 0; i < dropdowns.length; i++) {
+//   //     var openDropdown = dropdowns[i]
+//   //     if (openDropdown.classList.contains("show")) {
+//   //       openDropdown.classList.remove("show")
+//   //     }
+//   //   }
+//   // }
+// }
+</script>
+<template>
+  <div class="dropdown-anchor">
+    <div @click="showDropDown" class="drop-btn-container">
+      <img src="../assets/header/arrow_down.svg" alt="" id="arrow_down" />
+      <img src="../assets/header/folder.svg" alt="" class="folder" />
+      <label class="dropbtn" id="dropbtn"> Главная страница </label>
+    </div>
+    <div v-if="isShowDropDown" id="myDropdown" class="dropdown-content">
+      <div class="dropdown-content-line"></div>
+      <div class="dropdown-content-content">
+        <a href="#" class="dropdown-content-a">
+          <img
+            src="../assets/anchor_header/html.svg"
+            alt=""
+            class="anchor-img"
+            style="transform: scale(0.8)"
+          />
+          <label class="label">о_кафедре.html</label></a
+        >
+        <a href="#" class="dropdown-content-a">
+          <img
+            src="../assets/anchor_header/css.svg"
+            alt=""
+            class="anchor-img"
+          />
+          <label class="label">кафедра_в_цифрах.css</label>
+        </a>
+        <a href="#" class="dropdown-content-a">
+          <img src="../assets/anchor_header/py.svg" alt="" class="anchor-img" />
+          <label class="label">фотогалерея.py</label></a
+        >
+        <a href="#" class="dropdown-content-a">
+          <img
+            src="../assets/anchor_header/c++.svg"
+            alt=""
+            class="anchor-img"
+          />
+          <label class="label">главные_новости.cpp</label> </a
+        ><a href="#" class="dropdown-content-a">
+          <img src="../assets/anchor_header/js.svg" alt="" class="anchor-img" />
+          <label class="label">работники_кафедры.js</label></a
+        >
+        <a href="#" class="dropdown-content-a">
+          <img
+            src="../assets/anchor_header/ts.svg"
+            alt=""
+            class="anchor-img"
+            style="transform: scale(0.8)"
+          />
+          <label class="label">контакты.ts</label>
+        </a>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+@font-face {
+  font-family: Nunito;
+  src: url("../assets/Nunito.ttf");
+}
+.label {
+  margin-left: 7px;
+  cursor: pointer;
+}
+.anchor-img {
+  width: 23px;
+  height: 23px;
+  margin-left: 22px;
+}
+.dropdown-content-line {
+  margin-left: 22px;
+  width: 2px;
+  height: 200px;
+  background-color: #787878;
+}
+#arrow_down {
+  padding-left: 10px;
+}
+#arrow_down:hover,
+#arrow_donw:focus {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
+    hue-rotate(146deg) brightness(122%) contrast(120%);
+}
+.drop-btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+.dropbtn {
+  color: #cccccc;
+  font-family: Nunito;
+  font-weight: 200;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  padding-right: 56px;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+  color: #ffffff;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  min-width: 160px;
+  overflow: auto;
+  z-index: 99;
+}
+
+.dropdown-content-a {
+  width: 220px;
+  height: 28px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  color: #cccccc;
+  padding-bottom: 7px;
+  text-decoration: none;
+  font-family: Nunito;
+  font-weight: 200;
+  font-size: 16px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+.dropdown-content-a:hover {
+  color: #ffffff;
+  background-color: #1f1f21;
+}
+
+.dropdown-content-a:hover {
+  color: #ddd;
+}
+
+.show {
+  display: block;
+}
+</style>

@@ -54,7 +54,8 @@ defineProps({
   display: flex;
   flex-direction: row;
   justify-content: end;
-  margin-bottom: 30px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 .kafedraText-content-nechet {
   color: #999999;
