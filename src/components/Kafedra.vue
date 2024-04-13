@@ -7,7 +7,7 @@ import KafedraText from "./KafedraText.vue"
     <div class="numbers-wrapper">
       <div class="numbers" v-for="i in 25">{{ i }}</div>
     </div>
-    <div class="content-kafedra-wrapper">
+    <div id="kafedra" class="content-kafedra-wrapper">
       <div class="title-kafedra-wrapper">
         <h1 class="title-kafedra">
           <span style="color: #1e66f5">#</span>КАФЕДРА

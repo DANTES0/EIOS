@@ -1,0 +1,18 @@
+<svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip253_979">
+			<rect id="Photo" width="24.000000" height="24.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip253_979)">
+		<path id="path" d="M2.5 5C2.5 4.44 2.94 4 3.5 4L20.5 4C21.05 4 21.5 4.44 21.5 5L21.5 19C21.5 19.55 21.05 20 20.5 20L3.5 20C2.94 20 2.5 19.55 2.5 19L2.5 5Z" fill="#000000" fill-opacity="0" fill-rule="evenodd"/>
+		<path id="path" d="M3.5 4L20.5 4C21.05 4 21.5 4.44 21.5 5L21.5 19C21.5 19.55 21.05 20 20.5 20L3.5 20C2.94 20 2.5 19.55 2.5 19L2.5 5C2.5 4.44 2.94 4 3.5 4Z" stroke="#808080" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round"/>
+		<path id="path" d="M7.25 9C7.66 9 8 8.66 8 8.25C8 7.83 7.66 7.5 7.25 7.5C6.83 7.5 6.5 7.83 6.5 8.25C6.5 8.66 6.83 9 7.25 9Z" fill="#000000" fill-opacity="0" fill-rule="evenodd"/>
+		<path id="path" d="M8 8.25C8 7.83 7.66 7.5 7.25 7.5C6.83 7.5 6.5 7.83 6.5 8.25C6.5 8.66 6.83 9 7.25 9C7.66 9 8 8.66 8 8.25Z" stroke="#808080" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round"/>
+		<path id="path" d="M7.5 12L10 14L13 10.5L21.5 17L21.5 19C21.5 19.55 21.05 20 20.5 20L3.5 20C2.94 20 2.5 19.55 2.5 19L2.5 17L7.5 12Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+		<path id="path" d="M10 14L13 10.5L21.5 17L21.5 19C21.5 19.55 21.05 20 20.5 20L3.5 20C2.94 20 2.5 19.55 2.5 19L2.5 17L7.5 12L10 14Z" stroke="#808080" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round"/>
+	</g>
+</svg>

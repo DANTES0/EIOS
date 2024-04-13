@@ -1,5 +1,4 @@
 <script setup>
-
 // defineProps({
 //   id: Number,
 //   headLine: String,
@@ -9,52 +8,55 @@
 // })
 
 defineProps({
-    id: Number,
-    headline: String,
-    category: String,
-    date: String,
-    url: String
+  id: Number,
+  headline: String,
+  category: String,
+  date: String,
+  url: String,
 })
-
 </script>
 
 <template>
-    <div class="wrapper-brief-news">
-        <h1 class="title-brief-news">НОВОСТИ</h1>
-        <div class="content-brief-news-wrapper">
-            <div 
-                class="prev btn-news" 
-                style="margin-right: 58px;"
-                @click="$emit('prev')">
-                {
-            </div>
-                <div class="content-brief-news-container">
-                    <div class="image-block-brief-news"
-                        :style="{ backgroundImage: 'url(' + url + ')' }">
-                        <div class="date-block-brief-news">
-                            <label class="text-date-block-brief-news">
-                                <!-- 25.02.2024 -->
-                                {{ date }}
-                            </label>
-                        </div>
-                    </div>
-                    <div class="text-brief-news-container">
-                        <h2 class="description-text-brief-news">
-                            {{headline}}
-                            <!-- {{url}} -->
-                            <!-- Началась регистрация участников юбилейной XV Международной олимпиады в сфере информационных технологий «IT-Планета 2024» -->
-                        </h2>
-                        <he class="teg-text-brief-news">{{category}}</he>
-                    </div>
-                </div>
-                <div
-                    class="next btn-news"
-                    style="margin-left: 58px;"
-                    @click="$emit('next')">
-                    }
-                </div>
+  <div class="wrapper-brief-news">
+    <h1 class="title-brief-news">НОВОСТИ</h1>
+    <div class="content-brief-news-wrapper">
+      <div
+        class="prev btn-news"
+        style="margin-right: 58px"
+        @click="$emit('prev')"
+      >
+        {
+      </div>
+      <div class="content-brief-news-container">
+        <div
+          class="image-block-brief-news"
+          :style="{ backgroundImage: 'url(' + url + ')' }"
+        >
+          <div class="date-block-brief-news">
+            <label class="text-date-block-brief-news">
+              <!-- 25.02.2024 -->
+              {{ date }}
+            </label>
+          </div>
         </div>
+        <div class="text-brief-news-container">
+          <h2 class="description-text-brief-news">
+            {{ headline }}
+            <!-- {{url}} -->
+            <!-- Началась регистрация участников юбилейной XV Международной олимпиады в сфере информационных технологий «IT-Планета 2024» -->
+          </h2>
+          <he class="teg-text-brief-news">{{ category }}</he>
+        </div>
+      </div>
+      <div
+        class="next btn-news"
+        style="margin-left: 58px"
+        @click="$emit('next')"
+      >
+        }
+      </div>
     </div>
+  </div>
 </template>
 
 <!-- <template>
@@ -80,87 +82,87 @@ defineProps({
 
 <style>
 .wrapper-brief-news {
-    width: 100%;
-    max-width: 1390px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 272px;
-    flex-direction: column;
+  width: 100%;
+  max-width: 1390px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 272px;
+  flex-direction: column;
 }
 .title-brief-news {
-    font-size: 64px;
-    font-weight: 700;
-    letter-spacing: 32px;
-    text-shadow: 0px 8px #000000;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 32px;
+  text-shadow: 0px 8px #000000;
 }
 .content-brief-news-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }
-.btn-news {
+/* .btn-news {
     font-size: 212px;
     cursor: pointer;
     margin-top: 40px;
-}
+} */
 .content-brief-news-container {
-    width: 1120px;
-    height: 374px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 85px;
+  width: 1120px;
+  height: 374px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 85px;
 }
 .image-block-brief-news {
-    background-image: url(${urls});
-    background-size: cover;
-    width: 572px;
-    height: 374px;
-    border: 5px solid #408AFA;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    background-repeat: no-repeat;
+  background-image: url(${urls});
+  background-size: cover;
+  width: 572px;
+  height: 374px;
+  border: 5px solid #408afa;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  background-repeat: no-repeat;
 }
 .date-block-brief-news {
-    width: 195px;
-    height: 50px;
-    border: 3px solid #408AFA;
-    background-color: #151A31;
-    opacity: 88%;
-    border-radius: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 27px
+  width: 195px;
+  height: 50px;
+  border: 3px solid #408afa;
+  background-color: #151a31;
+  opacity: 88%;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 27px;
 }
 .text-date-block-brief-news {
-    color: white;
-    font-size: 25px;
-    font-weight: 400;
+  color: white;
+  font-size: 25px;
+  font-weight: 400;
 }
 .text-brief-news-container {
-    width: 529px;
-    height: 280px;
-    margin-left: 19px;
-    line-height: 34px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 529px;
+  height: 280px;
+  margin-left: 19px;
+  line-height: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .description-text-brief-news {
-    font-size: 33px;
-    font-weight: 400;
-    color: white;
+  font-size: 33px;
+  font-weight: 400;
+  color: white;
 }
 
 .teg-text-brief-news {
-    font-size: 41px;
-    font-weight: 600;
-    margin-bottom: 13px;
+  font-size: 41px;
+  font-weight: 600;
+  margin-bottom: 13px;
 }
 </style>

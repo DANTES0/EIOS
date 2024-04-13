@@ -34,16 +34,16 @@ function showDropDown() {
     <div v-if="isShowDropDown" id="myDropdown" class="dropdown-content">
       <div class="dropdown-content-line"></div>
       <div class="dropdown-content-content">
-        <a href="#" class="dropdown-content-a">
+        <a href="#kafedra" class="dropdown-content-a">
           <img
             src="../assets/anchor_header/html.svg"
             alt=""
             class="anchor-img"
-            style="transform: scale(0.8)"
+            style="transform: scale(0.7)"
           />
           <label class="label">о_кафедре.html</label></a
         >
-        <a href="#" class="dropdown-content-a">
+        <a href="#news" class="dropdown-content-a">
           <img
             src="../assets/anchor_header/css.svg"
             alt=""
@@ -71,7 +71,7 @@ function showDropDown() {
             src="../assets/anchor_header/ts.svg"
             alt=""
             class="anchor-img"
-            style="transform: scale(0.8)"
+            style="transform: scale(0.7)"
           />
           <label class="label">контакты.ts</label>
         </a>
