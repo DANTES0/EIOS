@@ -12,6 +12,7 @@
   position: sticky;
   top: 0;
   z-index: 99;
+  border-bottom: 1px solid #2b2b2b;
 }
 .tabs-image {
   width: 16px;
@@ -33,5 +34,6 @@
   width: 158px;
   height: 100%;
   background-color: #1f1f1f;
+  border-right: 1px solid #2b2b2b;
 }
 </style>

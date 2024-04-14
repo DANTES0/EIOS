@@ -1,0 +1,18 @@
+<svg width="81.000000" height="104.000000" viewBox="0 0 81 104" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip266_332">
+			<rect id="arrow_rjfnfkmhm72a" width="103.776680" height="81.000000" transform="translate(0.000000 103.421387) rotate(-90.000000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+		<linearGradient id="paint_linear_266_335_0" x1="14.175087" y1="99.005432" x2="45.335190" y2="13.397568" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#FFFFFF" stop-opacity="0.200000"/>
+			<stop offset="1.000000" stop-color="#FFFFFF" stop-opacity="0.000000"/>
+		</linearGradient>
+	</defs>
+	<g clip-path="url(#clip266_332)">
+		<path id="path" d="M60.75 51.53C60.75 52.07 60.59 52.6 60.28 53.02L23.15 102.75C22.51 103.61 21.44 103.64 20.77 102.82C20.09 101.99 20.07 100.63 20.71 99.76L56.72 51.53L20.71 3.3C20.07 2.43 20.1 1.06 20.77 0.24C21.44 -0.59 22.51 -0.55 23.15 0.31L60.28 50.03C60.59 50.45 60.75 50.99 60.75 51.53Z" fill="#999999" fill-opacity="1.000000" fill-rule="nonzero"/>
+		<path id="path" d="M60.75 51.53C60.75 52.07 60.59 52.6 60.28 53.02L23.15 102.75C22.51 103.61 21.44 103.64 20.77 102.82C20.09 101.99 20.07 100.63 20.71 99.76L56.72 51.53L20.71 3.3C20.07 2.43 20.1 1.06 20.77 0.24C21.44 -0.59 22.51 -0.55 23.15 0.31L60.28 50.03C60.59 50.45 60.75 50.99 60.75 51.53Z" fill="url(#paint_linear_266_335_0)" fill-opacity="1.000000" fill-rule="nonzero"/>
+	</g>
+</svg>

@@ -49,24 +49,24 @@ function showDropDown() {
             alt=""
             class="anchor-img"
           />
-          <label class="label">кафедра_в_цифрах.css</label>
+          <label class="label">главные_новости.css</label>
         </a>
-        <a href="#" class="dropdown-content-a">
+        <a href="#prepod" class="dropdown-content-a">
           <img src="../assets/anchor_header/py.svg" alt="" class="anchor-img" />
-          <label class="label">фотогалерея.py</label></a
+          <label class="label">работники_кафедры.py</label></a
         >
-        <a href="#" class="dropdown-content-a">
+        <a href="#cifri" class="dropdown-content-a">
           <img
             src="../assets/anchor_header/c++.svg"
             alt=""
             class="anchor-img"
           />
-          <label class="label">главные_новости.cpp</label> </a
-        ><a href="#" class="dropdown-content-a">
+          <label class="label">кафедра_в_цифрах.cpp</label> </a
+        ><a href="#gallery" class="dropdown-content-a">
           <img src="../assets/anchor_header/js.svg" alt="" class="anchor-img" />
-          <label class="label">работники_кафедры.js</label></a
+          <label class="label">фотогалерея.js</label></a
         >
-        <a href="#" class="dropdown-content-a">
+        <a href="#footer" class="dropdown-content-a">
           <img
             src="../assets/anchor_header/ts.svg"
             alt=""

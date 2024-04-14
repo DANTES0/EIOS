@@ -2,6 +2,11 @@
 import Kafedra from "../components/Kafedra.vue"
 import News from "../components/News.vue"
 import Tabs from "../components/Tabs.vue"
+import PrepodavateliKafedri from "../components/PrepodavateliKafedri.vue"
+import KafedraCifri from "../components/KafedraCifri.vue"
+import PhotoGallery from "../components/PhotoGallery.vue"
+import Footer from "../components/Footer.vue"
+import Terminal from "../components/Terminal.vue"
 import DepartamentInNumbers from "../components/DepartamentInNumbers.vue"
 import BriefNews from "../components/BriefNews.vue"
 import { useFetch } from "@vueuse/core"
@@ -85,6 +90,11 @@ onMounted(() => {
     <Tabs></Tabs>
     <Kafedra></Kafedra>
     <News></News>
+    <PrepodavateliKafedri></PrepodavateliKafedri>
+    <KafedraCifri></KafedraCifri>
+    <PhotoGallery></PhotoGallery>
+    <Footer></Footer>
+    <Terminal></Terminal>
     <!-- <DepartamentInNumbers></DepartamentInNumbers> -->
     <!-- <BriefNews :id = extractedId
                        :headLine = text
@@ -126,5 +136,9 @@ onMounted(() => {
   display: flex;
   /* justify-content: center; */
   align-items: center;
+}
+.Main-page {
+  height: 100%;
+  position: relative;
 }
 </style>

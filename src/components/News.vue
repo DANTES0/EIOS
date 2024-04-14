@@ -2,13 +2,11 @@
 <template>
   <div class="news-wrapper">
     <div class="numbers-wrapper">
-      <div class="numbers" v-for="i in 19">{{ i }}</div>
+      <div class="numbers" v-for="i in 18">{{ i }}</div>
     </div>
-    <div class="content-news-wrapper">
+    <div id="news" class="content-news-wrapper">
       <div class="title-news-wrapper">
-        <h1 id="news" class="title-news">
-          <span style="color: #1e66f5">#</span>НОВОСТИ
-        </h1>
+        <h1 class="title-news"><span style="color: #1e66f5">#</span>НОВОСТИ</h1>
         <label class="line-dashed">----------</label>
       </div>
       <div class="container-news">
@@ -204,7 +202,7 @@
   height: 664px;
   width: 100%;
   background-color: #191919;
-  margin-top: 33px;
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
   justify-content: start;
