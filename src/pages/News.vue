@@ -3,7 +3,6 @@
 
 <template>
     <div class="News-page">
-        
     </div>
 </template>
 

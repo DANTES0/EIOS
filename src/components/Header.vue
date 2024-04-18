@@ -23,7 +23,7 @@ import HeaderAnchor from "./HeaderAnchor.vue"
           class="page"
           id="w"
           data-title="Расписание"
-          @click="$router.push('/entrants')"
+          @click="$router.push('/timetable')"
         ></a>
         <a
           class="page"
