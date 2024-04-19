@@ -167,7 +167,6 @@
         filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
         hue-rotate(146deg) brightness(122%) contrast(120%);
         color: #ffffff;
-        
     }
     .dropdown {
         position: relative;
@@ -184,29 +183,7 @@
         overflow: auto;
         z-index: 99;
     }
-    /* .dropdown-content-a {
-        width: 220px;
-        height: 28px;
-        display: flex;
-        flex-direction: row;
-        justify-content: start;
-        align-items: center;
-        color: #cccccc;
-        padding-bottom: 7px;
-        text-decoration: none;
-        font-family: Nunito;
-        font-weight: 200;
-        font-size: 16px;
-        margin-right: 15px;
-        cursor: pointer;
-    }
-    .dropdown-content-a:hover {
-        color: #ffffff;
-        background-color: #1f1f21;
-    }
-    .dropdown-content-a:hover {
-        color: #ddd;
-    } */
+    
     .show {
         display: block;
     }

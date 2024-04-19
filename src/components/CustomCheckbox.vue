@@ -1,6 +1,6 @@
 <template>
     <input type="checkbox" v-model="model" :value="value" />
-    <span>{{ label }}</span>
+    <span id="checkbox-category">{{ label }}</span>
 </template>
 
 <script setup>
@@ -25,16 +25,16 @@
 </script>
 
 <style>
-    span {
+    #checkbox-category {
         margin-left: 10px;
         user-select: none;
-        
+        margin-bottom: 14px;
     }
 
     input[type="checkbox"] {
         appearance: none;
-        height: 11px;
-        width: 11px;
+        height: 20px;
+        width: 20px;
         background-color: transparent;
         border: 1px solid rgb(128, 128, 128);
         border-radius: none;
@@ -43,11 +43,12 @@
         align-items: center;
         justify-content: center;
         outline:none;
+        margin-bottom: 14px;
     }
 
     input[type="checkbox"]:after {
         content: url("../assets/header/NewsFilters/tick.svg");
-        transform: translateY(-1px) translateX(0.5px) scale(0.6);
+        transform: translateY(-1px) translateX(0.5px) scale(1.0);
         color: white;
         display: none;
     }
