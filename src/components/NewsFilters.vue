@@ -2,11 +2,13 @@
     import {ref} from "vue"
 
     const isShowFilters = ref(null)
+    const isShowCategories = ref(null)
+
     function showFilters() {
         isShowFilters.value = !isShowFilters.value
+        isShowCategories.value = false
     } 
 
-    const isShowCategories = ref(null)
     function showCategories() {
         isShowCategories.value = !isShowCategories.value
     } 
@@ -140,7 +142,7 @@
     #arrow_down {
         padding-left: 10px;
     }
-    #arrow_down:hover, #arrow_donw:focus {
+    #arrow_down:hover, #arrow_down:focus {
         filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
             hue-rotate(146deg) brightness(122%) contrast(120%);
     }
@@ -148,6 +150,7 @@
         display: flex;
         justify-content: flex-start;
         cursor: pointer;
+        user-select: none;
     }
     .dropbtn {
         color: #cccccc;
@@ -159,14 +162,16 @@
         margin-left: 4px;
     }
     .drop-btn-container:hover{
+        filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
+        hue-rotate(146deg) brightness(122%) contrast(120%);
         color: #ffffff;
+        
     }
     .dropdown {
         position: relative;
         display: inline-block;
     }
     .dropdown-content {
-
         margin-top: 3px;
         display: flex;
         flex-direction: row;
