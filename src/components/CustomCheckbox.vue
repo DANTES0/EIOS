@@ -1,6 +1,6 @@
 <template>
     <input type="checkbox" v-model="model" :value="value" />
-    <span id="checkbox-category">{{ label }}</span>
+    <span id="checkbox-category" @click="toggleCheckbox">{{ label }}</span>
 </template>
 
 <script setup>
@@ -22,6 +22,10 @@
         emit("update:modelValue", value);
     },
     });
+
+    function toggleCheckbox() {
+        model.value = !model.value;
+    }
 </script>
 
 <style>
@@ -29,6 +33,15 @@
         margin-left: 10px;
         user-select: none;
         margin-bottom: 14px;
+
+        color: rgb(134, 134, 134);
+        font-family: Nunito;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    #checkbox-category:hover {
+        color: #ddd;
     }
 
     input[type="checkbox"] {

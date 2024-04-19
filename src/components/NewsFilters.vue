@@ -2,6 +2,21 @@
     import {ref} from "vue"
     import CustomCheckbox from "./CustomCheckbox.vue"
 
+    const categories = ref([
+        "Конференции",
+        "Конкурсы, гранты",
+        "Мероприятия",
+        "Наука",
+        "Достижения",
+        "Спорт",
+        "Конференции орг.",
+        "Объявления",
+        "Приемная комиссия",
+        "Другие"
+    ]);
+
+    const selectedCategories = ref(Array(categories.value.length).fill(false));
+
     const isShowFilters = ref(null)
     const isShowCategories = ref(null)
 
@@ -30,46 +45,8 @@
             <div v-if="isShowCategories" id="categoriesDropdown" class="categories-dropdown-content">
                 <div class="dropdown-content-line"></div>
                 <div class="categories-dropdown-content-checkboxes">
-                    <div class="category-checkbox">
-                        <CustomCheckbox  :label="`Конференции`" v-model="isSelected"  />
-                        <!-- <input type="checkbox" id="important" v-model="important" /> -->
-                        <!-- <label for="important"> Конференции </label> -->
-                    </div>
-                    <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Конкурсы, гранты </label>
-                    </div>
-                    <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Мероприятия </label>
-                    </div>
-                    <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Наука </label>
-                    </div>
-                    <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Достижения </label>
-                    </div>
-                    <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Спорт </label>
-                    </div>
-                    <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Конференции организаций </label>
-                    </div>
-                    <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Объявления </label>
-                    </div>
-                    <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Приемная комиссия </label>
-                    </div>
-                    <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Другие </label>
+                    <div class="category-checkbox" v-for="(category, index) in categories" :key="index">
+                        <CustomCheckbox :label="category" v-model="selectedCategories[index]" />
                     </div>
                 </div>
             </div>
@@ -165,7 +142,7 @@
     }
     .drop-btn-container:hover{
         filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
-        hue-rotate(146deg) brightness(122%) contrast(120%);
+            hue-rotate(146deg) brightness(122%) contrast(120%);
         color: #ffffff;
     }
     .dropdown {
@@ -197,28 +174,10 @@
     }
 
     .category-checkbox {
-        color: rgb(134, 134, 134);
-        font-family: Nunito;
-        font-size: 14px;
-        font-weight: 300;
-        text-align: left;
-
         display:flex;
         align-items:center;
         margin-left: 12px;
-        
         cursor: pointer;
-    }
-    .category-checkbox label {
-        margin-left: 10px;
-        user-select: none;
-        cursor: pointer;
-    }
-    .category-checkbox input {
-        cursor: pointer;
-    }
-    .category-checkbox:hover {
-        color: #ddd;
     }
 
 </style>
