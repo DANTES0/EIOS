@@ -1,5 +1,6 @@
 <script setup>
     import {ref} from "vue"
+    import CustomCheckbox from "./CustomCheckbox.vue"
 
     const isShowFilters = ref(null)
     const isShowCategories = ref(null)
@@ -30,8 +31,9 @@
                 <div class="dropdown-content-line"></div>
                 <div class="categories-dropdown-content-checkboxes">
                     <div class="category-checkbox">
-                        <input type="checkbox" id="important" v-model="important" />
-                        <label for="important"> Конференции </label>
+                        <CustomCheckbox  :label="`Конференции`" v-model="isSelected"  />
+                        <!-- <input type="checkbox" id="important" v-model="important" /> -->
+                        <!-- <label for="important"> Конференции </label> -->
                     </div>
                     <div class="category-checkbox">
                         <input type="checkbox" id="important" v-model="important" />
