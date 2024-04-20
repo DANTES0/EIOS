@@ -20,6 +20,7 @@
 
     const isShowFilters = ref(null)
     const isShowCategories = ref(null)
+    const isShowData = ref(null)
 
     function showFilters() {
         isShowFilters.value = !isShowFilters.value
@@ -28,6 +29,10 @@
 
     function showCategories() {
         isShowCategories.value = !isShowCategories.value
+    } 
+
+    function showData() {
+        isShowData.value = !isShowData.value
     } 
 </script>
 <template>
@@ -38,7 +43,9 @@
 
     <div v-if="isShowFilters" id="myDropdown" class="dropdown-content">
         <div class="filters-content-line"></div>
+
         <div class="dropdown-content-content">
+
             <div @click="showCategories" class="drop-btn-container">
                 <img src="../assets/header/arrow_down.svg" alt="" id="arrow_down" />
                 <label class="dropbtn" id="dropbtn"> Категории </label>
@@ -52,48 +59,12 @@
                 </div>
             </div>
 
-            <div>
-                <a href="#kafedra" class="dropdown-content-a">
-                    <img
-                    src="../assets/anchor_header/html.svg"
-                    alt=""
-                    class="anchor-img"
-                    style="transform: scale(0.7)"
-                    />
-                    <label class="label">о_кафедре.html</label></a
-                >
-                <a href="#news" class="dropdown-content-a">
-                    <img
-                    src="../assets/anchor_header/css.svg"
-                    alt=""
-                    class="anchor-img"
-                    />
-                    <label class="label">главные_новости.css</label>
-                </a>
-                <a href="#prepod" class="dropdown-content-a">
-                    <img src="../assets/anchor_header/py.svg" alt="" class="anchor-img" />
-                    <label class="label">работники_кафедры.py</label></a
-                >
-                <a href="#cifri" class="dropdown-content-a">
-                    <img
-                    src="../assets/anchor_header/c++.svg"
-                    alt=""
-                    class="anchor-img"
-                    />
-                    <label class="label">кафедра_в_цифрах.cpp</label> </a
-                ><a href="#gallery" class="dropdown-content-a">
-                    <img src="../assets/anchor_header/js.svg" alt="" class="anchor-img" />
-                    <label class="label">фотогалерея.js</label></a
-                >
-                <a href="#footer" class="dropdown-content-a">
-                    <img
-                    src="../assets/anchor_header/ts.svg"
-                    alt=""
-                    class="anchor-img"
-                    style="transform: scale(0.7)"
-                    />
-                    <label class="label">контакты.ts</label>
-                </a>
+            <div @click="showData" class="drop-btn-container">
+                <img src="../assets/header/arrow_down.svg" alt="" id="arrow_down" />
+                <label class="dropbtn" id="dropbtn"> Дата </label>
+            </div>
+            <div v-if="isShowData" id="dataDropdown" class="data-dropdown-content">
+                <div class="data-content-line"></div>
             </div>
         </div>
     </div>
@@ -116,6 +87,7 @@
     .filters-content-line {
         margin-left: 22px;
         width: 1px;
+        /* высота должна меняться */
         height: 550px;
         background-color: #787878;
     }
@@ -129,6 +101,12 @@
         margin-left: 21.5px;
         width: 1px;
         height: 330px;
+        background-color: rgb(0, 84, 255);;
+    }
+    .data-content-line {
+        margin-left: 21.5px;
+        width: 1px;
+        height: 120px;
         background-color: rgb(0, 84, 255);;
     }
     #arrow_down {
