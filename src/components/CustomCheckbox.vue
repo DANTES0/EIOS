@@ -1,6 +1,8 @@
 <template>
-    <input type="checkbox" v-model="model" :value="value" />
-    <span id="checkbox-category" @click="toggleCheckbox">{{ label }}</span>
+    <div class="custom-checkbox-wrapper" @click="toggleCheckbox">
+        <input type="checkbox" v-model="model" :value="value" />
+        <span id="checkbox-category">{{ label }}</span>
+    </div>
 </template>
 
 <script setup>
@@ -32,12 +34,13 @@
     #checkbox-category {
         margin-left: 10px;
         user-select: none;
-        margin-bottom: 14px;
 
         color: rgb(134, 134, 134);
         font-family: Nunito;
         font-size: 14px;
         font-weight: 300;
+
+        cursor: pointer;
     }
 
     #checkbox-category:hover {
@@ -56,7 +59,6 @@
         align-items: center;
         justify-content: center;
         outline:none;
-        margin-bottom: 14px;
     }
 
     input[type="checkbox"]:after {
@@ -75,4 +77,22 @@
     input[type="checkbox"]:checked:after{
         display: block;
     }
+
+    .custom-checkbox-wrapper {
+        display: flex;
+        height: 20px;
+        /* width: 161px; */
+        /* max-width: 161px; */
+        cursor: pointer;
+    }
+
+    .custom-checkbox-wrapper:hover #checkbox-category {
+        color: #ddd;
+    }
+
+    .custom-checkbox-wrapper:hover input[type="checkbox"] {
+        background-color: transparent;
+        border: 1px solid rgb(0, 84, 255);
+    }
+
 </style>

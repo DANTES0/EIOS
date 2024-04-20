@@ -3,6 +3,7 @@
     import CustomCheckbox from "./CustomCheckbox.vue"
 
     const categories = ref([
+        "Важные",
         "Конференции",
         "Конкурсы, гранты",
         "Мероприятия",
@@ -36,14 +37,14 @@
     </div>
 
     <div v-if="isShowFilters" id="myDropdown" class="dropdown-content">
-        <div class="dropdown-content-line"></div>
+        <div class="filters-content-line"></div>
         <div class="dropdown-content-content">
             <div @click="showCategories" class="drop-btn-container">
                 <img src="../assets/header/arrow_down.svg" alt="" id="arrow_down" />
                 <label class="dropbtn" id="dropbtn"> Категории </label>
             </div>
             <div v-if="isShowCategories" id="categoriesDropdown" class="categories-dropdown-content">
-                <div class="dropdown-content-line"></div>
+                <div class="categories-content-line"></div>
                 <div class="categories-dropdown-content-checkboxes">
                     <div class="category-checkbox" v-for="(category, index) in categories" :key="index">
                         <CustomCheckbox :label="category" v-model="selectedCategories[index]" />
@@ -112,11 +113,23 @@
         height: 23px;
         margin-left: 22px;
     }
+    .filters-content-line {
+        margin-left: 22px;
+        width: 1px;
+        height: 550px;
+        background-color: #787878;
+    }
     .dropdown-content-line {
         margin-left: 22px;
         width: 2px;
         height: 200px;
         background-color: #787878;
+    }
+    .categories-content-line {
+        margin-left: 21.5px;
+        width: 1px;
+        height: 330px;
+        background-color: rgb(0, 84, 255);;
     }
     #arrow_down {
         padding-left: 10px;
@@ -166,7 +179,6 @@
     }
     
     .categories-dropdown-content {
-        margin-top: 3px;
         display: flex;
         min-width: 160px;
         overflow: auto;
@@ -174,10 +186,13 @@
     }
 
     .category-checkbox {
-        display:flex;
-        align-items:center;
         margin-left: 12px;
-        cursor: pointer;
     }
 
+    .categories-dropdown-content-checkboxes {
+        margin-top: 10px;
+        display:flex;
+        flex-direction: column;
+        gap:10px;
+    }
 </style>
