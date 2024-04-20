@@ -1,5 +1,5 @@
 <script setup>
-    import {ref} from "vue"
+    import {ref, computed} from "vue"
     import CustomCheckbox from "./CustomCheckbox.vue"
 
     const categories = ref([
@@ -18,13 +18,35 @@
 
     const selectedCategories = ref(Array(categories.value.length).fill(false));
 
-    const isShowFilters = ref(null)
-    const isShowCategories = ref(null)
-    const isShowData = ref(null)
+    const isShowFilters = ref(false)
+    const isShowCategories = ref(false)
+    const isShowData = ref(false)
+
+    const filtersContentHeight = computed(() => {
+        let height = 0
+        // if (isShowCategories.value) {
+        //     height += 380
+        // }
+        // if (isShowData.value) {
+        //     height += 130
+        // }
+        if (isShowData.value == false && isShowCategories.value == false) {
+            height += 58
+        }
+        if (isShowData.value == true && isShowCategories.value == false) {
+            height += 180
+        }
+        if (isShowData.value == false && isShowCategories.value == true) {
+            height += 388
+        }
+        if (isShowData.value == true && isShowCategories.value == true) {
+            height += 508
+        }
+        return height
+    });
 
     function showFilters() {
         isShowFilters.value = !isShowFilters.value
-        isShowCategories.value = false
     } 
 
     function showCategories() {
@@ -41,8 +63,8 @@
         <label class="dropbtn" id="dropbtn"> Фильтры </label>
     </div>
 
-    <div v-if="isShowFilters" id="myDropdown" class="dropdown-content">
-        <div class="filters-content-line"></div>
+    <div v-if="isShowFilters" class="dropdown-content">
+        <div class="filters-content-line" :style="{ height: filtersContentHeight + 'px' }"></div>
 
         <div class="dropdown-content-content">
 
@@ -88,7 +110,7 @@
         margin-left: 22px;
         width: 1px;
         /* высота должна меняться */
-        height: 550px;
+        /* height: 550px; */
         background-color: #787878;
     }
     .dropdown-content-line {
@@ -142,14 +164,14 @@
     }
     .dropdown-content {
         margin-top: 3px;
-        display: flex;
+        /* display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        background-color: transparent;
-        min-width: 160px;
+        background-color: transparent; */
+        /* min-width: 161px;
         overflow: auto;
-        z-index: 99;
+        z-index: 99; */
     }
     
     .show {

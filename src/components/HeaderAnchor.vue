@@ -32,7 +32,7 @@ import NewsFilters from "./NewsFilters.vue"
   <div v-if="$route.path == `/timetable`" class="search-timetable-anchor">
     <SearchTimetable></SearchTimetable>
   </div>
-  <div v-if="$route.path == `/news`" class="search-timetable-anchor">
+  <div v-if="$route.path == `/news`" class="news-filters">
     <NewsFilters></NewsFilters>
   </div>
 </template>
