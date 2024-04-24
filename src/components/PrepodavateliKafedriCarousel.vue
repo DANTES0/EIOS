@@ -13,6 +13,7 @@ const fetchPrepod = async() => {
   
   prepod.value = response_prepod.data.value
   prepod.value.sort((a, b) => a.id - b.id);
+  [prepod.value[0], prepod.value[1]] = [prepod.value[1], prepod.value[0]]
   console.log(prepod.value)
   console.log(response_prepod)
 }
@@ -23,10 +24,14 @@ setTimeout(() => {
   }, 2000); // Короткий интервал времени
 }
 let currentIndex = ref(1)
-const next = () => {
-    currentIndex.value = (currentIndex.value + 1) % prepod.value.length
+const next = computed(() => {
+    
+    [prepod.value[currentIndex.value], prepod.value[currentIndex.value+1]] = [prepod.value[currentIndex.value+1], prepod.value[currentIndex.value]]
+    // currentIndex.value = (currentIndex.value + 1) % prepod.value.length
+    ++currentIndex.value;
+    console.log(currentIndex.value)
 //   console.log(currentGalleryIndex.value)
-}
+})
 
 const prev = () => {
   if (currentIndex.value == 0) {
@@ -48,7 +53,7 @@ onMounted(() => {
 <template>
     <div class="content-wrapper-prepod">
         <div class="prepod-image-block">
-          <div style="" class="prepod-image-arrow back-image-arrow"></div>
+          <div style="" class="prepod-image-arrow back-image-arrow">{{ prepod }}</div>
           <div class="PrepodavateliKafedriItem-wrap">
           <PrepodavateliKafedriItem v-for="{id, name, photo, post, rank} in prepod"
           :id = "id"
@@ -56,6 +61,8 @@ onMounted(() => {
           :photo="photo"
           :post="post"
           :rank="rank"
+          :currentIndex="currentIndex"
+          :length="prepod.length"
           ></PrepodavateliKafedriItem>
         </div>
           <!-- <PrepodavateliKafedriItem
@@ -69,7 +76,7 @@ onMounted(() => {
             class="prepod-image main-prepod-image"
           />
           <img src="../assets/news.png" alt="" class="prepod-image" /> -->
-          <div class="prepod-image-arrow next-image-arrow" @click="next_prepodavatel"></div>
+          <div class="prepod-image-arrow next-image-arrow" @click="next"></div>
         </div>
         <!-- <div class="prepod-description-block">
           <h1 class="name-prepod"></h1>
