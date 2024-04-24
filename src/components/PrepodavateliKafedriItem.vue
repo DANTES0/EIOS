@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 // import { createRequire } from 'module';
 // const require = createRequire(import.meta.url);
 let flag = ref(false)
@@ -9,10 +9,12 @@ const props = defineProps({
   photo: String,
   post: String,
   rank: String,
-  active: Boolean
+  active: Boolean,
+  currentIndex: Number,
+  length: Number
 })
 const CurImage = ref(1)
-console.log(props.id)
+console.log(props.length)
 function next_prepodavatel() {
 flag.value = true
 setTimeout(() => {
@@ -23,7 +25,24 @@ const resetAnimation = () => {
   flag.value = false;
   
 };
+let temp = ref(0)
+const checked = computed(() => {
 
+    if (props.currentIndex+1 == props.id || props.currentIndex == props.id) {
+        return true
+    }
+    if (props.currentIndex-1 == 0)
+    {
+        temp.value = props.length+1
+        if (temp.value == props.id){
+            return true
+        }
+        
+    }
+    
+    return false
+})
+console.log(checked)
 // const PrevImage = () => {
 //     if (CurImage.value - 1 == 0) {
 //         return 8
@@ -34,14 +53,14 @@ const resetAnimation = () => {
 // } 
 </script>
 <template>
-    <div class="wrappper">
+    <div class="wrappper" :class="{'wrap-destroy': !checked}">
           <img
             :src="photo"
             alt=""
-            class="prepod-image" :class="{'main-prepod-image': id == CurImage}"
+            class="prepod-image" :class="{'main-prepod-image': id==currentIndex}"
           />
-        <div class="prepod-description-block" v-if="id==CurImage">
-          <h1 class="name-prepod">{{ name }}</h1>
+        <div class="prepod-description-block" v-if="id==currentIndex">
+          <h1 class="name-prepod">{{currentIndex }}</h1>
           <h2 style="margin-bottom: 21px" class="spec-prepod info-prepod">
            {{ post }}
           </h2>
@@ -54,6 +73,7 @@ const resetAnimation = () => {
     </div>
 </template>
 <style scoped>
+
 .wrappper {
     display: flex;
     flex-direction: column;
@@ -177,5 +197,8 @@ const resetAnimation = () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.wrap-destroy {
+    display: none;
 }
 </style>
