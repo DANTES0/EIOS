@@ -1,4 +1,13 @@
-<script setup></script>
+<script setup>
+
+defineProps({
+  id: Number,
+  headline: String,
+  category: String,
+  date: String,
+  url: String,
+})
+</script>
 <template>
   <div class="news-wrapper">
     <div class="numbers-wrapper">
@@ -18,34 +27,33 @@
         <div class="description-news">
           <div class="general-block-description-news">
             <div class="description-text-news">
-              Началась регистрация участников юбилейной XV Международной
-              олимпиады в сфере информационных технологий «IT-Планета 2024»
+              {{headline}}
             </div>
           </div>
           <div class="btn-next-back-wrapper">
-            <button class="btn-news back">НАЗАД</button>
-            <button class="btn-news next">ВПЕРЕД</button>
+            <button class="btn-news back" @click="$emit('prev')">НАЗАД</button>
+            <button  class="btn-news next" @click="$emit('next')">ВПЕРЕД</button>
           </div>
         </div>
         <div class="card-news-block">
           <div class="card-news-up-block">
             <div class="card-news-up-tags">
               <img src="../assets/News/image.svg" alt="" class="img-tags" />
-              <div class="tags-title">Мероприятия</div>
+              <div class="tags-title">{{category}}</div>
             </div>
-            <div class="card-news-up-date">25/02/2024</div>
+            <div class="card-news-up-date">{{date}}</div>
           </div>
           <div class="card-news-down-tags">
             <img
-              src="../assets/news.png"
+              src=""
               alt=""
               class="card-news-down-tags-blur"
+              :style="{ backgroundImage: 'url(' +url[0] + ')' }"
             />
-            <img
-              src="../assets/news.png"
-              alt=""
+            <div
               class="card-news-down-tags-image"
-            />
+              :style="{ backgroundImage: 'url(' +url[0] + ')' }"
+            ></div>
           </div>
         </div>
       </div>
@@ -69,6 +77,8 @@
   filter: blur(6px);
   transform: scale(1.4);
   object-fit: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .card-news-down-tags-image {
   position: absolute;
@@ -76,9 +86,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  width: 402px;
-  height: 276px;
+  width: 460px;
+  height: 300px;
   margin: auto auto;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 50%;
 }
 .card-news-down-tags {
   overflow: hidden;

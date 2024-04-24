@@ -1,4 +1,98 @@
-<script setup></script>
+<script setup>
+import {ref, onMounted } from 'vue'
+
+onMounted(()=>{
+
+  console.log(document.querySelector('.circle_gallery'))
+})
+let prop = defineProps({
+  id_photo: Number,
+  photo: Array
+})
+let j = ref(0)
+let first = ref(0)
+let second = ref(1)
+let third = ref(2)
+let flag = ref(0)
+let array_size = ref(Object.keys(prop.photo).filter(key => !isNaN(key)).length);
+const gradientActive = ref(false);
+const next_photo = () => {
+  gradientActive.value = !gradientActive.value;
+  console.log(gradientActive.value)
+  setTimeout(()=> gradientActive.value = !gradientActive.value, 800)
+//   let count = 0;
+
+// for (let key in prop.photo) {
+//   if (typeof prop.photo[key] === "string") {
+//     count++;
+//   }
+// }
+// console.log(count)
+  // console.log(Object.keys(prop.photo).length)
+  if (third.value == 1) 
+  {
+    first.value = -1
+    // flag.value = 1;
+  }
+  first.value++
+  if (first.value == array_size.value-1) 
+  {
+    second.value = -1
+    // flag.value = 1;
+  }
+  // console.log(first.value)
+  second.value++
+  if (second.value == array_size.value-1)
+  {
+    third.value = -1
+  }
+  // console.log(second.value)
+  third.value++
+  
+  // console.log(third.value)
+
+}
+const gradientActiveLeft = ref(false)
+const prev_photo = () => {
+  gradientActiveLeft.value = !gradientActiveLeft.value;
+  console.log(gradientActiveLeft.value)
+  setTimeout(()=> gradientActiveLeft.value = !gradientActiveLeft.value, 800)
+  third.value--
+  if (third.value == 0) 
+  {
+    second.value = array_size.value
+    // flag.value = 1;
+  }
+  second.value--
+  if (second.value == 0)
+  {
+    first.value = array_size.value
+  }
+  first.value--
+  if (second.value == array_size.value-2) 
+  {
+    third.value = array_size.value-1
+    // flag.value = 1;
+  }
+  
+  
+  
+  
+  console.log(first.value)
+  console.log(second.value)
+  console.log(third.value)
+  
+ 
+
+}
+let show = ref(true)
+const c = () => {
+
+
+}
+let circle = ref(null)
+let array = []
+</script>
 <template>
   <div class="wrapper-gallery">
     <div class="numbers-wrapper">
@@ -13,38 +107,97 @@
       </div>
       <div class="content-wrapper-gallery">
         <div class="gallery-image-block">
-          <div style="" class="gallery-image-arrow back-image-arrow"></div>
-          <img src="../assets/news.png" alt="" class="gallery-image" />
-          <img src="../assets/news.png" alt="" class="gallery-image" />
-          <img src="../assets/news.png" alt="" class="gallery-image" />
-          <div class="gallery-image-arrow next-image-arrow"></div>
+          <div style="" class="gallery-image-arrow back-image-arrow" @click="prev_photo"></div>
+          <div src="" alt="" class="gallery-image":style="{ backgroundImage: 'url(' +photo[first] + ')' }" ></div>
+          <div src="" alt="" class="gallery-image":style="{ backgroundImage: 'url(' +photo[second] + ')' }" ></div>
+          <div src="" alt="" class="gallery-image":style="{ backgroundImage: 'url(' +photo[third]+ ')' }" ></div>
+          <div class="gallery-image-arrow next-image-arrow" @click="next_photo"></div>
         </div>
-        <div class="gallery-circle-block">
-          <div v-for="i in 4" class="circle-gallery"></div>
-        </div>
+        <!-- @click="$emit('next_photo')" -->
+        <div class="line-gradient"  :class="{ 'gradient-active': gradientActive, 'gradient-active-left': gradientActiveLeft}" ></div>
+        <!-- <div  class="gallery-circle-block">
+          <div @click="c" ref="circle"class="circle_gallery" v-for="i in 6" ></div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 @font-face {
   font-family: JetBrainsMono;
   src: url("../assets/JetBrainsMono.ttf");
+}
+.line-gradient {
+  height: 2px;
+  width: 300px;
+  /* background-color: #1e66f5; */
+  /* background: linear-gradient(to right, red, yellow); */
+  background: linear-gradient(-45deg, #ccc, #1f1f1f, #1f1f1f);
+  background-size: 400% 400%;
+}
+.gradient-active-left {
+  animation: gradient-left 1s ease;
+}
+.gradient-active {
+  /* animation: gradientAnimation 0.5s ease forwards; */
+  animation: gradient 1s ease;
+  
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 0%;
+	}
+	50% {
+		background-position: -100% 0%;
+	}
+	100% {
+		background-position: 0% 0%;
+	}
+}
+@keyframes gradient-left {
+	0% {
+		background-position: -100% 0%;
+	}
+	50% {
+		background-position: 0% 0%;
+	}
+	100% {
+		background-position: -100% 0%;
+	}
+}
+@keyframes gradientAnimation {
+  0% {
+    background: linear-gradient(to right, red, yellow);
+  }
+  50% {
+    background: linear-gradient(to right, red, yellow);
+  }
+  100% {
+    background: linear-gradient(to left, red, yellow);
+  }
 }
 .gallery-image-arrow:hover {
   filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
     hue-rotate(146deg) brightness(122%) contrast(120%);
   cursor: pointer;
 }
-.circle-gallery {
+.circle_gallery_active {
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  margin-right: 5px;
+  background-color: blue;
+}
+.circle_gallery {
   width: 16px;
   height: 16px;
   border-radius: 100%;
   border: 1px solid white;
+  margin-right: 5px;
   background-color: transparent;
 }
 .gallery-circle-block {
-  width: 100px;
+  width: auto;
   height: 16px;
   display: flex;
   flex-direction: row;
@@ -79,6 +232,9 @@
 .gallery-image {
   width: 360px;
   height: 360px;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .back-image-arrow {
   background-image: url("../assets/PrepodavateliKafedri/arrow_back.svg");
@@ -104,7 +260,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 330px;
+  height: 450px;
   margin-top: 30px;
 }
 .content-gallery-wrapper {
