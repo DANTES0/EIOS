@@ -11,10 +11,11 @@ const props = defineProps({
   rank: String,
   active: Boolean,
   currentIndex: Number,
-  length: Number
+  length: Number,
+  nextId: Number,
+  prevId: Number
 })
-const CurImage = ref(1)
-console.log(props.length)
+// console.log(props.countObject)
 function next_prepodavatel() {
 flag.value = true
 setTimeout(() => {
@@ -26,23 +27,32 @@ const resetAnimation = () => {
   
 };
 let temp = ref(0)
-const checked = computed(() => {
+// let show1 = ref(false)
+// let show2 = ref(false)
+// const checked = computed(() => {
+//     // console.log(props.currentIndex == props.countObject)
+//     // console.log(`Current index = ${props.currentIndex}`)
+//     // console.log(`index= ${props.countObject}`)
+//     // console.log(`id= ${props.id}`)
+//     if (props.currentIndex+1 == props.nextId || props.currentIndex == props.id || props.currentIndex-1 == props.prevId) {
+//       console.log(props.prevId)
+//         return true
+//     }
+//     // if (props.currentIndex == props.id) {
 
-    if (props.currentIndex+1 == props.id || props.currentIndex == props.id) {
-        return true
-    }
-    if (props.currentIndex-1 == 0)
-    {
-        temp.value = props.length+1
-        if (temp.value == props.id){
-            return true
-        }
+//     // }
+//     // if (props.countObject == 0)
+//     // {
+//     //     temp.value = props.length-1
+//     //     if (temp.value == props.id){
+//     //         return true
+//     //     }
         
-    }
+//     // }
     
-    return false
-})
-console.log(checked)
+//     // return false
+// })
+// console.log(checked)
 // const PrevImage = () => {
 //     if (CurImage.value - 1 == 0) {
 //         return 8
@@ -53,7 +63,7 @@ console.log(checked)
 // } 
 </script>
 <template>
-    <div class="wrappper" :class="{'wrap-destroy': !checked}">
+    <div class="wrappper">
           <img
             :src="photo"
             alt=""

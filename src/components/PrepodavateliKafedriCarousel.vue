@@ -8,44 +8,144 @@ const prepod_url = computed(() => {
   return `http://25.61.98.183:8080/teachers/getAll`
 })
 let prepod = ref(null)
+let currentIndex = ref(1)
+let nextId = ref([])
+let prevId = ref([])
+let boll = ref ([])
+let temp_array= ref([])
 const fetchPrepod = async() => {
   const response_prepod = await useFetch(prepod_url).json()
   
   prepod.value = response_prepod.data.value
-  prepod.value.sort((a, b) => a.id - b.id);
-  [prepod.value[0], prepod.value[1]] = [prepod.value[1], prepod.value[0]]
-  console.log(prepod.value)
-  console.log(response_prepod)
+  prepod.value.sort();
+
+//   currentIndex.value++;
+for (let i = 0; i< prepod.value.length; i++)
+{
+  prepod.value[i].id = i
+  if (prepod.value[i].id == prepod.value.length-1)
+  {
+    nextId.value[i] = 0  
+  } else {
+  nextId.value[i] = i + 1;
+  } 
+  
+  if (prepod.value[i].id == 0){
+    prevId.value[i] = prepod.value.length-1
+  } else {
+    prevId.value[i] = i - 1;
+  }
+  // boll.value[i] = false
 }
-function next_prepodavatel() {
-flag.value = true
-setTimeout(() => {
-    flag.value = false; // Удаляем класс .anima
-  }, 2000); // Короткий интервал времени
+    // [prepod.value[0], prepod.value[1]] = [prepod.value[1], prepod.value[0]]
+    // [prepod.value[0], prepod.value[prepod.value.length-1]] = [prepod.value[prepod.value.length-1], prepod.value[0]]
+
+    for (let i = 0; i< prepod.value.length; i++)
+{
+  if (currentIndex.value == prepod.value[i].id)
+  {
+    temp_array.value[0] = prepod.value[prevId.value[i]]
+    console.log(prepod.value[prevId.value[i]])
+    temp_array.value[1] = prepod.value[currentIndex.value]
+    console.log(prepod.value[currentIndex.value])
+    temp_array.value[2] = prepod.value[nextId.value[i]]
+    console.log(prepod.value[nextId.value[i]])
+  }
+  // console.log(temp_array.value)
+  // console.log(currentIndex.value+1 == nextId.value[i])
+  // if (currentIndex.value+1 == nextId.value[i] || currentIndex.value-1 == prevId.value[i] || currentIndex.value == prepod.value[i].id){
+  //   boll.value[nextId.value[i]] = true
+  //   boll.value[prevId.value[i]] = true
+  //   boll.value[currentIndex.value] = true
+  //   // console.log('добавилось')
+  // }
+  // console.log(prepod.value[i].id)
+  // console.log(boll.value)
+  
+  // console.log(boll.value)
 }
-let currentIndex = ref(1)
+//   console.log(response_prepod)
+}
+
 const next = computed(() => {
     
-    [prepod.value[currentIndex.value], prepod.value[currentIndex.value+1]] = [prepod.value[currentIndex.value+1], prepod.value[currentIndex.value]]
+    // [prepod.value[currentIndex.value], prepod.value[currentIndex.value+1]] = [prepod.value[currentIndex.value+1], prepod.value[currentIndex.value]]
     // currentIndex.value = (currentIndex.value + 1) % prepod.value.length
-    ++currentIndex.value;
-    console.log(currentIndex.value)
+    currentIndex.value++;
+    if (currentIndex.value+1 == prepod.value.length+1 ){
+      currentIndex.value = 0
+    }
+    
+    // boll.value.fill(false)
+    for (let i = 0; i< prepod.value.length; i++)
+{
+  if (currentIndex.value == prepod.value[i].id)
+  {
+    temp_array.value[0] = prepod.value[prevId.value[i]]
+    console.log(prepod.value[prevId.value[i]])
+    temp_array.value[1] = prepod.value[currentIndex.value]
+    console.log(prepod.value[currentIndex.value])
+    temp_array.value[2] = prepod.value[nextId.value[i]]
+    console.log(prepod.value[nextId.value[i]])
+  }
+//   console.log(currentIndex.value+1 == nextId.value[i])
+//   if (currentIndex.value+1 == prepod.value.length){
+//     boll.value[0] = true
+//   }
+//   if (currentIndex.value+1 == nextId.value[i] || currentIndex.value-1 == prevId.value[i] || currentIndex.value == prepod.value[i].id){
+//     boll.value[nextId.value[i]] = true
+//     boll.value[prevId.value[i]] = true
+//     boll.value[currentIndex.value] = true
+//     console.log('добавилось')
+//   }
+//   // console.log(prepod.value[i].id)
+//   // console.log(boll.value)
+  
+//   console.log(boll.value)
+}
+    // console.log(currentIndex.value)
 //   console.log(currentGalleryIndex.value)
 })
 
 const prev = () => {
-  if (currentIndex.value == 0) {
-    currentIndex.value = prepod.value.length - 1
-  } else {
-    currentIndex.value = Math.abs(
-      (currentIndex.value - 1) % prepod.value.length
-    )
+  currentIndex.value--;
+    if (currentIndex.value == -1 ){
+      currentIndex.value = prepod.value.length-1
+    }
+    
+    // boll.value.fill(false)
+    for (let i = 0; i< prepod.value.length; i++)
+{
+  if (currentIndex.value == prepod.value[i].id)
+  {
+    temp_array.value[0] = prepod.value[prevId.value[i]]
+    console.log(prepod.value[prevId.value[i]])
+    temp_array.value[1] = prepod.value[currentIndex.value]
+    console.log(prepod.value[currentIndex.value])
+    temp_array.value[2] = prepod.value[nextId.value[i]]
+    console.log(prepod.value[nextId.value[i]])
   }
+//   console.log(currentIndex.value+1 == nextId.value[i])
+//   if (currentIndex.value+1 == prepod.value.length){
+//     boll.value[0] = true
+//   }
+//   if (currentIndex.value+1 == nextId.value[i] || currentIndex.value-1 == prevId.value[i] || currentIndex.value == prepod.value[i].id){
+//     boll.value[nextId.value[i]] = true
+//     boll.value[prevId.value[i]] = true
+//     boll.value[currentIndex.value] = true
+//     console.log('добавилось')
+//   }
+//   // console.log(prepod.value[i].id)
+//   // console.log(boll.value)
+  
+//   console.log(boll.value)
+}
 //   console.log(currentGalleryIndex.value)
 }
 // const currentNews = computed(() =>
 // prepod.value ? prepod.value[currentIndex.value] : null
 // )
+let count = ref(0)
 onMounted(() => {
     fetchPrepod();
 })
@@ -53,16 +153,15 @@ onMounted(() => {
 <template>
     <div class="content-wrapper-prepod">
         <div class="prepod-image-block">
-          <div style="" class="prepod-image-arrow back-image-arrow">{{ prepod }}</div>
+          <div style="" class="prepod-image-arrow back-image-arrow" @click="prev"></div>
           <div class="PrepodavateliKafedriItem-wrap">
-          <PrepodavateliKafedriItem v-for="{id, name, photo, post, rank} in prepod"
+          <PrepodavateliKafedriItem v-for="({id, name, photo, post, rank}, index) in temp_array"
           :id = "id"
           :name = "name"
           :photo="photo"
           :post="post"
           :rank="rank"
           :currentIndex="currentIndex"
-          :length="prepod.length"
           ></PrepodavateliKafedriItem>
         </div>
           <!-- <PrepodavateliKafedriItem
