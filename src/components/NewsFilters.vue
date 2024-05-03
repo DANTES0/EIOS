@@ -63,8 +63,7 @@
     <div v-if="isShowFilters" class="filters">
         <div class="filters-line" :style="{ height: filtersContentHeight + 'px' }"></div>
 
-        <!-- где прописан стиль этого класса? -->
-        <div class="dropdown-content-content"> 
+        <div class="filters-content"> 
 
             <!-- кнопка отрытия категорий -->
             <div @click="showCategories" class="dropdown-button">
@@ -73,10 +72,10 @@
             </div>
 
             <!-- категории -->
-            <div v-if="isShowCategories" id="categoriesDropdown" class="categories-dropdown-content">
+            <div v-if="isShowCategories" class="categories">
                 <div class="categories-line"></div>
-                <div class="categories-dropdown-content-checkboxes">
-                    <div class="category-checkbox" v-for="(category, index) in categories" :key="index">
+                <div class="categories-content">
+                    <div class="categories-content-item" v-for="(category, index) in categories" :key="index">
                         <CustomCheckbox :label="category" v-model="selectedCategories[index]" />
                     </div>
                 </div>
@@ -89,7 +88,7 @@
             </div>
 
             <!-- дата -->
-            <div v-if="isShowData" id="dataDropdown" class="data-dropdown-content">
+            <div v-if="isShowData" class="data">
                 <div class="data-line"></div>
             </div>
 
@@ -155,22 +154,22 @@
         display: flex;
         min-width: 161px;
     }
-    
-    .categories-dropdown-content {
+
+    .categories {
         display: flex;
         min-width: 160px;
         overflow: auto;
         z-index: 99;
     }
 
-    .category-checkbox {
-        margin-left: 12px;
-    }
-
-    .categories-dropdown-content-checkboxes {
+    .categories-content {
         margin-top: 10px;
         display:flex;
         flex-direction: column;
         gap:10px;
+    }
+
+    .categories-content-item {
+        margin-left: 12px;
     }
 </style>
