@@ -1,6 +1,18 @@
 <script setup>
     import {ref, computed} from "vue"
     import CustomCheckbox from "./CustomCheckbox.vue"
+    import VueDatePicker from '@vuepic/vue-datepicker'
+    import '@vuepic/vue-datepicker/dist/main.css'
+
+    const dateStart = ref()
+    const dateEnd = ref(new Date())
+
+    const format = (date) => {
+        const day = date.getDate()
+        const month = date.getMonth() + 1
+        const year = date.getFullYear()
+        return `${day}/${month}/${year}`
+    }
 
     const categories = ref([
         "Важные",
@@ -14,7 +26,7 @@
         "Объявления",
         "Приемная комиссия",
         "Другие"
-    ]);
+    ])
 
     const selectedCategories = ref(Array(categories.value.length).fill(false));
 
@@ -37,7 +49,7 @@
             height += 508
         }
         return height
-    });
+    })
 
     function showFilters() {
         isShowFilters.value = !isShowFilters.value
@@ -90,10 +102,30 @@
             <!-- дата -->
             <div v-if="isShowData" class="data">
                 <div class="data-line"></div>
+                <div class="data-content">
+                     <span class="data-start">С</span>
+                     <VueDatePicker v-model="dateStart" 
+                        dark 
+                        :enable-time-picker="false" 
+                        :format="format" 
+                        locale="ru" 
+                        cancel-text="Отмена" 
+                        select-text="Выбрать" 
+                        input-class-name="datapicker-input">
+                    </VueDatePicker>
+                     <span class="data-end">По</span>
+                     <VueDatePicker v-model="dateEnd" 
+                        dark 
+                        :enable-time-picker="false" 
+                        :format="format" 
+                        locale="ru" 
+                        cancel-text="Отмена" 
+                        select-text="Выбрать" 
+                        input-class-name="datapicker-input">
+                    </VueDatePicker>
+                </div>
             </div>
-
         </div>
-        
     </div>
 </template>
 
@@ -113,13 +145,13 @@
         margin-left: 21.5px;
         width: 1px;
         height: 330px;
-        background-color: rgb(0, 84, 255);;
+        background-color: rgb(0, 84, 255);
     }
     .data-line {
         margin-left: 21.5px;
         width: 1px;
         height: 120px;
-        background-color: rgb(0, 84, 255);;
+        background-color: rgb(0, 84, 255);
     }
 
 
@@ -143,7 +175,6 @@
         font-family: Nunito;
         font-weight: 200;
         font-size: 16px;
-        border: none;
         cursor: pointer;
         margin-left: 4px;
     }
@@ -158,8 +189,6 @@
     .categories {
         display: flex;
         min-width: 160px;
-        overflow: auto;
-        z-index: 99;
     }
 
     .categories-content {
@@ -171,5 +200,35 @@
 
     .categories-content-item {
         margin-left: 12px;
+    }
+
+
+    .data {
+        display: flex;
+    }
+
+    .data-content {
+        margin-left: 16px;
+        display:flex;
+        flex-direction: column;
+        gap:10px;
+    }
+
+    .data-content span {
+        color: #cccccc;
+        font-family: Nunito;
+        font-weight: 200;
+        font-size: 16px;
+    }
+
+    .datapicker-input {
+        color: #cccccc;
+        font-family: Rubik;
+        font-size: 16px;
+        font-weight: 300;
+    }
+
+    .datapicker-input:hover {
+        border-color: rgb(0, 84, 255);
     }
 </style>
