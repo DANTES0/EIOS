@@ -61,7 +61,7 @@
 
     function showData() {
         isShowData.value = !isShowData.value
-    } 
+    }
 </script>
 
 <template>
@@ -79,7 +79,7 @@
 
             <!-- кнопка отрытия категорий -->
             <div @click="showCategories" class="dropdown-button">
-                <img src="../assets/header/arrow_down.svg" alt=""/>
+                <img class="arrow-down-button" src="../assets/header/arrow_down.svg" alt="" :class="{ 'rotated': isShowCategories }"/>
                 <label class="dropdown-button-text" > Категории </label>
             </div>
 
@@ -95,7 +95,7 @@
 
             <!-- кнопка отрытия даты -->
             <div @click="showData" class="dropdown-button" id="showDataButton">
-                <img src="../assets/header/arrow_down.svg" alt=""/>
+                <img class="arrow-down-button" src="../assets/header/arrow_down.svg" alt="" :class="{ 'rotated': isShowData }"/>
                 <label class="dropdown-button-text"> Дата </label>
             </div>
 
@@ -287,5 +287,16 @@
 
     .dp__action_button {
         --dp-action-button-height: 25px;
+    }
+
+    .arrow-down-button {
+        transform-origin: 65% 50%;
+        width:25px;
+        transform: rotate(-90deg);
+        transition: transform 0.25s ease;
+    }
+
+    .rotated {
+        transform: rotate(0deg);
     }
 </style>
