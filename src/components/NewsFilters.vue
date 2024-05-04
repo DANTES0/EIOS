@@ -183,7 +183,6 @@
         align-items: center;
         cursor: pointer; 
         user-select: none;
-        /* margin-top:10px; */
     }
     #showDataButton {
         margin-top:5px;
@@ -203,6 +202,9 @@
         cursor: pointer;
         margin-left: 4px;
     }
+
+
+    /* стили для контейнеров */
     .filters {
         margin-top: 3px;
         display: flex;
@@ -226,6 +228,7 @@
     }
 
 
+    /* стили для даты */
     .data {
         display: flex;
     }
@@ -259,7 +262,6 @@
     }
 
     .dp-custom-calendar .dp__calendar_item {
-        /* color: #cccccc; */
         font-family: Rubik;
     }
 
@@ -276,5 +278,14 @@
 
     :root {
         --dp-font-family: Nunito;
+        --dp-font-size: 0.75rem;
+        --dp-border-radius: 0px;
+        --dp-cell-border-radius: 0px;
+        --dp-cell-size: 30px;
+        --dp-menu-min-width: 225px;
+    }
+
+    .dp__action_button {
+        --dp-action-button-height: 25px;
     }
 </style>
