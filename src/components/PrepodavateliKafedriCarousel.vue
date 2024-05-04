@@ -175,7 +175,7 @@ onMounted(() => {
             class="prepod-image main-prepod-image"
           />
           <img src="../assets/news.png" alt="" class="prepod-image" /> -->
-          <div class="prepod-image-arrow next-image-arrow" @click="next"></div>
+          <div class="prepod-image-arrow next-image-arrow" @click="next" style="margin-left: 15px;"></div>
         </div>
         <!-- <div class="prepod-description-block">
           <h1 class="name-prepod"></h1>
@@ -202,6 +202,7 @@ onMounted(() => {
     overflow-x: hidden;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 @keyframes anima {

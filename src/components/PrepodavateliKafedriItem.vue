@@ -70,7 +70,7 @@ let temp = ref(0)
             class="prepod-image" :class="{'main-prepod-image': id==currentIndex}"
           />
         <div class="prepod-description-block" v-if="id==currentIndex">
-          <h1 class="name-prepod">{{currentIndex }}</h1>
+          <h1 class="name-prepod">{{name }}</h1>
           <h2 style="margin-bottom: 21px" class="spec-prepod info-prepod">
            {{ post }}
           </h2>
