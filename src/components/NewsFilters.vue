@@ -30,9 +30,9 @@
 
     const selectedCategories = ref(Array(categories.value.length).fill(false));
 
-    const isShowFilters = ref(false)
-    const isShowCategories = ref(false)
-    const isShowData = ref(false)
+    const isShowFilters = ref(true)
+    const isShowCategories = ref(true)
+    const isShowData = ref(true)
 
     const filtersContentHeight = computed(() => {
         let height = 0
@@ -40,13 +40,13 @@
             height += 60
         }
         else if (isShowData.value && !isShowCategories.value) {
-            height += 211
+            height += 213
         }
         else if (!isShowData.value && isShowCategories.value) {
-            height += 388
+            height += 391
         }
         else if (isShowData.value && isShowCategories.value) {
-            height += 541
+            height += 543.5
         }
         return height
     })
