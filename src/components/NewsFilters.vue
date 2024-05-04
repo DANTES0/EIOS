@@ -4,7 +4,7 @@
     import VueDatePicker from '@vuepic/vue-datepicker'
     import '@vuepic/vue-datepicker/dist/main.css'
 
-    const dateStart = ref()
+    const dateStart = ref(new Date().setMonth(new Date().getMonth() - 1))
     const dateEnd = ref(new Date())
 
     const format = (date) => {
@@ -37,16 +37,16 @@
     const filtersContentHeight = computed(() => {
         let height = 0
         if (!isShowData.value && !isShowCategories.value) {
-            height += 58
+            height += 60
         }
         else if (isShowData.value && !isShowCategories.value) {
-            height += 180
+            height += 211
         }
         else if (!isShowData.value && isShowCategories.value) {
             height += 388
         }
         else if (isShowData.value && isShowCategories.value) {
-            height += 508
+            height += 541
         }
         return height
     })
@@ -94,7 +94,7 @@
             </div>
 
             <!-- кнопка отрытия даты -->
-            <div @click="showData" class="dropdown-button">
+            <div @click="showData" class="dropdown-button" id="showDataButton">
                 <img src="../assets/header/arrow_down.svg" alt=""/>
                 <label class="dropdown-button-text"> Дата </label>
             </div>
@@ -111,8 +111,17 @@
                         locale="ru" 
                         cancel-text="Отмена" 
                         select-text="Выбрать" 
-                        input-class-name="datapicker-input">
+                        input-class-name="datapicker-input"
+                        calendar-class-name="dp-custom-calendar"
+                        calendar-cell-class-name="dp-custom-cell"
+                        hide-input-icon>
+
+                        <!-- убрать предварительную дату -->
+                        <template #action-preview="">
+                        </template>
+
                     </VueDatePicker>
+
                      <span class="data-end">По</span>
                      <VueDatePicker v-model="dateEnd" 
                         dark 
@@ -121,7 +130,15 @@
                         locale="ru" 
                         cancel-text="Отмена" 
                         select-text="Выбрать" 
-                        input-class-name="datapicker-input">
+                        input-class-name="datapicker-input"
+                        calendar-class-name="dp-custom-calendar"
+                        calendar-cell-class-name="dp-custom-cell"
+                        hide-input-icon>
+
+                        <!-- убрать предварительную дату -->
+                        <template #action-preview="">
+                        </template>
+
                     </VueDatePicker>
                 </div>
             </div>
@@ -135,6 +152,10 @@
         src: url("../assets/Nunito.ttf");
     }
 
+    :root {
+        --blue-color: rgb(0, 84, 255);
+    }
+
     /* стили для линий */
     .filters-line {
         margin-left: 22px;
@@ -145,13 +166,13 @@
         margin-left: 21.5px;
         width: 1px;
         height: 330px;
-        background-color: rgb(0, 84, 255);
+        background-color: var(--blue-color);
     }
     .data-line {
         margin-left: 21.5px;
         width: 1px;
-        height: 120px;
-        background-color: rgb(0, 84, 255);
+        height: 148px;
+        background-color: var(--blue-color);
     }
 
 
@@ -159,13 +180,17 @@
     .dropdown-button {
         display: flex;
         justify-content: flex-start;
+        align-items: center;
         cursor: pointer; 
         user-select: none;
+        /* margin-top:10px; */
+    }
+    #showDataButton {
+        margin-top:5px;
     }
     .dropdown-button:hover {
         filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(100%)
             hue-rotate(146deg) brightness(100%) contrast(100%);
-        color: #ffffff;
     }
     .dropdown-button img {
         padding-left: 10px;
@@ -178,8 +203,6 @@
         cursor: pointer;
         margin-left: 4px;
     }
-
-
     .filters {
         margin-top: 3px;
         display: flex;
@@ -226,9 +249,32 @@
         font-family: Rubik;
         font-size: 16px;
         font-weight: 300;
+        width:156px;
+        height:37px;
+        border-radius: 0px;
     }
 
     .datapicker-input:hover {
-        border-color: rgb(0, 84, 255);
+        border-color: var(--blue-color);
+    }
+
+    .dp-custom-calendar .dp__calendar_item {
+        /* color: #cccccc; */
+        font-family: Rubik;
+    }
+
+    .dp-custom-cell:hover {
+        background-color: var(--blue-color);
+    }
+
+    .dp__theme_dark {
+        --dp-primary-color: var(--blue-color);
+        --dp-text-color: #cccccc;
+        --dp-secondary-color: #787878;
+        --dp-border-color: rgb(128, 128, 128);
+    }
+
+    :root {
+        --dp-font-family: Nunito;
     }
 </style>
