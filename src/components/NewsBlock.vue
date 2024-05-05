@@ -13,7 +13,6 @@
     <div class="news-block-wrapper" :style="{ width: props.blockWidth, height: props.blockHeight }">
 
         <div class="news-block-tag-and-date-wrapper">
-user-select: none
             <div class="news-block-tag">
                 <img src="../assets/News/image.svg" alt="" class="tag-icon" />
                 <div class="tag">Мероприятия</div>
