@@ -4,8 +4,8 @@
     const props = defineProps({
     blockWidth: { type: String, default: "100%" },
     blockHeight: { type: String, default: "319px" },
-    foregroundWidth: { type: String, default: "315px" },
-    foregroundHeight: { type: String, default: "216px" }
+    foregroundWidth: { type: String, default: "80%" }, //315px
+    foregroundHeight: { type: String, default: "80%" }
   });
 </script>
 
@@ -13,7 +13,7 @@
     <div class="news-block-wrapper" :style="{ width: props.blockWidth, height: props.blockHeight }">
 
         <div class="news-block-tag-and-date-wrapper">
-
+user-select: none
             <div class="news-block-tag">
                 <img src="../assets/News/image.svg" alt="" class="tag-icon" />
                 <div class="tag">Мероприятия</div>
