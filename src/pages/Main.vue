@@ -1,6 +1,6 @@
 <script setup>
 import Kafedra from "../components/Kafedra.vue"
-import News from "../components/News.vue"
+import News from "../components/NewsMain.vue"
 import Tabs from "../components/Tabs.vue"
 import PrepodavateliKafedri from "../components/PrepodavateliKafedri.vue"
 import KafedraCifri from "../components/KafedraCifri.vue"

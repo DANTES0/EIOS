@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+  import NewsBlock from "./NewsBlock.vue"
+</script>
 <template>
   <div class="news-wrapper">
     <div class="numbers-wrapper">
@@ -27,27 +29,15 @@
             <button class="btn-news next">ВПЕРЕД</button>
           </div>
         </div>
-        <div class="card-news-block">
-          <div class="card-news-up-block">
-            <div class="card-news-up-tags">
-              <img src="../assets/News/image.svg" alt="" class="img-tags" />
-              <div class="tags-title">Мероприятия</div>
-            </div>
-            <div class="card-news-up-date">25/02/2024</div>
-          </div>
-          <div class="card-news-down-tags">
-            <img
-              src="../assets/news.png"
-              alt=""
-              class="card-news-down-tags-blur"
-            />
-            <img
-              src="../assets/news.png"
-              alt=""
-              class="card-news-down-tags-image"
-            />
-          </div>
-        </div>
+
+        <NewsBlock
+          :blockWidth="'540px'" 
+          :blockHeight="'395px'" 
+          :foregroundWidth="'402px'"
+          :foregroundHeight="'276px'"
+        >
+        </NewsBlock>
+        
       </div>
     </div>
   </div>
@@ -62,67 +52,7 @@
   font-family: Rubik;
   src: url("../assets/Rubik.ttf");
 }
-.card-news-down-tags-blur {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  filter: blur(6px);
-  transform: scale(1.4);
-  object-fit: cover;
-}
-.card-news-down-tags-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 402px;
-  height: 276px;
-  margin: auto auto;
-}
-.card-news-down-tags {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.card-news-up-date {
-  font-family: Rubik;
-  font-size: 18px;
-  font-weight: 800;
-  color: #cccccc;
-  margin-right: 160px;
-}
-.img-tags {
-  width: 24px;
-  height: 24px;
-  margin-left: 12px;
-}
-.card-news-up-tags {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 165px;
-}
-.tags-title {
-  width: 129px;
-  height: 22px;
-  font-family: Rubik;
-  font-size: 18;
-  font-weight: 800;
-  color: #1e66f5;
-  margin-left: 12px;
-}
-.card-news-up-block {
-  height: 48px;
-  width: 100%;
-  border-bottom: 1px solid #999999;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
+
 .kapybaras {
   width: 301px;
   height: 297px;
@@ -132,14 +62,7 @@
 .content-news-wrapper {
   width: 100%;
 }
-.card-news-block {
-  margin-right: 71px;
-  width: 540px;
-  height: 395px;
-  display: flex;
-  flex-direction: column;
-  border: solid 1px #999999;
-}
+
 .back {
   margin-left: 50px;
 }
