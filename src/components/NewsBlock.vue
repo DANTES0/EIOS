@@ -1,38 +1,43 @@
 <script setup>
     import { defineProps } from "vue";
+    import { format } from 'date-fns';
 
-    const props = defineProps({
-    blockWidth: { type: String, default: "100%" },
-    blockHeight: { type: String, default: "319px" },
-    foregroundWidth: { type: String, default: "80%" }, //315px
-    foregroundHeight: { type: String, default: "80%" }
-  });
+    const newsData = defineProps({
+        newsTag: { type: String, default: "Мероприятия"},
+        newsDate: { type: Date, default: new Date() },
+        newsImage: { type: String, default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlY50ssdieUXOuZGHTd9cYVYM7A3smEU4aXY4X_36f3g&s"}, // картинка в img ../assets/news.png передаётся если прописать путь в src, а не :src
+        blockWidth: { type: String, default: "100%" },
+        blockHeight: { type: String, default: "319px" },
+        foregroundWidth: { type: String, default: "80%" }, //315px
+        foregroundHeight: { type: String, default: "80%" }
+    });
+
 </script>
 
 <template>
-    <div class="news-block-wrapper" :style="{ width: props.blockWidth, height: props.blockHeight }">
+    <div class="news-block-wrapper" :style="{ width: newsData.blockWidth, height: newsData.blockHeight }">
 
         <div class="news-block-tag-and-date-wrapper">
             <div class="news-block-tag">
                 <img src="../assets/News/image.svg" alt="" class="tag-icon" />
-                <div class="tag">Мероприятия</div>
+                <div class="tag">{{newsData.newsTag}}</div>
             </div>
 
-            <div class="news-block-date">25/02/2024</div>
+            <div class="news-block-date">{{format(newsData.newsDate, 'dd/MM/yyyy')}}</div>
 
         </div>
 
         <div class="news-block-image">
             <img
-                src="../assets/news.png"
+                :src="newsData.newsImage"
                 alt=""
                 class="news-block-image-background"
             />
             <img
-                src="../assets/news.png"
+                :src="newsData.newsImage"
                 alt=""
                 class="news-block-image-foreground"
-                :style="{ width: props.foregroundWidth, height: props.foregroundHeight }"
+                :style="{ width: newsData.foregroundWidth, height: newsData.foregroundHeight }"
             />
         </div>
     </div>
@@ -83,6 +88,7 @@
         margin-left: 12px;
     }
 
+    
     .tag {
         font-family: Rubik;
         font-size: 18;
