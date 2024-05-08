@@ -2,6 +2,7 @@
     import { defineProps } from "vue";
     import { format } from 'date-fns';
 
+
     const newsData = defineProps({
         newsTag: { type: String, default: "Мероприятия"},
         newsDate: { type: Date, default: new Date() },
