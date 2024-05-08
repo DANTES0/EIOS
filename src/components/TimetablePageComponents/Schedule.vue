@@ -1,4 +1,20 @@
-<script setup></script>
+<script setup>
+import { useFetch } from "@vueuse/core"
+import { computed, ref } from "vue"
+import { onMounted } from "vue"
+let flag = ref(false)
+const schedule = computed(() => {
+  return `http://25.61.98.183:8080/api/schedule/group?groupname=О714Б`
+})
+const fetchSchedule = async() => {
+  const response_prepod = await useFetch(schedule).json()
+  console.log(response_prepod.data.value)
+}
+
+onMounted(() => {
+    fetchSchedule();
+})
+</script>
 <template>
     <div class="shedule-wrap">
         <table>
