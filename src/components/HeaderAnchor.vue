@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from "vue"
 import { useRoute } from "vue-router";
 import DropdownHeader from "./DropdownHeader.vue";
 import SearchTimetable from "./SearchTimetable.vue"
-
+import NewsFilters from "./NewsFilters.vue"
 
 // this.$refs.dropbtn.addEventListener("click", function (event) {
 //   document.getElementById("myDropdown").classList.toggle("show")
@@ -31,6 +31,9 @@ import SearchTimetable from "./SearchTimetable.vue"
   </div>
   <div v-if="$route.path == `/timetable`" class="search-timetable-anchor">
     <SearchTimetable></SearchTimetable>
+  </div>
+  <div v-if="$route.path == `/news`" class="news-filters">
+    <NewsFilters></NewsFilters>
   </div>
 </template>
 <style>
