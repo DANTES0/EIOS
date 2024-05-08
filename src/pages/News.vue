@@ -61,7 +61,7 @@
         margin: auto auto;
         /* background-color: blueviolet; */
         width: 1422px;
-
+ 
         min-height: 674px;
         max-height: 2420px;
 

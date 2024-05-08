@@ -9,7 +9,8 @@
         blockWidth: { type: String, default: "100%" },
         blockHeight: { type: String, default: "319px" },
         foregroundWidth: { type: String, default: "80%" }, //315px
-        foregroundHeight: { type: String, default: "80%" }
+        foregroundHeight: { type: String, default: "80%" },
+        newsSummary: {type: Boolean, default: true}
     });
 
 </script>
@@ -40,6 +41,19 @@
                 :style="{ width: newsData.foregroundWidth, height: newsData.foregroundHeight }"
             />
         </div>
+    </div>
+
+    <!-- если props.newsnewsSummary == true, то показать блок снизу-->
+    <div class="news-block-summary" v-if="newsData.newsSummary"> 
+
+        <div class="news-block-title"> 
+            Международная олимпиала в сфере ИКТ "ИТ-Планета 2024"
+        </div>
+
+        <div class="news-block-description"> 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet porttitor eget dolor morbi non arcu risus quis varius...
+        </div>
+
     </div>
 </template>
 
@@ -132,5 +146,33 @@
         height: 216px;
 
         margin: auto auto;
+    }
+
+    .news-block-summary {
+
+    }
+
+    .news-block-title {
+        color: rgb(255, 255, 255);
+        font-family: JetBrainsMono;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 27px;
+        letter-spacing: -1px;
+        text-align: left;
+
+        margin-top: 10px;
+    }
+
+    .news-block-description{
+        color: rgba(255, 255, 255, 0.6);
+        font-family: JetBrainsMono;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 27px;
+        letter-spacing: -1px;
+        text-align: justify;
+
+        margin-top: 10px;
     }
 </style>
