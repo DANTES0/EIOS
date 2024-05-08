@@ -6,11 +6,13 @@
         newsTag: { type: String, default: "Мероприятия"},
         newsDate: { type: Date, default: new Date() },
         newsImage: { type: String, default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlY50ssdieUXOuZGHTd9cYVYM7A3smEU4aXY4X_36f3g&s"}, // картинка в img ../assets/news.png передаётся если прописать путь в src, а не :src
+        newsShowSummary: {type: Boolean, default: true},
+        newsTitle: {type: String, default: 'Международная олимпиала в сфере ИКТ "ИТ-Планета 2024"'},
+        newsDescription: {type: String, default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet porttitor eget dolor morbi non arcu risus quis varius..."},
         blockWidth: { type: String, default: "100%" },
         blockHeight: { type: String, default: "319px" },
         foregroundWidth: { type: String, default: "80%" }, //315px
         foregroundHeight: { type: String, default: "80%" },
-        newsSummary: {type: Boolean, default: true}
     });
 
 </script>
@@ -44,14 +46,14 @@
     </div>
 
     <!-- если props.newsnewsSummary == true, то показать блок снизу-->
-    <div class="news-block-summary" v-if="newsData.newsSummary"> 
+    <div class="news-block-summary" v-if="newsData.newsShowSummary"> 
 
         <div class="news-block-title"> 
-            Международная олимпиала в сфере ИКТ "ИТ-Планета 2024"
+            {{newsData.newsTitle}}
         </div>
 
         <div class="news-block-description"> 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet porttitor eget dolor morbi non arcu risus quis varius...
+            {{newsData.newsDescription}}
         </div>
 
     </div>
