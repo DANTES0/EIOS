@@ -20,7 +20,7 @@ defineProps({
       </div>
       <div class="container-news">
         <img
-          src="../assets/News/kapybars_in_circle.png"
+          src="../../assets/News/kapybars_in_circle.png"
           alt=""
           class="kapybaras"
         />

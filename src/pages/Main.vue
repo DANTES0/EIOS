@@ -1,6 +1,6 @@
 <script setup>
 import Kafedra from "../components/MainPageComponents/Kafedra.vue"
-import News from "../components/MainPageComponents/NewsMain.vue"
+import News from "../components/MainPageComponents/News.vue"
 import Tabs from "../components/Tabs.vue"
 import PrepodavateliKafedri from "../components/MainPageComponents/PrepodavateliKafedri.vue"
 import KafedraCifri from "../components/MainPageComponents/KafedraCifri.vue"
@@ -34,7 +34,7 @@ const currentGalleryIndex = ref(0)
 
 const nextPhotoGallery = () => {
   currentGalleryIndex.value = (currentGalleryIndex.value + 1) % photo_galleries.value.length
-  console.log(currentGalleryIndex.value)
+  // console.log(currentGalleryIndex.value)
 }
 
 const prevPhotoGallery = () => {
@@ -45,12 +45,12 @@ const prevPhotoGallery = () => {
       (currentGalleryIndex.value - 1) % photo_galleries.value.length
     )
   }
-  console.log(currentGalleryIndex.value)
+  // console.log(currentGalleryIndex.value)
 }
 
 const nextNews = () => {
   currentNewsIndex.value = (currentNewsIndex.value + 1) % news.value.length
-  console.log(currentNewsIndex.value)
+  // console.log(currentNewsIndex.value)
 }
 
 const prevNews = () => {
@@ -64,13 +64,13 @@ const prevNews = () => {
   console.log(currentNewsIndex.value)
 }
 const currentNews = computed(() =>
-news.value = news.value[currentNewsIndex.value]
-  // news.value ? news.value[currentNewsIndex.value] : null
+// news.value = news.value[currentNewsIndex.value]
+  news.value ? news.value[currentNewsIndex.value] : null
 )
 
 const currentPhotoGallery = computed(() => {
 for (let i = 0; i<photo_galleries.value.length; i=i+1) {
-  console.log(photo_galleries.value[i].filename)
+  // console.log(photo_galleries.value[i].filename)
   array[i] = photo_galleries.value[i].filename
 }
 return array
@@ -95,6 +95,7 @@ const aboba = async () => {
 
   news.value = response.data.value
   images.value = response.data.images
+  console.log(response.data.value)
   
 
 }
@@ -102,7 +103,7 @@ const aboba = async () => {
 onMounted(() => {
   aboba()
   fetchGallery()
-  console.log(currentGalleryIndex)
+  // console.log(currentNews.value)
 })
 
 //console.log(text)

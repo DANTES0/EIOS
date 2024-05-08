@@ -7,10 +7,14 @@
         newsTag: { type: String, default: "Мероприятия"},
         newsDate: { type: Date, default: new Date() },
         newsImage: { type: String, default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlY50ssdieUXOuZGHTd9cYVYM7A3smEU4aXY4X_36f3g&s"}, // картинка в img ../assets/news.png передаётся если прописать путь в src, а не :src
+        newsShowSummary: {type: Boolean, default: true},
+        newsTitle: {type: String, default: 'Международная олимпиала в сфере ИКТ "ИТ-Планета 2024"'},
+        newsDescription: {type: String, default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet porttitor eget dolor morbi non arcu risus quis varius..."},
+        
         blockWidth: { type: String, default: "100%" },
         blockHeight: { type: String, default: "319px" },
         foregroundWidth: { type: String, default: "80%" }, //315px
-        foregroundHeight: { type: String, default: "80%" }
+        foregroundHeight: { type: String, default: "80%" },
     });
 
 </script>
@@ -41,6 +45,18 @@
                 :style="{ width: newsData.foregroundWidth, height: newsData.foregroundHeight }"
             />
         </div>
+    </div>
+
+    <div class="news-block-summary" v-if="newsData.newsShowSummary"> 
+
+        <div class="news-block-title"> 
+            {{newsData.newsTitle}}
+        </div>
+
+        <div class="news-block-description"> 
+            {{newsData.newsDescription}}
+        </div>
+
     </div>
 </template>
 
@@ -133,5 +149,29 @@
         height: 216px;
 
         margin: auto auto;
+    }
+
+    .news-block-title {
+        color: rgb(255, 255, 255);
+        font-family: JetBrainsMono;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 27px;
+        letter-spacing: -1px;
+        text-align: left;
+
+        margin-top: 10px;
+    }
+
+    .news-block-description{
+        color: rgba(255, 255, 255, 0.6);
+        font-family: JetBrainsMono;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 27px;
+        letter-spacing: -1px;
+        text-align: justify;
+
+        margin-top: 10px;
     }
 </style>
