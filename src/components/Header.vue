@@ -3,7 +3,7 @@ import HeaderAnchor from "./HeaderAnchor.vue"
 </script>
 
 <template>
-  <div class="header-wrapper">
+  <div class="header-wrapper"  :style="{ width: $route.path === '/newsContent' ? 'auto' : '' }">
     <div class="header-wrapper-container">
       <!-- <div class="title" @click="$router.push('/')">О<span style="color:#408AFA">7</span></div> -->
       <div class="page-header">
@@ -39,18 +39,18 @@ import HeaderAnchor from "./HeaderAnchor.vue"
         <a class="page" id="moodle" data-title="moodle"></a>
       </div>
     </div>
-    <div class="header-wrapper-anchor-container">
+    <div class="header-wrapper-anchor-container" v-if="$route.path !== '/newsContent' ">
       <div class="pum">
         <a class="title" @click="$router.push('/')"
-          >Кафедра <span style="color: white">О</span>7</a
+        >Кафедра <span style="color: white">О</span>7</a
         >
         <!-- <img src="../assets/voenmeh2.svg" alt="" class="voenmeh-title"> -->
         <a href="https://www.voenmeh.ru/" class="voen">
           <img
-            style="transform: scale(1.6)"
-            src="../assets/header/voenmeh.svg"
-            class="page"
-            id="r"
+              style="transform: scale(1.6)"
+              src="../assets/header/voenmeh.svg"
+              class="page"
+              id="r"
           />
         </a>
       </div>

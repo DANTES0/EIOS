@@ -3,6 +3,7 @@ import Main from "../pages/Main.vue"
 import News from "../pages/News.vue"
 import Timetable from "../pages/Timetable.vue"
 import Gallery from "../pages/Gallery.vue"
+import NewsContent from "../pages/NewsContent.vue";
 const routes = [
     {
         path: '/',
@@ -23,6 +24,11 @@ const routes = [
         path: '/gallery',
         name: "Gallery",
         component: Gallery
+    },
+    {
+        path: '/newsContent',
+        name: "NewsContent",
+        component: NewsContent
     }
 ]
 

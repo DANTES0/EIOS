@@ -2,6 +2,7 @@
     import { defineProps } from "vue";
     import { format } from 'date-fns';
 
+
     const newsData = defineProps({
         newsTag: { type: String, default: "Мероприятия"},
         newsDate: { type: Date, default: new Date() },
@@ -23,7 +24,7 @@
 
         <div class="news-block-tag-and-date-wrapper">
             <div class="news-block-tag">
-                <img src="../../assets/News/image.svg" alt="" class="tag-icon" />
+                <img src="../../assets/News/image.svg" alt="" class="tag-icon"  />
                 <div class="tag">{{newsData.newsTag}}</div>
             </div>
 
@@ -31,7 +32,7 @@
 
         </div>
 
-        <div class="news-block-image">
+        <div class="news-block-image" @click="$router.push('/newsContent')">
             <img
                 :src="newsData.newsImage"
                 alt=""
@@ -48,7 +49,7 @@
 
     <div class="news-block-summary" v-if="newsData.newsShowSummary"> 
 
-        <div class="news-block-title"> 
+        <div class="news-block-title" @click="$router.push('/newsContent')">
             {{newsData.newsTitle}}
         </div>
 
