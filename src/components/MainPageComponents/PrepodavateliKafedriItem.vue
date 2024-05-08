@@ -169,7 +169,7 @@ let temp = ref(0)
 
 }
 .back-image-arrow {
-  background-image: url("../assets/PrepodavateliKafedri/arrow_back.svg");
+  background-image: url("../../assets/PrepodavateliKafedri/arrow_back.svg");
   width: 103px;
   height: 81px;
   background-repeat: no-repeat;
@@ -180,7 +180,7 @@ let temp = ref(0)
   height: 330px;
 }
 .next-image-arrow {
-  background-image: url("../assets/PrepodavateliKafedri/arrow_next.svg");
+  background-image: url("../../assets/PrepodavateliKafedri/arrow_next.svg");
   width: 103px;
   height: 81px;
   background-repeat: no-repeat;

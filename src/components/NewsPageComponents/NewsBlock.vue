@@ -19,7 +19,7 @@
 
         <div class="news-block-tag-and-date-wrapper">
             <div class="news-block-tag">
-                <img src="../assets/News/image.svg" alt="" class="tag-icon" />
+                <img src="../../assets/News/image.svg" alt="" class="tag-icon" />
                 <div class="tag">{{newsData.newsTag}}</div>
             </div>
 
@@ -46,12 +46,12 @@
 <style>
     @font-face {
         font-family: JetBrainsMono;
-        src: url("../assets/JetBrainsMono.ttf");
+        src: url("../../assets/JetBrainsMono.ttf");
     }
 
     @font-face {
         font-family: Rubik;
-        src: url("../assets/Rubik.ttf");
+        src: url("../../assets/Rubik.ttf");
     }
 
     /* размеры блока */

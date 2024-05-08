@@ -37,11 +37,11 @@
 <style>
 @font-face {
   font-family: Ubuntu-Bold;
-  src: url("../assets/Ubuntu-Bold.ttf");
+  src: url("../../assets/Ubuntu-Bold.ttf");
 }
 @font-face {
   font-family: JetBrainsMono;
-  src: url("../assets/JetBrainsMono.ttf");
+  src: url("../../assets/JetBrainsMono.ttf");
 }
 
 .description-cifri {
@@ -64,7 +64,7 @@
   text-align: center;
 }
 .image-block-cifri {
-  background-image: url("../assets/KafedraCifri/cifri_file.svg");
+  background-image: url("../../assets/KafedraCifri/cifri_file.svg");
   height: 202px;
   width: 168px;
   background-repeat: no-repeat;
@@ -84,7 +84,7 @@
 .cifri-frame {
   width: 1024px;
   height: 482px;
-  background-image: url("../assets/KafedraCifri/frame.png");
+  background-image: url("../../assets/KafedraCifri/frame.png");
   background-size: contain;
   margin: 0 auto;
   margin-top: 20px;

@@ -27,7 +27,7 @@ let options = ["1", "2", "3"]
 <style >
 @font-face {
   font-family: JetBrainsMono;
-  src: url("../assets/JetBrainsMono.ttf");
+  src: url("../../assets/JetBrainsMono.ttf");
 }
 .select-input {
     height: 26px;

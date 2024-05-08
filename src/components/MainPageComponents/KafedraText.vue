@@ -30,7 +30,7 @@ defineProps({
 <style>
 @font-face {
   font-family: JetBrainsMono;
-  src: url("../assets/JetBrainsMono.ttf");
+  src: url("../../assets/JetBrainsMono.ttf");
 }
 .kafedraText-title-nechet {
   font-size: 30px;

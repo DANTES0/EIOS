@@ -750,7 +750,7 @@
 <style>
 @font-face {
   font-family: JetBrainsMono;
-  src: url("../assets/JetBrainsMono.ttf");
+  src: url("../../assets/JetBrainsMono.ttf");
 }
 .time-schedule {
     width: 75px;

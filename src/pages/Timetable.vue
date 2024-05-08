@@ -1,7 +1,7 @@
 <script setup>
 import Terminal from '../components/Terminal.vue';
 import Tabs from '../components/Tabs.vue';
-import Schedule from '../components/Schedule.vue'
+import Schedule from '../components/TimetablePageComponents/Schedule.vue'
 </script>
 
 <template>

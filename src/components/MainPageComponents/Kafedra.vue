@@ -39,11 +39,11 @@ import KafedraText from "./KafedraText.vue"
 <style>
 @font-face {
   font-family: JetBrainsMono;
-  src: url("../assets/JetBrainsMono.ttf");
+  src: url("../../assets/JetBrainsMono.ttf");
 }
 @font-face {
   font-family: Rubik;
-  src: url("../assets/Rubik.ttf");
+  src: url("../../assets/Rubik.ttf");
 }
 
 .content-kafedra-wrapper {

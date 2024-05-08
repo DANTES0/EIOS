@@ -67,7 +67,7 @@
 <template>
     <!-- кнопка отрытия фильтров -->
     <div @click="showFilters" class="dropdown-button">
-        <img src="../assets/header/NewsFilters/filter-square.svg" alt=""/>
+        <img src="../../assets/header/NewsFilters/filter-square.svg" alt=""/>
         <label class="dropdown-button-text"> Фильтры </label>
     </div>
 
@@ -79,7 +79,7 @@
 
             <!-- кнопка отрытия категорий -->
             <div @click="showCategories" class="dropdown-button">
-                <img class="arrow-down-button" src="../assets/header/arrow_down.svg" alt="" :class="{ 'rotated': isShowCategories }"/>
+                <img class="arrow-down-button" src="../../assets/header/arrow_down.svg" alt="" :class="{ 'rotated': isShowCategories }"/>
                 <label class="dropdown-button-text" > Категории </label>
             </div>
 
@@ -95,7 +95,7 @@
 
             <!-- кнопка отрытия даты -->
             <div @click="showData" class="dropdown-button" id="showDataButton">
-                <img class="arrow-down-button" src="../assets/header/arrow_down.svg" alt="" :class="{ 'rotated': isShowData }"/>
+                <img class="arrow-down-button" src="../../assets/header/arrow_down.svg" alt="" :class="{ 'rotated': isShowData }"/>
                 <label class="dropdown-button-text"> Дата </label>
             </div>
 
@@ -149,7 +149,7 @@
 <style>
     @font-face {
         font-family: Nunito;
-        src: url("../assets/Nunito.ttf");
+        src: url("../../assets/Nunito.ttf");
     }
 
     :root {

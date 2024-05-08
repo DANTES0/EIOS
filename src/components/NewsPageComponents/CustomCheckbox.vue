@@ -62,7 +62,7 @@
     }
 
     input[type="checkbox"]:after {
-        content: url("../assets/header/NewsFilters/tick.svg");
+        content: url("../../assets/header/NewsFilters/tick.svg");
         transform: translateY(-1px) translateX(0.5px) scale(1.0);
         color: white;
         display: none;

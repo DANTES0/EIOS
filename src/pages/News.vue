@@ -1,6 +1,6 @@
 <script setup>
     import Tabs from '../components/Tabs.vue'
-    import NewsBlock from "../components/NewsBlock.vue"
+    import NewsBlock from "../components/NewsPageComponents/NewsBlock.vue"
 </script>
 
 <template>

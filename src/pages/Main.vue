@@ -1,14 +1,12 @@
 <script setup>
-import Kafedra from "../components/Kafedra.vue"
-import News from "../components/NewsMain.vue"
+import Kafedra from "../components/MainPageComponents/Kafedra.vue"
+import News from "../components/MainPageComponents/NewsMain.vue"
 import Tabs from "../components/Tabs.vue"
-import PrepodavateliKafedri from "../components/PrepodavateliKafedri.vue"
-import KafedraCifri from "../components/KafedraCifri.vue"
-import PhotoGallery from "../components/PhotoGallery.vue"
+import PrepodavateliKafedri from "../components/MainPageComponents/PrepodavateliKafedri.vue"
+import KafedraCifri from "../components/MainPageComponents/KafedraCifri.vue"
+import PhotoGallery from "../components/MainPageComponents/PhotoGallery.vue"
 import Footer from "../components/Footer.vue"
 import Terminal from "../components/Terminal.vue"
-import DepartamentInNumbers from "../components/DepartamentInNumbers.vue"
-import BriefNews from "../components/BriefNews.vue"
 import { useFetch } from "@vueuse/core"
 import { computed, ref } from "vue"
 import { onMounted } from "vue"
@@ -30,7 +28,7 @@ let photo_galleries = ref(null)
 let array = ref(Array);
 
 //массив для новостей
-let news = ref(null)
+let news = ref([])
 const currentNewsIndex = ref(0)
 const currentGalleryIndex = ref(0)
 
@@ -66,12 +64,10 @@ const prevNews = () => {
   console.log(currentNewsIndex.value)
 }
 const currentNews = computed(() =>
-  news.value ? news.value[currentNewsIndex.value] : null
+news.value = news.value[currentNewsIndex.value]
+  // news.value ? news.value[currentNewsIndex.value] : null
 )
-// const prepod_reactive = computed(() => {
-//   console.log(prepod.value)
-//   return prepod.value
-// })
+
 const currentPhotoGallery = computed(() => {
 for (let i = 0; i<photo_galleries.value.length; i=i+1) {
   console.log(photo_galleries.value[i].filename)
@@ -79,20 +75,10 @@ for (let i = 0; i<photo_galleries.value.length; i=i+1) {
 }
 return array
 }
-// photo_galleries.value ? photo_galleries.value[currentGalleryIndex.value] : null
+
 )
 
-// const aboba = async()  => { const response = await useFetch(url).json();
-//     extractedId.value = response.data.value.id
-//     console.log(response.data.value)
-//     console.log(extractedId.value)
-//     text.value = response.data.value.headLine
-//     date.value = response.data.value.date
-//     category.value = response.data.value.category
-//     urls.value = response.data.value.urls
-//     console.log(text.value);
-//     console.log(JSON.parse(JSON.stringify(urls.value)));
-// };
+
 
 const fetchGallery = async() => {
   const response_gallery = await useFetch(photo_url).json()
@@ -106,28 +92,16 @@ const aboba = async () => {
   //если url - новость по индексу
   extractedId.value = response.data.value.id
   text.value = response.data.value.headLine
-  //console.log(extractedId.value, text.value)
 
-  //если url - shorts
   news.value = response.data.value
   images.value = response.data.images
   
- 
-  // console.log(response)
+
 }
 
-// console.log(aboba());
-// a = ref(aboba())
-//console.log(a.value);
-//let id = 5;
-//console.log(id)
 onMounted(() => {
   aboba()
   fetchGallery()
-  // console.log(news)
-  // console.log(currentNewsIndex.value)
-  // console.log(currentNews.images)
-  // console.log(currentNews.headline)
   console.log(currentGalleryIndex)
 })
 
@@ -136,7 +110,6 @@ onMounted(() => {
 
 <template>
   <div class="Main-page">
-    <!-- <div class="container"> -->
     <Tabs></Tabs>
     <Kafedra></Kafedra>
     <News
@@ -160,25 +133,7 @@ onMounted(() => {
     ></PhotoGallery>
     <Footer></Footer>
     <Terminal></Terminal>
-    <!-- <DepartamentInNumbers></DepartamentInNumbers> -->
-    <!-- <BriefNews :id = extractedId
-                       :headLine = text
-                       :date = date
-                       :category = category
-                       :urls = urls></BriefNews> -->
     <div class="clp-cont"></div>
-    <!-- <BriefNews
-      v-if="news && news.length > 1 && currentNewsIndex !== null"
-      :id="currentNews.id"
-      :headline="currentNews.headline"
-      :category="currentNews.category"
-      :date="currentNews.date"
-      :url="currentNews.url"
-      @next="nextNews"
-      @prev="prevNews"
-    >
-    </BriefNews> -->
-    <!-- </div> -->
   </div>
 </template>
 

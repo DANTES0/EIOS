@@ -7,8 +7,8 @@ function showDropDown() {
 } </script>
 <template>
     <div @click="showDropDown" class="drop-btn-container">
-      <img src="../assets/header/arrow_down.svg" alt="" id="arrow_down" />
-      <img src="../assets/header/folder.svg" alt="" class="folder" />
+      <img src="../../assets/header/arrow_down.svg" alt="" id="arrow_down" />
+      <img src="../../assets/header/folder.svg" alt="" class="folder" />
       <label class="dropbtn" id="dropbtn"> Главная страница </label>
     </div>
     <div v-if="isShowDropDown" id="myDropdown" class="dropdown-content">
@@ -16,7 +16,7 @@ function showDropDown() {
       <div class="dropdown-content-content">
         <a href="#kafedra" class="dropdown-content-a">
           <img
-            src="../assets/anchor_header/html.svg"
+            src="../../assets/anchor_header/html.svg"
             alt=""
             class="anchor-img"
             style="transform: scale(0.7)"
@@ -25,30 +25,30 @@ function showDropDown() {
         >
         <a href="#news" class="dropdown-content-a">
           <img
-            src="../assets/anchor_header/css.svg"
+            src="../../assets/anchor_header/css.svg"
             alt=""
             class="anchor-img"
           />
           <label class="label">главные_новости.css</label>
         </a>
         <a href="#prepod" class="dropdown-content-a">
-          <img src="../assets/anchor_header/py.svg" alt="" class="anchor-img" />
+          <img src="../../assets/anchor_header/py.svg" alt="" class="anchor-img" />
           <label class="label">работники_кафедры.py</label></a
         >
         <a href="#cifri" class="dropdown-content-a">
           <img
-            src="../assets/anchor_header/c++.svg"
+            src="../../assets/anchor_header/c++.svg"
             alt=""
             class="anchor-img"
           />
           <label class="label">кафедра_в_цифрах.cpp</label> </a
         ><a href="#gallery" class="dropdown-content-a">
-          <img src="../assets/anchor_header/js.svg" alt="" class="anchor-img" />
+          <img src="../../assets/anchor_header/js.svg" alt="" class="anchor-img" />
           <label class="label">фотогалерея.js</label></a
         >
         <a href="#footer" class="dropdown-content-a">
           <img
-            src="../assets/anchor_header/ts.svg"
+            src="../../assets/anchor_header/ts.svg"
             alt=""
             class="anchor-img"
             style="transform: scale(0.7)"
@@ -61,7 +61,7 @@ function showDropDown() {
 <style>
 @font-face {
   font-family: Nunito;
-  src: url("../assets/Nunito.ttf");
+  src: url("../../assets/Nunito.ttf");
 }
 .label {
   margin-left: 7px;
