@@ -4,54 +4,59 @@
 </script>
 
 <template>
-    <div class="news-page">
-        <Tabs></Tabs>
-        <div class="news-page-container">
-            <div class="news-page-content">
+    <Tabs></Tabs>
 
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
+    <div class="news-page-container">
 
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
+        <div class="news-page-content">
 
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-
-
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-                <div class="news-block">
-                    <NewsBlock></NewsBlock>
-                </div>
-
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
             </div>
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+
+
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+            <div class="news-block">
+                <NewsBlock></NewsBlock>
+            </div>
+
         </div>
+
+        <div class="pagination-component">
+
+        </div>
+
     </div>
 </template>
 
@@ -74,7 +79,7 @@
         grid-template-columns: 1fr 1fr 1fr;
         gap: 50px 74px;
 
-        padding-bottom: 142px;
+        padding-bottom: 50px;
     }
 
     .news-block {
@@ -83,4 +88,10 @@
         /* background-color: black; */
     }
 
+    .pagination-component {
+        margin: 0 auto;
+        background-color: yellow;
+        width: 1064px;
+        height: 92px;
+    }
 </style>

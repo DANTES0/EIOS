@@ -9,6 +9,7 @@
         newsShowSummary: {type: Boolean, default: true},
         newsTitle: {type: String, default: 'Международная олимпиала в сфере ИКТ "ИТ-Планета 2024"'},
         newsDescription: {type: String, default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet porttitor eget dolor morbi non arcu risus quis varius..."},
+        
         blockWidth: { type: String, default: "100%" },
         blockHeight: { type: String, default: "319px" },
         foregroundWidth: { type: String, default: "80%" }, //315px
@@ -45,7 +46,6 @@
         </div>
     </div>
 
-    <!-- если props.newsnewsSummary == true, то показать блок снизу-->
     <div class="news-block-summary" v-if="newsData.newsShowSummary"> 
 
         <div class="news-block-title"> 
@@ -148,10 +148,6 @@
         height: 216px;
 
         margin: auto auto;
-    }
-
-    .news-block-summary {
-
     }
 
     .news-block-title {
