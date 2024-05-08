@@ -1,5 +1,5 @@
 <script setup>
-  import NewsBlock from "./News.vue"
+  // import NewsBlock from "./News.vue"
 </script>
 <template>
   <div class="news-wrapper">
@@ -30,13 +30,13 @@
           </div>
         </div>
 
-        <NewsBlock
+        <!-- <NewsBlock
           :blockWidth="'540px'" 
           :blockHeight="'395px'" 
           :foregroundWidth="'402px'"
           :foregroundHeight="'276px'"
         >
-        </NewsBlock>
+        </NewsBlock> -->
         
       </div>
     </div>
