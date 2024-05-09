@@ -103,7 +103,7 @@ import HeaderAnchor from "./HeaderAnchor.vue"
   /* box-shadow: inset 1px -1px  rgb(0, 0, 0); */
   filter: invert(11%) sepia(0%) saturate(1%) hue-rotate(112deg) brightness(98%)
     contrast(85%);
-  z-index: 99;
+  z-index: 999;
   border-left: 1px solid #000;
   border-bottom: 1px solid #000;
 }

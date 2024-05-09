@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from "vue"
-const isShowDropDown = ref(null)
+const isShowDropDown = ref(true)
 function showDropDown() {
   isShowDropDown.value = !isShowDropDown.value
   

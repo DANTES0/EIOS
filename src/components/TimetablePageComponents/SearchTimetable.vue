@@ -1,10 +1,46 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useFetch } from "@vueuse/core"
+import { onMounted } from "vue"
+// import Vuex from "vuex"
+// import Vuex from "vuex"
+// import { useStore } from "vuex";
 import "vue3-select-component/dist/style.css";
 import VueSelect from "vue3-select-component";
 import Multiselect from '@vueform/multiselect'
+import eventBus from '../../eventBus.js'
 let options = ["1", "2", "3"]
-const selected = ref("");
+let array = ref([]);
+// const selected = ref("");
+const url = computed(()=> {
+    return `http://25.61.98.183:8080/api/v1/group/all`
+})
+let placeholder = ref('Поиск...')
+
+const fetchGroup = async() => {
+  const response = await useFetch(url).json()
+  console.log(response.data.value)
+  for(let i = 0; i< response.data.value.length; i++) {
+    array.value.push({
+        label: response.data.value[i].name,
+        value: response.data.value[i].id
+    })
+  }
+  console.log(array.value)
+}
+
+onMounted(() => {
+    fetchGroup()
+  // console.log(currentNews.value)
+})
+// const store = useStore()
+
+const handleOptionSelected = (option) => {
+  console.log(option.value);
+  placeholder.value = option.value
+  eventBus.emit('optionSelected', option.value);
+};
+// updat
 </script>
 <template>
     <div class="search-timetable-wrap">
@@ -22,18 +58,10 @@ const selected = ref("");
     
     <div class="input-search">
         <VueSelect
-    v-model="selected"
-    placeholder="Поиск..."
-    :options="[
-      { label: 'Option #1', value: 'option_1' },
-      { label: 'Option #2', value: 'option_2' },
-      { label: 'Option #3', value: 'option_3' },
-      { label: 'Option #3', value: 'option_3' },
-      { label: 'Option #3', value: 'option_3' },
-      { label: 'Option #3', value: 'option_3' },
-      { label: 'Option #3', value: 'option_3' },
-      { label: 'Option #3', value: 'option_3' },
-    ]"
+        v-model="selected"
+        :placeholder="placeholder"
+        :options="array"
+        @option-selected="handleOptionSelected"
   />
         <!-- <input placeholder="Поиск..." type="" class="input-search-input">
         <select class="select-input" name="" id="">
@@ -46,8 +74,8 @@ const selected = ref("");
 <!-- src="@vueform/multiselect/themes/default.css" -->
 <style scoped>
 @font-face {
-  font-family: JetBrainsMono;
-  src: url("../../assets/JetBrainsMono.ttf");
+   font-family: JetBrainsMono;
+   src: url("../../assets/JetBrainsMono.ttf");
 }
 .dropdown-icon {
     width: 100px;
@@ -83,7 +111,7 @@ const selected = ref("");
     background-color: transparent;
   width: 220px;
   margin-top: 30px;
-  z-index: 1;
+  z-index: 0;
 }
 :deep(.search-input) {
     color: #ffffff;
@@ -105,7 +133,7 @@ const selected = ref("");
     fill: #e4e4e7;
 }
 :deep(.clear-button svg) {
-    fill: #e4e4e7;
+    fill: transparent;
 }
 :deep(.single-value) {
     color: #ffffff;
