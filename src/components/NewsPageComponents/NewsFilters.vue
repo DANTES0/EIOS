@@ -1,11 +1,12 @@
 <script setup>
-    import {ref, computed} from "vue"
+    import {ref, computed, watch} from "vue"
     import CustomCheckbox from "./CustomCheckbox.vue"
     import VueDatePicker from '@vuepic/vue-datepicker'
+    import { useRouter } from 'vue-router';
     import '@vuepic/vue-datepicker/dist/main.css'
 
     const dateStart = ref(new Date().setMonth(new Date().getMonth() - 1))
-    const dateEnd = ref(new Date())
+    const dateEnd = ref(new Date().setMonth(new Date().getMonth()))
 
     const format = (date) => {
         const day = date.getDate()
@@ -62,6 +63,37 @@
     function showData() {
         isShowData.value = !isShowData.value
     }
+
+    const router = useRouter()
+
+    // Функция для отправки выбранных параметров фильтров в маршрут News.vue
+    function applyFilters() {
+        router.push({
+            name: 'News',
+            query: {
+                categories: selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(','),
+                s: dateStart.value,
+                po: dateEnd.value
+            }
+        })
+    }
+    const handleStartDate = (modelData) => {
+        dateStart.value = modelData.getTime()
+        applyFilters()
+    }
+
+    const handleEndDate = (modelData) => {
+        dateEnd.value = modelData.getTime()
+        applyFilters()
+    }
+
+    watch(selectedCategories, (newValue) => {
+        console.log('Selected categories changed:', newValue)
+        applyFilters()
+    }, { deep: true })
+
+    applyFilters()
+
 </script>
 
 <template>
@@ -104,7 +136,8 @@
                 <div class="data-line"></div>
                 <div class="data-content">
                      <span class="data-start">С</span>
-                     <VueDatePicker v-model="dateStart" 
+                     <VueDatePicker v-model="dateStart"
+                        @update:model-value="handleStartDate"
                         dark 
                         :enable-time-picker="false" 
                         :format="format" 
@@ -124,6 +157,7 @@
 
                      <span class="data-end">По</span>
                      <VueDatePicker v-model="dateEnd" 
+                        @update:model-value="handleEndDate"
                         dark 
                         :enable-time-picker="false" 
                         :format="format" 
