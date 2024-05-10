@@ -79,11 +79,26 @@ new Img(pivo3),
   <!--  <button @click="$vueFlux.show('next')">NEXT</button>-->
 </template>
 
-<style>
+<style scoped>
 
+:deep(.visible ul) {
+  background-color: #000000c7;
+
+}
+:deep(.visible li) {
+  opacity: 1 !important;
+}
 .photo-slider{
   width: 70%;
 }
 
-
+:deep(.flux-button:hover > svg polyline) {
+  stroke: #1e66f5;
+}
+:deep(.flux-button:hover > svg line) {
+  stroke: #1e66f5;
+}
+:deep(.flux-button:hover > svg rect) {
+  fill: #1e66f5;
+}
 </style>
