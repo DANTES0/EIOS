@@ -1,5 +1,5 @@
 <script setup>
-    import { defineProps } from "vue";
+    import { defineProps, computed } from "vue";
     import { format } from 'date-fns';
 
 
@@ -9,14 +9,35 @@
         newsImage: { type: String, default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlY50ssdieUXOuZGHTd9cYVYM7A3smEU4aXY4X_36f3g&s"}, // картинка в img ../assets/news.png передаётся если прописать путь в src, а не :src
         newsShowSummary: {type: Boolean, default: true},
         newsTitle: {type: String, default: 'Международная олимпиала в сфере ИКТ "ИТ-Планета 2024"'},
-        newsDescription: {type: String, default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet porttitor eget dolor morbi non arcu risus quis varius..."},
+        newsDescription: {type: String, default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet porttitor eget dolor morbi non arcu risus quis varius"},
         
         blockWidth: { type: String, default: "100%" },
         blockHeight: { type: String, default: "319px" },
-        foregroundWidth: { type: String, default: "80%" }, //315px
+        foregroundWidth: { type: String, default: "80%" },
         foregroundHeight: { type: String, default: "80%" },
     });
 
+    const processedDescription = () => {
+        const maxLength = 220 // Максимальная длина описания
+        if (newsData.newsDescription.length > maxLength) {
+            let truncatedText = newsData.newsDescription.slice(0, maxLength)
+            truncatedText = truncatedText.slice(0, Math.min(truncatedText.length, truncatedText.lastIndexOf(" "))) // Обрезаем текст до последнего пробела
+            return truncatedText + '...'
+        } else {
+            return newsData.newsDescription
+        }
+    };
+
+    const processedTitle = () => {
+        const maxLength = 75 // Максимальная длина заголовка
+        if (newsData.newsTitle.length > maxLength) {
+            let truncatedTitle = newsData.newsTitle.slice(0, maxLength)
+            truncatedTitle = truncatedTitle.slice(0, Math.min(truncatedTitle.length, truncatedTitle.lastIndexOf(" "))) // Обрезаем заголовок до последнего пробела
+            return truncatedTitle + '...'
+        } else {
+            return newsData.newsTitle
+        }
+    };
 </script>
 
 <template>
@@ -49,12 +70,12 @@
 
     <div class="news-block-summary" v-if="newsData.newsShowSummary"> 
 
-        <div class="news-block-title" @click="$router.push('/newsContent')">
-            {{newsData.newsTitle}}
+        <div class="news-block-title" @click="$router.push('/newsContent')"> 
+            {{ processedTitle() }}
         </div>
 
         <div class="news-block-description"> 
-            {{newsData.newsDescription}}
+            {{ processedDescription() }}
         </div>
 
     </div>
