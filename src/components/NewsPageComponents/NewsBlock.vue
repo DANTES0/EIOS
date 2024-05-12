@@ -12,8 +12,8 @@
         
         blockWidth: { type: String, default: "100%" },
         blockHeight: { type: String, default: "319px" },
-        foregroundWidth: { type: String, default: "80%" },
-        foregroundHeight: { type: String, default: "80%" },
+        foregroundWidth: { type: String, default: "85%" },
+        foregroundHeight: { type: String, default: "85%" },
     });
 
     const processedDescription = () => {
@@ -62,7 +62,10 @@
                 :src="newsData.newsImage"
                 alt=""
                 class="news-block-image-foreground"
-                :style="{ width: newsData.foregroundWidth, height: newsData.foregroundHeight }"
+                :style="{ 
+                        maxWidth: newsData.foregroundWidth,
+                        maxHeight: newsData.foregroundHeight,
+                    }"
             />
         </div>
     </div>
@@ -151,7 +154,7 @@
     .news-block-image-background {
         width: 100%;
         height: 100%;
-        filter: blur(6px) brightness(50%);;
+        filter: blur(6px) brightness(50%);
         transform: scale(1.4);
         object-fit: cover;
     }
@@ -167,8 +170,8 @@
         bottom: 0;
 
         /* устанавливается высота и ширина здесь */
-        width: 315px;
-        height: 216px;
+        /* width: 315px;
+        height: 216px; */
 
         margin: auto auto;
     }

@@ -4,8 +4,9 @@
     import { ref, watch } from 'vue';
     import { useRoute } from 'vue-router';
     
-    const route = useRoute()
     const newsData = ref([])
+
+    const route = useRoute()
     const selectedCategories = ref([])
     const dateStart = ref(new Date())
     const dateEnd = ref(new Date())
@@ -58,12 +59,14 @@
             </div>
             <div class="news-block">
                 <NewsBlock
-                    
+                    :newsImage="'https://24ai.tech/en/wp-content/uploads/sites/3/2023/10/01_product_1_sdelat-izobrazhenie-1-1-3-scaled.jpg'"
                 ></NewsBlock>
             </div>
 
             <div class="news-block">
-                <NewsBlock></NewsBlock>
+                <NewsBlock
+                    :newsImage="'https://images.unsplash.com/photo-1603486002664-a7319421e133?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8MTYlM0E5fGVufDB8fDB8fHww'"
+                ></NewsBlock>
             </div>
             <div class="news-block">
                 <NewsBlock></NewsBlock>
@@ -97,7 +100,7 @@
 
         <!-- тут компонент для переключения страниц -->
         <div class="pagination-component">
-
+            
         </div>
 
     </div>
