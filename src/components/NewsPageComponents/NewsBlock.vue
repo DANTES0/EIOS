@@ -151,10 +151,12 @@
     .news-block-image-background {
         width: 100%;
         height: 100%;
-        filter: blur(6px);
+        filter: blur(6px) brightness(50%);;
         transform: scale(1.4);
         object-fit: cover;
     }
+
+    
 
     /* картинка на переднем плане */
     .news-block-image-foreground {
