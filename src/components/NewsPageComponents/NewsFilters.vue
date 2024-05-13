@@ -5,14 +5,24 @@
     import { useRouter } from 'vue-router';
     import '@vuepic/vue-datepicker/dist/main.css'
 
-    const dateStart = ref(new Date().setMonth(new Date().getMonth() - 1))
-    const dateEnd = ref(new Date().setMonth(new Date().getMonth()))
+    // const dateStart = ref(new Date().setMonth(new Date().getMonth() - 1))
+    // const dateEnd = ref(new Date().setMonth(new Date().getMonth()))
+
+    const dateStart = ref()
+    const dateEnd = ref()
 
     const format = (date) => {
         const day = date.getDate()
         const month = date.getMonth() + 1
         const year = date.getFullYear()
         return `${day}/${month}/${year}`
+    }
+
+    const formatDots = (date) => {
+        const day = date.getDate()
+        const month = date.getMonth() + 1
+        const year = date.getFullYear()
+        return `${day}.${month}.${year}`
     }
 
     const categories = ref([
@@ -66,29 +76,37 @@
 
     const router = useRouter()
 
-    // Функция для отправки выбранных параметров фильтров в маршрут News.vue
     function applyFilters() {
+        const selectedCategoriesNames = selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(';')
+
+        const query = {
+            startDate: dateStart.value,
+            endDate: dateEnd.value
+        };
+
+        if (selectedCategoriesNames !== '') {
+            query.categories = selectedCategoriesNames;
+        }
+
         router.push({
             name: 'News',
-            query: {
-                categories: selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(','),
-                s: dateStart.value,
-                po: dateEnd.value
-            }
-        })
+            query: query
+        });
     }
+    
     const handleStartDate = (modelData) => {
-        dateStart.value = modelData.getTime()
+        dateStart.value = formatDots(dateStart.value)
         applyFilters()
+        dateStart.value = modelData
     }
 
     const handleEndDate = (modelData) => {
-        dateEnd.value = modelData.getTime()
+        dateEnd.value = formatDots(dateEnd.value)
         applyFilters()
+        dateEnd.value = modelData
     }
 
     watch(selectedCategories, (newValue) => {
-        console.log('Selected categories changed:', newValue)
         applyFilters()
     }, { deep: true })
 

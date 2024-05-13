@@ -1,29 +1,56 @@
 <script setup>
     import Tabs from '../components/Tabs.vue'
     import NewsBlock from "../components/NewsPageComponents/NewsBlock.vue"
-    import { ref, watch } from 'vue';
+    import { ref, computed, watch} from 'vue';
     import { useRoute } from 'vue-router';
     
     const newsData = ref([])
-
     const route = useRoute()
-    const selectedCategories = ref([])
-    const dateStart = ref(new Date())
-    const dateEnd = ref(new Date())
+
+    const formatURLDots = (date) => {
+        const day = date.getDate()
+        const month = date.getMonth() + 1
+        const year = date.getFullYear()
+        return `${day}.${month}.${year}`
+    }
 
     async function loadNews() {
-        const categories = route.query.categories ? route.query.categories.split(',') : []
-        const startDate = route.query.s ? new Date(parseInt(route.query.s)) : null
-        const endDate = route.query.po ? new Date(parseInt(route.query.po)) : null
+        console.log('загрузка')
 
-        // const response = await fetch(`url`);
-        // const data = await response.json();
-        // newsData.value = data;
+        let requestAddress = `http://25.61.98.183:8080/news/get/all`
+
+        const categories = route.query.categories ? route.query.categories.split(';') : []
+        const startDate = route.query.startDate ? new Date(parseInt(route.query.startDate)) : null
+        const endDate = route.query.endDate ? new Date(parseInt(route.query.endDate)) : null
+
+        if (categories.length === 0 && !startDate && !endDate) {
+            requestAddress = `http://25.61.98.183:8080/news/get/all`
+        } else if (categories.length === 0 && startDate && endDate) {
+            requestAddress = `http://25.61.98.183:8080/news/get/all?startDate=${format(startDate)}&endDate=${formatURLDots(endDate)}`
+        } else if (categories.length > 0 && !startDate && !endDate) {
+            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}`
+        } else if (categories.length > 0 && startDate && endDate) {
+            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}&startDate=${formatURLDots(startDate)}&endDate=${format(endDate)}`
+        }
 
         console.log(categories)
         console.log(startDate)
         console.log(endDate)
+
+        try {
+            const response = await fetch(requestAddress)
+            if (response.ok) {
+                const data = await response.json()
+                newsData.value = data
+                console.log(newsData.value)
+            } else {
+                console.error('Ошибка при загрузке данных:', response.statusText)
+            }
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса:', error)
+        }
     }
+
 
     loadNews()
 
@@ -35,72 +62,24 @@
 <template>
     <Tabs></Tabs>
 
-    <!-- Отображаем новости -->
-    <!-- <div v-for="newsItem in newsData" :key="newsItem.id">
-        <NewsBlock :newsItem="newsItem" />
-    </div> -->
-
     <div class="news-page-container">
 
-        <!-- вот тут должна формироваться страница -->
         <div class="news-page-content">
 
-            <div class="news-block">
-                <NewsBlock></NewsBlock>
-            </div>
-            <div class="news-block">
+            <div v-for="newsItem in newsData" :key="newsItem.id" class="news-block">
                 <NewsBlock 
-                    :newsTag="'Конференции'" 
-                    :newsTitle="'FUNNY CAT MEMES COMPILATION OF 2023 V09 FUNNY CAT MEMES COMPILATION OF 2023 V09 FUNNY CAT MEMES COMPILATION OF 2023 V09 FUNNY CAT MEMES COMPILATION OF 2023 V09'" 
-                    :newsImage="'https://i.ytimg.com/vi/1M_oZgVBknw/maxresdefault.jpg'"
-                    :newsDescription="'Try Not To Laugh Challenge is a hilarious compilation of Funny and cute Animal Videos, featuring some of the funniest cats memes around! With so many cute and funny animals in one place, you re sure to be entertained for hours on end. So why not sit back, relax, and watch some of the funniest animals around? Try Not To Laugh Challenge is a hilarious compilation of Funny and cute Animal Videos, featuring some of the funniest cats memes around! With so many cute and funny animals in one place, you re sure to be entertained for hours on end. So why not sit back, relax, and watch some of the funniest animals around?'"
-                ></NewsBlock>
-
+                    :newsTag="newsItem.category"
+                    :newsTitle="newsItem.headline"
+                    :newsDate="newsItem.date"
+                    :newsImage="newsItem.images[0]"
+                    :newsDescription="newsItem.fullInfo"
+                />
             </div>
-            <div class="news-block">
-                <NewsBlock
-                    :newsImage="'https://24ai.tech/en/wp-content/uploads/sites/3/2023/10/01_product_1_sdelat-izobrazhenie-1-1-3-scaled.jpg'"
-                ></NewsBlock>
-            </div>
-
-            <div class="news-block">
-                <NewsBlock
-                    :newsImage="'https://images.unsplash.com/photo-1603486002664-a7319421e133?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8MTYlM0E5fGVufDB8fDB8fHww'"
-                ></NewsBlock>
-            </div>
-            <div class="news-block">
-                <NewsBlock></NewsBlock>
-            </div>
-            <div class="news-block">
-                <NewsBlock></NewsBlock>
-            </div>
-
-            <div class="news-block">
-                <NewsBlock></NewsBlock>
-            </div>
-            <div class="news-block">
-                <NewsBlock></NewsBlock>
-            </div>
-            <div class="news-block">
-                <NewsBlock></NewsBlock>
-            </div>
-
-
-            <div class="news-block">
-                <NewsBlock></NewsBlock>
-            </div>
-            <div class="news-block">
-                <NewsBlock></NewsBlock>
-            </div>
-            <div class="news-block">
-                <NewsBlock></NewsBlock>
-            </div>
-
         </div>
 
         <!-- тут компонент для переключения страниц -->
         <div class="pagination-component">
-            
+            <!-- <Pagination :totalPages="totalPages" :currentPage="currentPage" @pageChanged="onPageChanged" /> -->
         </div>
 
     </div>

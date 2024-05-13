@@ -17,7 +17,7 @@
     });
 
     const processedDescription = () => {
-        const maxLength = 220 // Максимальная длина описания
+        const maxLength = 216 // Максимальная длина описания
         if (newsData.newsDescription.length > maxLength) {
             let truncatedText = newsData.newsDescription.slice(0, maxLength)
             truncatedText = truncatedText.slice(0, Math.min(truncatedText.length, truncatedText.lastIndexOf(" "))) // Обрезаем текст до последнего пробела
@@ -37,6 +37,18 @@
             return newsData.newsTitle
         }
     };
+
+    // const shouldUseForegroundWidth = computed(() => {
+    //     const maxWidth = parseFloat(newsData.foregroundWidth)
+    //     const imageWidth = 0
+    //     return imageWidth < maxWidth
+    // });
+
+    // const shouldUseForegroundHeight = computed(() => {
+    //     const maxHeight = parseFloat(newsData.foregroundHeight);
+    //     const imageHeight = 0
+    //     return imageHeight < maxHeight;
+    // });
 </script>
 
 <template>
@@ -65,6 +77,8 @@
                 :style="{ 
                         maxWidth: newsData.foregroundWidth,
                         maxHeight: newsData.foregroundHeight,
+                        // width: shouldUseForegroundWidth() ? '85%' : 'auto',
+                        // height: shouldUseForegroundHeight() ? '85%' : 'auto'
                     }"
             />
         </div>
