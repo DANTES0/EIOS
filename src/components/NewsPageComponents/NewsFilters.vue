@@ -24,11 +24,14 @@
     }
 
     const formatDotsFilters = (date) => {
-        // вот здесь наверное сделать проверку, если приходит пустая дата, то возвращать null
-        const day = date.getDate()
-        const month = date.getMonth() + 1
-        const year = date.getFullYear()
-        return `${day}.${month}.${year}`
+        if (date) {
+            const day = date.getDate()
+            const month = date.getMonth() + 1
+            const year = date.getFullYear()
+            return `${day}.${month}.${year}`
+        } else {
+            return null
+        }
     }
 
     const categories = ref([
@@ -86,10 +89,15 @@
 
         const selectedCategoriesNames = selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(';')
 
-        const query = {
-            startDate: dateStartURL.value,
-            endDate: dateEndURL.value
-        };
+        const query = {}
+
+        if(dateStartURL.value != null) {
+            query.startDate = dateStartURL.value
+        }
+        
+        if(dateEndURL.value != null) {
+            query.endDate = dateEndURL.value
+        }
 
         if (selectedCategoriesNames !== '') {
             query.categories = selectedCategoriesNames;
