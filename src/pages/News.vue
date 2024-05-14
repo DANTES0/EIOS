@@ -26,7 +26,7 @@
         if (categories.length === 0 && !startDate && !endDate) {
             requestAddress = `http://25.61.98.183:8080/news/get/all`
         } else if (categories.length === 0 && startDate && endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?startDate=${format(startDate)}&endDate=${formatURLDots(endDate)}`
+            requestAddress = `http://25.61.98.183:8080/news/get/all?startDate=${formatURLDots(startDate)}&endDate=${formatURLDots(endDate)}`
         } else if (categories.length > 0 && !startDate && !endDate) {
             requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}`
         } else if (categories.length > 0 && startDate && endDate) {

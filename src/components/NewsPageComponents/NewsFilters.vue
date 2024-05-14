@@ -5,11 +5,16 @@
     import { useRouter } from 'vue-router';
     import '@vuepic/vue-datepicker/dist/main.css'
 
-    // const dateStart = ref(new Date().setMonth(new Date().getMonth() - 1))
-    // const dateEnd = ref(new Date().setMonth(new Date().getMonth()))
+    // исправить при удалении даты (когда юзер нажимает на крестик)
+    // переименовать formatDotsFilters
+    // дата записывается для передачи нормально, нужно проверить как уже формируется URL для запроса
+    // поменять отступы у тега и даты в блоке новости
 
     const dateStart = ref()
     const dateEnd = ref()
+
+    const dateStartURL = ref()
+    const dateEndURL = ref()
 
     const format = (date) => {
         const day = date.getDate()
@@ -18,7 +23,8 @@
         return `${day}/${month}/${year}`
     }
 
-    const formatDots = (date) => {
+    const formatDotsFilters = (date) => {
+        // вот здесь наверное сделать проверку, если приходит пустая дата, то возвращать null
         const day = date.getDate()
         const month = date.getMonth() + 1
         const year = date.getFullYear()
@@ -77,11 +83,12 @@
     const router = useRouter()
 
     function applyFilters() {
+
         const selectedCategoriesNames = selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(';')
 
         const query = {
-            startDate: dateStart.value,
-            endDate: dateEnd.value
+            startDate: dateStartURL.value,
+            endDate: dateEndURL.value
         };
 
         if (selectedCategoriesNames !== '') {
@@ -95,18 +102,18 @@
     }
     
     const handleStartDate = (modelData) => {
-        dateStart.value = formatDots(dateStart.value)
-        applyFilters()
         dateStart.value = modelData
+        dateStartURL.value = formatDotsFilters(modelData)
+        applyFilters()
     }
 
     const handleEndDate = (modelData) => {
-        dateEnd.value = formatDots(dateEnd.value)
-        applyFilters()
         dateEnd.value = modelData
+        dateEndURL.value = formatDotsFilters(modelData)
+        applyFilters()
     }
 
-    watch(selectedCategories, (newValue) => {
+    watch(selectedCategories, () => {
         applyFilters()
     }, { deep: true })
 
