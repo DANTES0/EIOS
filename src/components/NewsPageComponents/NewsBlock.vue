@@ -126,6 +126,7 @@
         width: 100%;
         border-bottom: 1px solid #999999;
         display: flex;
+        justify-content: space-between;
         align-items: center;
         gap: 78px;
     }
@@ -147,7 +148,8 @@
         font-family: Rubik;
         font-size: 18;
         font-weight: 800;
-        color: #1e66f5;
+        /* color: #1e66f5;*/
+        color: #cccccc;
     }
     
     .news-block-date {
@@ -156,6 +158,7 @@
         font-size: 18px;
         font-weight: 800;
         color: #cccccc;
+        margin-right: 53px;
     }
 
     .news-block-image {
