@@ -1,5 +1,5 @@
 <script setup>
-    import { defineProps, computed } from "vue";
+    import { defineProps } from "vue";
     import { format } from 'date-fns';
 
     const newsData = defineProps({
@@ -37,18 +37,6 @@
             return newsData.newsTitle
         }
     };
-
-    // const shouldUseForegroundWidth = computed(() => {
-    //     const maxWidth = parseFloat(newsData.foregroundWidth)
-    //     const imageWidth = 0
-    //     return imageWidth < maxWidth
-    // });
-
-    // const shouldUseForegroundHeight = computed(() => {
-    //     const maxHeight = parseFloat(newsData.foregroundHeight);
-    //     const imageHeight = 0
-    //     return imageHeight < maxHeight;
-    // });
 </script>
 
 <template>
@@ -77,8 +65,6 @@
                 :style="{ 
                         maxWidth: newsData.foregroundWidth,
                         maxHeight: newsData.foregroundHeight,
-                        // width: shouldUseForegroundWidth() ? '85%' : 'auto',
-                        // height: shouldUseForegroundHeight() ? '85%' : 'auto'
                     }"
             />
         </div>

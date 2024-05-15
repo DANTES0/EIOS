@@ -5,7 +5,9 @@
     import { useRouter } from 'vue-router';
     import '@vuepic/vue-datepicker/dist/main.css'
 
-    // поменять отступы у тега и даты в блоке новости
+    // Исправить теги
+    // Сделать пагинацию
+    // Сделать запрос к Рите 
 
     const dateStart = ref()
     const dateEnd = ref()
