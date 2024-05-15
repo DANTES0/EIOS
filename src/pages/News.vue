@@ -1,36 +1,27 @@
 <script setup>
     import Tabs from '../components/Tabs.vue'
     import NewsBlock from "../components/NewsPageComponents/NewsBlock.vue"
-    import { ref, computed, watch} from 'vue';
+    import { ref, watch} from 'vue';
     import { useRoute } from 'vue-router';
     
     const newsData = ref([])
     const route = useRoute()
 
-    const formatURLDots = (date) => {
-        const day = date.getDate()
-        const month = date.getMonth() + 1
-        const year = date.getFullYear()
-        return `${day}.${month}.${year}`
-    }
-
     async function loadNews() {
-        console.log('загрузка')
-
         let requestAddress = `http://25.61.98.183:8080/news/get/all`
 
         const categories = route.query.categories ? route.query.categories.split(';') : []
-        const startDate = route.query.startDate ? new Date(parseInt(route.query.startDate)) : null
-        const endDate = route.query.endDate ? new Date(parseInt(route.query.endDate)) : null
+        const startDate = route.query.startDate ? route.query.startDate : null
+        const endDate = route.query.endDate ? route.query.endDate : null
 
         if (categories.length === 0 && !startDate && !endDate) {
             requestAddress = `http://25.61.98.183:8080/news/get/all`
         } else if (categories.length === 0 && startDate && endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?startDate=${formatURLDots(startDate)}&endDate=${formatURLDots(endDate)}`
+            requestAddress = `http://25.61.98.183:8080/news/get/all?startDate=${startDate}&endDate=${endDate}`
         } else if (categories.length > 0 && !startDate && !endDate) {
             requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}`
         } else if (categories.length > 0 && startDate && endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}&startDate=${formatURLDots(startDate)}&endDate=${format(endDate)}`
+            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`
         }
 
         console.log(categories)

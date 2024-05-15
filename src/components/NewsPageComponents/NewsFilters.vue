@@ -5,9 +5,6 @@
     import { useRouter } from 'vue-router';
     import '@vuepic/vue-datepicker/dist/main.css'
 
-    // исправить при удалении даты (когда юзер нажимает на крестик)
-    // переименовать formatDotsFilters
-    // дата записывается для передачи нормально, нужно проверить как уже формируется URL для запроса
     // поменять отступы у тега и даты в блоке новости
 
     const dateStart = ref()
@@ -23,7 +20,7 @@
         return `${day}/${month}/${year}`
     }
 
-    const formatDotsFilters = (date) => {
+    const formatDateDots = (date) => {
         if (date) {
             const day = date.getDate()
             const month = date.getMonth() + 1
@@ -111,13 +108,13 @@
     
     const handleStartDate = (modelData) => {
         dateStart.value = modelData
-        dateStartURL.value = formatDotsFilters(modelData)
+        dateStartURL.value = formatDateDots(modelData)
         applyFilters()
     }
 
     const handleEndDate = (modelData) => {
         dateEnd.value = modelData
-        dateEndURL.value = formatDotsFilters(modelData)
+        dateEndURL.value = formatDateDots(modelData)
         applyFilters()
     }
 
