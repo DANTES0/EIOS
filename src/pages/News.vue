@@ -1,6 +1,7 @@
 <script setup>
     import Tabs from '../components/Tabs.vue'
     import NewsBlock from "../components/NewsPageComponents/NewsBlock.vue"
+    import Pagination from "../components/NewsPageComponents/Pagination.vue"
     import { ref, watch} from 'vue';
     import { useRoute } from 'vue-router';
     
@@ -66,11 +67,12 @@
                     :newsDescription="newsItem.fullInfo"
                 />
             </div>
+
         </div>
 
         <!-- тут компонент для переключения страниц -->
-        <div class="pagination-component">
-            <!-- <Pagination :totalPages="totalPages" :currentPage="currentPage" @pageChanged="onPageChanged" /> -->
+        <div class="pagination-wrapper">
+            <Pagination class="pagination"/>
         </div>
 
     </div>
@@ -110,10 +112,13 @@
         transform: scale(1.04);
     }
 
-    .pagination-component {
+    .pagination-wrapper {
         margin: 0 auto;
         background-color: yellow;
         width: 1064px;
         height: 92px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
