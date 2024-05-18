@@ -1,19 +1,53 @@
 <script setup>
 import {ref} from "vue"
+import { useFetch } from "@vueuse/core";
 import { authState } from '../authState';
+import { useStore } from 'vuex';
+
+const store = useStore();
 let login = ref('');
 let password = ref('');
+let loginError = ref(false);
+// const { fetch } = useFetch({
+//     // настройки fetch, такие как baseURL, headers, и т.д.
+// });
 const hideAuth = (event) => {
     // Проверяем, что клик был по фону, а не по контейнеру авторизации
     if (event.target.classList.contains('auth-wrapp')) {
         authState.isVisible = false;
     }
 };
-const authorize = () => {
-    // Тут вы можете использовать значения переменных login и password
-    console.log('Логин:', login.value);
-    console.log('Пароль:', password.value);
-    // Дополнительный код для авторизации...
+const authorize = async () => {
+    if (login.value === '') {
+        loginError.value = true;
+        return;
+    } else {
+        loginError.value = false;
+    }
+
+    try {
+        const { data, error } = await useFetch('http://25.59.204.137:8080/api/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                login: login.value,
+                password: password.value
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).json();
+
+        if (error.value) {
+            console.error('Ошибка при отправке запроса:', error.value);
+            return;
+        }
+
+        const { accessToken, refreshToken } = data.value;
+        store.dispatch('login', { accessToken, refreshToken });
+
+    } catch (error) {
+        console.error('Ошибка при отправке запроса:', error);
+    }
 };
 </script>
 <template>
@@ -24,7 +58,7 @@ const authorize = () => {
                 <div class="auth-title"><span style="color: #1E66F5;">#</span>АВТОРИЗАЦИЯ</div>
                 <div class="input-login">
                     <div class="input-login-title">Введите логин</div>
-                    <input v-model="login" placeholder="Логин...." type="text" class="input-login-text input">
+                    <input @click="loginError = false" v-model="login" placeholder="Логин...." type="text" class="input-login-text input" :class="{'error': loginError}">
                 </div>
                 <div class="input-passwaord">
                     <div class="input-password-title">Введите пароль</div>
@@ -38,6 +72,7 @@ const authorize = () => {
 
 </template>
 <style scoped>
+
 @font-face {
   font-family: JetBrainsMono;
   src: url("../assets/JetBrainsMono.ttf");
@@ -60,6 +95,14 @@ const authorize = () => {
     color: #7D7D7D;
     margin-top: 8px;
     margin-left: 250px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.not-auth:hover{
+    color: #8a8a8a;
+}
+.not-auth:active {
+    color: #CCCCCC;
 }
 .enter-auth {
     width: 186px;
@@ -72,7 +115,7 @@ const authorize = () => {
     font-size: 18px;
     font-weight: 400;
     /* margin-bottom: 24px; */
-    margin-top: 69px;
+    margin-top: 99px;
     cursor: pointer;
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
@@ -94,6 +137,7 @@ const authorize = () => {
     color: #C4C4C4;
     outline: #1E66F5;
     font-size: 18px;
+    transition: border-color 0.3s ease;
 }
 .input::placeholder {
     color: #5C5C5C;
@@ -105,7 +149,7 @@ const authorize = () => {
 }
 .auth-title {
     font-family: JetBrainsMono;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 400;
     color: #CCCCCC;
     margin-top: 30px;
@@ -142,6 +186,9 @@ const authorize = () => {
     }
     .input-login {
     font-weight: 300;
+}
+.error {
+    border-color: #FF7070;
 }
 
 </style>

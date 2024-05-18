@@ -1,6 +1,14 @@
 <script setup>
 import HeaderAnchor from "./HeaderAnchor.vue"
 import { authState } from '../authState';
+import { useStore } from 'vuex';
+
+const store = useStore();
+
+function isLoggedIn () {
+  console.log(store.getters.isLoggedIn)
+  // return store.getters.isLoggedIn;
+}
 
 const toggleAuthVisibility = () => {
   authState.isVisible = !authState.isVisible;
@@ -36,14 +44,14 @@ const emit = defineEmits(['toggle-auth'])
           class="page"
           id="e"
           data-title="Комиссия"
-          @click="$router.push('/gallery')"
+          @click="$router.push('/admin')"
         ></a>
 
         <a class="page" id="t" @click="$router.push('/gallery')"></a>
       </div>
       <div class="page-header-bottom">
         <a @click="toggleAuthVisibility" class="page" id="profile" data-title="Профиль"></a>
-        <a class="page" id="moodle" data-title="moodle"></a>
+        <a @click="isLoggedIn" class="page" id="moodle" data-title="moodle"></a>
       </div>
     </div>
     <div class="header-wrapper-anchor-container" v-if="$route.path !== '/newsContent' ">
