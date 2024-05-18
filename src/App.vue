@@ -1,12 +1,27 @@
 <script setup>
 import NavBar from "./components/Header.vue"
 import Footer from "./components/Footer.vue"
+import Auth from "./components/Auth.vue";
+import { ref } from "vue";
+import { authState } from './authState';
+
+function visibleAuth () 
+{ 
+  
+  isVisible.value = !isVisible.value
+  console.log(isVisible.value)
+}
+
+
 </script>
 
 <template>
   <div class="wrap">
-    <NavBar> </NavBar>
+    <Auth v-if="authState.isVisible"></Auth>
+    <NavBar></NavBar>
+    
     <div class="main-background">
+      
       <router-view />
     </div>
   </div>

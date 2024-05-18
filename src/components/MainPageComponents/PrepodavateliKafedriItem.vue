@@ -27,40 +27,6 @@ const resetAnimation = () => {
   
 };
 let temp = ref(0)
-// let show1 = ref(false)
-// let show2 = ref(false)
-// const checked = computed(() => {
-//     // console.log(props.currentIndex == props.countObject)
-//     // console.log(`Current index = ${props.currentIndex}`)
-//     // console.log(`index= ${props.countObject}`)
-//     // console.log(`id= ${props.id}`)
-//     if (props.currentIndex+1 == props.nextId || props.currentIndex == props.id || props.currentIndex-1 == props.prevId) {
-//       console.log(props.prevId)
-//         return true
-//     }
-//     // if (props.currentIndex == props.id) {
-
-//     // }
-//     // if (props.countObject == 0)
-//     // {
-//     //     temp.value = props.length-1
-//     //     if (temp.value == props.id){
-//     //         return true
-//     //     }
-        
-//     // }
-    
-//     // return false
-// })
-// console.log(checked)
-// const PrevImage = () => {
-//     if (CurImage.value - 1 == 0) {
-//         return 8
-//     }
-//     else{
-//         return CurImage.value - 1
-//     }
-// } 
 </script>
 <template>
     <div class="wrappper">
@@ -76,14 +42,9 @@ let temp = ref(0)
           </h2>
           <h2 class="stepen-prepod info-prepod" >{{ rank}}</h2>
         </div>
-        <!-- @animationend="resetAnimation" -->
-        <!-- <div class="prepod-circle-block">
-          <div v-for="i in 4" class="circle-prepod"></div>
-        </div> -->
     </div>
 </template>
 <style scoped>
-
 .wrappper {
     display: flex;
     flex-direction: column;

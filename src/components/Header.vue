@@ -1,5 +1,12 @@
 <script setup>
 import HeaderAnchor from "./HeaderAnchor.vue"
+import { authState } from '../authState';
+
+const toggleAuthVisibility = () => {
+  authState.isVisible = !authState.isVisible;
+  console.log(authState.isVisible)
+};
+const emit = defineEmits(['toggle-auth'])
 </script>
 
 <template>
@@ -35,7 +42,7 @@ import HeaderAnchor from "./HeaderAnchor.vue"
         <a class="page" id="t" @click="$router.push('/gallery')"></a>
       </div>
       <div class="page-header-bottom">
-        <a class="page" id="profile" data-title="Профиль"></a>
+        <a @click="toggleAuthVisibility" class="page" id="profile" data-title="Профиль"></a>
         <a class="page" id="moodle" data-title="moodle"></a>
       </div>
     </div>

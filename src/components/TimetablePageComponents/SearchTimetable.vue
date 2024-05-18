@@ -15,15 +15,25 @@ let array = ref([]);
 const url = computed(()=> {
     return `http://25.61.98.183:8080/api/v1/group/all`
 })
+const teacherUrl = computed(()=> {
+    return `http://25.61.98.183:8080/api/v1/teacher/getAll`
+})
 let placeholder = ref('Поиск...')
-
 const fetchGroup = async() => {
   const response = await useFetch(url).json()
   console.log(response.data.value)
+  const responseTeacher = await useFetch(teacherUrl).json()
+  console.log(responseTeacher.data.value)
   for(let i = 0; i< response.data.value.length; i++) {
     array.value.push({
         label: response.data.value[i].name,
         value: response.data.value[i].id
+    })
+  }
+  for(let i = 0; i<responseTeacher.data.value.length; i++) {
+    array.value.push({
+        label: responseTeacher.data.value[i].name,
+        value: `teacher${responseTeacher.data.value[i].id}`
     })
   }
   console.log(array.value)
@@ -62,7 +72,11 @@ const handleOptionSelected = (option) => {
         :placeholder="placeholder"
         :options="array"
         @option-selected="handleOptionSelected"
-  />
+  >
+  <template #no-options>
+      По вашему запросу ничего не найдено
+    </template>
+</VueSelect>
         <!-- <input placeholder="Поиск..." type="" class="input-search-input">
         <select class="select-input" name="" id="">
             <option value=""></option>
@@ -105,7 +119,9 @@ const handleOptionSelected = (option) => {
     --vs-icon-size: 20px;
     /* --vs-font-family: JetBrainsMono; */
 }
-
+:deep(.no-results) {
+    color: white;
+}
 :deep(.vue-select) {
     font-family: JetBrainsMono;
     background-color: transparent;

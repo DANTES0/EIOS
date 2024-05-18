@@ -35,10 +35,9 @@ for (let i = 0; i< prepod.value.length; i++)
   } else {
     prevId.value[i] = i - 1;
   }
-  // boll.value[i] = false
+
 }
-    // [prepod.value[0], prepod.value[1]] = [prepod.value[1], prepod.value[0]]
-    // [prepod.value[0], prepod.value[prepod.value.length-1]] = [prepod.value[prepod.value.length-1], prepod.value[0]]
+
 
     for (let i = 0; i< prepod.value.length; i++)
 {
@@ -51,32 +50,18 @@ for (let i = 0; i< prepod.value.length; i++)
     temp_array.value[2] = prepod.value[nextId.value[i]]
     console.log(prepod.value[nextId.value[i]])
   }
-  // console.log(temp_array.value)
-  // console.log(currentIndex.value+1 == nextId.value[i])
-  // if (currentIndex.value+1 == nextId.value[i] || currentIndex.value-1 == prevId.value[i] || currentIndex.value == prepod.value[i].id){
-  //   boll.value[nextId.value[i]] = true
-  //   boll.value[prevId.value[i]] = true
-  //   boll.value[currentIndex.value] = true
-  //   // console.log('добавилось')
-  // }
-  // console.log(prepod.value[i].id)
-  // console.log(boll.value)
-  
-  // console.log(boll.value)
+
 }
-//   console.log(response_prepod)
+
 }
 
 const next = computed(() => {
     
-    // [prepod.value[currentIndex.value], prepod.value[currentIndex.value+1]] = [prepod.value[currentIndex.value+1], prepod.value[currentIndex.value]]
-    // currentIndex.value = (currentIndex.value + 1) % prepod.value.length
     currentIndex.value++;
     if (currentIndex.value+1 == prepod.value.length+1 ){
       currentIndex.value = 0
     }
     
-    // boll.value.fill(false)
     for (let i = 0; i< prepod.value.length; i++)
 {
   if (currentIndex.value == prepod.value[i].id)
@@ -88,23 +73,9 @@ const next = computed(() => {
     temp_array.value[2] = prepod.value[nextId.value[i]]
     console.log(prepod.value[nextId.value[i]])
   }
-//   console.log(currentIndex.value+1 == nextId.value[i])
-//   if (currentIndex.value+1 == prepod.value.length){
-//     boll.value[0] = true
-//   }
-//   if (currentIndex.value+1 == nextId.value[i] || currentIndex.value-1 == prevId.value[i] || currentIndex.value == prepod.value[i].id){
-//     boll.value[nextId.value[i]] = true
-//     boll.value[prevId.value[i]] = true
-//     boll.value[currentIndex.value] = true
-//     console.log('добавилось')
-//   }
-//   // console.log(prepod.value[i].id)
-//   // console.log(boll.value)
-  
-//   console.log(boll.value)
+
 }
-    // console.log(currentIndex.value)
-//   console.log(currentGalleryIndex.value)
+
 })
 
 const prev = () => {
@@ -113,7 +84,6 @@ const prev = () => {
       currentIndex.value = prepod.value.length-1
     }
     
-    // boll.value.fill(false)
     for (let i = 0; i< prepod.value.length; i++)
 {
   if (currentIndex.value == prepod.value[i].id)
@@ -125,26 +95,11 @@ const prev = () => {
     temp_array.value[2] = prepod.value[nextId.value[i]]
     console.log(prepod.value[nextId.value[i]])
   }
-//   console.log(currentIndex.value+1 == nextId.value[i])
-//   if (currentIndex.value+1 == prepod.value.length){
-//     boll.value[0] = true
-//   }
-//   if (currentIndex.value+1 == nextId.value[i] || currentIndex.value-1 == prevId.value[i] || currentIndex.value == prepod.value[i].id){
-//     boll.value[nextId.value[i]] = true
-//     boll.value[prevId.value[i]] = true
-//     boll.value[currentIndex.value] = true
-//     console.log('добавилось')
-//   }
-//   // console.log(prepod.value[i].id)
-//   // console.log(boll.value)
-  
-//   console.log(boll.value)
+
 }
-//   console.log(currentGalleryIndex.value)
+
 }
-// const currentNews = computed(() =>
-// prepod.value ? prepod.value[currentIndex.value] : null
-// )
+
 let count = ref(0)
 onMounted(() => {
     fetchPrepod();
@@ -155,46 +110,25 @@ onMounted(() => {
         <div class="prepod-image-block">
           <div style="" class="prepod-image-arrow back-image-arrow" @click="prev"></div>
           <div class="PrepodavateliKafedriItem-wrap">
-          <PrepodavateliKafedriItem v-for="({id, name, photo, post, rank}, index) in temp_array"
-          :id = "id"
-          :name = "name"
-          :photo="photo"
-          :post="post"
-          :rank="rank"
-          :currentIndex="currentIndex"
-          ></PrepodavateliKafedriItem>
-        </div>
-          <!-- <PrepodavateliKafedriItem
-          :active="true"></PrepodavateliKafedriItem>
-          <PrepodavateliKafedriItem></PrepodavateliKafedriItem> -->
-          
-          <!-- <img src="../assets/news.png" alt="" class="prepod-image" />
-          <img
-            src="../assets/news.png"
-            alt=""
-            class="prepod-image main-prepod-image"
-          />
-          <img src="../assets/news.png" alt="" class="prepod-image" /> -->
+            <PrepodavateliKafedriItem v-for="({id, name, photo, post, rank}, index) in temp_array"
+            :key="id"
+            :id = "id"
+            :name = "name"
+            :photo="photo"
+            :post="post"
+            :rank="rank"
+            :currentIndex="currentIndex"
+            ></PrepodavateliKafedriItem>
+          </div>
           <div class="prepod-image-arrow next-image-arrow" @click="next" style="margin-left: 15px;"></div>
         </div>
-        <!-- <div class="prepod-description-block">
-          <h1 class="name-prepod"></h1>
-          <h2 style="margin-bottom: 21px" class="spec-prepod info-prepod">
-           
-          </h2>
-          <h2 class="stepen-prepod info-prepod" ></h2>
-        </div> -->
+
         <div class="line-anima" :class="{'setup': flag}" ></div>
-        <!-- @animationend="resetAnimation" -->
-        <!-- <div class="prepod-circle-block">
-          <div v-for="i in 4" class="circle-prepod"></div>
-        </div> -->
       </div>
 </template>
 <style scoped>
 .setup {
   animation: anima 2s ease !important;
-  /* opacity: 0; */
 }
 .PrepodavateliKafedriItem-wrap {
     width: 100%;
