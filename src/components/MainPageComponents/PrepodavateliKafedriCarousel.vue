@@ -5,7 +5,7 @@ import { onMounted } from "vue"
 import PrepodavateliKafedriItem from './PrepodavateliKafedriItem.vue'
 let flag = ref(false)
 const prepod_url = computed(() => {
-  return `http://25.61.98.183:8080/teachers/getAll`
+  return `http://25.61.98.183:8080/api/v1/teacher/getAll`
 })
 let prepod = ref(null)
 let currentIndex = ref(1)

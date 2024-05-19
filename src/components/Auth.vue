@@ -26,7 +26,7 @@ const authorize = async () => {
     }
 
     try {
-        const { data, error } = await useFetch('http://25.59.204.137:8080/api/auth/login', {
+        const { data, error } = await useFetch('http://25.61.98.183:8080/api/auth/login', {
             method: 'POST',
             body: JSON.stringify({
                 login: login.value,
@@ -44,6 +44,7 @@ const authorize = async () => {
 
         const { accessToken, refreshToken } = data.value;
         store.dispatch('login', { accessToken, refreshToken });
+        authState.isVisible = false
 
     } catch (error) {
         console.error('Ошибка при отправке запроса:', error);

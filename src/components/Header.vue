@@ -51,7 +51,7 @@ const emit = defineEmits(['toggle-auth'])
       </div>
       <div class="page-header-bottom">
         <a @click="toggleAuthVisibility" class="page" id="profile" data-title="Профиль"></a>
-        <a @click="isLoggedIn" class="page" id="moodle" data-title="moodle"></a>
+        <a @click="() => store.dispatch('logout')" class="page" id="moodle" data-title="moodle"></a>
       </div>
     </div>
     <div class="header-wrapper-anchor-container" v-if="$route.path !== '/newsContent' ">
