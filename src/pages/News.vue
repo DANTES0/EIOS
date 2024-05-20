@@ -91,11 +91,16 @@
         <!-- тут компонент для переключения страниц -->
         <div class="pagination-wrapper">
             <VPagination 
+                class="custom-pagination"
                 v-model:page="currentPage"
                 :length="10"
                 :total-visible="10"
                 prev-icon="mdi-chevron-left"
                 next-icon="mdi-chevron-right"
+                rounded="0"
+                active-color="white"
+                color="#686767"
+                size="65px"
             />
         </div>
     </div>
@@ -137,11 +142,17 @@
 
     .pagination-wrapper {
         margin: 0 auto;
-        background-color: yellow;
+        /* background-color: yellow; */
         width: 1064px;
         height: 92px;
         display:flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .custom-pagination .v-btn__content {
+        font-family: JetBrainsMono;
+        font-weight: 700;
+        font-size: 36px;
     }
 </style>
