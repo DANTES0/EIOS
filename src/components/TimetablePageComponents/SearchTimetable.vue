@@ -128,6 +128,7 @@ const handleOptionSelected = (option) => {
   width: 220px;
   margin-top: 30px;
   z-index: 0;
+  position: static;
 }
 :deep(.search-input) {
     color: #ffffff;
@@ -158,6 +159,7 @@ const handleOptionSelected = (option) => {
 :deep(.menu) {
     background-color: transparent;
     border: 1px solid #1E66F5;
+    position: static;
 }
 :deep(.menu-option) {
     background-color: #181818;

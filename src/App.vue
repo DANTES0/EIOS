@@ -18,7 +18,7 @@ function visibleAuth ()
 <template>
   <div class="wrap">
     <Auth v-if="authState.isVisible"></Auth>
-    <NavBar></NavBar>
+    <NavBar v-if="$route.path != '/admin'"></NavBar>
     
     <div class="main-background">
       

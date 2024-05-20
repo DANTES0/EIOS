@@ -267,4 +267,7 @@ const emit = defineEmits(['toggle-auth'])
   width: 40px;
   height: 40px;
 }
+#arrow_down:hover {
+  transform: rotate(90deg);
+}
 </style>

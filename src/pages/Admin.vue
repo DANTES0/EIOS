@@ -3,7 +3,8 @@ import { useStore } from 'vuex';
 import { ref } from 'vue';
 import { authState } from '../authState';
 import useAuthenticatedFetch from '../fetchInterceptor';
-let visible = ref(false)
+import LeftAdminMenu from '../components/AdminPageComponents/LeftAdminMenu.vue';
+let visible = ref(true)
 const store = useStore();
 
 async function fetchData() {
@@ -18,9 +19,9 @@ async function fetchData() {
   if (statusCode.value =='403' || (statusCode.value == '401' && !store.getters.accessToken))
     {
       authState.isVisible = true
-        visible.value = false
+        // visible.value = false
     } else {
-      visible.value = true
+      // visible.value = true
     }
   if (error.value) {
     // console.error('Failed to fetch data:', error.value);
@@ -30,16 +31,17 @@ async function fetchData() {
   }
   if (!store.getters.isLoggedIn) {
         authState.isVisible = true
-        visible.value = false
+        // visible.value = false
     }
 }
 fetchData()
 </script>
 
 <template>
-    <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
+  <LeftAdminMenu></LeftAdminMenu>
+    <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN
-    </div>
+    </div> -->
 </template>
 
 <style>

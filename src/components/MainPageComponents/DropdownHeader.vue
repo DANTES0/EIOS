@@ -7,10 +7,11 @@ function showDropDown() {
 } </script>
 <template>
     <div @click="showDropDown" class="drop-btn-container">
-      <img src="../../assets/header/arrow_down.svg" alt="" id="arrow_down" />
+      <img src="../../assets/header/arrow_down.svg" alt="" class="arrow_down" :class="{'rotated': isShowDropDown}"/>
       <img src="../../assets/header/folder.svg" alt="" class="folder" />
       <label class="dropbtn" id="dropbtn"> Главная страница </label>
     </div>
+    <Transition name = "slide-fade">
     <div v-if="isShowDropDown" id="myDropdown" class="dropdown-content">
       <div class="dropdown-content-line"></div>
       <div class="dropdown-content-content">
@@ -57,8 +58,20 @@ function showDropDown() {
         </a>
       </div>
     </div>
+  </Transition>
 </template>
 <style>
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
 @font-face {
   font-family: Nunito;
   src: url("../../assets/Nunito.ttf");
@@ -78,13 +91,21 @@ function showDropDown() {
   height: 200px;
   background-color: #787878;
 }
-#arrow_down {
-  padding-left: 10px;
+.arrow_down {
+  /* padding-left: 10px; */
+ margin-left: 10px;
+  transform: rotate(-90deg);
+  transition: 0.3s ease;
 }
-#arrow_down:hover,
-#arrow_donw:focus {
+
+.arrow_down:hover,
+.arrow_down:focus {
   filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
     hue-rotate(146deg) brightness(122%) contrast(120%);
+    
+}
+.rotated {
+  transform: rotate(90deg);
 }
 .drop-btn-container {
   display: flex;
@@ -119,7 +140,7 @@ function showDropDown() {
   align-items: center;
   background-color: transparent;
   min-width: 160px;
-  overflow: auto;
+  overflow: hidden;
   z-index: 99;
 }
 
