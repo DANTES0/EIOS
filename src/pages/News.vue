@@ -2,11 +2,15 @@
     import Tabs from '../components/Tabs.vue'
     import NewsBlock from "../components/NewsPageComponents/NewsBlock.vue"
     import Pagination from "../components/NewsPageComponents/Pagination.vue"
-    import { ref, watch} from 'vue';
+    import { ref, watch, computed} from 'vue';
     import { useRoute } from 'vue-router';
-    
+    import { VPagination } from 'vuetify/components'
+
     const newsData = ref([])
     const route = useRoute()
+
+    const currentPage = ref(1)
+    const itemsPerPage = 10
 
     async function loadNews() {
         let requestAddress = `http://25.61.98.183:8080/news/get/all`
@@ -57,6 +61,12 @@
     watch(route, () => {
         loadNews()
     });
+
+    const paginatedNews = computed(() => {
+        const start = (currentPage.value - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        return newsData.value.slice(start, end);
+    });
 </script>
 
 <template>
@@ -80,9 +90,14 @@
 
         <!-- тут компонент для переключения страниц -->
         <div class="pagination-wrapper">
-            <Pagination class="pagination"/>
+            <VPagination 
+                v-model:page="currentPage"
+                :length="10"
+                :total-visible="10"
+                prev-icon="/src/assets/pagination/arrow_left.svg"
+                next-icon="/src/assets/pagination/arrow_right.svg"
+            />
         </div>
-
     </div>
 </template>
 
