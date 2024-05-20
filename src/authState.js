@@ -3,5 +3,6 @@ import { reactive } from 'vue';
 export const authState = reactive({
   isVisible: false,
   isAccess: true,
-  isVisibleModalAddUsers: true
+  isVisibleModalAddUsers: false,
+  isVisibleChangePhotoGallery: false
 });

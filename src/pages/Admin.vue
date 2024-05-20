@@ -1,10 +1,13 @@
 <script setup>
 import { useStore } from 'vuex';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { authState } from '../authState';
 import useAuthenticatedFetch from '../fetchInterceptor';
 import LeftAdminMenu from '../components/AdminPageComponents/LeftAdminMenu.vue';
 import AddUserModalComponent from '../components/AdminPageComponents/AddUserModalComponent.vue';
+import ChangePhotoGallery from '../components/AdminPageComponents/ChangePhotoGallery.vue';
+
+let isVisibleChangePhotoGallery = ref(false)
 let visible = ref(true)
 const store = useStore();
 
@@ -41,10 +44,21 @@ fetchData()
 <template>
   <AddUserModalComponent v-if="authState.isVisibleModalAddUsers"></AddUserModalComponent>
   <LeftAdminMenu></LeftAdminMenu>
+  <!-- <ChangePhotoGallery v-if="authState.isVisibleChangePhotoGallery"></ChangePhotoGallery> -->
+
     <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN
     </div> -->
 </template>
 
-<style>
+<style scoped>
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.wrapper-admin {
+  display: flex;
+  width: 100%;
+}
 </style>

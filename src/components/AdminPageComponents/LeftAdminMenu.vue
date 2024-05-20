@@ -1,5 +1,6 @@
 <script setup>
 import {ref} from 'vue'
+import { authState } from '../../authState';
 
 const isActiveMain = ref(false)
 const isActiveNews = ref(false)
@@ -14,12 +15,23 @@ const isActiveUsers = ref(false)
                 <div class="admin-panel-title">Панель администратора</div>
             </div>
             <div class="article-menu">
+                <div class="wrap-wrap">
                 <div class="wrap">
                     <div class="mainPage article" :class="{'active': isActiveMain}" @click="() => isActiveMain =! isActiveMain">
                         <div class="mainPage-title title" >Главная страница</div>
                     </div>
                     <img  class="arrow" :class="{'rotate': isActiveMain}" src="../../assets/Upper.svg">
                 </div>
+                <div v-if="isActiveMain" class="content-userPage">
+                        <div class="content-userPage-wrap">
+                            <div class="content-userPage-title">Преподаватели</div>
+                        </div>
+                        <div class="content-userPage-title">Главные новости</div>
+                        <div class="content-userPage-title">Преподаватели</div>
+                        <div class="content-userPage-title" @click="() => { authState.isVisibleChangePhotoGallery = !authState.isVisibleChangePhotoGallery}">Фотогалерея</div>
+                        <div class="content-userPage-title">Разное</div>
+                    </div>
+            </div>
                 <div class="wrap">
                     <div class="newsPage article" :class="{'active': isActiveNews}" @click="() => isActiveNews =! isActiveNews">
                         <div class="newsPage-title title">Новости</div>
