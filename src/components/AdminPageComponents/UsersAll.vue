@@ -18,24 +18,16 @@
         <span class="user-edit">Редактировать</span>
         <span class="user-delete">Удалить</span>
       </div>
-      <div class="user-item">
+      <div v-for="i in 10" class="user-item">
         <span class="user-id">1</span>
         <span class="user-login">o714b27</span>
         <span class="user-password">oo12pog</span>
-        <span class="user-role">Администратор/Преподаватель</span>
+        <span class="user-role">Cтудент</span>
         <span class="user-name">Петриков Кирилл Романович</span>
         <span class="user-edit" ><button><img src="../../assets/admin/piece_of_paper_and_pencil.svg" alt="Edit"></button></span>
         <span class="user-delete"><button><img src="../../assets/admin/cross-svgrepo-com.svg" alt="Delete"></button></span>
       </div>
-      <div class="user-item">
-        <span class="user-id">2</span>
-        <span class="user-login">o714b27</span>
-        <span class="user-password">oo12pog</span>
-        <span class="user-role">Администратор/Преподаватель</span>
-        <span class="user-name">Петриков Кирилл Романович</span>
-        <span class="user-edit"><button><img src="../../assets/admin/piece_of_paper_and_pencil.svg" alt="Edit"></button></span>
-        <span class="user-delete"><button><img src="../../assets/admin/cross-svgrepo-com.svg" alt="Delete"></button></span>
-      </div>
+      
     </div>
   </div>
 </template>
@@ -70,15 +62,20 @@
   width: 50%;
   margin: 20px;
   padding: 8px;
-  font-size: 1em;
+  font-size: 1em;   
   border: 1px solid #333;
   border-radius: 5px;
   background-color: #1A1A1A;
   color: #FFFFFF;
+  outline: #1E66F5;
+  transition: 0.3s ease
+}
+.placeholder-userAll::placeholder {
+    font-family: JetBrainsMono;
 }
 
 .placeholder-userAll:focus {
-  background-color: #333333;
+  /* background-color: #333333; */
   border-color: #1E66F5;
 }
 
