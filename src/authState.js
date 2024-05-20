@@ -1,5 +1,6 @@
 import { reactive } from 'vue';
 
 export const authState = reactive({
-  isVisible: false
+  isVisible: false,
+  isAccess: true
 });

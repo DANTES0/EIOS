@@ -41,6 +41,7 @@ const emit = defineEmits(['toggle-auth'])
           @click="$router.push('/timetable')"
         ></a>
         <a
+        v-if="authState.isAccess"
           class="page"
           id="e"
           data-title="Комиссия"

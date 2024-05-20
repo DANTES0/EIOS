@@ -204,4 +204,7 @@ const handleOptionSelected = (option) => {
     font-weight: 300;
     margin-left: 22px;
 }
+
+
+
 </style>

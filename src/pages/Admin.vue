@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { authState } from '../authState';
 import useAuthenticatedFetch from '../fetchInterceptor';
 import LeftAdminMenu from '../components/AdminPageComponents/LeftAdminMenu.vue';
+import AddUserModalComponent from '../components/AdminPageComponents/AddUserModalComponent.vue';
 let visible = ref(true)
 const store = useStore();
 
@@ -38,6 +39,7 @@ fetchData()
 </script>
 
 <template>
+  <AddUserModalComponent></AddUserModalComponent>
   <LeftAdminMenu></LeftAdminMenu>
     <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN

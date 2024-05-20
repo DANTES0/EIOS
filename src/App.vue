@@ -4,7 +4,17 @@ import Footer from "./components/Footer.vue"
 import Auth from "./components/Auth.vue";
 import { ref } from "vue";
 import { authState } from './authState';
-
+import useAuthenticatedFetch from './fetchInterceptor';
+const fetch = async () => {
+ const {statusCode, data, error} = await useAuthenticatedFetch(`http://25.61.98.183:8080/admin`).get()
+ console.log(statusCode)
+ if (statusCode.value == '200') {
+  authState.isAccess = true
+  console.log(authState.isAccess)
+ } 
+  console.log('ЗАПРОС')
+}
+fetch();
 function visibleAuth () 
 { 
   
