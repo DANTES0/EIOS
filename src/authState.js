@@ -4,5 +4,6 @@ export const authState = reactive({
   isVisible: false,
   isAccess: true,
   isVisibleModalAddUsers: false,
-  isVisibleChangePhotoGallery: false
+  isVisibleChangePhotoGallery: false,
+  isVisibleUsersAll: false
 });

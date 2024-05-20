@@ -47,10 +47,11 @@ fetchData()
 
   <div class="admin-page-container">
     <LeftAdminMenu></LeftAdminMenu>
-  <!-- <ChangePhotoGallery v-if="authState.isVisibleChangePhotoGallery"></ChangePhotoGallery> -->
+  
 
     <div class="userAll-content">
-      <UserAll></UserAll>
+      <ChangePhotoGallery v-if="authState.isVisibleChangePhotoGallery"></ChangePhotoGallery>
+      <UserAll v-if="authState.isVisibleUsersAll"></UserAll>
     </div>
     <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN
@@ -71,7 +72,7 @@ fetchData()
 .userAll-content{
   display: flex;
   /*justify-content: center;*/
-  width: 100%;
+  width: calc(100% - 1px);
   /* align-items: center;*/
 }
 </style>

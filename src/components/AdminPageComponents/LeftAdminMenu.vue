@@ -51,7 +51,7 @@ const isActiveUsers = ref(false)
                         </div>
                         <div class="content-userPage-title">Студенты</div>
                         <div class="content-userPage-title">Администраторы</div>
-                        <div class="content-userPage-title">Все</div>
+                        <div class="content-userPage-title" @click="() => {authState.isVisibleUsersAll = !authState.isVisibleUsersAll}">Все</div>
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@ const isActiveUsers = ref(false)
     color: #d0d0d0;
 }
 .admin-container {
-    width: 320px;
+    width: 20%;
     height: 100vh;
     background-color: #181818;
     font-family: JetBrainsMono;
