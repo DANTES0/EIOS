@@ -23,6 +23,14 @@
             requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}`
         } else if (categories.length > 0 && startDate && endDate) {
             requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`
+        } else if (categories.length === 0 && startDate && !endDate) {
+            requestAddress = `http://25.61.98.183:8080/news/get/all?startDate=${startDate}`
+        } else if (categories.length > 0 && startDate && !endDate) {
+            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`
+        } else if (categories.length === 0 && !startDate && endDate) {
+            requestAddress = `http://25.61.98.183:8080/news/get/all?endDate=${endDate}`
+        } else if (categories.length > 0 && !startDate && endDate) {
+            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`
         }
 
         console.log(categories)
