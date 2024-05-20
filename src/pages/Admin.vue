@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { authState } from '../authState';
 import useAuthenticatedFetch from '../fetchInterceptor';
 import LeftAdminMenu from '../components/AdminPageComponents/LeftAdminMenu.vue';
+import UserAll from '../components/AdminPageComponents/UsersAll.vue';
 let visible = ref(true)
 const store = useStore();
 
@@ -38,11 +39,32 @@ fetchData()
 </script>
 
 <template>
-  <LeftAdminMenu></LeftAdminMenu>
+
+  <div class="admin-page-container">
+    <LeftAdminMenu></LeftAdminMenu>
+    <div class="userAll-content">
+      <UserAll></UserAll>
+    </div>
     <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN
     </div> -->
+
+  </div>
+
 </template>
 
 <style>
+
+.admin-page-container{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.userAll-content{
+  display: flex;
+  /*justify-content: center;*/
+  width: 100%;
+  /* align-items: center;*/
+}
 </style>
