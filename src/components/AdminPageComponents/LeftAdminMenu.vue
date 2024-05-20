@@ -68,7 +68,7 @@ const isActiveUsers = ref(false)
 }
 @font-face {
   font-family: Russo-One;
-  src: url("../assets/RussoOne-Regular.ttf");
+  src: url("../../assets/RussoOne-Regular.ttf");
 }
 .content-userPage-title {
     margin-bottom: 28px;
@@ -172,5 +172,6 @@ const isActiveUsers = ref(false)
 }
 .admin-panel-title {
     margin-top: 5px;
+  margin-bottom: 10px;
 }
 </style>

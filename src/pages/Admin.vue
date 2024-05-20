@@ -8,6 +8,7 @@ import AddUserModalComponent from '../components/AdminPageComponents/AddUserModa
 import ChangePhotoGallery from '../components/AdminPageComponents/ChangePhotoGallery.vue';
 
 let isVisibleChangePhotoGallery = ref(false)
+import UserAll from '../components/AdminPageComponents/UsersAll.vue';
 let visible = ref(true)
 const store = useStore();
 
@@ -43,22 +44,34 @@ fetchData()
 
 <template>
   <AddUserModalComponent v-if="authState.isVisibleModalAddUsers"></AddUserModalComponent>
-  <LeftAdminMenu></LeftAdminMenu>
+
+  <div class="admin-page-container">
+    <LeftAdminMenu></LeftAdminMenu>
   <!-- <ChangePhotoGallery v-if="authState.isVisibleChangePhotoGallery"></ChangePhotoGallery> -->
 
+    <div class="userAll-content">
+      <UserAll></UserAll>
+    </div>
     <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN
     </div> -->
+
+  </div>
+
 </template>
 
-<style scoped>
+<style>
 
-.container {
+.admin-page-container{
   display: flex;
   flex-direction: row;
+
 }
-.wrapper-admin {
+
+.userAll-content{
   display: flex;
+  /*justify-content: center;*/
   width: 100%;
+  /* align-items: center;*/
 }
 </style>
