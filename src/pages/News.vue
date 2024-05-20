@@ -94,8 +94,8 @@
                 v-model:page="currentPage"
                 :length="10"
                 :total-visible="10"
-                prev-icon="/src/assets/pagination/arrow_left.svg"
-                next-icon="/src/assets/pagination/arrow_right.svg"
+                prev-icon="mdi-chevron-left"
+                next-icon="mdi-chevron-right"
             />
         </div>
     </div>
