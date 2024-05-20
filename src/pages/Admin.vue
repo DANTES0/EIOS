@@ -39,7 +39,7 @@ fetchData()
 </script>
 
 <template>
-  <AddUserModalComponent></AddUserModalComponent>
+  <AddUserModalComponent v-if="authState.isVisibleModalAddUsers"></AddUserModalComponent>
   <LeftAdminMenu></LeftAdminMenu>
     <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN

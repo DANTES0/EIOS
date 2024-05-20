@@ -1,20 +1,21 @@
 <script setup>
 import "vue3-select-component/dist/style.css";
 import VueSelect from "vue3-select-component";
+import { authState } from "../../authState";
 import {ref, computed} from 'vue'
 let array = ref([]);
 let placeholder = ref('Поиск...')
-const hideAuth = (event) => {
+const hideModal = (event) => {
     // Проверяем, что клик был по фону, а не по контейнеру авторизации
-    if (event.target.classList.contains('auth-wrapp')) {
-        authState.isVisible = false;
+    if (event.target.classList.contains('modal-add-user-wrapper')) {
+        authState.isVisibleModalAddUsers = false;
     }
 };
 // const selected = ref("");
 </script>
 
 <template>
-    <div class="modal-add-user-wrapper">
+    <div class="modal-add-user-wrapper" @click="hideModal">
         <div class="modal-add-user-container">
             <div class="modal-add-user-block">
                 <div class="modal-add-user-title" style="font-size: 28px;">Добавление аккаунта студента</div>
