@@ -1,26 +1,65 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import NewsContentHeader from '../components/NewsContentPageComponents/NewsContentHeader.vue'
 import NewsContentBase from '../components/NewsContentPageComponents/NewsContentBase.vue'
 import NewsContentPageSlider from '../components/NewsContentPageComponents/NewsContentPageSlider.vue'
 
+const newsData = ref(null);
+const route = useRoute();
+const IPAddress = '25.61.98.183'; // Используйте здесь тот же IP, что и в News.vue
+
+async function loadNewsContent() {
+    const newsId = route.params.id;
+    const requestAddress = `http://${IPAddress}:8080/news/get/${newsId}`;
+    
+    try {
+        const response = await fetch(requestAddress);
+        if (response.ok) {
+            newsData.value = await response.json();
+            console.log(newsData.value)
+        } else {
+            console.error('Ошибка при загрузке данных:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Ошибка при выполнении запроса:', error);
+    }
+}
+
+onMounted(() => {
+    loadNewsContent();
+});
 </script>
 
 <template>
-
-  <div class="page-container-header">
-    <NewsContentHeader></NewsContentHeader>
-      </div>
+  <div v-if="newsData" class="page-container">
+    <div class="page-container-header">
+        <NewsContentHeader
+        :newsHeadline="newsData.headline"
+        :newsMainInfo="newsData.mainInfo"
+        :newsCategory="newsData.category"
+        :newsDate="newsData.date"
+    />
+  </div>
 
 
   <div class="page-container-base">
-    <NewsContentBase></NewsContentBase>
+      <NewsContentBase
+      :newsFullInfo="newsData.fullInfo"
+    />
   </div>
+
   <div class="page-container-base-slider">
-    <NewsContentPageSlider></NewsContentPageSlider>
+    <NewsContentPageSlider
+        :images="newsData.images"
+    />
   </div>
-
-
+  </div>
+  <div v-else>
+    <p></p>
+  </div>
 </template>
+
 
 <style scoped>
 
