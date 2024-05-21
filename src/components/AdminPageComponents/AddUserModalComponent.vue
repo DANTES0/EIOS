@@ -15,7 +15,7 @@ const hideModal = (event) => {
 </script>
 
 <template>
-    <div class="modal-add-user-wrapper" @click="hideModal">
+    <div v-if="authState.isVisibleModalAddUsers" class="modal-add-user-wrapper" @click="hideModal">
         <div class="modal-add-user-container">
             <div class="modal-add-user-block">
                 <div class="modal-add-user-title" style="font-size: 28px;">Добавление аккаунта студента</div>

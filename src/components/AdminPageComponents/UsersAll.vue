@@ -2,6 +2,7 @@
 
 import {computed, onMounted, ref, watch} from "vue";
 import {useFetch} from "@vueuse/core";
+import { authState } from "../../authState";
 
 let array = ref([])
 let flag = ref(true);
@@ -64,7 +65,10 @@ function sortByName() {
         <div class="line"></div>
       <h1>Пользователи</h1>
     </header>
-    <input type="text" placeholder="Поиск..." class="placeholder-userAll">
+    <div class="wrap-input-btn">
+      <input type="text" placeholder="Поиск..." class="placeholder-userAll">
+      <button @click="authState.isVisibleModalAddUsers = true" class="addUser">Новый пользователь</button>
+    </div>
     <div class="text-list-userAll">Список пользователей</div>
     <div class="user-list">
       <div class="user-list-header">
@@ -95,7 +99,32 @@ function sortByName() {
   font-family: JetBrainsMono;
   src: url("../../assets/JetBrainsMono.ttf");
 }
-
+.wrap-input-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.addUser {
+  width: 240px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid #CCCCCC;
+  font-family: JetBrainsMono;
+  font-size: 18px;
+  color: #CCCCCC;
+  border-radius: 4px;
+  transition: 0.3s ease;
+  margin-right: 30px;
+}
+.addUser:hover {
+  background-color: #222222;
+    border-color: #1E66F5;
+}
+.addUser:active {
+  background-color: #333333;
+    border-color: #1E66F5;
+}
 .content-userAll {
   display: flex;
   flex-direction: column;
