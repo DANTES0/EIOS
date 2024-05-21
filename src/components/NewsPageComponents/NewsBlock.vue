@@ -41,7 +41,7 @@
 </script>
 
 <template>
-    <div class="news-block-wrapper" :style="{ width: newsData.blockWidth, height: newsData.blockHeight }">
+    <div class="news-block-wrapper" :style="{ width: newsData.blockWidth, height: newsData.blockHeight }" @click="$emit('click')">
 
         <div class="news-block-tag-and-date-wrapper">
             <div class="news-block-tag">
@@ -52,8 +52,8 @@
             <div class="news-block-date">{{format(newsData.newsDate, 'dd/MM/yyyy')}}</div>
 
         </div>
-
-        <div class="news-block-image" @click="$router.push('/newsContent')">
+        <!-- @click="$router.push('/newsContent')" -->
+        <div class="news-block-image">
             <img
                 :src="newsData.newsImage"
                 alt=""
@@ -72,8 +72,8 @@
     </div>
 
     <div class="news-block-summary" v-if="newsData.newsShowSummary"> 
-
-        <div class="news-block-title" @click="$router.push('/newsContent')"> 
+        <!-- @click="$router.push('/newsContent')" -->
+        <div class="news-block-title" > 
             {{ processedTitle() }}
         </div>
 

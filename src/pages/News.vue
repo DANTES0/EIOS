@@ -1,83 +1,89 @@
 <script setup>
-    import Tabs from '../components/Tabs.vue'
-    import NewsBlock from "../components/NewsPageComponents/NewsBlock.vue"
-    import Pagination from "../components/NewsPageComponents/Pagination.vue"
-    import { ref, watch, computed} from 'vue';
-    import { useRoute } from 'vue-router';
-    import CustomPagination from "../components/NewsPageComponents/CustomPagination.vue"
+import Tabs from '../components/Tabs.vue'
+import NewsBlock from "../components/NewsPageComponents/NewsBlock.vue"
+import Pagination from "../components/NewsPageComponents/Pagination.vue"
+import { ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import CustomPagination from "../components/NewsPageComponents/CustomPagination.vue"
 
-    const newsData = ref([])
-    const route = useRoute()
+const newsData = ref([])
+const route = useRoute()
+const router = useRouter()
 
-    const currentPage = ref(1)
-    const itemsPerPage = 10
+const currentPage = ref(1)
+const itemsPerPage = 10
 
-    async function loadNews() {
-        let requestAddress = `http://25.61.98.183:8080/news/get/all`
+const currentIP = true;
+let IPAddress = '';
 
-        const categories = route.query.categories ? route.query.categories.split(';') : []
-        const startDate = route.query.startDate ? route.query.startDate : null
-        const endDate = route.query.endDate ? route.query.endDate : null
+if (currentIP) {
+    IPAddress = '25.61.98.183';
+} else {
+    IPAddress = '25.59.204.137'
+}
 
-        if (categories.length === 0 && !startDate && !endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all`
-        } else if (categories.length === 0 && startDate && endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?startDate=${startDate}&endDate=${endDate}`
-        } else if (categories.length > 0 && !startDate && !endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}`
-        } else if (categories.length > 0 && startDate && endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`
-        } else if (categories.length === 0 && startDate && !endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?startDate=${startDate}`
-        } else if (categories.length > 0 && startDate && !endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`
-        } else if (categories.length === 0 && !startDate && endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?endDate=${endDate}`
-        } else if (categories.length > 0 && !startDate && endDate) {
-            requestAddress = `http://25.61.98.183:8080/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`
-        }
+async function loadNews() {
+    let requestAddress = `http://${IPAddress}:8080/news/get/all`
 
-        console.log(categories)
-        console.log(startDate)
-        console.log(endDate)
+    const categories = route.query.categories ? route.query.categories.split(';') : []
+    const startDate = route.query.startDate ? route.query.startDate : null
+    const endDate = route.query.endDate ? route.query.endDate : null
 
-        try {
-            const response = await fetch(requestAddress)
-            if (response.ok) {
-                const data = await response.json()
-                newsData.value = data
-                console.log(newsData.value)
-            } else {
-                console.error('Ошибка при загрузке данных:', response.statusText)
-            }
-        } catch (error) {
-            console.error('Ошибка при выполнении запроса:', error)
-        }
+    if (categories.length === 0 && !startDate && !endDate) {
+        requestAddress = `http://${IPAddress}:8080/news/get/all`
+    } else if (categories.length === 0 && startDate && endDate) {
+        requestAddress = `http://${IPAddress}:8080/news/get/all?startDate=${startDate}&endDate=${endDate}`
+    } else if (categories.length > 0 && !startDate && !endDate) {
+        requestAddress = `http://${IPAddress}:8080/news/get/all?categories=${categories.join(';')}`
+    } else if (categories.length > 0 && startDate && endDate) {
+        requestAddress = `http://${IPAddress}:8080/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`
+    } else if (categories.length === 0 && startDate && !endDate) {
+        requestAddress = `http://${IPAddress}:8080/news/get/all?startDate=${startDate}`
+    } else if (categories.length > 0 && startDate && !endDate) {
+        requestAddress = `http://${IPAddress}:8080/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`
+    } else if (categories.length === 0 && !startDate && endDate) {
+        requestAddress = `http://${IPAddress}:8080/news/get/all?endDate=${endDate}`
+    } else if (categories.length > 0 && !startDate && endDate) {
+        requestAddress = `http://${IPAddress}:8080/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`
     }
 
+    console.log(categories)
+    console.log(startDate)
+    console.log(endDate)
 
+    try {
+        const response = await fetch(requestAddress)
+        if (response.ok) {
+            const data = await response.json()
+            newsData.value = data
+            console.log(newsData.value)
+        } else {
+            console.error('Ошибка при загрузке данных:', response.statusText)
+        }
+    } catch (error) {
+        console.error('Ошибка при выполнении запроса:', error)
+    }
+}
+
+loadNews()
+
+watch(route, () => {
     loadNews()
+});
 
-    watch(route, () => {
-        loadNews()
-    });
-
-    const paginatedNews = computed(() => {
-        const start = (currentPage.value - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        return newsData.value.slice(start, end);
-    });
+function navigateToNews(newsId) {
+    router.push(`/news/get/${newsId}`);
+}
 </script>
 
 <template>
     <Tabs></Tabs>
 
     <div class="news-page-container">
-
         <div class="news-page-content">
-
             <div v-for="newsItem in newsData" :key="newsItem.id" class="news-block">
                 <NewsBlock 
+                    @click="navigateToNews(newsItem.id)"
                     :newsTag="newsItem.category"
                     :newsTitle="newsItem.headline"
                     :newsDate="newsItem.date"
@@ -85,13 +91,10 @@
                     :newsDescription="newsItem.fullInfo"
                 />
             </div>
-
         </div>
 
-        <!-- тут компонент для переключения страниц -->
         <div class="pagination-wrapper">
             <CustomPagination></CustomPagination>
-            <!-- <Pagination></Pagination> -->
         </div>
     </div>
 </template>

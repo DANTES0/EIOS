@@ -1,26 +1,27 @@
 <script setup>
-import HeaderAnchor from "./HeaderAnchor.vue"
+import HeaderAnchor from "./HeaderAnchor.vue";
 import { authState } from '../authState';
 import { useStore } from 'vuex';
 
 const store = useStore();
 
-function isLoggedIn () {
-  console.log(store.getters.isLoggedIn)
+function isLoggedIn() {
+  console.log(store.getters.isLoggedIn);
   // return store.getters.isLoggedIn;
 }
 
 const toggleAuthVisibility = () => {
   authState.isVisible = !authState.isVisible;
-  console.log(authState.isVisible)
+  console.log(authState.isVisible);
 };
-const emit = defineEmits(['toggle-auth'])
+
+const emit = defineEmits(['toggle-auth']);
 </script>
 
 <template>
-  <div class="header-wrapper"  :style="{ width: $route.path === '/newsContent' ? 'auto' : '' }">
+  <div class="header-wrapper" :style="{ width: $route.path.match(/^\/news\/get\/\d+$/) ? 'auto' : '' }">
+
     <div class="header-wrapper-container">
-      <!-- <div class="title" @click="$router.push('/')">О<span style="color:#408AFA">7</span></div> -->
       <div class="page-header">
         <a
           class="page"
@@ -41,7 +42,7 @@ const emit = defineEmits(['toggle-auth'])
           @click="$router.push('/timetable')"
         ></a>
         <a
-        v-if="authState.isAccess"
+          v-if="authState.isAccess"
           class="page"
           id="e"
           data-title="Комиссия"
@@ -55,18 +56,17 @@ const emit = defineEmits(['toggle-auth'])
         <a @click="() => store.dispatch('logout')" class="page" id="moodle" data-title="moodle"></a>
       </div>
     </div>
-    <div class="header-wrapper-anchor-container" v-if="$route.path !== '/newsContent' ">
+    <div class="header-wrapper-anchor-container" v-if="!($route.path === '/newsContent' || $route.path.match(/^\/news\/get\/\d+$/))">
       <div class="pum">
-        <a class="title" @click="$router.push('/')"
-        >Кафедра <span style="color: white">О</span>7</a
-        >
-        <!-- <img src="../assets/voenmeh2.svg" alt="" class="voenmeh-title"> -->
+        <a class="title" @click="$router.push('/')">
+          Кафедра <span style="color: white">О</span>7
+        </a>
         <a href="https://www.voenmeh.ru/" class="voen">
           <img
-              style="transform: scale(1.6)"
-              src="../assets/header/voenmeh.svg"
-              class="page"
-              id="r"
+            style="transform: scale(1.6)"
+            src="../assets/header/voenmeh.svg"
+            class="page"
+            id="r"
           />
         </a>
       </div>
