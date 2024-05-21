@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-    import { computed} from "vue";
+    import { computed } from "vue";
 
     const props = defineProps({
         modelValue: { type: [Array, Boolean] },
@@ -17,12 +17,12 @@
     const emit = defineEmits(["update:modelValue"]);
 
     const model = computed({
-    get() {
-        return props.modelValue;
-    },
-    set(value) {
-        emit("update:modelValue", value);
-    },
+        get() {
+            return props.modelValue;
+        },
+        set(value) {
+            emit("update:modelValue", value);
+        },
     });
 
     function toggleCheckbox() {

@@ -1,17 +1,36 @@
 <script setup>
-    import {ref, computed} from "vue"
+    import {ref, computed, watch} from "vue"
     import CustomCheckbox from "./CustomCheckbox.vue"
     import VueDatePicker from '@vuepic/vue-datepicker'
+    import { useRouter } from 'vue-router';
     import '@vuepic/vue-datepicker/dist/main.css'
 
-    const dateStart = ref(new Date().setMonth(new Date().getMonth() - 1))
-    const dateEnd = ref(new Date())
+    // Исправить теги
+    // Сделать пагинацию
+    // Сделать запрос к Рите 
+
+    const dateStart = ref()
+    const dateEnd = ref()
+
+    const dateStartURL = ref()
+    const dateEndURL = ref()
 
     const format = (date) => {
         const day = date.getDate()
         const month = date.getMonth() + 1
         const year = date.getFullYear()
         return `${day}/${month}/${year}`
+    }
+
+    const formatDateDots = (date) => {
+        if (date) {
+            const day = date.getDate()
+            const month = date.getMonth() + 1
+            const year = date.getFullYear()
+            return `${day}.${month}.${year}`
+        } else {
+            return null
+        }
     }
 
     const categories = ref([
@@ -62,6 +81,51 @@
     function showData() {
         isShowData.value = !isShowData.value
     }
+
+    const router = useRouter()
+
+    function applyFilters() {
+
+        const selectedCategoriesNames = selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(';')
+
+        const query = {}
+
+        if(dateStartURL.value != null) {
+            query.startDate = dateStartURL.value
+        }
+        
+        if(dateEndURL.value != null) {
+            query.endDate = dateEndURL.value
+        }
+
+        if (selectedCategoriesNames !== '') {
+            query.categories = selectedCategoriesNames;
+        }
+
+        router.push({
+            name: 'News',
+            query: query
+        });
+    }
+    
+    const handleStartDate = (modelData) => {
+        dateStart.value = modelData
+        dateStartURL.value = formatDateDots(modelData)
+        applyFilters()
+    }
+
+    const handleEndDate = (modelData) => {
+        dateEnd.value = modelData
+        dateEndURL.value = formatDateDots(modelData)
+        applyFilters()
+    }
+
+    watch(selectedCategories, () => {
+        applyFilters()
+    }, { deep: true })
+
+    applyFilters()
+
 </script>
 
 <template>
@@ -104,7 +168,8 @@
                 <div class="data-line"></div>
                 <div class="data-content">
                      <span class="data-start">С</span>
-                     <VueDatePicker v-model="dateStart" 
+                     <VueDatePicker v-model="dateStart"
+                        @update:model-value="handleStartDate"
                         dark 
                         :enable-time-picker="false" 
                         :format="format" 
@@ -124,6 +189,7 @@
 
                      <span class="data-end">По</span>
                      <VueDatePicker v-model="dateEnd" 
+                        @update:model-value="handleEndDate"
                         dark 
                         :enable-time-picker="false" 
                         :format="format" 
@@ -288,6 +354,11 @@
     .dp__action_button {
         --dp-action-button-height: 25px;
     }
+
+    /* .dp__month_year_select {
+        color: #cccccc !important;
+    } */
+
 
     .arrow-down-button {
         transform-origin: 65% 50%;

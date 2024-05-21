@@ -1,5 +1,5 @@
 <script setup>
-    import { defineProps, computed } from "vue";
+    import { defineProps } from "vue";
     import { format } from 'date-fns';
 
 
@@ -13,12 +13,12 @@
         
         blockWidth: { type: String, default: "100%" },
         blockHeight: { type: String, default: "319px" },
-        foregroundWidth: { type: String, default: "80%" },
-        foregroundHeight: { type: String, default: "80%" },
+        foregroundWidth: { type: String, default: "85%" },
+        foregroundHeight: { type: String, default: "85%" },
     });
 
     const processedDescription = () => {
-        const maxLength = 220 // Максимальная длина описания
+        const maxLength = 216 // Максимальная длина описания
         if (newsData.newsDescription.length > maxLength) {
             let truncatedText = newsData.newsDescription.slice(0, maxLength)
             truncatedText = truncatedText.slice(0, Math.min(truncatedText.length, truncatedText.lastIndexOf(" "))) // Обрезаем текст до последнего пробела
@@ -63,7 +63,10 @@
                 :src="newsData.newsImage"
                 alt=""
                 class="news-block-image-foreground"
-                :style="{ width: newsData.foregroundWidth, height: newsData.foregroundHeight }"
+                :style="{ 
+                        maxWidth: newsData.foregroundWidth,
+                        maxHeight: newsData.foregroundHeight,
+                    }"
             />
         </div>
     </div>
@@ -110,6 +113,7 @@
         width: 100%;
         border-bottom: 1px solid #999999;
         display: flex;
+        justify-content: space-between;
         align-items: center;
         gap: 78px;
     }
@@ -131,7 +135,8 @@
         font-family: Rubik;
         font-size: 18;
         font-weight: 800;
-        color: #1e66f5;
+        /* color: #1e66f5;*/
+        color: #cccccc;
     }
     
     .news-block-date {
@@ -140,6 +145,7 @@
         font-size: 18px;
         font-weight: 800;
         color: #cccccc;
+        margin-right: 53px;
     }
 
     .news-block-image {
@@ -152,10 +158,12 @@
     .news-block-image-background {
         width: 100%;
         height: 100%;
-        filter: blur(6px);
+        filter: blur(6px) brightness(50%);
         transform: scale(1.4);
         object-fit: cover;
     }
+
+    
 
     /* картинка на переднем плане */
     .news-block-image-foreground {
@@ -166,8 +174,8 @@
         bottom: 0;
 
         /* устанавливается высота и ширина здесь */
-        width: 315px;
-        height: 216px;
+        /* width: 315px;
+        height: 216px; */
 
         margin: auto auto;
     }
