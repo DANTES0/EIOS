@@ -49,7 +49,7 @@ const isActiveUsers = ref(false)
                         <div class="content-userPage-wrap">
                             <div class="content-userPage-title">Преподаватели</div>
                         </div>
-                        <div class="content-userPage-title">Студенты</div>
+                        <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserStudent'}">Студенты</div>
                         <div class="content-userPage-title">Администраторы</div>
                         <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserAll'}">Все</div>
                     </div>

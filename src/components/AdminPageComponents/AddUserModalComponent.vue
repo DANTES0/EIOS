@@ -1,15 +1,27 @@
 <script setup>
 import "vue3-select-component/dist/style.css";
 import VueSelect from "vue3-select-component";
-import { authState } from "../../authState";
+import {authState} from "../../authState";
 import {ref, computed} from 'vue'
+import eventBus from "../../eventBus.js";
+
+let options = ["1", "2", "3"]
 let array = ref([]);
-let placeholder = ref('Поиск...')
+array.value.push('kfmf','efjje','efewf')
+const selected = ref(null);
+const placeholder = ref('Поиск...');
+
+const handleOptionSelected = (option) => {
+  console.log(option.value);
+  placeholder.value = option.value
+  eventBus.emit('optionSelected', option.value);
+};
+
 const hideModal = (event) => {
-    // Проверяем, что клик был по фону, а не по контейнеру авторизации
-    if (event.target.classList.contains('modal-add-user-wrapper')) {
-        authState.isVisibleModalAddUsers = false;
-    }
+  if (event.target.classList.contains('modal-add-user-wrapper')) {
+    authState.isVisibleModalAddUsers = false;
+  }
+
 };
 // const selected = ref("");
 </script>
@@ -25,11 +37,11 @@ const hideModal = (event) => {
                 </div>
                 <div class="input-login wrap">
                     <div class="input-login-title title">Введите логин</div>
-                    <input v-model="password" placeholder="Пароль...." type="password" class="input-login-text input">
+                    <input v-model="password" placeholder="Пароль...." type="text" class="input-login-text input">
                 </div>
                 <div class="input-password wrap">
                     <div class="input-login-title title">Введите пароль</div>
-                    <input @click="loginError = false" v-model="login" placeholder="Логин...." type="text" class="input-login-text input" :class="{'error': loginError}">
+                    <input @click="loginError = false" v-model="login" placeholder="Логин...." type="password" class="input-login-text input" :class="{'error': loginError}">
                 </div>
                 <div class="input-group wrap">
                     <div class="input-login-title title">Номер группы</div>
@@ -71,7 +83,7 @@ const hideModal = (event) => {
     font-weight: 400;
     font-size: 24px;
     color: #CCCCCC;
-position: absolute;
+    position: absolute;
     background-color: #0000004e;
     width: 100vw;
     height: 100%;
@@ -79,7 +91,7 @@ position: absolute;
 }
 .modal-add-user-container {
     width: 824px;
-    height: 990px;
+    height: auto;
     background-color: #181818;
     border: 1px solid #C4C4C4;
     border-radius: 10px;
@@ -107,6 +119,8 @@ position: absolute;
     transition: 0.3s ease;
     outline: #1E66F5;
 }
+
+
 .input::placeholder {
     font-size: 20px;
     font-family: JetBrainsMono;
@@ -122,11 +136,12 @@ position: absolute;
     height: 50px;
     border-radius: 10px;
     color: #CCCCCC;
-    font-size: 24px;
+    font-size: 21px;
     font-family: JetBrainsMono;
     margin-top: 144px;
     transition: 0.3s ease;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 .enter-modal-add-user:hover {
     background-color: #222222;
@@ -139,12 +154,6 @@ position: absolute;
 .modal-add-user-title {
     margin-top: 50px
 }
-
-
-
-
-
-
 
 :deep(.no-results) {
     color: white;

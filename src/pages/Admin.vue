@@ -6,6 +6,7 @@ import useAuthenticatedFetch from '../fetchInterceptor';
 import LeftAdminMenu from '../components/AdminPageComponents/LeftAdminMenu.vue';
 import AddUserModalComponent from '../components/AdminPageComponents/AddUserModalComponent.vue';
 import ChangePhotoGallery from '../components/AdminPageComponents/ChangePhotoGallery.vue';
+import UserStudent from '../components/AdminPageComponents/UserStudents.vue';
 
 let isVisibleChangePhotoGallery = ref(false)
 import UserAll from '../components/AdminPageComponents/UsersAll.vue';
@@ -52,6 +53,7 @@ fetchData()
     <div class="userAll-content">
       <ChangePhotoGallery v-if="authState.isArticle == 'ChangePhotoGallery'"></ChangePhotoGallery>
       <UserAll v-if="authState.isArticle == 'UserAll'"></UserAll>
+      <UserStudent v-if="authState.isArticle == 'UserStudent'"></UserStudent>
     </div>
     <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN
@@ -71,8 +73,6 @@ fetchData()
 
 .userAll-content{
   display: flex;
-  /*justify-content: center;*/
   width: calc(100% - 1px);
-  /* align-items: center;*/
 }
 </style>

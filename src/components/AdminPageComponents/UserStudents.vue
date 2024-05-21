@@ -8,9 +8,10 @@ let array = ref([])
 let flag = ref(true);
 let flagLogin = ref(true);
 let flagName = ref(true);
+let flagCourse = ref(true);
 
 const url = computed(()=> {
-  return `http://25.59.204.137:8080/api/v1/admin/users/all`
+  return `http://25.59.204.137:8080/api/v1/admin/students/all`
 })
 
 const fetchGroup = async () => {
@@ -56,25 +57,37 @@ function sortByName() {
   }
 }
 
+function sortByCourse() {
+  if(flagCourse.value) {
+    array.value.sort((a, b) => a.id - b.id);
+    flagCourse.value = !flagCourse.value;
+  } else{
+    flagCourse.value = !flagCourse.value;
+    array.value.sort((a, b) => b.id - a.id);
+  }
+}
+
 </script>
 
 <template>
   <div class="content-userAll">
 
     <header class="content-header">
-        <div class="line"></div>
+      <div class="line"></div>
       <h1>Пользователи</h1>
     </header>
     <div class="wrap-input-btn">
       <input type="text" placeholder="Поиск..." class="placeholder-userAll">
-<!--      <button @click="authState.isVisibleModalAddUsers = true" class="addUser">Новый пользователь</button>-->
+      <button @click="authState.isVisibleModalAddUsers = true" class="addUser">Новый пользователь</button>
     </div>
     <div class="text-list-userAll">Список пользователей</div>
     <div class="user-list">
       <div class="user-list-header">
         <span class="user-id">Id <button><img src="../../assets/admin/bottom.svg" @click="sortById" ></button></span>
         <span class="user-login">Логин <button><img src="../../assets/admin/bottom.svg" @click="sortByLogin"></button></span>
-        <span class="user-role">Права<button><img src="../../assets/admin/bottom.svg" ></button></span>
+<!--        <span class="user-role">Права<button><img src="../../assets/admin/bottom.svg" ></button></span>-->
+        <span class="user-role">Группа<button><img src="../../assets/admin/bottom.svg" ></button></span>
+        <span class="user-role">Курс<button><img src="../../assets/admin/bottom.svg" @click="sortByCourse" ></button></span>
         <span class="user-name">Имя <button><img src="../../assets/admin/bottom.svg" @click="sortByName"></button></span>
         <span class="user-edit">Редактировать</span>
         <span class="user-delete">Удалить</span>
@@ -83,7 +96,9 @@ function sortByName() {
       <div v-for="item in array"   class="user-item">
         <span class="user-id">{{ item.id }}</span>
         <span class="user-login">{{ item.login }}</span>
-        <span class="user-role">{{ item.roles[0] }}</span>
+<!--        <span class="user-role">{{ item.roles[0] }}</span>-->
+        <span class="user-role">{{ item.group }}</span>
+        <span class="user-role">{{ item.course }}</span>
         <span class="user-name">{{ item.name }}</span>
         <span class="user-edit"><button><img src="../../assets/admin/piece_of_paper_and_pencil.svg" alt="Edit"></button></span>
         <span class="user-delete"><button><img src="../../assets/admin/cross-svgrepo-com.svg" alt="Delete"></button></span>
@@ -119,11 +134,11 @@ function sortByName() {
 }
 .addUser:hover {
   background-color: #222222;
-    border-color: #1E66F5;
+  border-color: #1E66F5;
 }
 .addUser:active {
   background-color: #333333;
-    border-color: #1E66F5;
+  border-color: #1E66F5;
 }
 .content-userAll {
   display: flex;
@@ -145,9 +160,9 @@ function sortByName() {
 }
 
 .line {
-    width: 1px;
-    height: 100%;
-    background-color: #2B2B2B;
+  width: 1px;
+  height: 100%;
+  background-color: #2B2B2B;
 }
 
 .content-header h1 {
@@ -161,7 +176,7 @@ function sortByName() {
   width: 50%;
   margin: 20px;
   padding: 8px;
-  font-size: 1em;   
+  font-size: 1em;
   border: 1px solid #333;
   border-radius: 5px;
   background-color: #1A1A1A;
@@ -170,7 +185,7 @@ function sortByName() {
   transition: 0.3s ease
 }
 .placeholder-userAll::placeholder {
-    font-family: JetBrainsMono;
+  font-family: JetBrainsMono;
 }
 
 .placeholder-userAll:focus {
@@ -200,20 +215,20 @@ function sortByName() {
 }
 
 .user-login{
-  width: 20%;
+  width: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .user-role{
-  width: 20%;
+  width: 15%;
   display: flex;
   justify-content: center;
 }
 
 .user-name{
-  width: 35%;
+  width: 30%;
   display: flex;
   justify-content: center;
 }
