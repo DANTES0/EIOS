@@ -7,6 +7,7 @@ import LeftAdminMenu from '../components/AdminPageComponents/LeftAdminMenu.vue';
 import AddUserModalComponent from '../components/AdminPageComponents/AddUserModalComponent.vue';
 import ChangePhotoGallery from '../components/AdminPageComponents/ChangePhotoGallery.vue';
 import UserStudent from '../components/AdminPageComponents/UserStudents.vue';
+import EditUserStudentModalComponent from "../components/AdminPageComponents/EditUserStudentModalComponent.vue";
 
 let isVisibleChangePhotoGallery = ref(false)
 import UserAll from '../components/AdminPageComponents/UsersAll.vue';
@@ -45,10 +46,13 @@ fetchData()
 
 <template>
   <AddUserModalComponent v-if="authState.isVisibleModalAddUsers"></AddUserModalComponent>
+  <EditUserStudentModalComponent
+      v-if="authState.isVisibleEditStudentModelComponent"
+  ></EditUserStudentModalComponent>
 
   <div class="admin-page-container">
     <LeftAdminMenu></LeftAdminMenu>
-  
+
 
     <div class="userAll-content">
       <ChangePhotoGallery v-if="authState.isArticle == 'ChangePhotoGallery'"></ChangePhotoGallery>

@@ -6,5 +6,8 @@ export const authState = reactive({
   isVisibleModalAddUsers: false,
   isVisibleChangePhotoGallery: false,
   isVisibleUsersAll: false,
+  isVisibleEditStudentModelComponent: false,
+  editUserId: null,
   isArticle: ""
 });
+

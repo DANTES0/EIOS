@@ -35,8 +35,13 @@ watch(authState.isVisibleModalAddUsers, (newVal) => {
   }
 });
 
-eventBus.on('studentAdded', fetchGroup);
+const editUser = (id) => {
+  authState.editUserId = id;
+  authState.isVisibleEditStudentModelComponent = true;
+};
 
+
+eventBus.on('studentAdded', fetchGroup);
 
 function sortById() {
   if(flag.value) {
@@ -47,6 +52,7 @@ function sortById() {
     array.value.sort((a, b) => b.id - a.id);
   }
 }
+
 function sortByLogin() {
   if(flagLogin.value) {
     array.value.sort((a, b) => a.login.localeCompare(b.login));
@@ -69,13 +75,30 @@ function sortByName() {
 
 function sortByCourse() {
   if(flagCourse.value) {
-    array.value.sort((a, b) => a.id - b.id);
+    array.value.sort((a, b) => a.course - b.course);
     flagCourse.value = !flagCourse.value;
   } else{
     flagCourse.value = !flagCourse.value;
-    array.value.sort((a, b) => b.id - a.id);
+    array.value.sort((a, b) => b.course - a.course);
   }
 }
+
+const deleteUser = async (id) => {
+  try {
+    const response = await fetch(`http://25.59.204.137:8080/user/delete/${id}`, {
+      method: 'POST',
+    });
+
+    if (response.ok) {
+      await fetchGroup();
+    } else {
+      console.error('Failed to delete user', await response.text());
+    }
+  } catch (error) {
+    console.error('Failed to delete user', error);
+  }
+};
+
 </script>
 
 <template>
@@ -102,15 +125,15 @@ function sortByCourse() {
         <span class="user-delete">Удалить</span>
       </div>
 
-      <div v-for="item in array"   class="user-item">
+      <div v-for="item in array" :key = "item.id" class="user-item">
         <span class="user-id">{{ item.id }}</span>
         <span class="user-login">{{ item.login }}</span>
 <!--        <span class="user-role">{{ item.roles[0] }}</span>-->
         <span class="user-role">{{ item.group }}</span>
         <span class="user-role">{{ item.course }}</span>
         <span class="user-name">{{ item.name }}</span>
-        <span class="user-edit"><button><img src="../../assets/admin/piece_of_paper_and_pencil.svg" alt="Edit"></button></span>
-        <span class="user-delete"><button><img src="../../assets/admin/cross-svgrepo-com.svg" alt="Delete"></button></span>
+        <span class="user-edit"><button><img src="../../assets/admin/piece_of_paper_and_pencil.svg" @click="editUser(item.id)" ></button></span>
+        <span class="user-delete"><button><img src="../../assets/admin/cross-svgrepo-com.svg" @click="deleteUser(item.id)"></button></span>
       </div>
 
     </div>
