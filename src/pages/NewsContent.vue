@@ -35,10 +35,10 @@ onMounted(() => {
   <div v-if="newsData" class="page-container">
     <div class="page-container-header">
         <NewsContentHeader
-        :newsHeadline="newsData.headline"
-        :newsMainInfo="newsData.mainInfo"
-        :newsCategory="newsData.category"
-        :newsDate="newsData.date"
+        :newsHeaderHeadline="newsData.headline"
+        :newsHeaderMainInfo="newsData.mainInfo"
+        :newsHeaderCategory="newsData.category"
+        :newsHeaderDate="newsData.date"
     />
   </div>
 
@@ -51,7 +51,7 @@ onMounted(() => {
 
   <div class="page-container-base-slider">
     <NewsContentPageSlider
-        :images="newsData.images"
+        :newsImages="newsData.images"
     />
   </div>
   </div>
