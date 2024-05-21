@@ -3,6 +3,7 @@
 import {computed, onMounted, ref, watch} from "vue";
 import {useFetch} from "@vueuse/core";
 import { authState } from "../../authState";
+import eventBus from '../../eventBus.js';
 
 let array = ref([])
 let flag = ref(true);
@@ -27,6 +28,15 @@ onMounted(() => {
 watch(array.value, () => {
   fetchGroup()
 })
+
+watch(authState.isVisibleModalAddUsers, (newVal) => {
+  if (!newVal) {
+    fetchGroup();
+  }
+});
+
+eventBus.on('studentAdded', fetchGroup);
+
 
 function sortById() {
   if(flag.value) {
@@ -66,7 +76,6 @@ function sortByCourse() {
     array.value.sort((a, b) => b.id - a.id);
   }
 }
-
 </script>
 
 <template>

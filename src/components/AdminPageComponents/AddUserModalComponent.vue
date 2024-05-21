@@ -4,58 +4,69 @@ import VueSelect from "vue3-select-component";
 import {authState} from "../../authState";
 import {ref, computed} from 'vue'
 import eventBus from "../../eventBus.js";
+import {useFetch} from "@vueuse/core";
 
-
-let array = ref([]);
-array.value.push(
-    {
-      label: 'О714Б',
-      value: 1
-    },
-    {
-      label: 'О715Б',
-      value: 2
-    },
-    {
-      label: 'О716Б',
-      value: 3
-    }
-)
-
-let array2 = ref([]);
-array2.value.push(
-    {
-      label: '1',
-      value: 1
-    },
-    {
-      label: '2',
-      value: 2
-    },
-    {
-      label: '3',
-      value: 3
-    }
-)
+const login = ref();
+const password = ref();
+const roles = ref([{id: 3, name: 'ROLE_STUDENT'}]);
+const name = ref();
+const group = ref();
+const course = ref();
 
 const selected = ref(null);
 const selected2 = ref(null);
 const placeholder = ref('Поиск...');
 const placeholder2 = ref('Поиск...');
 
+let array = ref([]);
+array.value.push(
+    { label: 'О714Б', value: 1 },
+    { label: 'О715Б', value: 2 },
+    { label: 'О716Б', value: 3 }
+)
+
+let array2 = ref([]);
+array2.value.push(
+    { label: '1', value: 1 },
+    { label: '2', value: 2 },
+    { label: '3', value: 3 }
+)
+
 const handleOptionSelected = (option) => {
-  console.log(option.value);
-  placeholder.value = option.value
-  eventBus.emit('optionSelected', option.value);
+  placeholder.value = option.label;
+  group.value = option.label;
+};
+
+const handleOptionSelected2 = (option) => {
+  placeholder2.value = option.label;
+  course.value = option.label;
 };
 
 const hideModal = (event) => {
   if (event.target.classList.contains('modal-add-user-wrapper')) {
     authState.isVisibleModalAddUsers = false;
   }
-
 };
-// const selected = ref("");
+
+const sendNewStudent = async () => {
+  const {data, error} = await useFetch('http://25.59.204.137:8080/students/register', {
+    method: 'POST',
+    body: JSON.stringify({
+      login: login.value,
+      password: password.value,
+      roles: roles.value,
+      name: name.value,
+      group: group.value,
+      course: course.value
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).json();
+
+  authState.isVisibleModalAddUsers = false;
+  eventBus.emit('studentAdded');
+};
 </script>
 
 <template>
@@ -65,15 +76,15 @@ const hideModal = (event) => {
                 <div class="modal-add-user-title" style="font-size: 28px;">Добавление аккаунта студента</div>
                 <div class="input-name wrap" style="margin-top: 40px;">
                     <div class="input-name-title title">Введите Имя</div>
-                    <input @click="loginError = false" v-model="login" placeholder="Логин...." type="text" class="input--name-text input" :class="{'error': loginError}">
+                    <input @click="loginError = false" v-model="name" placeholder="Логин...." type="text" class="input--name-text input" :class="{'error': loginError}">
                 </div>
                 <div class="input-login wrap">
                     <div class="input-login-title title">Введите логин</div>
-                    <input v-model="password" placeholder="Пароль...." type="text" class="input-login-text input">
+                    <input v-model="login" placeholder="Пароль...." type="text" class="input-login-text input">
                 </div>
                 <div class="input-password wrap">
                     <div class="input-login-title title">Введите пароль</div>
-                    <input @click="loginError = false" v-model="login" placeholder="Логин...." type="password" class="input-login-text input" :class="{'error': loginError}">
+                    <input @click="loginError = false" v-model="password" placeholder="Логин...." type="password" class="input-login-text input" :class="{'error': loginError}">
                 </div>
                 <div class="input-group wrap">
                     <div class="input-login-title title">Номер группы</div>
@@ -90,10 +101,10 @@ const hideModal = (event) => {
                         v-model="selected2"
                         :placeholder="placeholder2"
                         :options="array2"
-                        @option-selected="handleOptionSelected"
+                        @option-selected="handleOptionSelected2"
                     ></VueSelect>
                 </div>
-                <button class="enter-modal-add-user"> Создать</button>
+                <button class="enter-modal-add-user" @click="sendNewStudent"> Создать</button>
             </div>
         </div>
     </div>
