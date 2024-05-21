@@ -16,21 +16,25 @@ const isActiveUsers = ref(false)
             </div>
             <div class="article-menu">
                 <div class="wrap-wrap">
-                <div class="wrap">
-                    <div class="mainPage article" :class="{'active': isActiveMain}" @click="() => isActiveMain =! isActiveMain">
+                <div class="wrap" @click="() => isActiveMain =! isActiveMain">
+                    <div class="mainPage article" :class="{'active': isActiveMain}" >
                         <div class="mainPage-title title" >Главная страница</div>
                     </div>
                     <img  class="arrow" :class="{'rotate': isActiveMain}" src="../../assets/Upper.svg">
                 </div>
+                <Transition name = "slide-fade">
                 <div v-if="isActiveMain" class="content-userPage">
                         <div class="content-userPage-wrap">
                             <div class="content-userPage-title">Преподаватели</div>
                         </div>
                         <div class="content-userPage-title">Главные новости</div>
                         <div class="content-userPage-title">Преподаватели</div>
-                        <div class="content-userPage-title" @click="() => { authState.isArticle = 'ChangePhotoGallery'}">Фотогалерея</div>
+                        <div class="content-userPage-wrap" :class="{'lineActive': authState.isArticle == 'ChangePhotoGallery'}" >
+                            <div class="content-userPage-title"  @click="() => { authState.isArticle = 'ChangePhotoGallery'}">Фотогалерея</div>
+                        </div>
                         <div class="content-userPage-title">Разное</div>
                     </div>
+                </Transition>
             </div>
                 <div class="wrap">
                     <div class="newsPage article" :class="{'active': isActiveNews}" @click="() => isActiveNews =! isActiveNews">
@@ -39,20 +43,25 @@ const isActiveUsers = ref(false)
                         <img :class="{'rotate': isActiveNews}" class="arrow" src="../../assets/Upper.svg">
                 </div>
                 <div class="userPage-wrap">
-                <div class="wrap">
-                    <div class="usersPage article" :class="{'active': isActiveUsers}" @click="() => isActiveUsers =! isActiveUsers">
+                <div class="wrap" @click="() => isActiveUsers =! isActiveUsers">
+                    <div class="usersPage article" :class="{'active': isActiveUsers}" >
                         <div class="usersPage-title title">Пользователи</div>
                     </div>
                     <img :class="{'rotate': isActiveUsers}" class="arrow" src="../../assets/Upper.svg">
                 </div>
+                <Transition name = "slide-fade">
                     <div v-if="isActiveUsers" class="content-userPage">
-                        <div class="content-userPage-wrap">
-                            <div class="content-userPage-title">Преподаватели</div>
+                        
+                        <div class="content-userPage-title">Преподаватели</div>
+                        <div class="content-userPage-wrap" :class="{'lineActive': authState.isArticle == 'UserStudent'}" >
+                            <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserStudent'}">Студенты</div>
                         </div>
-                        <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserStudent'}">Студенты</div>
                         <div class="content-userPage-title">Администраторы</div>
-                        <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserAll'}">Все</div>
+                        <div class="content-userPage-wrap" :class="{'lineActive': authState.isArticle == 'UserAll'}" >
+                            <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserAll'}">Все</div>
+                        </div>
                     </div>
+                </Transition>
                 </div>
             </div>
             
@@ -70,10 +79,25 @@ const isActiveUsers = ref(false)
   font-family: Russo-One;
   src: url("../../assets/RussoOne-Regular.ttf");
 }
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
+}
 .content-userPage-title {
     margin-bottom: 28px;
     padding-left: 20px;
     font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.content-userPage-title:hover {
+    color: #1E66F5;
 }
 .userPage-wrap {
     display: flex;
@@ -85,7 +109,12 @@ const isActiveUsers = ref(false)
 }
 .content-userPage-wrap {
     width: 200px;
-    border-left: 1px solid #1E66F5;
+    transition: 0.5s ease;
+    
+}
+.lineActive {
+    
+    border-left: 2px solid #1E66F5;
 }
 .rotate {
     transform: rotate(180deg);
@@ -102,10 +131,10 @@ const isActiveUsers = ref(false)
     margin-bottom: 15px;
     margin-left: 22px;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: 0.3s ease;
 }
 .back:hover {
-    color: #d0d0d0;
+    color: #1E66F5;
 }
 .arrow {
     width: 24px;
@@ -114,6 +143,7 @@ const isActiveUsers = ref(false)
     margin-bottom: 20px;
     transition: 0.2s ease;
     margin-left: 20px;
+    cursor: pointer;
 }
 .wrap {
     display: flex;
@@ -137,6 +167,7 @@ const isActiveUsers = ref(false)
     margin-left: 15px;
     user-select: none;
     transition: 0.2s ease;
+    
     /* margin-left: 16px; */
     /* padding-top: 8px; */
 }

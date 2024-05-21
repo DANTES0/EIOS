@@ -145,6 +145,7 @@ const deleteUser = async (id) => {
   display: flex;
   flex-direction: column;
   width: 100%;
+  
 }
 
 .content-header {

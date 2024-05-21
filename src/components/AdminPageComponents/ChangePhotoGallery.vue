@@ -164,6 +164,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   margin-right: 130px;
+  
 }
 .file-input {
   display: none;
@@ -182,6 +183,7 @@ onMounted(() => {
   cursor: pointer;
   text-align: center;
   line-height: 38px; /* to vertically center the text */
+  transition: 0.3s ease;
 }
 .file-label:hover {
   background-color: #222222;
@@ -201,6 +203,7 @@ onMounted(() => {
   font-family: JetBrainsMono;
   font-size: 18px;
   padding-left: 10px;
+  outline: #1E66F5;
 }
 .active {
   opacity: 0.3;

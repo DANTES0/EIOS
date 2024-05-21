@@ -65,6 +65,7 @@ const hideModal = (event) => {
   if (event.target.classList.contains('modal-add-user-wrapper')) {
     authState.isVisibleEditStudentModelComponent = false;
   }
+  document.documentElement.classList.remove('modal-open');
 };
 
 const sendNewStudent = async () => {
@@ -90,6 +91,7 @@ const sendNewStudent = async () => {
   authState.isVisibleEditStudentModelComponent = false;
   eventBus.emit('studentAdded');
 };
+document.documentElement.classList.add('modal-open');
 </script>
 
 <template>
@@ -109,6 +111,7 @@ const sendNewStudent = async () => {
           <div class="input-login-title title">Введите пароль</div>
           <input v-model="password2" placeholder="Пароль...." type="password" class="input-login-text input" :class="{'error': loginError}">
         </div>
+        <div class="select">
         <div class="input-group wrap">
           <div class="input-login-title title">Номер группы</div>
           <VueSelect
@@ -118,7 +121,7 @@ const sendNewStudent = async () => {
               @option-selected="handleOptionSelected"
           ></VueSelect>
         </div>
-        <div class="input-course wrap" style="margin-top: 120px;">
+        <div class="input-course wrap">
           <div class="input-login-title title">Курс обучения</div>
           <VueSelect
               v-model="selected2"
@@ -127,6 +130,7 @@ const sendNewStudent = async () => {
               @option-selected="handleOptionSelected2"
           ></VueSelect>
         </div>
+      </div>
         <button class="enter-modal-add-user" @click="sendNewStudent"> Сохранить</button>
       </div>
     </div>
@@ -138,6 +142,15 @@ const sendNewStudent = async () => {
   font-family: JetBrainsMono;
   src: url("../../assets/JetBrainsMono.ttf");
 }
+.select {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.input-course {
+    margin-left: 90px;
+}
 .title {
   margin-bottom: 18px;
 }
@@ -147,7 +160,7 @@ const sendNewStudent = async () => {
 .modal-add-user-wrapper {
   font-family: JetBrainsMono;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 20px;
   color: #CCCCCC;
   position: absolute;
   background-color: #0000004e;
@@ -162,7 +175,7 @@ const sendNewStudent = async () => {
   border: 1px solid #C4C4C4;
   border-radius: 10px;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 90px;
 }
 .modal-add-user-block {
   display: flex;
@@ -204,7 +217,7 @@ const sendNewStudent = async () => {
   color: #CCCCCC;
   font-size: 21px;
   font-family: JetBrainsMono;
-  margin-top: 144px;
+  margin-top: 160px;
   transition: 0.3s ease;
   cursor: pointer;
   margin-bottom: 30px;
@@ -218,7 +231,7 @@ const sendNewStudent = async () => {
   border-color: #1E66F5;
 }
 .modal-add-user-title {
-  margin-top: 50px
+  margin-top: 20px
 }
 
 :deep(.no-results) {

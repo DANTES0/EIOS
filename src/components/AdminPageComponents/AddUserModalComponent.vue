@@ -46,6 +46,7 @@ const hideModal = (event) => {
   if (event.target.classList.contains('modal-add-user-wrapper')) {
     authState.isVisibleModalAddUsers = false;
   }
+  document.documentElement.classList.remove('modal-open');
 };
 
 const sendNewStudent = async () => {
@@ -67,10 +68,11 @@ const sendNewStudent = async () => {
   authState.isVisibleModalAddUsers = false;
   eventBus.emit('studentAdded');
 };
+document.documentElement.classList.add('modal-open');
 </script>
 
 <template>
-    <div v-if="authState.isVisibleModalAddUsers" class="modal-add-user-wrapper" @click="hideModal">
+    <div v-if="authState.isVisibleModalAddUsers" class="modal-add-user-wrapper" :class="{'modal-open': authState.isVisibleModalAddUsers}" @click="hideModal">
         <div class="modal-add-user-container">
             <div class="modal-add-user-block">
                 <div class="modal-add-user-title" style="font-size: 28px;">Добавление аккаунта студента</div>
@@ -86,6 +88,7 @@ const sendNewStudent = async () => {
                     <div class="input-login-title title">Введите пароль</div>
                     <input @click="loginError = false" v-model="password" placeholder="Логин...." type="password" class="input-login-text input" :class="{'error': loginError}">
                 </div>
+                <div class="select">
                 <div class="input-group wrap">
                     <div class="input-login-title title">Номер группы</div>
                     <VueSelect
@@ -95,7 +98,7 @@ const sendNewStudent = async () => {
                         @option-selected="handleOptionSelected"
                     ></VueSelect>
                 </div>
-                <div class="input-course wrap" style="margin-top: 120px;">
+                <div class="input-course wrap">
                     <div class="input-login-title title">Курс обучения</div>
                     <VueSelect
                         v-model="selected2"
@@ -104,6 +107,7 @@ const sendNewStudent = async () => {
                         @option-selected="handleOptionSelected2"
                     ></VueSelect>
                 </div>
+            </div>
                 <button class="enter-modal-add-user" @click="sendNewStudent"> Создать</button>
             </div>
         </div>
@@ -115,6 +119,19 @@ const sendNewStudent = async () => {
   font-family: JetBrainsMono;
   src: url("../../assets/JetBrainsMono.ttf");
 }
+.modal-open {
+    position: fixed;
+    overflow: hidden;
+}
+.select {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.input-course {
+    margin-left: 90px;
+}
 .title {
     margin-bottom: 18px;
 }
@@ -124,13 +141,14 @@ const sendNewStudent = async () => {
 .modal-add-user-wrapper {
     font-family: JetBrainsMono;
     font-weight: 400;
-    font-size: 24px;
+    font-size: 20px;
     color: #CCCCCC;
     position: absolute;
     background-color: #0000004e;
     width: 100vw;
     height: 100%;
     z-index: 99;
+    overflow-y: hidden;
 }
 .modal-add-user-container {
     width: 824px;
@@ -139,7 +157,7 @@ const sendNewStudent = async () => {
     border: 1px solid #C4C4C4;
     border-radius: 10px;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 90px;
 }
 .modal-add-user-block {
     display: flex;
@@ -181,7 +199,7 @@ const sendNewStudent = async () => {
     color: #CCCCCC;
     font-size: 21px;
     font-family: JetBrainsMono;
-    margin-top: 144px;
+    margin-top: 160px;
     transition: 0.3s ease;
     cursor: pointer;
     margin-bottom: 30px;
@@ -195,7 +213,7 @@ const sendNewStudent = async () => {
     border-color: #1E66F5;
 }
 .modal-add-user-title {
-    margin-top: 50px
+    margin-top: 20px
 }
 
 :deep(.no-results) {
