@@ -355,9 +355,9 @@
         --dp-action-button-height: 25px;
     }
 
-    .dp__month_year_select {
+    /* .dp__month_year_select {
         color: #cccccc !important;
-    }
+    } */
 
 
     .arrow-down-button {

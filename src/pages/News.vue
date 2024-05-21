@@ -4,7 +4,7 @@
     import Pagination from "../components/NewsPageComponents/Pagination.vue"
     import { ref, watch, computed} from 'vue';
     import { useRoute } from 'vue-router';
-    import { VPagination } from 'vuetify/components'
+    import CustomPagination from "../components/NewsPageComponents/CustomPagination.vue"
 
     const newsData = ref([])
     const route = useRoute()
@@ -90,18 +90,8 @@
 
         <!-- тут компонент для переключения страниц -->
         <div class="pagination-wrapper">
-            <VPagination 
-                class="custom-pagination"
-                v-model:page="currentPage"
-                :length="10"
-                :total-visible="10"
-                prev-icon="mdi-chevron-left"
-                next-icon="mdi-chevron-right"
-                rounded="0"
-                active-color="white"
-                color="#686767"
-                size="65px"
-            />
+            <CustomPagination></CustomPagination>
+            <!-- <Pagination></Pagination> -->
         </div>
     </div>
 </template>
@@ -150,9 +140,5 @@
         align-items: center;
     }
 
-    .custom-pagination .v-btn__content {
-        font-family: JetBrainsMono;
-        font-weight: 700;
-        font-size: 36px;
-    }
+
 </style>
