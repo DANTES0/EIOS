@@ -5,11 +5,43 @@ import {authState} from "../../authState";
 import {ref, computed} from 'vue'
 import eventBus from "../../eventBus.js";
 
-let options = ["1", "2", "3"]
+
 let array = ref([]);
-array.value.push('kfmf','efjje','efewf')
+array.value.push(
+    {
+      label: 'О714Б',
+      value: 1
+    },
+    {
+      label: 'О715Б',
+      value: 2
+    },
+    {
+      label: 'О716Б',
+      value: 3
+    }
+)
+
+let array2 = ref([]);
+array2.value.push(
+    {
+      label: '1',
+      value: 1
+    },
+    {
+      label: '2',
+      value: 2
+    },
+    {
+      label: '3',
+      value: 3
+    }
+)
+
 const selected = ref(null);
+const selected2 = ref(null);
 const placeholder = ref('Поиск...');
+const placeholder2 = ref('Поиск...');
 
 const handleOptionSelected = (option) => {
   console.log(option.value);
@@ -55,9 +87,9 @@ const hideModal = (event) => {
                 <div class="input-course wrap" style="margin-top: 120px;">
                     <div class="input-login-title title">Курс обучения</div>
                     <VueSelect
-                        v-model="selected"
-                        :placeholder="placeholder"
-                        :options="array"
+                        v-model="selected2"
+                        :placeholder="placeholder2"
+                        :options="array2"
                         @option-selected="handleOptionSelected"
                     ></VueSelect>
                 </div>
