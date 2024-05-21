@@ -237,7 +237,7 @@ let array = []
   background-size: 100% 100%;
 }
 .back-image-arrow {
-  background-image: url("../assets/PrepodavateliKafedri/arrow_back.svg");
+  background-image: url("../../assets/PrepodavateliKafedri/arrow_back.svg");
   width: 70px;
   height: 81px;
   background-repeat: no-repeat;
@@ -248,7 +248,7 @@ let array = []
   height: 330px;
 }
 .next-image-arrow {
-  background-image: url("../assets/PrepodavateliKafedri/arrow_next.svg");
+  background-image: url("../../assets/PrepodavateliKafedri/arrow_next.svg");
   width: 70px;
   height: 81px;
   background-repeat: no-repeat;
