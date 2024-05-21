@@ -28,7 +28,7 @@ const isActiveUsers = ref(false)
                         </div>
                         <div class="content-userPage-title">Главные новости</div>
                         <div class="content-userPage-title">Преподаватели</div>
-                        <div class="content-userPage-title" @click="() => { authState.isVisibleChangePhotoGallery = !authState.isVisibleChangePhotoGallery}">Фотогалерея</div>
+                        <div class="content-userPage-title" @click="() => { authState.isArticle = 'ChangePhotoGallery'}">Фотогалерея</div>
                         <div class="content-userPage-title">Разное</div>
                     </div>
             </div>
@@ -51,7 +51,7 @@ const isActiveUsers = ref(false)
                         </div>
                         <div class="content-userPage-title">Студенты</div>
                         <div class="content-userPage-title">Администраторы</div>
-                        <div class="content-userPage-title" @click="() => {authState.isVisibleUsersAll = !authState.isVisibleUsersAll}">Все</div>
+                        <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserAll'}">Все</div>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,9 @@ const isActiveUsers = ref(false)
     font-family: JetBrainsMono;
     font-size: 20px;
     color: white;
-    position: relative;
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 .admin-menu-title {
     margin-left: 15px;

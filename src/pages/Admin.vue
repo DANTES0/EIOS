@@ -50,8 +50,8 @@ fetchData()
   
 
     <div class="userAll-content">
-      <ChangePhotoGallery v-if="authState.isVisibleChangePhotoGallery"></ChangePhotoGallery>
-      <UserAll v-if="authState.isVisibleUsersAll"></UserAll>
+      <ChangePhotoGallery v-if="authState.isArticle == 'ChangePhotoGallery'"></ChangePhotoGallery>
+      <UserAll v-if="authState.isArticle == 'UserAll'"></UserAll>
     </div>
     <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN
