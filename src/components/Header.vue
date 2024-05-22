@@ -3,6 +3,7 @@ import HeaderAnchor from "./HeaderAnchor.vue";
 import { authState } from '../authState';
 import { useStore } from 'vuex';
 
+
 const store = useStore();
 
 function isLoggedIn() {
@@ -23,24 +24,44 @@ const emit = defineEmits(['toggle-auth']);
 
     <div class="header-wrapper-container">
       <div class="page-header">
-        <a
-          class="page"
-          id="main"
-          data-title="Главная страница"
-          @click="$router.push('/')"
-        ></a>
+        <Popper
+                :placement="'right'"
+                :hover="true"
+                content="Главная страница">
+          <a
+            class="page"
+            id="main"
+            data-title="Главная страница"
+            @click="$router.push('/')"
+          ></a>
+        </Popper>
+        <Popper
+                :placement="'right'"
+                :hover="true"
+                content="Новости">
+        
         <a
           class="page"
           id="q"
           data-title="Новости"
           @click="$router.push('/news')"
         ></a>
+      </Popper>
+      <Popper
+                :placement="'right'"
+                :hover="true"
+                content="Расписание">
         <a
           class="page"
           id="w"
           data-title="Расписание"
           @click="$router.push('/timetable')"
         ></a>
+      </Popper>
+      <Popper
+                :placement="'right'"
+                :hover="true"
+                content="Панель администратора">
         <a
           v-if="authState.isAccess"
           class="page"
@@ -48,6 +69,7 @@ const emit = defineEmits(['toggle-auth']);
           data-title="Комиссия"
           @click="$router.push('/admin')"
         ></a>
+      </Popper>
 
         <a class="page" id="t" @click="$router.push('/gallery')"></a>
       </div>
@@ -76,28 +98,36 @@ const emit = defineEmits(['toggle-auth']);
 </template>
 
 <style scoped>
+
 @font-face {
   font-family: Russo-One;
   src: url("../assets/RussoOne-Regular.ttf");
 }
+:deep(.popper) {
+  background-color: #181818 !important;
+  padding: 10px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
 
+}
 #main {
   background-image: url("../assets/header/home.svg");
   filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
     contrast(89%);
   margin-top: 15px;
+  display: block;
 }
-.page:hover::after {
+/* .page:hover::after {
   content: attr(data-title);
-  position: absolute; /* Абсолютное позиционирование */
+  position: absolute; 
   left: 50px;
-  top: 5%; /* Положение подсказки */
-  z-index: 19; /* Отображаем подсказку поверх других элементов */
-  background-color: #ffffff; /* Полупрозрачный цвет фона */
-  font-family: Russo-One, sans-serif; /* Гарнитура шрифта */
-  font-size: 12px; /* Размер текста подсказки */
-  padding: 5px 10px; /* Поля */
-  border: 1px solid #333; /* Параметры рамки */
+  top: 5%; 
+  z-index: 19; 
+  background-color: #ffffff; 
+  font-family: Russo-One, sans-serif; 
+  font-size: 12px; 
+  padding: 5px 10px;
+  border: 1px solid #333; 
   border-radius: 10px;
 
   color: #838383;
@@ -106,8 +136,8 @@ const emit = defineEmits(['toggle-auth']);
   text-align: center;
   filter: invert(11%) sepia(0%) saturate(1%) hue-rotate(112deg) brightness(98%)
     contrast(85%);
-}
-.page:hover::before {
+} */
+/* .page:hover::before {
   content: "";
   position: absolute;
   left: 45px;
@@ -116,13 +146,12 @@ const emit = defineEmits(['toggle-auth']);
   height: 13px;
   background: #ffffff;
   transform: rotate(41deg);
-  /* box-shadow: inset 1px -1px  rgb(0, 0, 0); */
   filter: invert(11%) sepia(0%) saturate(1%) hue-rotate(112deg) brightness(98%)
     contrast(85%);
   z-index: 999;
   border-left: 1px solid #000;
   border-bottom: 1px solid #000;
-}
+} */
 .pum {
   margin-top: 10px;
   display: flex;
@@ -130,9 +159,9 @@ const emit = defineEmits(['toggle-auth']);
   justify-content: space-around;
   align-items: center;
 }
-#q:hover::after {
+/* #q:hover::after {
   width: 100px;
-}
+} */
 #moodle {
   background-image: url("../assets/header/bottom/moodle.svg");
   background-size: contain;
@@ -151,6 +180,7 @@ const emit = defineEmits(['toggle-auth']);
   background-image: url("../assets/header/second.svg");
   filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
     contrast(89%);
+    display: block;
 }
 .page-header-bottom {
   display: flex;
@@ -160,11 +190,13 @@ const emit = defineEmits(['toggle-auth']);
   background-image: url("../assets/header/third.svg");
   filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
     contrast(89%);
+    display: block;
 }
 #e {
   background-image: url("../assets/header/fourth.svg");
   filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
     contrast(89%);
+    display: block;
 }
 #r {
   /* background-image: url("../assets/voenmeh3.svg"); */
@@ -256,6 +288,7 @@ const emit = defineEmits(['toggle-auth']);
 .page-header {
   display: flex;
   flex-direction: column;
+  font-size: 20px;
 }
 .page {
   cursor: pointer;
