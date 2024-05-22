@@ -1,4 +1,13 @@
 <script setup>
+    import { defineProps } from "vue";
+    import { format } from 'date-fns';
+
+	const newsHeaderData = defineProps({
+		newsHeaderHeadline: { type: String, default: "Красивый цветной заголовок, а справа будет основная мысль новости"},
+		newsHeaderMainInfo: { type: String, default: "И нет сомнений, что активно развивающиеся страны третьего мира и по сей день остаются уделом либералов, которые жаждут быть в равной степени предоставлены сами себе. Однозначно, базовые сценарии поведения пользователей неоднозначны и будут описаны максимально подробно. Лишь стремящиеся вытеснить традиционное производство, нанотехнологии, превозмогая сложившуюся непростую экономическую ситуацию, ассоциативно распределены по отраслям." },
+		newsHeaderCategory: { type: String, default: "#кринж"},
+		newsHeaderDate: { type:Date, default: new Date()}
+	});
 
 </script>
 
@@ -7,24 +16,17 @@
   <div class="header-container">
     <div class="header-box1">
       <div class="title-news1">
-          <div class="news-title-text">Красивый цветной заголовок, а справа будет основная мысль новости </div>
+          <div class="news-title-text"> {{ newsHeaderData.newsHeaderHeadline }} </div>
       </div>
       <div class="text-news">
-        <div class="text-news-text">И нет сомнений, что активно развивающиеся страны третьего мира и по сей день остаются уделом либералов,
-          которые жаждут быть в равной степени предоставлены сами себе. Однозначно, базовые сценарии поведения
-          пользователей неоднозначны и будут описаны максимально подробно.
-          Лишь стремящиеся вытеснить традиционное производство, нанотехнологии, превозмогая сложившуюся непростую
-          экономическую ситуацию, ассоциативно распределены по отраслям.
-        </div>
+        <div class="text-news-text"> {{ newsHeaderData.newsHeaderMainInfo }} </div>
       </div>
     </div>
     <div class="header-box2">
-      <div class = "news-teg1-container"><div class="news-teg1">#кринж</div></div>
-      <div class = "news-date1-container"><div class="news-date1">20/09/24</div></div>
+      <div class = "news-teg1-container"><div class="news-teg1"> {{ newsHeaderData.newsHeaderCategory }} </div></div>
+      <div class = "news-date1-container"><div class="news-date1"> {{ format(newsHeaderData.newsHeaderDate, 'dd/MM/yyyy') }} </div></div>
     </div>
   </div>
-
-
 
 </template>
 

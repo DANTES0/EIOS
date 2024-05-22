@@ -1,131 +1,154 @@
 <script setup>
-    import {ref, computed, watch} from "vue"
-    import CustomCheckbox from "./CustomCheckbox.vue"
-    import VueDatePicker from '@vuepic/vue-datepicker'
-    import { useRouter } from 'vue-router';
-    import '@vuepic/vue-datepicker/dist/main.css'
+import { ref, computed, watch, onMounted } from "vue";
+import CustomCheckbox from "./CustomCheckbox.vue";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import { useRouter, useRoute } from 'vue-router';
+import '@vuepic/vue-datepicker/dist/main.css';
 
-    // Исправить теги
-    // Сделать пагинацию
-    // Сделать запрос к Рите 
+const dateStart = ref(null);
+const dateEnd = ref(null);
 
-    const dateStart = ref()
-    const dateEnd = ref()
+const dateStartURL = ref(null);
+const dateEndURL = ref(null);
 
-    const dateStartURL = ref()
-    const dateEndURL = ref()
+const categories = ref([
+    "Важные",
+    "Конференции",
+    "Конкурсы, гранты",
+    "Мероприятия",
+    "Наука",
+    "Достижения",
+    "Спорт",
+    "Конференции орг.",
+    "Объявления",
+    "Приемная комиссия",
+    "Другие"
+]);
 
-    const format = (date) => {
-        const day = date.getDate()
-        const month = date.getMonth() + 1
-        const year = date.getFullYear()
-        return `${day}/${month}/${year}`
+const selectedCategories = ref(Array(categories.value.length).fill(false));
+
+const isShowFilters = ref(true);
+const isShowCategories = ref(true);
+const isShowData = ref(true);
+
+const router = useRouter();
+const route = useRoute();
+
+const filtersContentHeight = computed(() => {
+    let height = 0;
+    if (!isShowData.value && !isShowCategories.value) {
+        height += 60;
     }
-
-    const formatDateDots = (date) => {
-        if (date) {
-            const day = date.getDate()
-            const month = date.getMonth() + 1
-            const year = date.getFullYear()
-            return `${day}.${month}.${year}`
-        } else {
-            return null
-        }
+    else if (isShowData.value && !isShowCategories.value) {
+        height += 213;
     }
-
-    const categories = ref([
-        "Важные",
-        "Конференции",
-        "Конкурсы, гранты",
-        "Мероприятия",
-        "Наука",
-        "Достижения",
-        "Спорт",
-        "Конференции орг.",
-        "Объявления",
-        "Приемная комиссия",
-        "Другие"
-    ])
-
-    const selectedCategories = ref(Array(categories.value.length).fill(false));
-
-    const isShowFilters = ref(true)
-    const isShowCategories = ref(true)
-    const isShowData = ref(true)
-
-    const filtersContentHeight = computed(() => {
-        let height = 0
-        if (!isShowData.value && !isShowCategories.value) {
-            height += 60
-        }
-        else if (isShowData.value && !isShowCategories.value) {
-            height += 213
-        }
-        else if (!isShowData.value && isShowCategories.value) {
-            height += 391
-        }
-        else if (isShowData.value && isShowCategories.value) {
-            height += 543.5
-        }
-        return height
-    })
-
-    function showFilters() {
-        isShowFilters.value = !isShowFilters.value
-    } 
-
-    function showCategories() {
-        isShowCategories.value = !isShowCategories.value
-    } 
-
-    function showData() {
-        isShowData.value = !isShowData.value
+    else if (!isShowData.value && isShowCategories.value) {
+        height += 391;
     }
+    else if (isShowData.value && isShowCategories.value) {
+        height += 543.5;
+    }
+    return height;
+});
 
-    const router = useRouter()
+function showFilters() {
+    isShowFilters.value = !isShowFilters.value;
+} 
 
-    function applyFilters() {
+function showCategories() {
+    isShowCategories.value = !isShowCategories.value;
+} 
 
-        const selectedCategoriesNames = selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(';')
+function showData() {
+    isShowData.value = !isShowData.value;
+}
 
-        const query = {}
+function applyFilters() {
+    const selectedCategoriesNames = selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(';');
 
-        if(dateStartURL.value != null) {
-            query.startDate = dateStartURL.value
-        }
-        
-        if(dateEndURL.value != null) {
-            query.endDate = dateEndURL.value
-        }
+    const query = {};
 
-        if (selectedCategoriesNames !== '') {
-            query.categories = selectedCategoriesNames;
-        }
-
-        router.push({
-            name: 'News',
-            query: query
-        });
+    if(dateStartURL.value != null) {
+        query.startDate = dateStartURL.value;
     }
     
-    const handleStartDate = (modelData) => {
-        dateStart.value = modelData
-        dateStartURL.value = formatDateDots(modelData)
-        applyFilters()
+    if(dateEndURL.value != null) {
+        query.endDate = dateEndURL.value;
     }
 
-    const handleEndDate = (modelData) => {
-        dateEnd.value = modelData
-        dateEndURL.value = formatDateDots(modelData)
-        applyFilters()
+    if (selectedCategoriesNames !== '') {
+        query.categories = selectedCategoriesNames;
     }
 
-    watch(selectedCategories, () => {
-        applyFilters()
-    }, { deep: true })
+    router.push({
+        name: 'News',
+        query: query
+    });
+}
 
-    applyFilters()
+const handleStartDate = (modelData) => {
+    dateStart.value = modelData;
+    dateStartURL.value = formatDateDots(modelData);
+    applyFilters();
+};
 
+const handleEndDate = (modelData) => {
+    dateEnd.value = modelData;
+    dateEndURL.value = formatDateDots(modelData);
+    applyFilters();
+};
+
+watch(selectedCategories, () => {
+    applyFilters();
+}, { deep: true });
+
+onMounted(() => {
+    loadFiltersFromUrl();
+    router.afterEach(loadFiltersFromUrl);
+});
+
+function loadFiltersFromUrl() {
+    const query = route.query;
+
+    if (query.startDate) {
+        dateStart.value = parseDate(query.startDate);
+        dateStartURL.value = formatDateDots(dateStart.value);
+    }
+
+    if (query.endDate) {
+        dateEnd.value = parseDate(query.endDate);
+        dateEndURL.value = formatDateDots(dateEnd.value);
+    }
+
+    if (query.categories) {
+        const selectedCategoriesArray = query.categories.split(';');
+        for (let i = 0; i < selectedCategoriesArray.length; i++) {
+            const category = selectedCategoriesArray[i];
+            const index = categories.value.indexOf(category);
+            if (index !== -1) {
+                selectedCategories.value[index] = true;
+            }
+        }
+    } else {
+        selectedCategories.value.fill(false);
+    }
+}
+
+function formatDateDots(date) {
+    if (date) {
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        return `${day}.${month}.${year}`;
+    } else {
+        return null;
+    }
+}
+
+function parseDate(dateStr) {
+    const [day, month, year] = dateStr.split('.').map(Number);
+    return new Date(year, month - 1, day);
+}
 </script>
 
 <template>
@@ -211,6 +234,7 @@
         </div>
     </div>
 </template>
+
 
 <style>
     @font-face {

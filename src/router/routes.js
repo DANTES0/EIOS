@@ -1,4 +1,4 @@
-import{createRouter, createWebHistory} from "vue-router"
+import { createRouter, createWebHistory } from "vue-router"
 import Main from "../pages/Main.vue"
 import News from "../pages/News.vue"
 import Timetable from "../pages/Timetable.vue"
@@ -27,16 +27,16 @@ const routes = [
         component: Admin
     },
     {
-        path: '/newsContent',
+        path: '/news/get/:id',
         name: "NewsContent",
         component: NewsContent
     }
 ]
-
+//newsContent
 const router = createRouter({
-    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior(to, from, savedPosition) {
         return { x: 0, y: 0 }
-      },
+    },
     history: createWebHistory(),
     routes
 })
