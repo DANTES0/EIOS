@@ -212,10 +212,10 @@ defineProps({
   justify-content: space-between;
 }
 .news-wrapper {
-  height: 664px;
+  height: 700px;
   width: 100%;
   background-color: #191919;
-  margin-top: 50px;
+  margin-top: 120px;
   display: flex;
   flex-direction: row;
   justify-content: start;

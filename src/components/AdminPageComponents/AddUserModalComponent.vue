@@ -5,6 +5,7 @@ import {authState} from "../../authState";
 import {ref, computed} from 'vue'
 import eventBus from "../../eventBus.js";
 import {useFetch} from "@vueuse/core";
+import config from "../../config";
 
 const login = ref();
 const password = ref();
@@ -50,7 +51,7 @@ const hideModal = (event) => {
 };
 
 const sendNewStudent = async () => {
-  const {data, error} = await useFetch('http://25.59.204.137:8080/students/register', {
+  const {data, error} = await useFetch(`${config.KirURL}/students/register`, {
     method: 'POST',
     body: JSON.stringify({
       login: login.value,

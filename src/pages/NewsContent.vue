@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 import NewsContentHeader from '../components/NewsContentPageComponents/NewsContentHeader.vue'
 import NewsContentBase from '../components/NewsContentPageComponents/NewsContentBase.vue'
 import NewsContentPageSlider from '../components/NewsContentPageComponents/NewsContentPageSlider.vue'
+import config from '../config';
 
 const newsData = ref(null);
 const route = useRoute();
@@ -11,7 +12,7 @@ const IPAddress = '25.61.98.183'; // Используйте здесь тот ж
 
 async function loadNewsContent() {
     const newsId = route.params.id;
-    const requestAddress = `http://${IPAddress}:8080/news/get/${newsId}`;
+    const requestAddress = `${config.KirURL}/news/get/${newsId}`;
     
     try {
         const response = await fetch(requestAddress);

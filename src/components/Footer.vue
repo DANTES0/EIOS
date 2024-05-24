@@ -151,6 +151,7 @@
   font-family: JetBrainsMono;
   color: #cccccc;
   font-size: 30px;
+  margin-top: 150px
   /* background-color: #0d101f; */
 }
 .footer-back {

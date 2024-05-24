@@ -115,14 +115,14 @@
   align-items: center;
 }
 .wrapper-cifri {
-  height: 780px;
+  height: 850px;
   background-color: #191919;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: start;
   align-items: start;
-  margin-top: 20px;
+  margin-top: 90px;
 }
 .title-cifri {
   font-size: 48px;

@@ -3,9 +3,10 @@ import { useFetch } from "@vueuse/core"
 import { computed, ref } from "vue"
 import { onMounted } from "vue"
 import PrepodavateliKafedriItem from './PrepodavateliKafedriItem.vue'
+import config from "../../config"
 let flag = ref(false)
 const prepod_url = computed(() => {
-  return `http://25.61.98.183:8080/api/v1/teacher/getAll`
+  return `${config.KirURL}/api/v1/teacher/getAll`
 })
 let prepod = ref(null)
 let currentIndex = ref(1)
@@ -157,6 +158,7 @@ onMounted(() => {
   width: 300px;
   height: 2px;
   background-color: #1e66f5;
+  margin-top: 30px;
   /* transition: anima 2s linear; */
 }
 .prepod-image-arrow:hover {

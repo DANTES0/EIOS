@@ -3,6 +3,7 @@ import {ref} from "vue"
 import { useFetch } from "@vueuse/core";
 import { authState } from '../authState';
 import { useStore } from 'vuex';
+import config from "../config";
 
 const store = useStore();
 let login = ref('');
@@ -16,6 +17,7 @@ const hideAuth = (event) => {
     if (event.target.classList.contains('auth-wrapp')) {
         authState.isVisible = false;
     }
+    document.documentElement.classList.remove('modal-open');
 };
 const authorize = async () => {
     if (login.value === '') {
@@ -26,7 +28,7 @@ const authorize = async () => {
     }
 
     try {
-        const { data, error } = await useFetch('http://25.61.98.183:8080/api/auth/login', {
+        const { data, error } = await useFetch(`${config.KirURL}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify({
                 login: login.value,
@@ -50,7 +52,9 @@ const authorize = async () => {
         console.error('Ошибка при отправке запроса:', error);
     }
 };
+document.documentElement.classList.add('modal-open');
 </script>
+
 <template>
 
     <div v-if="authState.isVisible" class="auth-wrapp" @click="hideAuth">

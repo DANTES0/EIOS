@@ -4,28 +4,23 @@ import { computed, ref, watch } from "vue"
 import { onMounted } from "vue"
 import {useStore} from "vuex"
 import eventBus from "../../eventBus"
+import config from "../../config"
 const selectedOption = ref('1');
+const isValidOption = (value) => {
+  const teacherAndNumberRegex = /^teacher\d+$/;
+  return teacherAndNumberRegex.test(value);
+};
 eventBus.on('optionSelected', (value) => {
   selectedOption.value = value;
 });
+const urlTeacher = ref('')
 const url = ref('')
-let flag = ref(false)
-// const updateUrl = computed( () => {
-//   return url.value = `http://25.61.98.183:8080/api/schedule/group?groupId=${selectedOption.value}` ;
-// });
-// watch(selectedOption, (newValue) => {
-//   updateUrl(newValue);
-// }, { immediate: true, deep: true });
-
-
-
-// const schedule = computed(() => {
-//   console.log(url.value);
-//   return url.value;
-// });
 const schedule = computed(() => {
-    
-    url.value = `http://25.61.98.183:8080/api/schedule/group?groupId=`+ selectedOption.value
+    if (isValidOption(selectedOption.value)) {
+        url.value = `${config.KirURL}/api/schedule/teacher?teacherId=`+ selectedOption.value.replace(/\D/g, '')
+    }else {
+    url.value = `${config.KirURL}/api/schedule/group?groupId=`+ selectedOption.value
+}
     console.log(url.value)
   return url.value
 })

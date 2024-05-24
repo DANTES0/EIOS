@@ -1,35 +1,4 @@
-// import { useFetch } from '@vueuse/core';
-// import store from './store';
 
-// function useAuthenticatedFetch(url) {
-//   const { isFetching, error, data, statusCode, get, post, put, delete: del } = useFetch(url, {
-//     beforeFetch({ options }) {
-//       const accessToken = store.getters.accessToken;
-//       if (accessToken) {
-//         options.headers = {
-//           ...options.headers,
-//           Authorization: `Bearer ${accessToken}`
-//         };
-//       }
-//       console.log('Request options:', options);
-//       console.log('Request options:', statusCode);
-      
-//       return { options };
-//     },
-//     onFetchError(ctx) {
-//       const { response } = ctx;
-//       if (response && response.status === 403) {
-//         console.error('Access Forbidden:', response);
-//         // Можно добавить логику обработки ошибки 403
-//       }
-//       return ctx;
-//     }
-//   });
-
-//   return { isFetching, error, data, get, post, put, del };
-// }
-
-// export default useAuthenticatedFetch;
 
 import { useFetch } from '@vueuse/core';
 import store from './store';

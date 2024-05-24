@@ -4,6 +4,7 @@ import {computed, onMounted, ref, watch} from "vue";
 import {useFetch} from "@vueuse/core";
 import { authState } from "../../authState";
 import eventBus from '../../eventBus.js';
+import config from "../../config";
 
 let array = ref([])
 let flag = ref(true);
@@ -12,7 +13,7 @@ let flagName = ref(true);
 let flagCourse = ref(true);
 
 const url = computed(()=> {
-  return `http://25.59.204.137:8080/api/v1/admin/students/all`
+  return `${config.KirURL}/api/v1/students/all`
 })
 
 const fetchGroup = async () => {
@@ -85,7 +86,7 @@ function sortByCourse() {
 
 const deleteUser = async (id) => {
   try {
-    const response = await fetch(`http://25.59.204.137:8080/user/delete/${id}`, {
+    const response = await fetch(`${config.KirURL}/user/delete/${id}`, {
       method: 'POST',
     });
 

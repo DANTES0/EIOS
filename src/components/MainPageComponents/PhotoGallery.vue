@@ -108,9 +108,9 @@ let array = []
       <div class="content-wrapper-gallery">
         <div class="gallery-image-block">
           <div style="" class="gallery-image-arrow back-image-arrow" @click="prev_photo"></div>
-          <div src="" alt="" class="gallery-image":style="{ backgroundImage: 'url(' +photo[first] + ')' }" ></div>
-          <div src="" alt="" class="gallery-image":style="{ backgroundImage: 'url(' +photo[second] + ')' }" ></div>
-          <div src="" alt="" class="gallery-image":style="{ backgroundImage: 'url(' +photo[third]+ ')' }" ></div>
+          <div src="" alt="" class="gallery-image":style="{ backgroundImage: 'url(' +photo[first] + ')' }" style="left: 5%;" ></div>
+          <div src="" alt="" class="gallery-image main-image-gallery":style="{ backgroundImage: 'url(' +photo[second] + ')' }" style="left: 24%;"></div>
+          <div src="" alt="" class="gallery-image":style="{ backgroundImage: 'url(' +photo[third]+ ')' }" style="right: 5%;"></div>
           <div class="gallery-image-arrow next-image-arrow" @click="next_photo"></div>
         </div>
         <!-- @click="$emit('next_photo')" -->
@@ -230,11 +230,13 @@ let array = []
   flex-direction: column;
 }
 .gallery-image {
-  width: 360px;
+  width: 500px;
   height: 360px;
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  position: absolute;
+  opacity: 0.33;
 }
 .back-image-arrow {
   background-image: url("../../assets/PrepodavateliKafedri/arrow_back.svg");
@@ -261,7 +263,8 @@ let array = []
   align-items: center;
   width: 100%;
   height: 450px;
-  margin-top: 30px;
+  /* margin-top: 30px; */
+  position: relative;
 }
 .content-gallery-wrapper {
   width: 100%;
@@ -312,5 +315,15 @@ let array = []
   color: white;
   letter-spacing: 8px;
   user-select: none;
+}
+.main-image-gallery {
+  width: 750px;
+  height: 500px;
+  z-index: 99;
+  opacity: 1;
+  transition: 0.3s ease;
+}
+.main-image-gallery:hover {
+  transform: scale(1.35);
 }
 </style>

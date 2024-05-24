@@ -74,8 +74,31 @@ const emit = defineEmits(['toggle-auth']);
         <a class="page" id="t" @click="$router.push('/gallery')"></a>
       </div>
       <div class="page-header-bottom">
-        <a @click="toggleAuthVisibility" class="page" id="profile" data-title="Профиль"></a>
         <a @click="() => store.dispatch('logout')" class="page" id="moodle" data-title="moodle"></a>
+        <Popper
+                :placement="'right'"
+                :hover="true"
+                content="Авторизоваться">
+        <a @click="toggleAuthVisibility" class="page" id="profile" data-title="Профиль"></a>
+      </Popper>
+      <Popper
+                :placement="'right'"
+                :hover="true"
+                content="Главный сайт">
+        <a class="page" id="voenmeh" data-title="voenmeh"></a>
+      </Popper>
+      <Popper
+                :placement="'right'"
+                :hover="true"
+                content="Мудл">
+        <a href="https://moodle.voenmeh.ru/login/index.php" class="page" id="moodle" data-title="moodle"></a>
+      </Popper>
+      <Popper
+                :placement="'right'"
+                :hover="true"
+                content="Корпоративная почта">
+        <a href="https://mail.voenmeh.ru/mail/" class="page" id="mailvoenmeh" data-title="mailvoenmeh"></a>
+      </Popper>
       </div>
     </div>
     <div class="header-wrapper-anchor-container" v-if="!($route.path === '/newsContent' || $route.path.match(/^\/news\/get\/\d+$/))">
@@ -162,6 +185,22 @@ const emit = defineEmits(['toggle-auth']);
 /* #q:hover::after {
   width: 100px;
 } */
+#voenmeh {
+  background-image: url("../assets/header/voenmeh.svg");
+  background-size: contain;
+  background-position: 50%;
+  transform: scale(1.4);
+  filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+    contrast(89%);
+}
+#mailvoenmeh {
+  background-image: url("../assets/header/mail.svg");
+  background-size: contain;
+  background-position: 50%;
+  transform: scale(1.1);
+  filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+    contrast(89%);
+}
 #moodle {
   background-image: url("../assets/header/bottom/moodle.svg");
   background-size: contain;
@@ -185,6 +224,7 @@ const emit = defineEmits(['toggle-auth']);
 .page-header-bottom {
   display: flex;
   flex-direction: column;
+  font-size: 20px;
 }
 #w {
   background-image: url("../assets/header/third.svg");
@@ -214,6 +254,14 @@ const emit = defineEmits(['toggle-auth']);
     brightness(100%) contrast(110%);
 }
 #profile:hover {
+  filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
+    brightness(100%) contrast(110%);
+}
+#voenmeh:hover {
+  filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
+    brightness(100%) contrast(110%);
+}
+#mailvoenmeh:hover {
   filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
     brightness(100%) contrast(110%);
 }
@@ -296,7 +344,9 @@ const emit = defineEmits(['toggle-auth']);
   width: 35px;
   height: 35px;
   margin-bottom: 20px;
+  display: block;
 }
+
 .voenmeh-title {
   width: 40px;
   height: 40px;

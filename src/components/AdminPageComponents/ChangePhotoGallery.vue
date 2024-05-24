@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useFetch } from "@vueuse/core"
+import config from '../../config';
 
 let array = ref([])
 
@@ -14,7 +15,7 @@ const handleMouseLeave = (index) => {
 }
 
 const photo_url = computed(() => {
-  return `http://25.61.98.183:8080/gallery/get`
+  return `${config.KirURL}/gallery/get`
 })
 
 const fetchPhoto = async () => {
@@ -28,7 +29,7 @@ const fetchPhoto = async () => {
 }
 
 const deletePhoto = async (id, index) => {
-  await useFetch(`http://25.61.98.183:8080/gallery/delete/${id}`, {
+  await useFetch(`${config.KirURL}/gallery/delete/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -48,7 +49,7 @@ const addPhoto = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await fetch('http://25.61.98.183:8080/gallery/upload', {
+  const response = await fetch(`${config.KirURL}/gallery/upload`, {
     method: 'POST',
     body: formData,
     headers: {

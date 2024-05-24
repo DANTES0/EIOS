@@ -10,12 +10,13 @@ import Terminal from "../components/Terminal.vue"
 import { useFetch } from "@vueuse/core"
 import { computed, ref } from "vue"
 import { onMounted } from "vue"
+import config from '../config'
 const url = computed(() => {
   //return `http://25.61.98.183:8080/news/1`
-  return `http://25.61.98.183:8080/news/get/last`
+  return `${config.KirURL}/news/get/last`
 })
 const photo_url = computed(() => {
-  return `http://25.61.98.183:8080/gallery/get`
+  return `${config.KirURL}/gallery/get`
 })
 
 const extractedId = ref(null)

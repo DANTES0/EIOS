@@ -5,6 +5,7 @@ import {authState} from "../../authState";
 import {ref, computed} from 'vue'
 import eventBus from "../../eventBus.js";
 import {useFetch} from "@vueuse/core";
+import config from "../../config";
 
 console.log('ID', authState.editUserId);
 
@@ -24,7 +25,7 @@ const placeholder2 = ref('Поиск...');
 let array3 = ref([]);
 
 const fetchData= async () => {
-  const response = await useFetch(`http://25.59.204.137:8080/students/find/${authState.editUserId}`).json();
+  const response = await useFetch(`${config.KirURL}/students/find/${authState.editUserId}`).json();
   array3.value = response.data.value;
 
   login.value = array3.value.user.login;
@@ -73,7 +74,7 @@ const sendNewStudent = async () => {
     password.value = password2.value;
   }
 
-  const {data, error} = await useFetch(`http://25.59.204.137:8080/students/edit/${authState.editUserId}`, {
+  const {data, error} = await useFetch(`${config.KirURL}/students/edit/${authState.editUserId}`, {
     method: 'POST',
     body: JSON.stringify({
       login: login.value,

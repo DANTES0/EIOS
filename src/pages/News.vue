@@ -5,6 +5,7 @@ import Pagination from "../components/NewsPageComponents/Pagination.vue"
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import CustomPagination from "../components/NewsPageComponents/CustomPagination.vue"
+import config from '../config';
 
 const newsData = ref([])
 const route = useRoute()
@@ -13,38 +14,38 @@ const router = useRouter()
 const currentPage = ref(1)
 const itemsPerPage = 10
 
-const currentIP = true;
-let IPAddress = '';
+// const currentIP = true;
+// let IPAddress = '';
 
-if (currentIP) {
-    IPAddress = '25.61.98.183';
-} else {
-    IPAddress = '25.59.204.137'
-}
+// if (currentIP) {
+//     IPAddress = '25.61.98.183';
+// } else {
+//     IPAddress = '25.59.204.137'
+// }
 
 async function loadNews() {
-    let requestAddress = `http://${IPAddress}:8080/news/get/all`
+    let requestAddress = `${config.KirURL}/news/get/all`
 
     const categories = route.query.categories ? route.query.categories.split(';') : []
     const startDate = route.query.startDate ? route.query.startDate : null
     const endDate = route.query.endDate ? route.query.endDate : null
 
     if (categories.length === 0 && !startDate && !endDate) {
-        requestAddress = `http://${IPAddress}:8080/news/get/all`
+        requestAddress = `${config.KirURL}/news/get/all`
     } else if (categories.length === 0 && startDate && endDate) {
-        requestAddress = `http://${IPAddress}:8080/news/get/all?startDate=${startDate}&endDate=${endDate}`
+        requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}&endDate=${endDate}`
     } else if (categories.length > 0 && !startDate && !endDate) {
-        requestAddress = `http://${IPAddress}:8080/news/get/all?categories=${categories.join(';')}`
+        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}`
     } else if (categories.length > 0 && startDate && endDate) {
-        requestAddress = `http://${IPAddress}:8080/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`
+        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`
     } else if (categories.length === 0 && startDate && !endDate) {
-        requestAddress = `http://${IPAddress}:8080/news/get/all?startDate=${startDate}`
+        requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}`
     } else if (categories.length > 0 && startDate && !endDate) {
-        requestAddress = `http://${IPAddress}:8080/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`
+        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`
     } else if (categories.length === 0 && !startDate && endDate) {
-        requestAddress = `http://${IPAddress}:8080/news/get/all?endDate=${endDate}`
+        requestAddress = `${config.KirURL}/news/get/all?endDate=${endDate}`
     } else if (categories.length > 0 && !startDate && endDate) {
-        requestAddress = `http://${IPAddress}:8080/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`
+        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`
     }
 
     console.log(categories)

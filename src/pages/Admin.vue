@@ -8,6 +8,7 @@ import AddUserModalComponent from '../components/AdminPageComponents/AddUserModa
 import ChangePhotoGallery from '../components/AdminPageComponents/ChangePhotoGallery.vue';
 import UserStudent from '../components/AdminPageComponents/UserStudents.vue';
 import EditUserStudentModalComponent from "../components/AdminPageComponents/EditUserStudentModalComponent.vue";
+import config from '../config';
 
 let isVisibleChangePhotoGallery = ref(false)
 import UserAll from '../components/AdminPageComponents/UsersAll.vue';
@@ -20,7 +21,7 @@ async function fetchData() {
 //     method: 'GET',
 //     headers: {Authorization: `Bearer`+' eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2l6YXIiLCJleHAiOjE3MTYwNjQ0NDYsInJvbGVzIjpbeyJpZCI6MSwibmFtZSI6IlJPTEVfQURNSU4ifV19.VoMXIWD-RxJjbRGHd3BosqAIvIXEfQ5vLM6P1z-3hrP7LLvNHfGqErtlH8-xkIRPe6fOsvKmk_A8mN9nHxQAjA'}
 // })
-  const { data, error, isFetching, statusCode } = await useAuthenticatedFetch('http://25.61.98.183:8080/admin').get();
+  const { data, error, isFetching, statusCode } = await useAuthenticatedFetch(`${config.KirURL}/api/v1/admin`).get();
   console.log(statusCode)
   console.log(store.getters.accessToken)
   if (statusCode.value =='403' || (statusCode.value == '401' && !store.getters.accessToken))
