@@ -85,7 +85,7 @@ const emit = defineEmits(['toggle-auth']);
                 :placement="'right'"
                 :hover="true"
                 content="Главный сайт">
-        <a class="page" id="voenmeh" data-title="voenmeh"></a>
+        <a href="https://www.voenmeh.ru/" class="page" id="voenmeh" data-title="voenmeh"></a>
       </Popper>
       <Popper
                 :placement="'right'"
@@ -105,14 +105,6 @@ const emit = defineEmits(['toggle-auth']);
       <div class="pum">
         <a class="title" @click="$router.push('/')">
           Кафедра <span style="color: white">О</span>7
-        </a>
-        <a href="https://www.voenmeh.ru/" class="voen">
-          <img
-            style="transform: scale(1.6)"
-            src="../assets/header/voenmeh.svg"
-            class="page"
-            id="r"
-          />
         </a>
       </div>
       <HeaderAnchor></HeaderAnchor>
@@ -179,7 +171,7 @@ const emit = defineEmits(['toggle-auth']);
   margin-top: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
 }
 /* #q:hover::after {

@@ -2,6 +2,7 @@
 
 import { useFetch } from '@vueuse/core';
 import store from './store';
+import config from './config';
 
 async function refreshAccessToken() {
   const refreshToken = store.getters.refreshToken;
@@ -12,7 +13,7 @@ async function refreshAccessToken() {
 
   try {
     console.log("А сюда", refreshToken)
-    const response = await fetch('http://25.61.98.183:8080/api/auth/token', {
+    const response = await fetch(`${config.KirURL}/api/auth/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

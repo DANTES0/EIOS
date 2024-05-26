@@ -9,14 +9,15 @@ import "vue3-select-component/dist/style.css";
 import VueSelect from "vue3-select-component";
 import Multiselect from '@vueform/multiselect'
 import eventBus from '../../eventBus.js'
+import config from "../../config";
 let options = ["1", "2", "3"]
 let array = ref([]);
 // const selected = ref("");
 const url = computed(()=> {
-    return `http://25.61.98.183:8080/api/v1/group/all`
+    return `${config.KirURL}/api/v1/group/all`
 })
 const teacherUrl = computed(()=> {
-    return `http://25.61.98.183:8080/api/v1/teacher/getAll`
+    return `${config.KirURL}/api/v1/teacher/getAll`
 })
 let placeholder = ref('Поиск...')
 const fetchGroup = async() => {
