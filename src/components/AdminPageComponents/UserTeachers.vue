@@ -3,19 +3,21 @@
 import {computed, onMounted, ref, watch} from "vue";
 import {useFetch} from "@vueuse/core";
 import { authState } from "../../authState";
+import eventBus from '../../eventBus.js';
 import config from "../../config";
 
-let array = ref([]);
+let array = ref([])
 let filteredArray = ref([]);
 let searchQuery = ref('');
 let searchCriterion = ref('id');
 let flag = ref(true);
 let flagLogin = ref(true);
 let flagName = ref(true);
+let flagCourse = ref(true);
 
-const url = computed(() => {
-  return `${config.KirURL}/api/v1/users/all`;
-});
+const url = computed(()=> {
+  return `${config.KirURL}/api/v1/teachers/all`
+})
 
 const fetchGroup = async () => {
   const response = await useFetch(url).json();
@@ -33,8 +35,8 @@ const filterUsers = () => {
         return user.login.toLowerCase().includes(searchQuery.value.toLowerCase());
       } else if (searchCriterion.value === 'name') {
         return user.name.toLowerCase().includes(searchQuery.value.toLowerCase());
-      } else if (searchCriterion.value === 'roles') {
-        return user.roles[0].toLowerCase().includes(searchQuery.value.toLowerCase());
+      } else if (searchCriterion.value === 'post') {
+        return user.post.toLowerCase().includes(searchQuery.value.toLowerCase());
       }
     });
   } else {
@@ -45,8 +47,25 @@ const filterUsers = () => {
 watch([searchQuery, searchCriterion], filterUsers);
 
 onMounted(() => {
-  fetchGroup();
+  fetchGroup()
+})
+
+watch(array.value, () => {
+  fetchGroup()
+})
+
+watch(authState.isVisibleModalAddUsers, (newVal) => {
+  if (!newVal) {
+    fetchGroup();
+  }
 });
+
+const editUser = (id) => {
+  authState.editUserId = id;
+  authState.isVisibleEditStudentModelComponent = true;
+};
+
+eventBus.on('studentAdded', fetchGroup);
 
 function sortById() {
   if (flag.value) {
@@ -78,6 +97,16 @@ function sortByName() {
   }
 }
 
+function sortByPost() {
+  if(flagCourse.value) {
+    filteredArray.value.sort((a, b) => a.post.localeCompare(b.post));
+    flagCourse.value = !flagCourse.value;
+  } else{
+    flagCourse.value = !flagCourse.value;
+    filteredArray.value.sort((a, b) => b.post.localeCompare(a.post));
+  }
+}
+
 const deleteUser = async (id) => {
   try {
     const response = await fetch(`${config.KirURL}/user/delete/${id}`, {
@@ -98,16 +127,17 @@ const deleteUser = async (id) => {
 
 <template>
   <div class="content-userAll">
+
     <header class="content-header">
       <div class="line"></div>
-      <h1>Пользователи</h1>
+      <h1>Преподаватели</h1>
     </header>
     <div class="wrap-input-btn">
       <select v-model="searchCriterion" class="search-select">
         <option class="search-select-option" value="id">Id</option>
         <option class="search-select-option" value="login">Логин</option>
         <option class="search-select-option" value="name">Имя</option>
-        <option class="search-select-option" value="roles">Роль</option>
+        <option class="search-select-option" value="post">Должность</option>
       </select >
 
       <input
@@ -116,38 +146,26 @@ const deleteUser = async (id) => {
           v-model="searchQuery"
           class="placeholder-userAll"
       />
+      <button @click="authState.isVisibleModalAddUsers = true" class="addUser">Новый преподаватель</button>
     </div>
-    <div class="text-list-userAll">Список пользователей</div>
+    <div class="text-list-userAll">Список преподавателей</div>
     <div class="user-list">
-
       <div class="user-list-header">
-        <span class="user-id">
-          Id <button @click="sortById"><img src="../../assets/admin/bottom.svg" /></button>
-        </span>
-        <span class="user-login">
-          Логин <button @click="sortByLogin"><img src="../../assets/admin/bottom.svg" /></button>
-        </span>
-        <span class="user-role">
-          Права<button><img src="../../assets/admin/bottom.svg" /></button>
-        </span>
-        <span class="user-name">
-          Имя <button @click="sortByName"><img src="../../assets/admin/bottom.svg" /></button>
-        </span>
+        <span class="user-id">Id <button><img src="../../assets/admin/bottom.svg" @click="sortById" ></button></span>
+        <span class="user-login">Логин <button><img src="../../assets/admin/bottom.svg" @click="sortByLogin"></button></span>
+        <span class="user-role">Должность<button><img src="../../assets/admin/bottom.svg" @click="sortByPost"></button></span>
+        <span class="user-name">Имя <button><img src="../../assets/admin/bottom.svg" @click="sortByName"></button></span>
         <span class="user-edit">Редактировать</span>
         <span class="user-delete">Удалить</span>
       </div>
 
-      <div v-if="filteredArray.length" v-for="item in filteredArray" :key="item.id" class="user-item">
+      <div v-if="filteredArray.length" v-for="item in filteredArray" :key = "item.id" class="user-item">
         <span class="user-id">{{ item.id }}</span>
         <span class="user-login">{{ item.login }}</span>
-        <span class="user-role">{{ item.roles[0] }}</span>
+        <span class="user-role">{{ item.post }}</span>
         <span class="user-name">{{ item.name }}</span>
-        <span class="user-edit">
-          <button><img src="../../assets/admin/piece_of_paper_and_pencil.svg" alt="Edit"/></button>
-        </span>
-        <span class="user-delete">
-          <button @click="deleteUser(item.id)"><img src="../../assets/admin/cross-svgrepo-com.svg"/></button>
-        </span>
+        <span class="user-edit"><button><img src="../../assets/admin/piece_of_paper_and_pencil.svg" @click="editUser(item.id)" ></button></span>
+        <span class="user-delete"><button><img src="../../assets/admin/cross-svgrepo-com.svg" @click="deleteUser(item.id)"></button></span>
       </div>
 
       <div v-else class="user-item">
@@ -164,7 +182,33 @@ const deleteUser = async (id) => {
   font-family: JetBrainsMono;
   src: url("../../assets/JetBrainsMono.ttf");
 }
-
+.wrap-input-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 20px;
+}
+.addUser {
+  margin-left: auto;
+  width: 240px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid #CCCCCC;
+  font-family: JetBrainsMono;
+  font-size: 18px;
+  color: #CCCCCC;
+  border-radius: 4px;
+  transition: 0.3s ease;
+  margin-right: 30px;
+}
+.addUser:hover {
+  background-color: #222222;
+  border-color: #1E66F5;
+}
+.addUser:active {
+  background-color: #333333;
+  border-color: #1E66F5;
+}
 .content-userAll {
   display: flex;
   flex-direction: column;
@@ -179,13 +223,15 @@ const deleteUser = async (id) => {
   margin-bottom: 20px;
   height: 70.5px;
   border-bottom: solid 1px #2B2B2B;
+  /* border-left: solid 1px #2B2B2B; */
+
   background-color: #181818;
 }
 
 .line {
-    width: 1px;
-    height: 100%;
-    background-color: #2B2B2B;
+  width: 1px;
+  height: 100%;
+  background-color: #2B2B2B;
 }
 
 .content-header h1 {
@@ -195,41 +241,11 @@ const deleteUser = async (id) => {
   color: white;
 }
 
-.wrap-input-btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 20px;
-}
-
-.search-select-option{
-  font-size: 0.8em;
-}
-
-.search-select {
-  padding: 8px;
-  padding-right: 30px;
-  margin-right: 10px;
-  border: 1px solid #333;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: #1A1A1A;
-  color: #FFFFFF;
-  outline: #1E66F5;
-  background: url('../../assets/admin/bottom.svg') no-repeat right center;
-  transition: 0.3s ease
-}
-
-.search-select:focus{
-  border-color: #1E66F5;
-  background-color: #1A1A1A;
-}
-
 .placeholder-userAll {
   width: 50%;
   margin: 20px;
   padding: 8px;
-  font-size: 1em;   
+  font-size: 1em;
   border: 1px solid #333;
   border-radius: 5px;
   background-color: #1A1A1A;
@@ -238,7 +254,30 @@ const deleteUser = async (id) => {
   transition: 0.3s ease
 }
 .placeholder-userAll::placeholder {
-    font-family: JetBrainsMono;
+  font-family: JetBrainsMono;
+}
+
+.search-select {
+  padding: 8px;
+  padding-right: 30px ;
+  margin-right: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  outline: #1E66F5;
+  background: url('../../assets/admin/bottom.svg') no-repeat right center;
+  transition: 0.3s ease
+}
+
+.search-select-option{
+  font-size: 0.8em;
+  background-color: #1A1A1A;
+}
+
+.search-select:focus{
+  border-color: #1E66F5;
 }
 
 .placeholder-userAll:focus {

@@ -7,6 +7,9 @@ import eventBus from '../../eventBus.js';
 import config from "../../config";
 
 let array = ref([])
+let filteredArray = ref([]);
+let searchQuery = ref('');
+let searchCriterion = ref('id');
 let flag = ref(true);
 let flagLogin = ref(true);
 let flagName = ref(true);
@@ -19,8 +22,29 @@ const url = computed(()=> {
 const fetchGroup = async () => {
   const response = await useFetch(url).json();
   array.value = response.data.value;
+  filteredArray.value = array.value;
   console.log('LOG', array);
 };
+
+const filterUsers = () => {
+  if (searchQuery.value) {
+    filteredArray.value = array.value.filter(user => {
+      if (searchCriterion.value === 'id') {
+        return user.id.toString().includes(searchQuery.value);
+      } else if (searchCriterion.value === 'login') {
+        return user.login.toLowerCase().includes(searchQuery.value.toLowerCase());
+      } else if (searchCriterion.value === 'name') {
+        return user.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+      } else if (searchCriterion.value === 'course') {
+        return user.course.toString().includes(searchQuery.value);
+      }
+    });
+  } else {
+    filteredArray.value = array.value;
+  }
+};
+
+watch([searchQuery, searchCriterion], filterUsers);
 
 onMounted(() => {
   fetchGroup()
@@ -41,46 +65,45 @@ const editUser = (id) => {
   authState.isVisibleEditStudentModelComponent = true;
 };
 
-
 eventBus.on('studentAdded', fetchGroup);
 
 function sortById() {
-  if(flag.value) {
-    array.value.sort((a, b) => a.id - b.id);
+  if (flag.value) {
+    filteredArray.value.sort((a, b) => a.id - b.id);
     flag.value = !flag.value;
-  } else{
+  } else {
+    filteredArray.value.sort((a, b) => b.id - a.id);
     flag.value = !flag.value;
-    array.value.sort((a, b) => b.id - a.id);
   }
 }
 
 function sortByLogin() {
-  if(flagLogin.value) {
-    array.value.sort((a, b) => a.login.localeCompare(b.login));
+  if (flagLogin.value) {
+    filteredArray.value.sort((a, b) => a.login.localeCompare(b.login));
     flagLogin.value = !flagLogin.value;
-  } else{
+  } else {
+    filteredArray.value.sort((a, b) => b.login.localeCompare(a.login));
     flagLogin.value = !flagLogin.value;
-    array.value.sort((a, b) =>b.login.localeCompare(a.login));
   }
 }
 
 function sortByName() {
-  if(flagName.value) {
-    array.value.sort((a, b) => a.name.localeCompare(b.name));
+  if (flagName.value) {
+    filteredArray.value.sort((a, b) => a.name.localeCompare(b.name));
     flagName.value = !flagName.value;
-  } else{
+  } else {
+    filteredArray.value.sort((a, b) => b.name.localeCompare(a.name));
     flagName.value = !flagName.value;
-    array.value.sort((a, b) =>b.name.localeCompare(a.name));
   }
 }
 
 function sortByCourse() {
   if(flagCourse.value) {
-    array.value.sort((a, b) => a.course - b.course);
+    filteredArray.value.sort((a, b) => a.course - b.course);
     flagCourse.value = !flagCourse.value;
   } else{
     flagCourse.value = !flagCourse.value;
-    array.value.sort((a, b) => b.course - a.course);
+    filteredArray.value.sort((a, b) => b.course - a.course);
   }
 }
 
@@ -107,18 +130,29 @@ const deleteUser = async (id) => {
 
     <header class="content-header">
       <div class="line"></div>
-      <h1>Пользователи</h1>
+      <h1>Студенты</h1>
     </header>
     <div class="wrap-input-btn">
-      <input type="text" placeholder="Поиск..." class="placeholder-userAll">
+      <select v-model="searchCriterion" class="search-select">
+        <option class="search-select-option" value="id">Id</option>
+        <option class="search-select-option" value="login">Логин</option>
+        <option class="search-select-option" value="name">Имя</option>
+        <option class="search-select-option" value="course">Курс</option>
+      </select >
+
+      <input
+          type="text"
+          placeholder="Поиск..."
+          v-model="searchQuery"
+          class="placeholder-userAll"
+      />
       <button @click="authState.isVisibleModalAddUsers = true" class="addUser">Новый пользователь</button>
     </div>
-    <div class="text-list-userAll">Список пользователей</div>
+    <div class="text-list-userAll">Список студентов</div>
     <div class="user-list">
       <div class="user-list-header">
         <span class="user-id">Id <button><img src="../../assets/admin/bottom.svg" @click="sortById" ></button></span>
         <span class="user-login">Логин <button><img src="../../assets/admin/bottom.svg" @click="sortByLogin"></button></span>
-<!--        <span class="user-role">Права<button><img src="../../assets/admin/bottom.svg" ></button></span>-->
         <span class="user-role">Группа<button><img src="../../assets/admin/bottom.svg" ></button></span>
         <span class="user-role">Курс<button><img src="../../assets/admin/bottom.svg" @click="sortByCourse" ></button></span>
         <span class="user-name">Имя <button><img src="../../assets/admin/bottom.svg" @click="sortByName"></button></span>
@@ -126,15 +160,18 @@ const deleteUser = async (id) => {
         <span class="user-delete">Удалить</span>
       </div>
 
-      <div v-for="item in array" :key = "item.id" class="user-item">
+      <div v-if="filteredArray.length" v-for="item in filteredArray" :key = "item.id" class="user-item">
         <span class="user-id">{{ item.id }}</span>
         <span class="user-login">{{ item.login }}</span>
-<!--        <span class="user-role">{{ item.roles[0] }}</span>-->
         <span class="user-role">{{ item.group }}</span>
         <span class="user-role">{{ item.course }}</span>
         <span class="user-name">{{ item.name }}</span>
         <span class="user-edit"><button><img src="../../assets/admin/piece_of_paper_and_pencil.svg" @click="editUser(item.id)" ></button></span>
         <span class="user-delete"><button><img src="../../assets/admin/cross-svgrepo-com.svg" @click="deleteUser(item.id)"></button></span>
+      </div>
+
+      <div v-else class="user-item">
+        Данные о пользователях или пользователе отсутсвуют
       </div>
 
     </div>
@@ -150,10 +187,11 @@ const deleteUser = async (id) => {
 .wrap-input-btn {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  margin-left: 20px;
 }
 .addUser {
+  margin-left: auto;
   width: 240px;
   height: 40px;
   background-color: transparent;
@@ -219,6 +257,29 @@ const deleteUser = async (id) => {
 }
 .placeholder-userAll::placeholder {
   font-family: JetBrainsMono;
+}
+
+.search-select {
+  padding: 8px;
+  padding-right: 30px ;
+  margin-right: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  outline: #1E66F5;
+  background: url('../../assets/admin/bottom.svg') no-repeat right center;
+  transition: 0.3s ease
+}
+
+.search-select-option{
+  font-size: 0.8em;
+  background-color: #1A1A1A;
+}
+
+.search-select:focus{
+  border-color: #1E66F5;
 }
 
 .placeholder-userAll:focus {
