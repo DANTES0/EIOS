@@ -49,19 +49,25 @@ const isActiveUsers = ref(false)
                     </div>
                     <img :class="{'rotate': isActiveUsers}" class="arrow" src="../../assets/Upper.svg">
                 </div>
-                <Transition name = "slide-fade">
+                  <Transition name="slide-fade">
                     <div v-if="isActiveUsers" class="content-userPage">
-                        
-                        <div class="content-userPage-title">Преподаватели</div>
-                        <div class="content-userPage-wrap" :class="{'lineActive': authState.isArticle == 'UserStudent'}" >
-                            <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserStudent'}">Студенты</div>
+
+                      <div class="content-userPage-wrap" :class="{'lineActive': authState.isArticle == 'UserTeachers'}">
+                        <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserTeachers'}">
+                          Преподаватели
                         </div>
-                        <div class="content-userPage-title">Администраторы</div>
-                        <div class="content-userPage-wrap" :class="{'lineActive': authState.isArticle == 'UserAll'}" >
-                            <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserAll'}">Все</div>
+                      </div>
+                      <div class="content-userPage-wrap" :class="{'lineActive': authState.isArticle == 'UserStudent'}">
+                        <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserStudent'}">
+                          Студенты
                         </div>
+                      </div>
+                      <div class="content-userPage-title">Администраторы</div>
+                      <div class="content-userPage-wrap" :class="{'lineActive': authState.isArticle == 'UserAll'}">
+                        <div class="content-userPage-title" @click="() => {authState.isArticle = 'UserAll'}">Все</div>
+                      </div>
                     </div>
-                </Transition>
+                  </Transition>
                 </div>
             </div>
             
