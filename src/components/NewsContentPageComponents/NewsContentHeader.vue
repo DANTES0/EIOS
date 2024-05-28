@@ -71,6 +71,7 @@
 
 .title-news1 {
   width: 45%;
+  min-height: 400px;
   border-right: solid 1px #2B2B2B;
   background-image: url("../../assets/NewsContent/blue-wave.svg");
   background-size: contain;
@@ -98,7 +99,7 @@
 }
 
 .news-teg1-container{
-  width: 35%;
+  width: 45%;
   display: flex;
   justify-content: flex-end;
 }
@@ -112,7 +113,7 @@
 }
 
 .news-date1-container{
-  width: 65%;
+  width: 55%;
   display: flex;
   justify-content: flex-end;
 }

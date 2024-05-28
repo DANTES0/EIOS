@@ -5,6 +5,7 @@ import Timetable from "../pages/Timetable.vue"
 import Gallery from "../pages/Gallery.vue"
 import Admin from "../pages/Admin.vue"
 import NewsContent from "../pages/NewsContent.vue";
+import NewsAdminAdd from "../components/AdminPageComponents/NewsAdminAdd.vue"
 const routes = [
     {
         path: '/',
@@ -30,6 +31,11 @@ const routes = [
         path: '/news/get/:id',
         name: "NewsContent",
         component: NewsContent
+    },
+    {
+        path: '/news/get/admin/:id',
+        name: "NewsAdminAdd",
+        component: NewsAdminAdd
     }
 ]
 //newsContent

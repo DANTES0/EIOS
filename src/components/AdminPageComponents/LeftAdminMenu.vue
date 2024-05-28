@@ -36,7 +36,7 @@ const isActiveUsers = ref(false)
                     </div>
                 </Transition>
             </div>
-                <div class="wrap">
+                <div class="wrap" @click="() => { authState.isArticle = 'NewsAdmin'}">
                     <div class="newsPage article" :class="{'active': isActiveNews}" @click="() => isActiveNews =! isActiveNews">
                         <div class="newsPage-title title">Новости</div>
                     </div>
