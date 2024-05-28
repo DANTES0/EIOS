@@ -90,8 +90,9 @@ defineProps({
   height: 300px;
   margin: auto auto;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  /* background-size: 100% 100%; */
   background-position: 50%;
+  background-size: contain;
 }
 .card-news-down-tags {
   overflow: hidden;
@@ -187,7 +188,7 @@ defineProps({
 .description-text-news {
   font-family: JetBrainsMono;
   margin-left: 45px;
-  margin-top: 50px;
+  margin-top: 10px;
   width: 350px;
   height: 200px;
   font-size: 20px;

@@ -111,6 +111,7 @@ let temp = ref(0)
   font-weight: 300;
 }
 .prepod-description-block {
+  padding: 0 10px;
   margin-top: 40px;
   width: 642px;
   height: 218px;

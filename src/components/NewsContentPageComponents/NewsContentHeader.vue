@@ -70,7 +70,7 @@
 }
 
 .title-news1 {
-  width: 35%;
+  width: 45%;
   border-right: solid 1px #2B2B2B;
   background-image: url("../../assets/NewsContent/blue-wave.svg");
   background-size: contain;
@@ -83,11 +83,11 @@
   font-family: Calibri;
   font-weight: bold;
   color: white;
-  font-size: 48px;
+  font-size: 44px;
 }
 
 .text-news{
-  width: 65%;
+  width: 55%;
 }
 
 .text-news-text{
