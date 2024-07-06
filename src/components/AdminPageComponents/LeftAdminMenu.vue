@@ -1,10 +1,10 @@
 <script setup>
-import {ref} from 'vue'
+import {ref} from 'vue';
 import { authState } from '../../authState';
 
-const isActiveMain = ref(false)
-const isActiveNews = ref(false)
-const isActiveUsers = ref(false)
+const isActiveMain = ref(false);
+const isActiveNews = ref(false);
+const isActiveUsers = ref(false);
 </script>
 
 <template>

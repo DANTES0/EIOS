@@ -1,11 +1,11 @@
 <script setup>
-import "vue3-select-component/dist/style.css";
-import VueSelect from "vue3-select-component";
-import {authState} from "../../authState";
-import {ref, computed} from 'vue'
-import eventBus from "../../eventBus.js";
-import {useFetch} from "@vueuse/core";
-import config from "../../config";
+import 'vue3-select-component/dist/style.css';
+import VueSelect from 'vue3-select-component';
+import {authState} from '../../authState';
+import {ref, computed} from 'vue';
+import eventBus from '../../eventBus.js';
+import {useFetch} from '@vueuse/core';
+import config from '../../config';
 
 const login = ref();
 const password = ref();
@@ -21,53 +21,53 @@ const placeholder2 = ref('Поиск...');
 
 let array = ref([]);
 array.value.push(
-    { label: 'О714Б', value: 1 },
-    { label: 'О715Б', value: 2 },
-    { label: 'О716Б', value: 3 }
-)
+	{ label: 'О714Б', value: 1 },
+	{ label: 'О715Б', value: 2 },
+	{ label: 'О716Б', value: 3 }
+);
 
 let array2 = ref([]);
 array2.value.push(
-    { label: '1', value: 1 },
-    { label: '2', value: 2 },
-    { label: '3', value: 3 }
-)
+	{ label: '1', value: 1 },
+	{ label: '2', value: 2 },
+	{ label: '3', value: 3 }
+);
 
 const handleOptionSelected = (option) => {
-  placeholder.value = option.label;
-  group.value = option.label;
+	placeholder.value = option.label;
+	group.value = option.label;
 };
 
 const handleOptionSelected2 = (option) => {
-  placeholder2.value = option.label;
-  course.value = option.label;
+	placeholder2.value = option.label;
+	course.value = option.label;
 };
 
 const hideModal = (event) => {
-  if (event.target.classList.contains('modal-add-user-wrapper')) {
-    authState.isVisibleModalAddUsers = false;
-  }
-  document.documentElement.classList.remove('modal-open');
+	if (event.target.classList.contains('modal-add-user-wrapper')) {
+		authState.isVisibleModalAddUsers = false;
+	}
+	document.documentElement.classList.remove('modal-open');
 };
 
 const sendNewStudent = async () => {
-  const {data, error} = await useFetch(`${config.KirURL}/students/register`, {
-    method: 'POST',
-    body: JSON.stringify({
-      login: login.value,
-      password: password.value,
-      roles: roles.value,
-      name: name.value,
-      group: group.value,
-      course: course.value
-    }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).json();
+	const {data, error} = await useFetch(`${config.KirURL}/students/register`, {
+		method: 'POST',
+		body: JSON.stringify({
+			login: login.value,
+			password: password.value,
+			roles: roles.value,
+			name: name.value,
+			group: group.value,
+			course: course.value
+		}),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}).json();
 
-  authState.isVisibleModalAddUsers = false;
-  eventBus.emit('studentAdded');
+	authState.isVisibleModalAddUsers = false;
+	eventBus.emit('studentAdded');
 };
 document.documentElement.classList.add('modal-open');
 </script>

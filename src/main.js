@@ -3,6 +3,7 @@ import router from './router/routes'
 import vuetify from './plugins/vuetify';
 import App from './App.vue'
 import './style.css'
+import './index.css'
 import store from './store'
 import Popper from 'vue3-popper'
 

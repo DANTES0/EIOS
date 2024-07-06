@@ -1,9 +1,9 @@
 <script setup>
 defineProps({
-  id: Number,
-  title: String,
-  description: String,
-})
+	id: Number,
+	title: String,
+	description: String,
+});
 </script>
 
 <template>

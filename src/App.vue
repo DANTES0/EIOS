@@ -1,14 +1,12 @@
 <script setup>
 import NavBar from "./components/Header.vue"
-import Footer from "./components/Footer.vue"
 import Auth from "./components/Auth.vue";
-import { ref } from "vue";
 import { authState } from './authState';
 import useAuthenticatedFetch from './fetchInterceptor';
 import config from "./config";
 
 const fetch = async () => {
- const {statusCode, data, error} = await useAuthenticatedFetch(`${config.KirURL}/api/v1/admin`).get()
+ const {statusCode} = await useAuthenticatedFetch(`${config.KirURL}/api/v1/admin`).get()
  console.log(statusCode)
  if (statusCode.value == '200') {
   authState.isAccess = true
@@ -17,12 +15,13 @@ const fetch = async () => {
   console.log('ЗАПРОС')
 }
 fetch();
-function visibleAuth () 
-{ 
+
+// function visibleAuth () 
+// { 
   
-  isVisible.value = !isVisible.value
-  console.log(isVisible.value)
-}
+//   isVisible.value = !isVisible.value
+//   console.log(isVisible.value)
+// }
 
 
 </script>

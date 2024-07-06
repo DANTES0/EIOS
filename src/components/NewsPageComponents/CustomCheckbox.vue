@@ -6,28 +6,28 @@
 </template>
 
 <script setup>
-    import { computed } from "vue";
+import { computed } from 'vue';
 
-    const props = defineProps({
-        modelValue: { type: [Array, Boolean] },
-        value: { type: [Boolean, Object] },
-        label: { type: String },
-    });
+const props = defineProps({
+	modelValue: { type: [Array, Boolean] },
+	value: { type: [Boolean, Object] },
+	label: { type: String },
+});
 
-    const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
-    const model = computed({
-        get() {
-            return props.modelValue;
-        },
-        set(value) {
-            emit("update:modelValue", value);
-        },
-    });
+const model = computed({
+	get() {
+		return props.modelValue;
+	},
+	set(value) {
+		emit('update:modelValue', value);
+	},
+});
 
-    function toggleCheckbox() {
-        model.value = !model.value;
-    }
+function toggleCheckbox() {
+	model.value = !model.value;
+}
 </script>
 
 <style>

@@ -1,21 +1,21 @@
 <script setup>
 import { ref } from 'vue';
-import PrepodavateliKafedriCarousel from './PrepodavateliKafedriCarousel.vue'
-let flag = ref(false)
+import PrepodavateliKafedriCarousel from './PrepodavateliKafedriCarousel.vue';
+let flag = ref(false);
 const props = defineProps({
-  id: Number,
-  name: String,
-  photo: String,
-  post: String
-}) 
+	id: Number,
+	name: String,
+	photo: String,
+	post: String
+}); 
 function next_prepodavatel() {
-flag.value = true
-setTimeout(() => {
-    flag.value = false; // Удаляем класс .anima
-  }, 2000); // Короткий интервал времени
+	flag.value = true;
+	setTimeout(() => {
+		flag.value = false; // Удаляем класс .anima
+	}, 2000); // Короткий интервал времени
 }
 const resetAnimation = () => {
-  flag.value = false;
+	flag.value = false;
   
 };
 </script>

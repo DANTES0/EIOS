@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed, watch, onMounted } from "vue";
-import CustomCheckbox from "./CustomCheckbox.vue";
+import { ref, computed, watch, onMounted } from 'vue';
+import CustomCheckbox from './CustomCheckbox.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { useRouter, useRoute } from 'vue-router';
 import '@vuepic/vue-datepicker/dist/main.css';
@@ -12,17 +12,17 @@ const dateStartURL = ref(null);
 const dateEndURL = ref(null);
 
 const categories = ref([
-    "Важные",
-    "Конференции",
-    "Конкурсы, гранты",
-    "Мероприятия",
-    "Наука",
-    "Достижения",
-    "Спорт",
-    "Конференции орг.",
-    "Объявления",
-    "Приемная комиссия",
-    "Другие"
+	'Важные',
+	'Конференции',
+	'Конкурсы, гранты',
+	'Мероприятия',
+	'Наука',
+	'Достижения',
+	'Спорт',
+	'Конференции орг.',
+	'Объявления',
+	'Приемная комиссия',
+	'Другие'
 ]);
 
 const selectedCategories = ref(Array(categories.value.length).fill(false));
@@ -35,119 +35,119 @@ const router = useRouter();
 const route = useRoute();
 
 const filtersContentHeight = computed(() => {
-    let height = 0;
-    if (!isShowData.value && !isShowCategories.value) {
-        height += 60;
-    }
-    else if (isShowData.value && !isShowCategories.value) {
-        height += 213;
-    }
-    else if (!isShowData.value && isShowCategories.value) {
-        height += 391;
-    }
-    else if (isShowData.value && isShowCategories.value) {
-        height += 543.5;
-    }
-    return height;
+	let height = 0;
+	if (!isShowData.value && !isShowCategories.value) {
+		height += 60;
+	}
+	else if (isShowData.value && !isShowCategories.value) {
+		height += 213;
+	}
+	else if (!isShowData.value && isShowCategories.value) {
+		height += 391;
+	}
+	else if (isShowData.value && isShowCategories.value) {
+		height += 543.5;
+	}
+	return height;
 });
 
 function showFilters() {
-    isShowFilters.value = !isShowFilters.value;
+	isShowFilters.value = !isShowFilters.value;
 } 
 
 function showCategories() {
-    isShowCategories.value = !isShowCategories.value;
+	isShowCategories.value = !isShowCategories.value;
 } 
 
 function showData() {
-    isShowData.value = !isShowData.value;
+	isShowData.value = !isShowData.value;
 }
 
 function applyFilters() {
-    const selectedCategoriesNames = selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(';');
+	const selectedCategoriesNames = selectedCategories.value.map((isChecked, index) => isChecked ? categories.value[index] : null).filter(category => category !== null).join(';');
 
-    const query = {};
+	const query = {};
 
-    if(dateStartURL.value != null) {
-        query.startDate = dateStartURL.value;
-    }
+	if(dateStartURL.value != null) {
+		query.startDate = dateStartURL.value;
+	}
     
-    if(dateEndURL.value != null) {
-        query.endDate = dateEndURL.value;
-    }
+	if(dateEndURL.value != null) {
+		query.endDate = dateEndURL.value;
+	}
 
-    if (selectedCategoriesNames !== '') {
-        query.categories = selectedCategoriesNames;
-    }
+	if (selectedCategoriesNames !== '') {
+		query.categories = selectedCategoriesNames;
+	}
 
-    router.push({
-        name: 'News',
-        query: query
-    });
+	router.push({
+		name: 'News',
+		query: query
+	});
 }
 
 const handleStartDate = (modelData) => {
-    dateStart.value = modelData;
-    dateStartURL.value = formatDateDots(modelData);
-    applyFilters();
+	dateStart.value = modelData;
+	dateStartURL.value = formatDateDots(modelData);
+	applyFilters();
 };
 
 const handleEndDate = (modelData) => {
-    dateEnd.value = modelData;
-    dateEndURL.value = formatDateDots(modelData);
-    applyFilters();
+	dateEnd.value = modelData;
+	dateEndURL.value = formatDateDots(modelData);
+	applyFilters();
 };
 
 watch(selectedCategories, () => {
-    applyFilters();
+	applyFilters();
 }, { deep: true });
 
 onMounted(() => {
-    loadFiltersFromUrl();
-    router.afterEach(loadFiltersFromUrl);
+	loadFiltersFromUrl();
+	router.afterEach(loadFiltersFromUrl);
 });
 
 function loadFiltersFromUrl() {
-    const query = route.query;
+	const query = route.query;
 
-    if (query.startDate) {
-        dateStart.value = parseDate(query.startDate);
-        dateStartURL.value = formatDateDots(dateStart.value);
-    }
+	if (query.startDate) {
+		dateStart.value = parseDate(query.startDate);
+		dateStartURL.value = formatDateDots(dateStart.value);
+	}
 
-    if (query.endDate) {
-        dateEnd.value = parseDate(query.endDate);
-        dateEndURL.value = formatDateDots(dateEnd.value);
-    }
+	if (query.endDate) {
+		dateEnd.value = parseDate(query.endDate);
+		dateEndURL.value = formatDateDots(dateEnd.value);
+	}
 
-    if (query.categories) {
-        const selectedCategoriesArray = query.categories.split(';');
-        for (let i = 0; i < selectedCategoriesArray.length; i++) {
-            const category = selectedCategoriesArray[i];
-            const index = categories.value.indexOf(category);
-            if (index !== -1) {
-                selectedCategories.value[index] = true;
-            }
-        }
-    } else {
-        selectedCategories.value.fill(false);
-    }
+	if (query.categories) {
+		const selectedCategoriesArray = query.categories.split(';');
+		for (let i = 0; i < selectedCategoriesArray.length; i++) {
+			const category = selectedCategoriesArray[i];
+			const index = categories.value.indexOf(category);
+			if (index !== -1) {
+				selectedCategories.value[index] = true;
+			}
+		}
+	} else {
+		selectedCategories.value.fill(false);
+	}
 }
 
 function formatDateDots(date) {
-    if (date) {
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-        return `${day}.${month}.${year}`;
-    } else {
-        return null;
-    }
+	if (date) {
+		const day = date.getDate();
+		const month = date.getMonth() + 1;
+		const year = date.getFullYear();
+		return `${day}.${month}.${year}`;
+	} else {
+		return null;
+	}
 }
 
 function parseDate(dateStr) {
-    const [day, month, year] = dateStr.split('.').map(Number);
-    return new Date(year, month - 1, day);
+	const [day, month, year] = dateStr.split('.').map(Number);
+	return new Date(year, month - 1, day);
 }
 </script>
 

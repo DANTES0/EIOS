@@ -1,87 +1,87 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { useFetch } from "@vueuse/core"
+import { ref, onMounted, computed } from 'vue';
+import { useFetch } from '@vueuse/core';
 import config from '../../config';
 
-let array = ref([])
+let array = ref([]);
 
 // Обработчики для изменения состояния видимости конкретного элемента
 const handleMouseOver = (index) => {
-  array.value[index].isVisible = true
-}
+	array.value[index].isVisible = true;
+};
 
 const handleMouseLeave = (index) => {
-  array.value[index].isVisible = false
-}
+	array.value[index].isVisible = false;
+};
 
 const photo_url = computed(() => {
-  return `${config.KirURL}/gallery/get`
-})
+	return `${config.KirURL}/gallery/get`;
+});
 
 const fetchPhoto = async () => {
-  const response = await useFetch(photo_url).json()
+	const response = await useFetch(photo_url).json();
   
-  array.value = response.data.value.map(item => ({
-    ...item,
-    isVisible: false
-  }))
-  console.log(array.value)
-}
+	array.value = response.data.value.map(item => ({
+		...item,
+		isVisible: false
+	}));
+	console.log(array.value);
+};
 
 const deletePhoto = async (id, index) => {
-  await useFetch(`${config.KirURL}/gallery/delete/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).json();
+	await useFetch(`${config.KirURL}/gallery/delete/${id}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}).json();
 
-  // Удаляем элемент из массива
-  array.value.splice(index, 1);
-}
+	// Удаляем элемент из массива
+	array.value.splice(index, 1);
+};
 
 const selectedFileName = ref('');
 const selectedFile = ref(null);
 
 const addPhoto = async (file) => {
-  if (!file) return;
+	if (!file) return;
 
-  const formData = new FormData();
-  formData.append('file', file);
+	const formData = new FormData();
+	formData.append('file', file);
 
-  const response = await fetch(`${config.KirURL}/gallery/upload`, {
-    method: 'POST',
-    body: formData,
-    headers: {
-      'Accept': 'application/json'
-    }
-  });
+	const response = await fetch(`${config.KirURL}/gallery/upload`, {
+		method: 'POST',
+		body: formData,
+		headers: {
+			'Accept': 'application/json'
+		}
+	});
 
-  if (response.ok) {
-    selectedFileName.value = '';
-    selectedFile.value = null;
-    fetchPhoto()
-  } else {
-    console.error('Error uploading file');
-  }
+	if (response.ok) {
+		selectedFileName.value = '';
+		selectedFile.value = null;
+		fetchPhoto();
+	} else {
+		console.error('Error uploading file');
+	}
   
-}
+};
 
 const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    selectedFileName.value = file.name;
-    selectedFile.value = file;
-    addPhoto(file); // Загрузка фото сразу после выбора
-  } else {
-    selectedFileName.value = '';
-    selectedFile.value = null;
-  }
-}
+	const file = event.target.files[0];
+	if (file) {
+		selectedFileName.value = file.name;
+		selectedFile.value = file;
+		addPhoto(file); // Загрузка фото сразу после выбора
+	} else {
+		selectedFileName.value = '';
+		selectedFile.value = null;
+	}
+};
 
 onMounted(() => {
-  fetchPhoto()
-})
+	fetchPhoto();
+});
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 <script setup>
-import { computed, onMounted, ref } from "vue"
-import { useRoute } from "vue-router";
-import DropdownHeader from "./MainPageComponents/DropdownHeader.vue";
-import SearchTimetable from "./TimetablePageComponents/SearchTimetable.vue"
-import NewsFilters from "./NewsPageComponents/NewsFilters.vue"
+import { computed, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import DropdownHeader from './MainPageComponents/DropdownHeader.vue';
+import SearchTimetable from './TimetablePageComponents/SearchTimetable.vue';
+import NewsFilters from './NewsPageComponents/NewsFilters.vue';
 
 // this.$refs.dropbtn.addEventListener("click", function (event) {
 //   document.getElementById("myDropdown").classList.toggle("show")

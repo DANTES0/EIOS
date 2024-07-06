@@ -1,18 +1,18 @@
 <script setup>
-import Tabs from '../components/Tabs.vue'
-import NewsBlock from "../components/NewsPageComponents/NewsBlock.vue"
-import Pagination from "../components/NewsPageComponents/Pagination.vue"
+import Tabs from '../components/Tabs.vue';
+import NewsBlock from '../components/NewsPageComponents/NewsBlock.vue';
+import Pagination from '../components/NewsPageComponents/Pagination.vue';
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import CustomPagination from "../components/NewsPageComponents/CustomPagination.vue"
+import CustomPagination from '../components/NewsPageComponents/CustomPagination.vue';
 import config from '../config';
 
-const newsData = ref([])
-const route = useRoute()
-const router = useRouter()
+const newsData = ref([]);
+const route = useRoute();
+const router = useRouter();
 
-const currentPage = ref(1)
-const itemsPerPage = 10
+const currentPage = ref(1);
+const itemsPerPage = 10;
 
 // const currentIP = true;
 // let IPAddress = '';
@@ -24,56 +24,56 @@ const itemsPerPage = 10
 // }
 
 async function loadNews() {
-    let requestAddress = `${config.KirURL}/news/get/all`
+	let requestAddress = `${config.KirURL}/news/get/all`;
 
-    const categories = route.query.categories ? route.query.categories.split(';') : []
-    const startDate = route.query.startDate ? route.query.startDate : null
-    const endDate = route.query.endDate ? route.query.endDate : null
+	const categories = route.query.categories ? route.query.categories.split(';') : [];
+	const startDate = route.query.startDate ? route.query.startDate : null;
+	const endDate = route.query.endDate ? route.query.endDate : null;
 
-    if (categories.length === 0 && !startDate && !endDate) {
-        requestAddress = `${config.KirURL}/news/get/all`
-    } else if (categories.length === 0 && startDate && endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}&endDate=${endDate}`
-    } else if (categories.length > 0 && !startDate && !endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}`
-    } else if (categories.length > 0 && startDate && endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`
-    } else if (categories.length === 0 && startDate && !endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}`
-    } else if (categories.length > 0 && startDate && !endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`
-    } else if (categories.length === 0 && !startDate && endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?endDate=${endDate}`
-    } else if (categories.length > 0 && !startDate && endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`
-    }
+	if (categories.length === 0 && !startDate && !endDate) {
+		requestAddress = `${config.KirURL}/news/get/all`;
+	} else if (categories.length === 0 && startDate && endDate) {
+		requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}&endDate=${endDate}`;
+	} else if (categories.length > 0 && !startDate && !endDate) {
+		requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}`;
+	} else if (categories.length > 0 && startDate && endDate) {
+		requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`;
+	} else if (categories.length === 0 && startDate && !endDate) {
+		requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}`;
+	} else if (categories.length > 0 && startDate && !endDate) {
+		requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`;
+	} else if (categories.length === 0 && !startDate && endDate) {
+		requestAddress = `${config.KirURL}/news/get/all?endDate=${endDate}`;
+	} else if (categories.length > 0 && !startDate && endDate) {
+		requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`;
+	}
 
-    console.log(categories)
-    console.log(startDate)
-    console.log(endDate)
+	console.log(categories);
+	console.log(startDate);
+	console.log(endDate);
 
-    try {
-        const response = await fetch(requestAddress)
-        if (response.ok) {
-            const data = await response.json()
-            newsData.value = data
-            console.log(newsData.value)
-        } else {
-            console.error('Ошибка при загрузке данных:', response.statusText)
-        }
-    } catch (error) {
-        console.error('Ошибка при выполнении запроса:', error)
-    }
+	try {
+		const response = await fetch(requestAddress);
+		if (response.ok) {
+			const data = await response.json();
+			newsData.value = data;
+			console.log(newsData.value);
+		} else {
+			console.error('Ошибка при загрузке данных:', response.statusText);
+		}
+	} catch (error) {
+		console.error('Ошибка при выполнении запроса:', error);
+	}
 }
 
-loadNews()
+loadNews();
 
 watch(route, () => {
-    loadNews()
+	loadNews();
 });
 
 function navigateToNews(newsId) {
-    router.push(`/news/get/${newsId}`);
+	router.push(`/news/get/${newsId}`);
 }
 </script>
 

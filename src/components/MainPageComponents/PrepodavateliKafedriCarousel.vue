@@ -1,117 +1,117 @@
+<!-- eslint-disable vue/no-side-effects-in-computed-properties -->
+<!-- eslint-disable vue/return-in-computed-property -->
 <script setup>
-import { useFetch } from "@vueuse/core"
-import { computed, ref } from "vue"
-import { onMounted } from "vue"
-import PrepodavateliKafedriItem from './PrepodavateliKafedriItem.vue'
-import config from "../../config"
-let flag = ref(false)
+import { useFetch } from '@vueuse/core';
+import { computed, ref } from 'vue';
+import { onMounted } from 'vue';
+import PrepodavateliKafedriItem from './PrepodavateliKafedriItem.vue';
+import config from '../../config';
+let flag = ref(false);
 const prepod_url = computed(() => {
-  return `${config.KirURL}/api/v1/teacher/getAll`
-})
-let prepod = ref(null)
-let currentIndex = ref(1)
-let nextId = ref([])
-let prevId = ref([])
-let boll = ref ([])
-let temp_array= ref([])
+	return `${config.KirURL}/api/v1/teacher/getAll`;
+});
+let prepod = ref(null);
+let currentIndex = ref(1);
+let nextId = ref([]);
+let prevId = ref([]);
+let temp_array= ref([]);
 const fetchPrepod = async() => {
-  const response_prepod = await useFetch(prepod_url).json()
+	const response_prepod = await useFetch(prepod_url).json();
   
-  prepod.value = response_prepod.data.value
-  prepod.value.sort();
+	prepod.value = response_prepod.data.value;
+	prepod.value.sort();
 
-//   currentIndex.value++;
-for (let i = 0; i< prepod.value.length; i++)
-{
-  prepod.value[i].id = i
-  if (prepod.value[i].id == prepod.value.length-1)
-  {
-    nextId.value[i] = 0  
-  } else {
-  nextId.value[i] = i + 1;
-  } 
+	//   currentIndex.value++;
+	for (let i = 0; i< prepod.value.length; i++)
+	{
+		prepod.value[i].id = i;
+		if (prepod.value[i].id == prepod.value.length-1)
+		{
+			nextId.value[i] = 0;  
+		} else {
+			nextId.value[i] = i + 1;
+		} 
   
-  if (prepod.value[i].id == 0){
-    prevId.value[i] = prepod.value.length-1
-  } else {
-    prevId.value[i] = i - 1;
-  }
+		if (prepod.value[i].id == 0){
+			prevId.value[i] = prepod.value.length-1;
+		} else {
+			prevId.value[i] = i - 1;
+		}
 
-}
+	}
 
 
-    for (let i = 0; i< prepod.value.length; i++)
-{
-  if (currentIndex.value == prepod.value[i].id)
-  {
-    temp_array.value[0] = prepod.value[prevId.value[i]]
-    console.log(prepod.value[prevId.value[i]])
-    temp_array.value[1] = prepod.value[currentIndex.value]
-    console.log(prepod.value[currentIndex.value])
-    temp_array.value[2] = prepod.value[nextId.value[i]]
-    console.log(prepod.value[nextId.value[i]])
-  }
+	for (let i = 0; i< prepod.value.length; i++)
+	{
+		if (currentIndex.value == prepod.value[i].id)
+		{
+			temp_array.value[0] = prepod.value[prevId.value[i]];
+			console.log(prepod.value[prevId.value[i]]);
+			temp_array.value[1] = prepod.value[currentIndex.value];
+			console.log(prepod.value[currentIndex.value]);
+			temp_array.value[2] = prepod.value[nextId.value[i]];
+			console.log(prepod.value[nextId.value[i]]);
+		}
 
-}
+	}
 
-}
+};
 
 const next = computed(() => {
     
-    currentIndex.value++;
-    if (currentIndex.value+1 == prepod.value.length+1 ){
-      currentIndex.value = 0
-    }
+	currentIndex.value++;
+	if (currentIndex.value+1 == prepod.value.length+1 ){
+		currentIndex.value = 0;
+	}
     
-    for (let i = 0; i< prepod.value.length; i++)
-{
-  if (currentIndex.value == prepod.value[i].id)
-  {
-    temp_array.value[0] = prepod.value[prevId.value[i]]
-    console.log(prepod.value[prevId.value[i]])
-    temp_array.value[1] = prepod.value[currentIndex.value]
-    console.log(prepod.value[currentIndex.value])
-    temp_array.value[2] = prepod.value[nextId.value[i]]
-    console.log(prepod.value[nextId.value[i]])
-  }
+	for (let i = 0; i< prepod.value.length; i++)
+	{
+		if (currentIndex.value == prepod.value[i].id)
+		{
+			temp_array.value[0] = prepod.value[prevId.value[i]];
+			console.log(prepod.value[prevId.value[i]]);
+			temp_array.value[1] = prepod.value[currentIndex.value];
+			console.log(prepod.value[currentIndex.value]);
+			temp_array.value[2] = prepod.value[nextId.value[i]];
+			console.log(prepod.value[nextId.value[i]]);
+		}
 
-}
+	}
 
-})
+});
 
 const prev = () => {
-  currentIndex.value--;
-    if (currentIndex.value == -1 ){
-      currentIndex.value = prepod.value.length-1
-    }
+	currentIndex.value--;
+	if (currentIndex.value == -1 ){
+		currentIndex.value = prepod.value.length-1;
+	}
     
-    for (let i = 0; i< prepod.value.length; i++)
-{
-  if (currentIndex.value == prepod.value[i].id)
-  {
-    temp_array.value[0] = prepod.value[prevId.value[i]]
-    console.log(prepod.value[prevId.value[i]])
-    temp_array.value[1] = prepod.value[currentIndex.value]
-    console.log(prepod.value[currentIndex.value])
-    temp_array.value[2] = prepod.value[nextId.value[i]]
-    console.log(prepod.value[nextId.value[i]])
-  }
+	for (let i = 0; i< prepod.value.length; i++)
+	{
+		if (currentIndex.value == prepod.value[i].id)
+		{
+			temp_array.value[0] = prepod.value[prevId.value[i]];
+			console.log(prepod.value[prevId.value[i]]);
+			temp_array.value[1] = prepod.value[currentIndex.value];
+			console.log(prepod.value[currentIndex.value]);
+			temp_array.value[2] = prepod.value[nextId.value[i]];
+			console.log(prepod.value[nextId.value[i]]);
+		}
 
-}
+	}
 
-}
+};
 
-let count = ref(0)
 onMounted(() => {
-    fetchPrepod();
-})
+	fetchPrepod();
+});
 </script>
 <template>
     <div class="content-wrapper-prepod">
         <div class="prepod-image-block">
           <div style="" class="prepod-image-arrow back-image-arrow" @click="prev"></div>
           <div class="PrepodavateliKafedriItem-wrap">
-            <PrepodavateliKafedriItem v-for="({id, name, photo, post, rank}, index) in temp_array"
+            <PrepodavateliKafedriItem v-for="({id, name, photo, post, rank}) in temp_array"
             :key="id"
             :id = "id"
             :name = "name"

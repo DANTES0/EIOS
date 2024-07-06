@@ -1,9 +1,8 @@
-<script setup></script>
 <template>
   <div class="terminal-tabs">
     <div class="termainal-tabs-wrapper">
-      <div class="title-terminal">ТЕРМИНАЛ</div>
-      <div class="arrow-terminal-up"></div>
+    <div class="title-terminal">ТЕРМИНАЛ</div>
+    <div class="arrow-terminal-up"></div>
     </div>
   </div>
 </template>
