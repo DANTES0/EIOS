@@ -5,6 +5,7 @@ import {useFetch} from "@vueuse/core";
 import {ref, watch} from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 let news = ref([])
+const flag = ref(false)
 const route = useRoute()
 const router = useRouter()
 const loadNews = async () => {
@@ -18,8 +19,21 @@ watch(route, () => {
     loadNews()
 });
 
-function navigateToNews(newsId) {
+async function navigateToNews(newsId) {
+    if (flag.value == true)
+    {
+        await useFetch(`${config.KirURL}/news/delete/${newsId}`, {
+            method: 'POST'
+        })
+        flag.value = !flag.value
+        loadNews()
+    } else {
     router.push(`/news/get/admin/${newsId}`);
+    }
+}
+
+function addNews() {
+    router.push(`/news/get/admin`)
 }
 </script>
 
@@ -29,7 +43,10 @@ function navigateToNews(newsId) {
         <div class="line"></div>
       <h1>Новости</h1>
     </header>
+    
         <div class="content-wrap-news">
+            <button @click="addNews" class="addNews">Добавить новость</button>
+            <button @click="() => flag = !flag" class="addNews" style="margin-left: 900px;">Удаление новостей</button>
             <div class="news-page-content">
                 <div class="news-block" v-for="newsItem in news"> 
                     <NewsBlock 
@@ -51,6 +68,28 @@ function navigateToNews(newsId) {
   font-family: JetBrainsMono;
   src: url("../../assets/JetBrainsMono.ttf");
 }
+
+.addNews {
+    font-family: JetBrainsMono;
+    font-size: 24px;
+    color: white;
+    font-weight: 400;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 40px;
+    transition: 0.3s ease;
+}
+.addNews:hover {
+    background-color: #222222;
+    border-color: #1E66F5;
+  }
+  
+  .addNews:active {
+    background-color: #333333;
+    border-color: #1E66F5;
+  }
+
 .news-block {
     cursor:pointer;
         width: 425px;

@@ -6,6 +6,7 @@
   import VueSelect from "vue3-select-component";
   import VueDatePicker from '@vuepic/vue-datepicker';
   import '@vuepic/vue-datepicker/dist/main.css';
+  import config from '../../config';
   
   const array = ref([]);
   const categories = ref([
@@ -36,14 +37,14 @@
   
   function formatDateDots(date) {
     if (date) {
-      const day = date.getDate();
-      const month = date.getMonth() + 1;
-      const year = date.getFullYear();
-      return `${day}.${month}.${year}`;
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${year}-${month}-${day}`;
     } else {
-      return null;
+        return null;
     }
-  }
+}
   
   function parseDate(dateStr) {
     const [day, month, year] = dateStr.split('.').map(Number);
@@ -53,13 +54,15 @@
   const handleStartDate = (modelData) => {
     dateStart.value = modelData;
   };
-  
+  const imagesArr = ref([])
   const images = ref([]);
   const mainImageIndex = ref(null);
   
   const handleFiles = (event) => {
     const files = event.target.files;
+    // console.log(files)
     for (let i = 0; i < files.length; i++) {
+        imagesArr.value.push(files[i])
       const reader = new FileReader();
       reader.onload = (e) => {
         images.value.push(e.target.result);
@@ -87,12 +90,48 @@
   const mainInfo = ref('')
   const category = ref('')
   const mainText = ref('')
+  const date = ref('')
+
+//   const formData = new FormData();
+//   formData.append('file', file);
 
 
-  const giveMeAllArea = () => {
+const giveMeAllArea = async () => {
+    date.value = formatDateDots(dateStart.value);
+    const formData = new FormData();
 
-    console.log(formatDateDots(dateStart.value))
-  }
+    let object = ref({
+        headline: headLine.value,
+        mainInfo: mainInfo.value,
+        category: category.value,
+        fullInfo: mainText.value,
+        date: date.value,
+        photoNumber: mainImageIndex.value,
+        onMainPage: false,
+    });
+    console.log(object.value)
+    const newsBlob = new Blob([JSON.stringify(object.value)], { type: 'application/json' });
+    formData.append('news', newsBlob);
+
+    // Добавляем каждый файл в formData под ключом 'images'
+    imagesArr.value.forEach((file) => {
+        formData.append('images', file);
+    });
+
+    // Логируем содержимое formData для отладки
+    for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+    }
+        const response = await fetch(`${config.KirURL}/news/upload`, {
+            method: 'POST',
+            body: formData,
+            // Не устанавливаем Content-Type заголовок, fetch сделает это автоматически
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+};
 
   const handleOptionSelected = (option) => {
     console.log(option.value);

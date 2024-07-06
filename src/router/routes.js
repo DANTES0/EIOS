@@ -36,6 +36,11 @@ const routes = [
         path: '/news/get/admin/:id',
         name: "NewsAdminAdd",
         component: NewsAdminAdd
+    },
+    {
+        path: '/news/get/admin',
+        name: "NewsAdminAdd1",
+        component: NewsAdminAdd
     }
 ]
 //newsContent
