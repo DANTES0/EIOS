@@ -10,6 +10,7 @@ let poop=123;
 let meh=123;
 let errorconnt=124234;
 let aewaeaweae = 12414;
+let dsfasdf='asdfasdf';
 // this.$refs.dropbtn.addEventListener("click", function (event) {
 //   document.getElementById("myDropdown").classList.toggle("show")
 //   console.log("click")
