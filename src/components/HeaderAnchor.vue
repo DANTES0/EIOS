@@ -5,6 +5,8 @@ import DropdownHeader from './MainPageComponents/DropdownHeader.vue';
 import SearchTimetable from './TimetablePageComponents/SearchTimetable.vue';
 import NewsFilters from './NewsPageComponents/NewsFilters.vue';
 
+let bob= 0;
+
 // this.$refs.dropbtn.addEventListener("click", function (event) {
 //   document.getElementById("myDropdown").classList.toggle("show")
 //   console.log("click")
