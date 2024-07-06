@@ -8,6 +8,7 @@ import NewsFilters from './NewsPageComponents/NewsFilters.vue';
 let bob= 0;
 let poop=123;
 let meh=123;
+let errorconnt=124234;
 // this.$refs.dropbtn.addEventListener("click", function (event) {
 //   document.getElementById("myDropdown").classList.toggle("show")
 //   console.log("click")
