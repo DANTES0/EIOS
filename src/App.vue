@@ -1,19 +1,19 @@
 <script setup>
-import NavBar from "./components/Header.vue"
-import Auth from "./components/Auth.vue";
+import NavBar from './components/Header.vue';
+import Auth from './components/Auth.vue';
 import { authState } from './authState';
 import useAuthenticatedFetch from './fetchInterceptor';
-import config from "./config";
+import config from './config';
 
 const fetch = async () => {
- const {statusCode} = await useAuthenticatedFetch(`${config.KirURL}/api/v1/admin`).get()
- console.log(statusCode)
- if (statusCode.value == '200') {
-  authState.isAccess = true
-  console.log(authState.isAccess)
- } 
-  console.log('ЗАПРОС')
-}
+	const {statusCode} = await useAuthenticatedFetch(`${config.KirURL}/api/v1/admin`).get();
+	console.log(statusCode);
+	if (statusCode.value == '200') {
+		authState.isAccess = true;
+		console.log(authState.isAccess);
+	} 
+	console.log('ЗАПРОС');
+};
 fetch();
 
 // function visibleAuth () 
@@ -36,7 +36,6 @@ fetch();
       <router-view />
     </div>
   </div>
-  <!-- <Footer></Footer> -->
 </template>
 
 <style scoped>

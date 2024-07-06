@@ -1,12 +1,12 @@
 <script setup>
 
-import {computed, onMounted, ref, watch} from "vue";
-import {useFetch} from "@vueuse/core";
-import { authState } from "../../authState";
+import {computed, onMounted, ref, watch} from 'vue';
+import {useFetch} from '@vueuse/core';
+import { authState } from '../../authState';
 import eventBus from '../../eventBus.js';
-import config from "../../config";
+import config from '../../config';
 
-let array = ref([])
+let array = ref([]);
 let filteredArray = ref([]);
 let searchQuery = ref('');
 let searchCriterion = ref('id');
@@ -16,111 +16,111 @@ let flagName = ref(true);
 let flagCourse = ref(true);
 
 const url = computed(()=> {
-  return `${config.KirURL}/api/v1/teachers/all`
-})
+	return `${config.KirURL}/api/v1/teachers/all`;
+});
 
 const fetchGroup = async () => {
-  const response = await useFetch(url).json();
-  array.value = response.data.value;
-  filteredArray.value = array.value;
-  console.log('LOG', array);
+	const response = await useFetch(url).json();
+	array.value = response.data.value;
+	filteredArray.value = array.value;
+	console.log('LOG', array);
 };
 
 const filterUsers = () => {
-  if (searchQuery.value) {
-    filteredArray.value = array.value.filter(user => {
-      if (searchCriterion.value === 'id') {
-        return user.id.toString().includes(searchQuery.value);
-      } else if (searchCriterion.value === 'login') {
-        return user.login.toLowerCase().includes(searchQuery.value.toLowerCase());
-      } else if (searchCriterion.value === 'name') {
-        return user.name.toLowerCase().includes(searchQuery.value.toLowerCase());
-      } else if (searchCriterion.value === 'post') {
-        return user.post.toLowerCase().includes(searchQuery.value.toLowerCase());
-      }
-    });
-  } else {
-    filteredArray.value = array.value;
-  }
+	if (searchQuery.value) {
+		filteredArray.value = array.value.filter(user => {
+			if (searchCriterion.value === 'id') {
+				return user.id.toString().includes(searchQuery.value);
+			} else if (searchCriterion.value === 'login') {
+				return user.login.toLowerCase().includes(searchQuery.value.toLowerCase());
+			} else if (searchCriterion.value === 'name') {
+				return user.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+			} else if (searchCriterion.value === 'post') {
+				return user.post.toLowerCase().includes(searchQuery.value.toLowerCase());
+			}
+		});
+	} else {
+		filteredArray.value = array.value;
+	}
 };
 
 watch([searchQuery, searchCriterion], filterUsers);
 
 onMounted(() => {
-  fetchGroup()
-})
+	fetchGroup();
+});
 
 watch(array.value, () => {
-  fetchGroup()
-})
+	fetchGroup();
+});
 
 watch(authState.isVisibleModalAddUsers, (newVal) => {
-  if (!newVal) {
-    fetchGroup();
-  }
+	if (!newVal) {
+		fetchGroup();
+	}
 });
 
 const editUser = (id) => {
-  authState.editUserId = id;
-  authState.isVisibleEditStudentModelComponent = true;
+	authState.editUserId = id;
+	authState.isVisibleEditStudentModelComponent = true;
 };
 
 eventBus.on('studentAdded', fetchGroup);
 
 function sortById() {
-  if (flag.value) {
-    filteredArray.value.sort((a, b) => a.id - b.id);
-    flag.value = !flag.value;
-  } else {
-    filteredArray.value.sort((a, b) => b.id - a.id);
-    flag.value = !flag.value;
-  }
+	if (flag.value) {
+		filteredArray.value.sort((a, b) => a.id - b.id);
+		flag.value = !flag.value;
+	} else {
+		filteredArray.value.sort((a, b) => b.id - a.id);
+		flag.value = !flag.value;
+	}
 }
 
 function sortByLogin() {
-  if (flagLogin.value) {
-    filteredArray.value.sort((a, b) => a.login.localeCompare(b.login));
-    flagLogin.value = !flagLogin.value;
-  } else {
-    filteredArray.value.sort((a, b) => b.login.localeCompare(a.login));
-    flagLogin.value = !flagLogin.value;
-  }
+	if (flagLogin.value) {
+		filteredArray.value.sort((a, b) => a.login.localeCompare(b.login));
+		flagLogin.value = !flagLogin.value;
+	} else {
+		filteredArray.value.sort((a, b) => b.login.localeCompare(a.login));
+		flagLogin.value = !flagLogin.value;
+	}
 }
 
 function sortByName() {
-  if (flagName.value) {
-    filteredArray.value.sort((a, b) => a.name.localeCompare(b.name));
-    flagName.value = !flagName.value;
-  } else {
-    filteredArray.value.sort((a, b) => b.name.localeCompare(a.name));
-    flagName.value = !flagName.value;
-  }
+	if (flagName.value) {
+		filteredArray.value.sort((a, b) => a.name.localeCompare(b.name));
+		flagName.value = !flagName.value;
+	} else {
+		filteredArray.value.sort((a, b) => b.name.localeCompare(a.name));
+		flagName.value = !flagName.value;
+	}
 }
 
 function sortByPost() {
-  if(flagCourse.value) {
-    filteredArray.value.sort((a, b) => a.post.localeCompare(b.post));
-    flagCourse.value = !flagCourse.value;
-  } else{
-    flagCourse.value = !flagCourse.value;
-    filteredArray.value.sort((a, b) => b.post.localeCompare(a.post));
-  }
+	if(flagCourse.value) {
+		filteredArray.value.sort((a, b) => a.post.localeCompare(b.post));
+		flagCourse.value = !flagCourse.value;
+	} else{
+		flagCourse.value = !flagCourse.value;
+		filteredArray.value.sort((a, b) => b.post.localeCompare(a.post));
+	}
 }
 
 const deleteUser = async (id) => {
-  try {
-    const response = await fetch(`${config.KirURL}/user/delete/${id}`, {
-      method: 'POST',
-    });
+	try {
+		const response = await fetch(`${config.KirURL}/user/delete/${id}`, {
+			method: 'POST',
+		});
 
-    if (response.ok) {
-      await fetchGroup();
-    } else {
-      console.error('Failed to delete user', await response.text());
-    }
-  } catch (error) {
-    console.error('Failed to delete user', error);
-  }
+		if (response.ok) {
+			await fetchGroup();
+		} else {
+			console.error('Failed to delete user', await response.text());
+		}
+	} catch (error) {
+		console.error('Failed to delete user', error);
+	}
 };
 
 </script>
@@ -159,7 +159,7 @@ const deleteUser = async (id) => {
         <span class="user-delete">Удалить</span>
       </div>
 
-      <div v-if="filteredArray.length" v-for="item in filteredArray" :key = "item.id" class="user-item">
+      <div  v-if="filteredArray.length" v-for="item in filteredArray"  :key = "item.id"  class="user-item">
         <span class="user-id">{{ item.id }}</span>
         <span class="user-login">{{ item.login }}</span>
         <span class="user-role">{{ item.post }}</span>
