@@ -1,19 +1,23 @@
 <script setup>
-  import { defineProps } from "vue";
+import { defineProps } from 'vue';
 
-	const newsBaseData = defineProps({
-		newsFullInfo: { type: String, default: "Вот вам яркий пример современных тенденций — перспективное планирование играет важную роль в формировании приоретизации разума над эмоциями. А ещё базовые сценарии поведения пользователей освещают чрезвычайно интересные особенности картины в целом, однако конкретные выводы, разумеется, подвергнуты целой серии независимых исследований."},
-	});
+const newsBaseData = defineProps({
+    newsFullInfo: {
+        type: String,
+        default:
+            'Вот вам яркий пример современных тенденций — перспективное планирование играет важную роль в формировании приоретизации разума над эмоциями. А ещё базовые сценарии поведения пользователей освещают чрезвычайно интересные особенности картины в целом, однако конкретные выводы, разумеется, подвергнуты целой серии независимых исследований.',
+    },
+});
 </script>
 
 <template>
-  <div class="news-content-base-container">
-    <div class="news-content-base">
-      <p class="base-text-content">
-        {{ newsBaseData.newsFullInfo }}
-      </p>
+    <div class="news-content-base-container">
+        <div class="news-content-base">
+            <p class="base-text-content">
+                {{ newsBaseData.newsFullInfo }}
+            </p>
 
-      <!-- <p class="base-text-content">
+            <!-- <p class="base-text-content">
         Вот вам яркий пример современных тенденций — перспективное планирование играет важную роль в формировании
         приоретизации разума над эмоциями. А ещё базовые сценарии поведения пользователей освещают чрезвычайно
         интересные особенности картины в целом, однако конкретные выводы, разумеется, подвергнуты целой серии
@@ -38,58 +42,55 @@
         укрепления моральных ценностей.
       </p> -->
 
-      <hr v-if="newsBaseData.newsFullInfo" style="width: 80%; margin: auto"/>
-
+            <hr
+                v-if="newsBaseData.newsFullInfo"
+                style="width: 80%; margin: auto"
+            />
+        </div>
     </div>
-  </div>
 </template>
 
 <style scoped>
-
-.news-content-base-container{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  }
-
-.news-content-base{
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  border: solid 1px #2B2B2B;
-  border-bottom: none;
-  background-color: #181818;
-  height: auto;
+.news-content-base-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.base-text-content{
-  font-family: Nunito;
-  font-size: 24px;
-  color: white;
-  margin: 30px;
-  text-indent: 20px;
+.news-content-base {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    border: solid 1px #2b2b2b;
+    border-bottom: none;
+    background-color: #181818;
+    height: auto;
 }
 
-.base-text-content-ul{
-  font-family: Nunito;
-  font-size: 24px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin: 0px 60px 0px 60px;
+.base-text-content {
+    font-family: Nunito;
+    font-size: 24px;
+    color: white;
+    margin: 30px;
+    text-indent: 20px;
+}
+
+.base-text-content-ul {
+    font-family: Nunito;
+    font-size: 24px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0px 60px 0px 60px;
 }
 
 ul.base-text-content-ul {
-  list-style: none; /* Отказываемся от стандартных маркеров */
+    list-style: none; /* Отказываемся от стандартных маркеров */
 }
-ul.base-text-content-ul li::before{
-
-  content: "– "; /* Вот и наше тире! */
-  padding-right: 20px; /* А здесь обеспечим утонченный отступ для тире */
-  color: #1E66F5;
+ul.base-text-content-ul li::before {
+    content: '– '; /* Вот и наше тире! */
+    padding-right: 20px; /* А здесь обеспечим утонченный отступ для тире */
+    color: #1e66f5;
 }
-
-
-
 </style>

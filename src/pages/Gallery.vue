@@ -1,11 +1,7 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
-    <div class="Gallery-page">
-        
-    </div>
+    <div class="Gallery-page"></div>
 </template>
 
-<style>
-</style>
+<style></style>

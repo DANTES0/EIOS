@@ -1,9 +1,9 @@
 <script setup>
-    import { VPagination } from 'vuetify/components'
+import { VPagination } from 'vuetify/components';
 </script>
 
 <template>
-    <VPagination 
+    <VPagination
         class="custom-pagination"
         v-model:page="currentPage"
         :length="10"
@@ -18,15 +18,17 @@
 </template>
 
 <style>
-    @import url("vuetify/styles");
+@import url('vuetify/styles');
 
-    .custom-pagination .v-btn__content {
-        font-family: JetBrainsMono;
-        font-weight: 700;
-        font-size: 36px;
-    }
+.custom-pagination .v-btn__content {
+    font-family: JetBrainsMono;
+    font-weight: 700;
+    font-size: 36px;
+}
 
-    *, ::before, ::after {
-        box-sizing: content-box;
-    }
+*,
+::before,
+::after {
+    box-sizing: content-box;
+}
 </style>

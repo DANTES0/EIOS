@@ -5,12 +5,12 @@ import DropdownHeader from './MainPageComponents/DropdownHeader.vue';
 import SearchTimetable from './TimetablePageComponents/SearchTimetable.vue';
 import NewsFilters from './NewsPageComponents/NewsFilters.vue';
 
-let bob= 0;
-let poop=123;
-let meh=123;
-let errorconnt=124234;
+let bob = 0;
+let poop = 123;
+let meh = 123;
+let errorconnt = 124234;
 let aewaeaweae = 12414;
-let dsfasdf='asdfasdf';
+let dsfasdf = 'asdfasdf';
 let aewaeaewwrerwrweae = '12rwerewr414';
 // this.$refs.dropbtn.addEventListener("click", function (event) {
 //   document.getElementById("myDropdown").classList.toggle("show")
@@ -33,16 +33,14 @@ let aewaeaewwrerwrweae = '12rwerewr414';
 // }
 </script>
 <template>
-  <div v-if="$route.path == `/`" class="dropdown-anchor">
-    <DropdownHeader></DropdownHeader>
-  </div>
-  <div v-if="$route.path == `/timetable`" class="search-timetable-anchor">
-    <SearchTimetable></SearchTimetable>
-  </div>
-  <div v-if="$route.path == `/news`" class="news-filters">
-    <NewsFilters></NewsFilters>
-  </div>
+    <div v-if="$route.path == `/`" class="dropdown-anchor">
+        <DropdownHeader></DropdownHeader>
+    </div>
+    <div v-if="$route.path == `/timetable`" class="search-timetable-anchor">
+        <SearchTimetable></SearchTimetable>
+    </div>
+    <div v-if="$route.path == `/news`" class="news-filters">
+        <NewsFilters></NewsFilters>
+    </div>
 </template>
-<style>
-
-</style>
+<style></style>
