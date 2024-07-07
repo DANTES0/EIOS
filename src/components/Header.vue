@@ -1,22 +1,16 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import HeaderAnchor from "./HeaderAnchor.vue";
+import HeaderAnchor from './HeaderAnchor.vue';
 import { authState } from '../authState';
 import { useStore } from 'vuex';
 
-
 const store = useStore();
 
-function isLoggedIn() {
-  console.log(store.getters.isLoggedIn);
-  // return store.getters.isLoggedIn;
-}
-
 const toggleAuthVisibility = () => {
-  authState.isVisible = !authState.isVisible;
-  console.log(authState.isVisible);
+	authState.isVisible = !authState.isVisible;
+	console.log(authState.isVisible);
 };
 
-const emit = defineEmits(['toggle-auth']);
 </script>
 
 <template>
