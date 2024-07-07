@@ -18,70 +18,75 @@ let visible = ref(true);
 const store = useStore();
 
 async function fetchData() {
-
-	// await fetch('http://25.59.204.137:8080/admin', {
-	//     method: 'GET',
-	//     headers: {Authorization: `Bearer`+' eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2l6YXIiLCJleHAiOjE3MTYwNjQ0NDYsInJvbGVzIjpbeyJpZCI6MSwibmFtZSI6IlJPTEVfQURNSU4ifV19.VoMXIWD-RxJjbRGHd3BosqAIvIXEfQ5vLM6P1z-3hrP7LLvNHfGqErtlH8-xkIRPe6fOsvKmk_A8mN9nHxQAjA'}
-	// })
-	const { data, error, isFetching, statusCode } = await useAuthenticatedFetch(`${config.KirURL}/api/v1/admin`).get();
-	console.log(statusCode);
-	console.log(store.getters.accessToken);
-	if (statusCode.value =='403' || (statusCode.value == '401' && !store.getters.accessToken))
-	{
-		authState.isVisible = true;
-		// visible.value = false
-	} else {
-		// visible.value = true
-	}
-	if (error.value) {
-		// console.error('Failed to fetch data:', error.value);
-	} else {
-    
-		console.log('Data:', data.value);
-	}
-	if (!store.getters.isLoggedIn) {
-		authState.isVisible = true;
-		// visible.value = false
-	}
+    // await fetch('http://25.59.204.137:8080/admin', {
+    //     method: 'GET',
+    //     headers: {Authorization: `Bearer`+' eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2l6YXIiLCJleHAiOjE3MTYwNjQ0NDYsInJvbGVzIjpbeyJpZCI6MSwibmFtZSI6IlJPTEVfQURNSU4ifV19.VoMXIWD-RxJjbRGHd3BosqAIvIXEfQ5vLM6P1z-3hrP7LLvNHfGqErtlH8-xkIRPe6fOsvKmk_A8mN9nHxQAjA'}
+    // })
+    const { data, error, isFetching, statusCode } = await useAuthenticatedFetch(
+        `${config.KirURL}/api/v1/admin`,
+    ).get();
+    console.log(statusCode);
+    console.log(store.getters.accessToken);
+    if (
+        statusCode.value == '403' ||
+        (statusCode.value == '401' && !store.getters.accessToken)
+    ) {
+        authState.isVisible = true;
+        // visible.value = false
+    } else {
+        // visible.value = true
+    }
+    if (error.value) {
+        // console.error('Failed to fetch data:', error.value);
+    } else {
+        console.log('Data:', data.value);
+    }
+    if (!store.getters.isLoggedIn) {
+        authState.isVisible = true;
+        // visible.value = false
+    }
 }
 fetchData();
 </script>
 
 <template>
-  <AddUserModalComponent v-if="authState.isVisibleModalAddUsers"></AddUserModalComponent>
-  <EditUserStudentModalComponent
-      v-if="authState.isVisibleEditStudentModelComponent"
-  ></EditUserStudentModalComponent>
+    <AddUserModalComponent
+        v-if="authState.isVisibleModalAddUsers"
+    ></AddUserModalComponent>
+    <EditUserStudentModalComponent
+        v-if="authState.isVisibleEditStudentModelComponent"
+    ></EditUserStudentModalComponent>
 
-  <div class="admin-page-container">
-    <LeftAdminMenu></LeftAdminMenu>
+    <div class="admin-page-container">
+        <LeftAdminMenu></LeftAdminMenu>
 
-
-    <div class="userAll-content">
-      <ChangePhotoGallery v-if="authState.isArticle == 'ChangePhotoGallery'"></ChangePhotoGallery>
-      <UserAll v-if="authState.isArticle == 'UserAll'"></UserAll>
-      <UserStudent v-if="authState.isArticle == 'UserStudent'"></UserStudent>
-      <NewsAdmin v-if = "authState.isArticle == 'NewsAdmin'"></NewsAdmin>
-      <UserTeachers v-if="authState.isArticle == 'UserTeachers'"></UserTeachers>
-    </div>
-    <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
+        <div class="userAll-content">
+            <ChangePhotoGallery
+                v-if="authState.isArticle == 'ChangePhotoGallery'"
+            ></ChangePhotoGallery>
+            <UserAll v-if="authState.isArticle == 'UserAll'"></UserAll>
+            <UserStudent
+                v-if="authState.isArticle == 'UserStudent'"
+            ></UserStudent>
+            <NewsAdmin v-if="authState.isArticle == 'NewsAdmin'"></NewsAdmin>
+            <UserTeachers
+                v-if="authState.isArticle == 'UserTeachers'"
+            ></UserTeachers>
+        </div>
+        <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN
     </div> -->
-
-  </div>
-
+    </div>
 </template>
 
 <style>
-
-.admin-page-container{
-  display: flex;
-  flex-direction: row;
-
+.admin-page-container {
+    display: flex;
+    flex-direction: row;
 }
 
-.userAll-content{
-  display: flex;
-  width: calc(100% - 1px);
+.userAll-content {
+    display: flex;
+    width: calc(100% - 1px);
 }
 </style>

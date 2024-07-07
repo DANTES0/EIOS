@@ -1,55 +1,55 @@
-import { createRouter, createWebHistory } from "vue-router"
-import Main from "../pages/Main.vue"
-import News from "../pages/News.vue"
-import Timetable from "../pages/Timetable.vue"
-import Gallery from "../pages/Gallery.vue"
-import Admin from "../pages/Admin.vue"
-import NewsContent from "../pages/NewsContent.vue";
-import NewsAdminAdd from "../components/AdminPageComponents/NewsAdminAdd.vue"
+import { createRouter, createWebHistory } from 'vue-router';
+import Main from '../pages/Main.vue';
+import News from '../pages/News.vue';
+import Timetable from '../pages/Timetable.vue';
+import Gallery from '../pages/Gallery.vue';
+import Admin from '../pages/Admin.vue';
+import NewsContent from '../pages/NewsContent.vue';
+import NewsAdminAdd from '../components/AdminPageComponents/NewsAdminAdd.vue';
 const routes = [
     {
         path: '/',
-        name: "Main",
-        component: Main
+        name: 'Main',
+        component: Main,
     },
     {
         path: '/news',
-        name: "News",
-        component: News
+        name: 'News',
+        component: News,
     },
     {
         path: '/timetable',
-        name: "Timetable",
-        component: Timetable
+        name: 'Timetable',
+        component: Timetable,
     },
     {
         path: '/admin',
-        name: "Admin",
-        component: Admin
+        name: 'Admin',
+        component: Admin,
     },
     {
         path: '/news/get/:id',
-        name: "NewsContent",
-        component: NewsContent
+        name: 'NewsContent',
+        component: NewsContent,
     },
     {
         path: '/news/get/admin/:id',
-        name: "NewsAdminAdd",
-        component: NewsAdminAdd
+        name: 'NewsAdminAdd',
+        component: NewsAdminAdd,
     },
     {
         path: '/news/get/admin',
-        name: "NewsAdminAdd1",
-        component: NewsAdminAdd
-    }
-]
+        name: 'NewsAdminAdd1',
+        component: NewsAdminAdd,
+    },
+];
 //newsContent
 const router = createRouter({
     scrollBehavior(to, from, savedPosition) {
-        return { x: 0, y: 0 }
+        return { x: 0, y: 0 };
     },
     history: createWebHistory(),
-    routes
-})
+    routes,
+});
 
 export default router;

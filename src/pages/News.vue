@@ -24,56 +24,58 @@ const itemsPerPage = 10;
 // }
 
 async function loadNews() {
-	let requestAddress = `${config.KirURL}/news/get/all`;
+    let requestAddress = `${config.KirURL}/news/get/all`;
 
-	const categories = route.query.categories ? route.query.categories.split(';') : [];
-	const startDate = route.query.startDate ? route.query.startDate : null;
-	const endDate = route.query.endDate ? route.query.endDate : null;
+    const categories = route.query.categories
+        ? route.query.categories.split(';')
+        : [];
+    const startDate = route.query.startDate ? route.query.startDate : null;
+    const endDate = route.query.endDate ? route.query.endDate : null;
 
-	if (categories.length === 0 && !startDate && !endDate) {
-		requestAddress = `${config.KirURL}/news/get/all`;
-	} else if (categories.length === 0 && startDate && endDate) {
-		requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}&endDate=${endDate}`;
-	} else if (categories.length > 0 && !startDate && !endDate) {
-		requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}`;
-	} else if (categories.length > 0 && startDate && endDate) {
-		requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`;
-	} else if (categories.length === 0 && startDate && !endDate) {
-		requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}`;
-	} else if (categories.length > 0 && startDate && !endDate) {
-		requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`;
-	} else if (categories.length === 0 && !startDate && endDate) {
-		requestAddress = `${config.KirURL}/news/get/all?endDate=${endDate}`;
-	} else if (categories.length > 0 && !startDate && endDate) {
-		requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`;
-	}
+    if (categories.length === 0 && !startDate && !endDate) {
+        requestAddress = `${config.KirURL}/news/get/all`;
+    } else if (categories.length === 0 && startDate && endDate) {
+        requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}&endDate=${endDate}`;
+    } else if (categories.length > 0 && !startDate && !endDate) {
+        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}`;
+    } else if (categories.length > 0 && startDate && endDate) {
+        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`;
+    } else if (categories.length === 0 && startDate && !endDate) {
+        requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}`;
+    } else if (categories.length > 0 && startDate && !endDate) {
+        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`;
+    } else if (categories.length === 0 && !startDate && endDate) {
+        requestAddress = `${config.KirURL}/news/get/all?endDate=${endDate}`;
+    } else if (categories.length > 0 && !startDate && endDate) {
+        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`;
+    }
 
-	console.log(categories);
-	console.log(startDate);
-	console.log(endDate);
+    console.log(categories);
+    console.log(startDate);
+    console.log(endDate);
 
-	try {
-		const response = await fetch(requestAddress);
-		if (response.ok) {
-			const data = await response.json();
-			newsData.value = data;
-			console.log(newsData.value);
-		} else {
-			console.error('Ошибка при загрузке данных:', response.statusText);
-		}
-	} catch (error) {
-		console.error('Ошибка при выполнении запроса:', error);
-	}
+    try {
+        const response = await fetch(requestAddress);
+        if (response.ok) {
+            const data = await response.json();
+            newsData.value = data;
+            console.log(newsData.value);
+        } else {
+            console.error('Ошибка при загрузке данных:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Ошибка при выполнении запроса:', error);
+    }
 }
 
 loadNews();
 
 watch(route, () => {
-	loadNews();
+    loadNews();
 });
 
 function navigateToNews(newsId) {
-	router.push(`/news/get/${newsId}`);
+    router.push(`/news/get/${newsId}`);
 }
 </script>
 
@@ -82,8 +84,12 @@ function navigateToNews(newsId) {
 
     <div class="news-page-container">
         <div class="news-page-content">
-            <div v-for="newsItem in newsData" :key="newsItem.id" class="news-block">
-                <NewsBlock 
+            <div
+                v-for="newsItem in newsData"
+                :key="newsItem.id"
+                class="news-block"
+            >
+                <NewsBlock
                     @click="navigateToNews(newsItem.id)"
                     :newsTag="newsItem.category"
                     :newsTitle="newsItem.headline"
@@ -101,48 +107,46 @@ function navigateToNews(newsId) {
 </template>
 
 <style>
-    .news-page-container {
-        display:block;
-        margin: auto auto;
-        /* background-color: blueviolet; */
-        width: 1422px;
- 
-        min-height: 674px;
-        max-height: 2420px;
+.news-page-container {
+    display: block;
+    margin: auto auto;
+    /* background-color: blueviolet; */
+    width: 1422px;
 
-        margin-top: 30px;
-        margin-bottom: 78px;
-    }
+    min-height: 674px;
+    max-height: 2420px;
 
-    .news-page-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 50px 74px;
+    margin-top: 30px;
+    margin-bottom: 78px;
+}
 
-        padding-bottom: 50px;
-    }
+.news-page-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px 74px;
 
-    .news-block {
-        cursor:pointer;
-        width: 425px;
-        height: 532px;
-        transition: transform 0.20s ease-in-out;
-        /* background-color: black; */
-    }
+    padding-bottom: 50px;
+}
 
-    .news-block:hover{
-        transform: scale(1.04);
-    }
+.news-block {
+    cursor: pointer;
+    width: 425px;
+    height: 532px;
+    transition: transform 0.2s ease-in-out;
+    /* background-color: black; */
+}
 
-    .pagination-wrapper {
-        margin: 0 auto;
-        /* background-color: yellow; */
-        width: 1064px;
-        height: 92px;
-        display:flex;
-        justify-content: center;
-        align-items: center;
-    }
+.news-block:hover {
+    transform: scale(1.04);
+}
 
-
+.pagination-wrapper {
+    margin: 0 auto;
+    /* background-color: yellow; */
+    width: 1064px;
+    height: 92px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>
