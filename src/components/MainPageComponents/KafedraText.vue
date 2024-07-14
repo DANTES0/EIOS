@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-    <div v-if="id == 1" class="kafedraText-content-wrapper">
+    <div v-if="id % 2 == 0" class="kafedraText-content-wrapper">
         <div class="kafedraText-line"></div>
         <div class="kafedraText-content">
             <h1 class="kafedraText-title">{{ title }}</h1>
@@ -16,7 +16,7 @@ defineProps({
             </h2>
         </div>
     </div>
-    <div v-if="id == 0" class="kafedraText-content-wrapper-nechet">
+    <div v-if="id % 2 != 0" class="kafedraText-content-wrapper-nechet">
         <div class="kafedraText-content-nechet">
             <h1 class="kafedraText-title-nechet">{{ title }}</h1>
             <h2 class="kafedraText-description-nechet">
@@ -45,7 +45,6 @@ defineProps({
 }
 .kafedraText-line-nechet {
     width: 3px;
-    height: 190px;
     background-color: #1e66f5;
     margin-right: 60px;
 }
@@ -78,7 +77,6 @@ defineProps({
 }
 .kafedraText-line {
     width: 3px;
-    height: 190px;
     background-color: #1e66f5;
     margin-left: 60px;
 }

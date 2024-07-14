@@ -2,7 +2,7 @@
 <template>
     <div class="wrapper-cifri">
         <div class="numbers-wrapper">
-            <div class="numbers" v-for="i in 22">{{ i }}</div>
+            <div class="numbers" v-for="i in 22" :key="i">{{ i }}</div>
         </div>
         <div id="cifri" class="content-cifri-wrapper">
             <div class="title-cifri-wrapper">
