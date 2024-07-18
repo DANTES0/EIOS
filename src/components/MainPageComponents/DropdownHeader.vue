@@ -1,5 +1,12 @@
 <script setup>
 import { ref } from 'vue';
+import IconBase from '../Icons/IconBase.vue';
+import IconHtml from '../Icons/Icon/IconHtml.vue';
+import IconCss from '../Icons/Icon/IconCss.vue';
+import IconPy from '../Icons/Icon/IconPy.vue';
+import IconC from '../Icons/Icon/IconC.vue';
+import IconJs from '../Icons/Icon/IconJs.vue';
+import IconTs from '../Icons/Icon/IconTs.vue';
 const isShowDropDown = ref(true);
 function showDropDown() {
     isShowDropDown.value = !isShowDropDown.value;
@@ -27,6 +34,9 @@ function showDropDown() {
                         class="anchor-img"
                         style="transform: scale(0.7)"
                     />
+                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
+                        ><icon-html
+                    /></icon-base> -->
                     <label class="label">о_кафедре.html</label></a
                 >
                 <a href="#news" class="dropdown-content-a">
@@ -35,6 +45,9 @@ function showDropDown() {
                         alt=""
                         class="anchor-img"
                     />
+                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
+                        ><icon-css></icon-css
+                    ></icon-base> -->
                     <label class="label">главные_новости.css</label>
                 </a>
                 <a href="#prepod" class="dropdown-content-a">
@@ -43,6 +56,9 @@ function showDropDown() {
                         alt=""
                         class="anchor-img"
                     />
+                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
+                        ><icon-py /> ></icon-base
+                    > -->
                     <label class="label">работники_кафедры.py</label></a
                 >
                 <a href="#cifri" class="dropdown-content-a">
@@ -51,6 +67,9 @@ function showDropDown() {
                         alt=""
                         class="anchor-img"
                     />
+                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
+                        ><icon-c /> ></icon-base
+                    > -->
                     <label class="label">кафедра_в_цифрах.cpp</label> </a
                 ><a href="#gallery" class="dropdown-content-a">
                     <img
@@ -58,6 +77,9 @@ function showDropDown() {
                         alt=""
                         class="anchor-img"
                     />
+                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
+                        ><icon-js /> ></icon-base
+                    > -->
                     <label class="label">фотогалерея.js</label></a
                 >
                 <a href="#footer" class="dropdown-content-a">
@@ -67,6 +89,9 @@ function showDropDown() {
                         class="anchor-img"
                         style="transform: scale(0.7)"
                     />
+                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
+                        ><icon-ts /> ></icon-base
+                    > -->
                     <label class="label">контакты.ts</label>
                 </a>
             </div>
