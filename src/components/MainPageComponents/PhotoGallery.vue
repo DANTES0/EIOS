@@ -84,7 +84,7 @@ let array = [];
 <template>
     <div class="wrapper-gallery">
         <div class="numbers-wrapper">
-            <div class="numbers" v-for="i in 22">{{ i }}</div>
+            <div class="numbers" v-for="i in 22" :key="i">{{ i }}</div>
         </div>
         <div id="gallery" class="content-gallery-wrapper">
             <div class="title-gallery-wrapper">

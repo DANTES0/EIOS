@@ -66,6 +66,7 @@ function showDropDown() {
                         src="../../assets/anchor_header/c++.svg"
                         alt=""
                         class="anchor-img"
+                        style="transform: scale(1.4)"
                     />
                     <!-- <icon-base class="ml-[18px]" width="24" height="24"
                         ><icon-c /> ></icon-base
@@ -126,7 +127,7 @@ function showDropDown() {
 .dropdown-content-line {
     margin-left: 22px;
     width: 2px;
-    height: 200px;
+    height: calc(28px * 6 + 10px);
     background-color: #787878;
 }
 .arrow_down {

@@ -1,4 +1,19 @@
-<script setup></script>
+<script setup>
+const cifri = [
+    {
+        title: '1000+',
+        description: 'студентов',
+    },
+    {
+        title: '110+',
+        description: 'бюджетных мест',
+    },
+    {
+        title: '43+',
+        description: 'преподавателей',
+    },
+];
+</script>
 <template>
     <div class="wrapper-cifri">
         <div class="numbers-wrapper">
@@ -11,26 +26,12 @@
                 </h1>
                 <label class="line-dashed-cifri">--------</label>
             </div>
-            <div class="cifri-frame">
-                <div class="cifri-block">
+            <div class="cifri-frame pl-16">
+                <div v-for="(item, i) in cifri" :key="i" class="cifri-block">
                     <div class="image-block-cifri">
-                        <h1 class="title-cifri">1000+</h1>
+                        <h1 class="title-cifri">{{ item.title }}</h1>
                     </div>
-                    <h2 style="padding-right: 10px" class="description-cifri">
-                        студентов
-                    </h2>
-                </div>
-                <div class="cifri-block">
-                    <div class="image-block-cifri">
-                        <h1 class="title-cifri">110+</h1>
-                    </div>
-                    <h2 class="description-cifri">бюджетных мест</h2>
-                </div>
-                <div class="cifri-block">
-                    <div class="image-block-cifri">
-                        <h1 class="title-cifri">43+</h1>
-                    </div>
-                    <h2 class="description-cifri">преподавателей</h2>
+                    <h2 class="description-cifri">{{ item.description }}</h2>
                 </div>
             </div>
         </div>

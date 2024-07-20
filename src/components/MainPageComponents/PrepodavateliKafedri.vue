@@ -21,7 +21,7 @@ const resetAnimation = () => {
 <template>
     <div class="wrapper-prepod">
         <div class="numbers-wrapper">
-            <div class="numbers" v-for="i in 25">{{ i }}</div>
+            <div class="numbers" v-for="i in 25" :key="i">{{ i }}</div>
         </div>
         <div id="prepod" class="content-prepod-wrapper">
             <div class="title-prepod-wrapper">
