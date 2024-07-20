@@ -42,10 +42,7 @@ const newsBaseData = defineProps({
         укрепления моральных ценностей.
       </p> -->
 
-            <hr
-                v-if="newsBaseData.newsFullInfo"
-                style="width: 80%; margin: auto"
-            />
+            <hr v-if="newsBaseData.newsFullInfo" style="width: 80%; margin: auto" />
         </div>
     </div>
 </template>

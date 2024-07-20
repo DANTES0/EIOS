@@ -51,23 +51,20 @@ const hideModal = (event) => {
 };
 
 const sendNewStudent = async () => {
-    const { data, error } = await useFetch(
-        `${config.KirURL}/students/register`,
-        {
-            method: 'POST',
-            body: JSON.stringify({
-                login: login.value,
-                password: password.value,
-                roles: roles.value,
-                name: name.value,
-                group: group.value,
-                course: course.value,
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+    const { data, error } = await useFetch(`${config.KirURL}/students/register`, {
+        method: 'POST',
+        body: JSON.stringify({
+            login: login.value,
+            password: password.value,
+            roles: roles.value,
+            name: name.value,
+            group: group.value,
+            course: course.value,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
         },
-    ).json();
+    }).json();
 
     authState.isVisibleModalAddUsers = false;
     eventBus.emit('studentAdded');

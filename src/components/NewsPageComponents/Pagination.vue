@@ -2,33 +2,19 @@
     <div>
         <div class="pagination-row">
             <button class="pagination-button">
-                <img
-                    src="/src/assets/pagination/double_arrow_left.svg"
-                    alt=""
-                />
+                <img src="/src/assets/pagination/double_arrow_left.svg" alt="" />
             </button>
 
             <button class="pagination-button">
                 <img src="/src/assets/pagination/arrow_left.svg" alt="" />
             </button>
 
-            <img
-                class="bracket"
-                src="/src/assets/pagination/bracket_left.svg"
-                alt=""
-            />
+            <img class="bracket" src="/src/assets/pagination/bracket_left.svg" alt="" />
 
             <div class="buttons-container">
-                <span
-                    v-for="(item, index) in 10"
-                    :key="index"
-                    class="button-wrapper"
-                >
+                <span v-for="(item, index) in 10" :key="index" class="button-wrapper">
                     <div v-if="activeIndex === index" class="triangle"></div>
-                    <button
-                        class="pagination-button"
-                        @click="activeIndex = index"
-                    >
+                    <button class="pagination-button" @click="activeIndex = index">
                         {{ index }}
                     </button>
                 </span>
@@ -41,10 +27,7 @@
             </button>
 
             <button class="pagination-button">
-                <img
-                    src="/src/assets/pagination/double_arrow_right.svg"
-                    alt=""
-                />
+                <img src="/src/assets/pagination/double_arrow_right.svg" alt="" />
             </button>
         </div>
     </div>

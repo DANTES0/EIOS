@@ -18,17 +18,9 @@ const isActiveUsers = ref(false);
             </div>
             <div class="article-menu">
                 <div class="wrap-wrap">
-                    <div
-                        class="wrap"
-                        @click="() => (isActiveMain = !isActiveMain)"
-                    >
-                        <div
-                            class="mainPage article"
-                            :class="{ active: isActiveMain }"
-                        >
-                            <div class="mainPage-title title">
-                                Главная страница
-                            </div>
+                    <div class="wrap" @click="() => (isActiveMain = !isActiveMain)">
+                        <div class="mainPage article" :class="{ active: isActiveMain }">
+                            <div class="mainPage-title title">Главная страница</div>
                         </div>
                         <img
                             class="arrow"
@@ -39,30 +31,22 @@ const isActiveUsers = ref(false);
                     <Transition name="slide-fade">
                         <div v-if="isActiveMain" class="content-userPage">
                             <div class="content-userPage-wrap">
-                                <div class="content-userPage-title">
-                                    Преподаватели
-                                </div>
+                                <div class="content-userPage-title">Преподаватели</div>
                             </div>
-                            <div class="content-userPage-title">
-                                Главные новости
-                            </div>
-                            <div class="content-userPage-title">
-                                Преподаватели
-                            </div>
+                            <div class="content-userPage-title">Главные новости</div>
+                            <div class="content-userPage-title">Преподаватели</div>
                             <div
                                 class="content-userPage-wrap"
                                 :class="{
                                     lineActive:
-                                        authState.isArticle ==
-                                        'ChangePhotoGallery',
+                                        authState.isArticle == 'ChangePhotoGallery',
                                 }"
                             >
                                 <div
                                     class="content-userPage-title"
                                     @click="
                                         () => {
-                                            authState.isArticle =
-                                                'ChangePhotoGallery';
+                                            authState.isArticle = 'ChangePhotoGallery';
                                         }
                                     "
                                 >
@@ -95,17 +79,9 @@ const isActiveUsers = ref(false);
                     />
                 </div>
                 <div class="userPage-wrap">
-                    <div
-                        class="wrap"
-                        @click="() => (isActiveUsers = !isActiveUsers)"
-                    >
-                        <div
-                            class="usersPage article"
-                            :class="{ active: isActiveUsers }"
-                        >
-                            <div class="usersPage-title title">
-                                Пользователи
-                            </div>
+                    <div class="wrap" @click="() => (isActiveUsers = !isActiveUsers)">
+                        <div class="usersPage article" :class="{ active: isActiveUsers }">
+                            <div class="usersPage-title title">Пользователи</div>
                         </div>
                         <img
                             :class="{ rotate: isActiveUsers }"
@@ -118,16 +94,14 @@ const isActiveUsers = ref(false);
                             <div
                                 class="content-userPage-wrap"
                                 :class="{
-                                    lineActive:
-                                        authState.isArticle == 'UserTeachers',
+                                    lineActive: authState.isArticle == 'UserTeachers',
                                 }"
                             >
                                 <div
                                     class="content-userPage-title"
                                     @click="
                                         () => {
-                                            authState.isArticle =
-                                                'UserTeachers';
+                                            authState.isArticle = 'UserTeachers';
                                         }
                                     "
                                 >
@@ -137,8 +111,7 @@ const isActiveUsers = ref(false);
                             <div
                                 class="content-userPage-wrap"
                                 :class="{
-                                    lineActive:
-                                        authState.isArticle == 'UserStudent',
+                                    lineActive: authState.isArticle == 'UserStudent',
                                 }"
                             >
                                 <div
@@ -152,14 +125,11 @@ const isActiveUsers = ref(false);
                                     Студенты
                                 </div>
                             </div>
-                            <div class="content-userPage-title">
-                                Администраторы
-                            </div>
+                            <div class="content-userPage-title">Администраторы</div>
                             <div
                                 class="content-userPage-wrap"
                                 :class="{
-                                    lineActive:
-                                        authState.isArticle == 'UserAll',
+                                    lineActive: authState.isArticle == 'UserAll',
                                 }"
                             >
                                 <div

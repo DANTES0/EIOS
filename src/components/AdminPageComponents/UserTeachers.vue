@@ -31,17 +31,11 @@ const filterUsers = () => {
             if (searchCriterion.value === 'id') {
                 return user.id.toString().includes(searchQuery.value);
             } else if (searchCriterion.value === 'login') {
-                return user.login
-                    .toLowerCase()
-                    .includes(searchQuery.value.toLowerCase());
+                return user.login.toLowerCase().includes(searchQuery.value.toLowerCase());
             } else if (searchCriterion.value === 'name') {
-                return user.name
-                    .toLowerCase()
-                    .includes(searchQuery.value.toLowerCase());
+                return user.name.toLowerCase().includes(searchQuery.value.toLowerCase());
             } else if (searchCriterion.value === 'post') {
-                return user.post
-                    .toLowerCase()
-                    .includes(searchQuery.value.toLowerCase());
+                return user.post.toLowerCase().includes(searchQuery.value.toLowerCase());
             }
         });
     } else {
@@ -138,13 +132,9 @@ const deleteUser = async (id) => {
         <div class="wrap-input-btn">
             <select v-model="searchCriterion" class="search-select">
                 <option class="search-select-option" value="id">Id</option>
-                <option class="search-select-option" value="login">
-                    Логин
-                </option>
+                <option class="search-select-option" value="login">Логин</option>
                 <option class="search-select-option" value="name">Имя</option>
-                <option class="search-select-option" value="post">
-                    Должность
-                </option>
+                <option class="search-select-option" value="post">Должность</option>
             </select>
 
             <input
@@ -153,10 +143,7 @@ const deleteUser = async (id) => {
                 v-model="searchQuery"
                 class="placeholder-userAll"
             />
-            <button
-                @click="authState.isVisibleModalAddUsers = true"
-                class="addUser"
-            >
+            <button @click="authState.isVisibleModalAddUsers = true" class="addUser">
                 Новый преподаватель
             </button>
         </div>

@@ -26,9 +26,7 @@ const itemsPerPage = 10;
 async function loadNews() {
     let requestAddress = `${config.KirURL}/news/get/all`;
 
-    const categories = route.query.categories
-        ? route.query.categories.split(';')
-        : [];
+    const categories = route.query.categories ? route.query.categories.split(';') : [];
     const startDate = route.query.startDate ? route.query.startDate : null;
     const endDate = route.query.endDate ? route.query.endDate : null;
 
@@ -84,11 +82,7 @@ function navigateToNews(newsId) {
 
     <div class="news-page-container">
         <div class="news-page-content">
-            <div
-                v-for="newsItem in newsData"
-                :key="newsItem.id"
-                class="news-block"
-            >
+            <div v-for="newsItem in newsData" :key="newsItem.id" class="news-block">
                 <NewsBlock
                     @click="navigateToNews(newsItem.id)"
                     :newsTag="newsItem.category"

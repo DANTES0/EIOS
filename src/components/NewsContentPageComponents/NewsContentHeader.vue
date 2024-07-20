@@ -5,8 +5,7 @@ import { format } from 'date-fns';
 const newsHeaderData = defineProps({
     newsHeaderHeadline: {
         type: String,
-        default:
-            'Красивый цветной заголовок, а справа будет основная мысль новости',
+        default: 'Красивый цветной заголовок, а справа будет основная мысль новости',
     },
     newsHeaderMainInfo: {
         type: String,

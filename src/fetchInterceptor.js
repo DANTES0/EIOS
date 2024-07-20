@@ -73,16 +73,14 @@ function useAuthenticatedFetch(url) {
                     // console.log('NEWACCCESTOKEN', newAccessToken, ctx)
                     ctx.options.headers.Authorization = `Bearer ${newAccessToken}`;
                     // console.log('CTX', ctx)
-                    return await useFetch(ctx.url, ctx.options).then(
-                        (newCtx) => {
-                            // console.log('CTX', ctx)
-                            ctx.response = newCtx.response;
-                            ctx.data = newCtx.data;
-                            ctx.error = newCtx.error;
-                            ctx.statusCode = newCtx.statusCode;
-                            return ctx;
-                        },
-                    );
+                    return await useFetch(ctx.url, ctx.options).then((newCtx) => {
+                        // console.log('CTX', ctx)
+                        ctx.response = newCtx.response;
+                        ctx.data = newCtx.data;
+                        ctx.error = newCtx.error;
+                        ctx.statusCode = newCtx.statusCode;
+                        return ctx;
+                    });
                 } catch (error) {
                     // console.log('WSETRWETWET')
                     // store.dispatch('logout');

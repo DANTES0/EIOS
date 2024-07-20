@@ -92,11 +92,7 @@ onMounted(() => {
 <template>
     <div class="content-wrapper-prepod">
         <div class="prepod-image-block">
-            <div
-                style=""
-                class="prepod-image-arrow back-image-arrow"
-                @click="prev"
-            ></div>
+            <div style="" class="prepod-image-arrow back-image-arrow" @click="prev"></div>
             <div class="PrepodavateliKafedriItem-wrap">
                 <PrepodavateliKafedriItem
                     v-for="{ id, name, photo, post, rank } in temp_array"

@@ -21,11 +21,7 @@ const toggleAuthVisibility = () => {
     >
         <div class="header-wrapper-container">
             <div class="page-header">
-                <Popper
-                    :placement="'right'"
-                    :hover="true"
-                    content="Главная страница"
-                >
+                <Popper :placement="'right'" :hover="true" content="Главная страница">
                     <a
                         class="page"
                         id="main"
@@ -72,11 +68,7 @@ const toggleAuthVisibility = () => {
                     id="moodle"
                     data-title="moodle"
                 ></a>
-                <Popper
-                    :placement="'right'"
-                    :hover="true"
-                    content="Авторизоваться"
-                >
+                <Popper :placement="'right'" :hover="true" content="Авторизоваться">
                     <a
                         @click="toggleAuthVisibility"
                         class="page"
@@ -84,11 +76,7 @@ const toggleAuthVisibility = () => {
                         data-title="Профиль"
                     ></a>
                 </Popper>
-                <Popper
-                    :placement="'right'"
-                    :hover="true"
-                    content="Главный сайт"
-                >
+                <Popper :placement="'right'" :hover="true" content="Главный сайт">
                     <a
                         href="https://www.voenmeh.ru/"
                         class="page"
@@ -104,11 +92,7 @@ const toggleAuthVisibility = () => {
                         data-title="moodle"
                     ></a>
                 </Popper>
-                <Popper
-                    :placement="'right'"
-                    :hover="true"
-                    content="Корпоративная почта"
-                >
+                <Popper :placement="'right'" :hover="true" content="Корпоративная почта">
                     <a
                         href="https://mail.voenmeh.ru/mail/"
                         class="page"
@@ -150,8 +134,8 @@ const toggleAuthVisibility = () => {
 }
 #main {
     background-image: url('../assets/header/home.svg');
-    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg)
-        brightness(93%) contrast(89%);
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
     margin-top: 15px;
     display: block;
 }
@@ -205,35 +189,35 @@ const toggleAuthVisibility = () => {
     background-size: contain;
     background-position: 50%;
     transform: scale(1.4);
-    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg)
-        brightness(93%) contrast(89%);
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
 }
 #mailvoenmeh {
     background-image: url('../assets/header/mail.svg');
     background-size: contain;
     background-position: 50%;
     transform: scale(1.1);
-    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg)
-        brightness(93%) contrast(89%);
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
 }
 #moodle {
     background-image: url('../assets/header/bottom/moodle.svg');
     background-size: contain;
     transform: scale(1.3);
-    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg)
-        brightness(93%) contrast(89%);
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
 }
 #profile {
     background-image: url('../assets/header/bottom/profile.svg');
     background-size: contain;
     /* transform: scale(1); */
-    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg)
-        brightness(93%) contrast(89%);
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
 }
 #q {
     background-image: url('../assets/header/second.svg');
-    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg)
-        brightness(93%) contrast(89%);
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
     display: block;
 }
 .page-header-bottom {
@@ -243,42 +227,42 @@ const toggleAuthVisibility = () => {
 }
 #w {
     background-image: url('../assets/header/third.svg');
-    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg)
-        brightness(93%) contrast(89%);
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
     display: block;
 }
 #e {
     background-image: url('../assets/header/fourth.svg');
-    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg)
-        brightness(93%) contrast(89%);
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
     display: block;
 }
 #r {
     /* background-image: url("../assets/voenmeh3.svg"); */
     transform: scale(2.5);
-    filter: invert(63%) sepia(92%) saturate(7299%) hue-rotate(215deg)
-        brightness(99%) contrast(94%);
+    filter: invert(63%) sepia(92%) saturate(7299%) hue-rotate(215deg) brightness(99%)
+        contrast(94%);
     /* filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%) contrast(89%); */
 }
 #r:hover {
-    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
-        brightness(100%) contrast(110%);
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
 }
 #moodle:hover {
-    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
-        brightness(100%) contrast(110%);
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
 }
 #profile:hover {
-    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
-        brightness(100%) contrast(110%);
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
 }
 #voenmeh:hover {
-    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
-        brightness(100%) contrast(110%);
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
 }
 #mailvoenmeh:hover {
-    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
-        brightness(100%) contrast(110%);
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
 }
 #e:hover::after {
     width: 100px;
@@ -290,20 +274,20 @@ const toggleAuthVisibility = () => {
     width: 100px;
 }
 #main:hover {
-    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
-        brightness(100%) contrast(110%);
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
 }
 #q:hover {
-    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
-        brightness(100%) contrast(110%);
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
 }
 #w:hover {
-    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
-        brightness(100%) contrast(110%);
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
 }
 #e:hover {
-    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg)
-        brightness(100%) contrast(110%);
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
 }
 .header-wrapper {
     /* position: fixed; */

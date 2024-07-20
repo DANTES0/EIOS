@@ -1,6 +1,6 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
-import pluginVue, { rules } from 'eslint-plugin-vue';
+import pluginVue from 'eslint-plugin-vue';
 
 export default [
     { files: ['**/*.{js,mjs,cjs,vue}'] },

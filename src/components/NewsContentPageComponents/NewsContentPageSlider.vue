@@ -42,9 +42,7 @@ const vfOptions = shallowReactive({
 });
 
 // Создаем массив ресурсов из пропсов
-const vfRscs = computed(() =>
-    newsSliderImages.newsImages.map((image) => new Img(image)),
-);
+const vfRscs = computed(() => newsSliderImages.newsImages.map((image) => new Img(image)));
 </script>
 
 <template>
