@@ -14,9 +14,7 @@ defineProps({
         </div>
         <div id="news" class="content-news-wrapper">
             <div class="title-news-wrapper">
-                <h1 class="title-news">
-                    <span style="color: #1e66f5">#</span>НОВОСТИ
-                </h1>
+                <h1 class="title-news"><span style="color: #1e66f5">#</span>НОВОСТИ</h1>
                 <label class="line-dashed">----------</label>
             </div>
             <div class="container-news">

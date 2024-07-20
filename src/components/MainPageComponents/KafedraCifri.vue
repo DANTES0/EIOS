@@ -21,9 +21,7 @@ const cifri = [
         </div>
         <div id="cifri" class="content-cifri-wrapper">
             <div class="title-cifri-wrapper">
-                <h1 class="title-cifri">
-                    <span style="color: #1e66f5">#</span>ЦИФРЫ
-                </h1>
+                <h1 class="title-cifri"><span style="color: #1e66f5">#</span>ЦИФРЫ</h1>
                 <label class="line-dashed-cifri">--------</label>
             </div>
             <div class="cifri-frame pl-16">

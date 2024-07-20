@@ -125,12 +125,7 @@ onMounted(() => {
                 <div class="checked" v-if="item.isVisible">
                     <div class="delete-title">Удалить?</div>
                     <div class="key">
-                        <div
-                            class="yes-key"
-                            @click="deletePhoto(item.id, index)"
-                        >
-                            Да
-                        </div>
+                        <div class="yes-key" @click="deletePhoto(item.id, index)">Да</div>
                         <div class="no-key">Нет</div>
                     </div>
                 </div>

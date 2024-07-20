@@ -64,11 +64,7 @@ const processedTitle = () => {
     >
         <div class="news-block-tag-and-date-wrapper">
             <div class="news-block-tag">
-                <img
-                    src="../../assets/News/image.svg"
-                    alt=""
-                    class="tag-icon"
-                />
+                <img src="../../assets/News/image.svg" alt="" class="tag-icon" />
                 <div class="tag">{{ newsData.newsTag }}</div>
             </div>
 
@@ -78,11 +74,7 @@ const processedTitle = () => {
         </div>
         <!-- @click="$router.push('/newsContent')" -->
         <div class="news-block-image">
-            <img
-                :src="newsData.newsImage"
-                alt=""
-                class="news-block-image-background"
-            />
+            <img :src="newsData.newsImage" alt="" class="news-block-image-background" />
             <img
                 :src="newsData.newsImage"
                 alt=""

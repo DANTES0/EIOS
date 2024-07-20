@@ -197,28 +197,16 @@ const handleOptionSelected = (option) => {
 
         <div class="titleNews">Основной текст новости</div>
         <div class="EditMainText">
-            <textarea
-                v-model="mainText"
-                type="text"
-                class="inputMain"
-            ></textarea>
+            <textarea v-model="mainText" type="text" class="inputMain"></textarea>
         </div>
 
         <div class="editPhoto">
-            <label class="upload-label" for="file-input"
-                >Выберите фотографии</label
-            >
+            <label class="upload-label" for="file-input">Выберите фотографии</label>
             <input type="file" id="file-input" multiple @change="handleFiles" />
             <div id="preview">
-                <div
-                    v-for="(image, index) in images"
-                    :key="index"
-                    class="primg"
-                >
+                <div v-for="(image, index) in images" :key="index" class="primg">
                     <div class="preview-image">
-                        <div class="delete-button" @click="removeImage(index)">
-                            ✕
-                        </div>
+                        <div class="delete-button" @click="removeImage(index)">✕</div>
                         <img :src="image" alt="Preview" />
                     </div>
                     <div class="radiobutton">
@@ -236,14 +224,10 @@ const handleOptionSelected = (option) => {
 
         <div class="enterBlo">
             <div class="checkNews">
-                <div class="checkNewsTitle">
-                    Отображать новость на главной странице?
-                </div>
+                <div class="checkNewsTitle">Отображать новость на главной странице?</div>
                 <input type="checkbox" class="checkbox" />
             </div>
-            <button class="btn" @click="giveMeAllArea">
-                Подтвердить новость
-            </button>
+            <button class="btn" @click="giveMeAllArea">Подтвердить новость</button>
         </div>
     </div>
 </template>

@@ -2,11 +2,7 @@
 <template>
     <div class="tabs">
         <div class="tabs-line">
-            <img
-                src="../assets/anchor_header/html.svg"
-                alt=""
-                class="tabs-image"
-            />
+            <img src="../assets/anchor_header/html.svg" alt="" class="tabs-image" />
             <label class="tabs-title">о_кафедре.html</label>
         </div>
     </div>

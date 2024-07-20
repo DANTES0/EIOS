@@ -13,9 +13,7 @@ let first = ref(0);
 let second = ref(1);
 let third = ref(2);
 let flag = ref(0);
-let array_size = ref(
-    Object.keys(prop.photo).filter((key) => !isNaN(key)).length,
-);
+let array_size = ref(Object.keys(prop.photo).filter((key) => !isNaN(key)).length);
 const gradientActive = ref(false);
 const next_photo = () => {
     gradientActive.value = !gradientActive.value;
@@ -53,10 +51,7 @@ const gradientActiveLeft = ref(false);
 const prev_photo = () => {
     gradientActiveLeft.value = !gradientActiveLeft.value;
     console.log(gradientActiveLeft.value);
-    setTimeout(
-        () => (gradientActiveLeft.value = !gradientActiveLeft.value),
-        800,
-    );
+    setTimeout(() => (gradientActiveLeft.value = !gradientActiveLeft.value), 800);
     third.value--;
     if (third.value == 0) {
         second.value = array_size.value;

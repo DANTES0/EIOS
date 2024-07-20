@@ -164,10 +164,7 @@ function parseDate(dateStr) {
 
     <!-- фильтры -->
     <div v-if="isShowFilters" class="filters">
-        <div
-            class="filters-line"
-            :style="{ height: filtersContentHeight + 'px' }"
-        ></div>
+        <div class="filters-line" :style="{ height: filtersContentHeight + 'px' }"></div>
 
         <div class="filters-content">
             <!-- кнопка отрытия категорий -->

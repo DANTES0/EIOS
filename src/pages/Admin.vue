@@ -65,13 +65,9 @@ fetchData();
                 v-if="authState.isArticle == 'ChangePhotoGallery'"
             ></ChangePhotoGallery>
             <UserAll v-if="authState.isArticle == 'UserAll'"></UserAll>
-            <UserStudent
-                v-if="authState.isArticle == 'UserStudent'"
-            ></UserStudent>
+            <UserStudent v-if="authState.isArticle == 'UserStudent'"></UserStudent>
             <NewsAdmin v-if="authState.isArticle == 'NewsAdmin'"></NewsAdmin>
-            <UserTeachers
-                v-if="authState.isArticle == 'UserTeachers'"
-            ></UserTeachers>
+            <UserTeachers v-if="authState.isArticle == 'UserTeachers'"></UserTeachers>
         </div>
         <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN

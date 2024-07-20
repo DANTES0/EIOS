@@ -1,63 +1,61 @@
 <script setup>
-import { ref, computed } from "vue";
-import { useFetch } from "@vueuse/core"
-import { onMounted } from "vue"
+import { ref, computed } from 'vue';
+import { useFetch } from '@vueuse/core';
+import { onMounted } from 'vue';
 // import Vuex from "vuex"
 // import Vuex from "vuex"
 // import { useStore } from "vuex";
-import "vue3-select-component/dist/style.css";
-import VueSelect from "vue3-select-component";
-import Multiselect from '@vueform/multiselect'
-import eventBus from '../../eventBus.js'
-import config from "../../config";
-let options = ["1", "2", "3"]
+import 'vue3-select-component/dist/style.css';
+import VueSelect from 'vue3-select-component';
+import Multiselect from '@vueform/multiselect';
+import eventBus from '../../eventBus.js';
+import config from '../../config';
+let options = ['1', '2', '3'];
 let array = ref([]);
 // const selected = ref("");
-const url = computed(()=> {
-    return `${config.KirURL}/api/v1/group/all`
-})
-const teacherUrl = computed(()=> {
-    return `${config.KirURL}/api/v1/teacher/getAll`
-})
-let placeholder = ref('Поиск...')
-const fetchGroup = async() => {
-  const response = await useFetch(url).json()
-  console.log(response.data.value)
-  const responseTeacher = await useFetch(teacherUrl).json()
-  console.log(responseTeacher.data.value)
-  for(let i = 0; i< response.data.value.length; i++) {
-    array.value.push({
-        label: response.data.value[i].name,
-        value: response.data.value[i].id
-    })
-  }
-  for(let i = 0; i<responseTeacher.data.value.length; i++) {
-    array.value.push({
-        label: responseTeacher.data.value[i].name,
-        value: `teacher${responseTeacher.data.value[i].id}`
-    })
-  }
-  console.log(array.value)
-}
+const url = computed(() => {
+    return `${config.KirURL}/api/v1/group/all`;
+});
+const teacherUrl = computed(() => {
+    return `${config.KirURL}/api/v1/teacher/getAll`;
+});
+let placeholder = ref('Поиск...');
+const fetchGroup = async () => {
+    const response = await useFetch(url).json();
+    console.log(response.data.value);
+    const responseTeacher = await useFetch(teacherUrl).json();
+    console.log(responseTeacher.data.value);
+    for (let i = 0; i < response.data.value.length; i++) {
+        array.value.push({
+            label: response.data.value[i].name,
+            value: response.data.value[i].id,
+        });
+    }
+    for (let i = 0; i < responseTeacher.data.value.length; i++) {
+        array.value.push({
+            label: responseTeacher.data.value[i].name,
+            value: `teacher${responseTeacher.data.value[i].id}`,
+        });
+    }
+    console.log(array.value);
+};
 
 onMounted(() => {
-    fetchGroup()
-  // console.log(currentNews.value)
-})
+    fetchGroup();
+    // console.log(currentNews.value)
+});
 // const store = useStore()
 
 const handleOptionSelected = (option) => {
-  console.log(option.value);
-  placeholder.value = option.value
-  eventBus.emit('optionSelected', option.value);
+    console.log(option.value);
+    placeholder.value = option.value;
+    eventBus.emit('optionSelected', option.value);
 };
 // updat
 </script>
 <template>
     <div class="search-timetable-wrap">
-        <div class="search-timetable-text">
-            Поиск по группе или преподавателю 
-        </div>
+        <div class="search-timetable-text">Поиск по группе или преподавателю</div>
         <!-- <Multiselect
         v-model="value"
       placeholder="Select your character"
@@ -66,37 +64,34 @@ const handleOptionSelected = (option) => {
       :options="options"
       :searchable="true"
     /> -->
-    
-    <div class="input-search">
-        <VueSelect
-        v-model="selected"
-        :placeholder="placeholder"
-        :options="array"
-        @option-selected="handleOptionSelected"
-  >
-  <template #no-options>
-      По вашему запросу ничего не найдено
-    </template>
-</VueSelect>
-        <!-- <input placeholder="Поиск..." type="" class="input-search-input">
+
+        <div class="input-search">
+            <VueSelect
+                v-model="selected"
+                :placeholder="placeholder"
+                :options="array"
+                @option-selected="handleOptionSelected"
+            >
+                <template #no-options> По вашему запросу ничего не найдено </template>
+            </VueSelect>
+            <!-- <input placeholder="Поиск..." type="" class="input-search-input">
         <select class="select-input" name="" id="">
             <option value=""></option>
         </select> -->
-    </div>
-    
+        </div>
     </div>
 </template>
 <!-- src="@vueform/multiselect/themes/default.css" -->
 <style scoped>
 @font-face {
-   font-family: JetBrainsMono;
-   src: url("../../assets/JetBrainsMono.ttf");
+    font-family: JetBrainsMono;
+    src: url('../../assets/JetBrainsMono.ttf');
 }
 .dropdown-icon {
     width: 100px;
 }
 :root {
-    --vs-input-placeholder-color: #5C5C5C;
+    --vs-input-placeholder-color: #5c5c5c;
     --vs-input-bg: transparent;
     --vs-input-outline: #e4e4e7;
     --vs-border: 1px solid #e4e4e7;
@@ -105,7 +100,7 @@ const handleOptionSelected = (option) => {
     --vs-font-weight: 200;
     --vs-line-height: 1;
     --vs-font-family: JetBrainsMono;
-    
+
     /* Для option */
     /* --vs-menu-bg: transparent; */
     --vs-menu-bg: #181818;
@@ -113,8 +108,7 @@ const handleOptionSelected = (option) => {
     --vs-option-focused-color: transparent;
     --vs-option-selected-color: #363535;
 
-    --vs-multi-value-xmark-color: #e4e4e7 ;
-    
+    --vs-multi-value-xmark-color: #e4e4e7;
 
     --vs-icon-color: #ff0000;
     --vs-icon-size: 20px;
@@ -126,25 +120,25 @@ const handleOptionSelected = (option) => {
 :deep(.vue-select) {
     font-family: JetBrainsMono;
     background-color: transparent;
-  width: 220px;
-  margin-top: 30px;
-  z-index: 0;
-  position: static;
+    width: 220px;
+    margin-top: 30px;
+    z-index: 0;
+    position: static;
 }
 :deep(.search-input) {
     color: #ffffff;
     background-color: transparent;
-    -webkit-input-placeholder:#5C5C5C
+    -webkit-input-placeholder: #5c5c5c;
 }
 :deep(.search-input::placeholder) {
-    color:#a7a7a7
+    color: #a7a7a7;
 }
 :deep(.control) {
     background-color: transparent;
 }
 :deep(.control.focused) {
     background-color: transparent;
-    border-color: #1E66F5;
+    border-color: #1e66f5;
     /* box-shadow: #b3b3b3; */
 }
 :deep(.dropdown-icon svg) {
@@ -159,7 +153,7 @@ const handleOptionSelected = (option) => {
 }
 :deep(.menu) {
     background-color: transparent;
-    border: 1px solid #1E66F5;
+    border: 1px solid #1e66f5;
     position: static;
 }
 :deep(.menu-option) {
@@ -167,13 +161,13 @@ const handleOptionSelected = (option) => {
     color: white;
 }
 :deep(.menu-option:hover) {
-    background-color: #5C5C5C;
+    background-color: #5c5c5c;
 }
 :deep(.menu-option.focused) {
-    background-color: transparent
+    background-color: transparent;
 }
 :deep(.menu-option.selected) {
-    background-color: #5C5C5C
+    background-color: #5c5c5c;
 }
 .select-input {
     height: 26px;
@@ -192,7 +186,7 @@ const handleOptionSelected = (option) => {
 .input-search {
     margin-left: 22px;
 }
-.search-timetable-wrap{
+.search-timetable-wrap {
     height: 100%;
     width: 100%;
     display: flex;
@@ -205,7 +199,4 @@ const handleOptionSelected = (option) => {
     font-weight: 300;
     margin-left: 22px;
 }
-
-
-
 </style>

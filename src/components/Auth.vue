@@ -28,19 +28,16 @@ const authorize = async () => {
     }
 
     try {
-        const { data, error } = await useFetch(
-            `${config.KirURL}/api/auth/login`,
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    login: login.value,
-                    password: password.value,
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+        const { data, error } = await useFetch(`${config.KirURL}/api/auth/login`, {
+            method: 'POST',
+            body: JSON.stringify({
+                login: login.value,
+                password: password.value,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
             },
-        ).json();
+        }).json();
 
         if (error.value) {
             console.error('Ошибка при отправке запроса:', error.value);
@@ -85,9 +82,7 @@ document.documentElement.classList.add('modal-open');
                     />
                 </div>
                 <div class="not-auth">не могу войти</div>
-                <button @click="authorize" class="enter-auth">
-                    Авторизоваться
-                </button>
+                <button @click="authorize" class="enter-auth">Авторизоваться</button>
             </div>
         </div>
     </div>

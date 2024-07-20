@@ -8,9 +8,7 @@
         </div>
         <div id="news" class="content-news-wrapper">
             <div class="title-news-wrapper">
-                <h1 class="title-news">
-                    <span style="color: #1e66f5">#</span>НОВОСТИ
-                </h1>
+                <h1 class="title-news"><span style="color: #1e66f5">#</span>НОВОСТИ</h1>
                 <label class="line-dashed">----------</label>
             </div>
             <div class="container-news">
@@ -22,9 +20,8 @@
                 <div class="description-news">
                     <div class="general-block-description-news">
                         <div class="description-text-news">
-                            Началась регистрация участников юбилейной XV
-                            Международной олимпиады в сфере информационных
-                            технологий «IT-Планета 2024»
+                            Началась регистрация участников юбилейной XV Международной
+                            олимпиады в сфере информационных технологий «IT-Планета 2024»
                         </div>
                     </div>
                     <div class="btn-next-back-wrapper">
