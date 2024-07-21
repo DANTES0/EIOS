@@ -29,12 +29,15 @@ const newsData = defineProps({
 
 const processedDescription = () => {
     const maxLength = 216; // Максимальная длина описания
+
     if (newsData.newsDescription.length > maxLength) {
         let truncatedText = newsData.newsDescription.slice(0, maxLength);
+
         truncatedText = truncatedText.slice(
             0,
             Math.min(truncatedText.length, truncatedText.lastIndexOf(' ')),
         ); // Обрезаем текст до последнего пробела
+
         return truncatedText + '...';
     } else {
         return newsData.newsDescription;
@@ -43,12 +46,15 @@ const processedDescription = () => {
 
 const processedTitle = () => {
     const maxLength = 75; // Максимальная длина заголовка
+
     if (newsData.newsTitle.length > maxLength) {
         let truncatedTitle = newsData.newsTitle.slice(0, maxLength);
+
         truncatedTitle = truncatedTitle.slice(
             0,
             Math.min(truncatedTitle.length, truncatedTitle.lastIndexOf(' ')),
         ); // Обрезаем заголовок до последнего пробела
+
         return truncatedTitle + '...';
     } else {
         return newsData.newsTitle;
@@ -87,7 +93,7 @@ const processedTitle = () => {
         </div>
     </div>
 
-    <div class="news-block-summary" v-if="newsData.newsShowSummary">
+    <div v-if="newsData.newsShowSummary" class="news-block-summary">
         <!-- @click="$router.push('/newsContent')" -->
         <div class="news-block-title">
             {{ processedTitle() }}

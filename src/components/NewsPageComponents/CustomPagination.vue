@@ -4,8 +4,8 @@ import { VPagination } from 'vuetify/components';
 
 <template>
     <VPagination
-        class="custom-pagination"
         v-model:page="currentPage"
+        class="custom-pagination"
         :length="10"
         :total-visible="10"
         prev-icon="mdi-chevron-left"

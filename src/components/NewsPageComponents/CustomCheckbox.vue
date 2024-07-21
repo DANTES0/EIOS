@@ -1,6 +1,6 @@
 <template>
     <div class="custom-checkbox-wrapper" @click="toggleCheckbox">
-        <input type="checkbox" v-model="model" :value="value" />
+        <input v-model="model" type="checkbox" :value="value" />
         <span id="checkbox-category">{{ label }}</span>
     </div>
 </template>

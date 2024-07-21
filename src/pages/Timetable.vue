@@ -6,9 +6,9 @@ import Schedule from '../components/TimetablePageComponents/Schedule.vue';
 
 <template>
     <div class="timetable-page">
-        <Tabs></Tabs>
-        <Schedule></Schedule>
-        <Terminal></Terminal>
+        <Tabs />
+        <Schedule />
+        <Terminal />
     </div>
 </template>
 

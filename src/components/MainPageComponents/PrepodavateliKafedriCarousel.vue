@@ -6,6 +6,7 @@ import { computed, ref } from 'vue';
 import { onMounted } from 'vue';
 import PrepodavateliKafedriItem from './PrepodavateliKafedriItem.vue';
 import config from '../../config';
+
 let flag = ref(false);
 const prepod_url = computed(() => {
     return `${config.KirURL}/api/v1/teacher/getAll`;
@@ -24,6 +25,7 @@ const fetchPrepod = async () => {
     //   currentIndex.value++;
     for (let i = 0; i < prepod.value.length; i++) {
         prepod.value[i].id = i;
+
         if (prepod.value[i].id == prepod.value.length - 1) {
             nextId.value[i] = 0;
         } else {
@@ -51,6 +53,7 @@ const fetchPrepod = async () => {
 
 const next = computed(() => {
     currentIndex.value++;
+
     if (currentIndex.value + 1 == prepod.value.length + 1) {
         currentIndex.value = 0;
     }
@@ -69,6 +72,7 @@ const next = computed(() => {
 
 const prev = () => {
     currentIndex.value--;
+
     if (currentIndex.value == -1) {
         currentIndex.value = prepod.value.length - 1;
     }
@@ -89,6 +93,7 @@ onMounted(() => {
     fetchPrepod();
 });
 </script>
+
 <template>
     <div class="content-wrapper-prepod">
         <div class="prepod-image-block">
@@ -96,25 +101,26 @@ onMounted(() => {
             <div class="PrepodavateliKafedriItem-wrap">
                 <PrepodavateliKafedriItem
                     v-for="{ id, name, photo, post, rank } in temp_array"
-                    :key="id"
                     :id="id"
+                    :key="id"
                     :name="name"
                     :photo="photo"
                     :post="post"
                     :rank="rank"
-                    :currentIndex="currentIndex"
+                    :current-index="currentIndex"
                 ></PrepodavateliKafedriItem>
             </div>
             <div
                 class="prepod-image-arrow next-image-arrow"
-                @click="next"
                 style="margin-left: 15px"
+                @click="next"
             ></div>
         </div>
 
         <div class="line-anima" :class="{ setup: flag }"></div>
     </div>
 </template>
+
 <style scoped>
 .setup {
     animation: anima 2s ease !important;

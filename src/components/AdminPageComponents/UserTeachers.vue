@@ -20,6 +20,7 @@ const url = computed(() => {
 
 const fetchGroup = async () => {
     const response = await useFetch(url).json();
+
     array.value = response.data.value;
     filteredArray.value = array.value;
     console.log('LOG', array);
@@ -138,56 +139,49 @@ const deleteUser = async (id) => {
             </select>
 
             <input
+                v-model="searchQuery"
                 type="text"
                 placeholder="Поиск..."
-                v-model="searchQuery"
                 class="placeholder-userAll"
             />
-            <button @click="authState.isVisibleModalAddUsers = true" class="addUser">
+            <button class="addUser" @click="authState.isVisibleModalAddUsers = true">
                 Новый преподаватель
             </button>
         </div>
         <div class="text-list-userAll">Список преподавателей</div>
         <div class="user-list">
             <div class="user-list-header">
-                <span class="user-id"
-                    >Id
+                <span class="user-id">
+                    Id
                     <button>
-                        <img
-                            src="../../assets/admin/bottom.svg"
-                            @click="sortById"
-                        /></button
-                ></span>
-                <span class="user-login"
-                    >Логин
+                        <img src="../../assets/admin/bottom.svg" @click="sortById" />
+                    </button>
+                </span>
+                <span class="user-login">
+                    Логин
                     <button>
-                        <img
-                            src="../../assets/admin/bottom.svg"
-                            @click="sortByLogin"
-                        /></button
-                ></span>
-                <span class="user-role"
-                    >Должность<button>
-                        <img
-                            src="../../assets/admin/bottom.svg"
-                            @click="sortByPost"
-                        /></button
-                ></span>
-                <span class="user-name"
-                    >Имя
+                        <img src="../../assets/admin/bottom.svg" @click="sortByLogin" />
+                    </button>
+                </span>
+                <span class="user-role">
+                    Должность
                     <button>
-                        <img
-                            src="../../assets/admin/bottom.svg"
-                            @click="sortByName"
-                        /></button
-                ></span>
+                        <img src="../../assets/admin/bottom.svg" @click="sortByPost" />
+                    </button>
+                </span>
+                <span class="user-name">
+                    Имя
+                    <button>
+                        <img src="../../assets/admin/bottom.svg" @click="sortByName" />
+                    </button>
+                </span>
                 <span class="user-edit">Редактировать</span>
                 <span class="user-delete">Удалить</span>
             </div>
 
             <div
-                v-if="filteredArray.length"
                 v-for="item in filteredArray"
+                v-if="filteredArray.length"
                 :key="item.id"
                 class="user-item"
             >
@@ -195,20 +189,22 @@ const deleteUser = async (id) => {
                 <span class="user-login">{{ item.login }}</span>
                 <span class="user-role">{{ item.post }}</span>
                 <span class="user-name">{{ item.name }}</span>
-                <span class="user-edit"
-                    ><button>
+                <span class="user-edit">
+                    <button>
                         <img
                             src="../../assets/admin/piece_of_paper_and_pencil.svg"
                             @click="editUser(item.id)"
-                        /></button
-                ></span>
-                <span class="user-delete"
-                    ><button>
+                        />
+                    </button>
+                </span>
+                <span class="user-delete">
+                    <button>
                         <img
                             src="../../assets/admin/cross-svgrepo-com.svg"
                             @click="deleteUser(item.id)"
-                        /></button
-                ></span>
+                        />
+                    </button>
+                </span>
             </div>
 
             <div v-else class="user-item">

@@ -6,6 +6,7 @@ import Gallery from '../pages/Gallery.vue';
 import Admin from '../pages/Admin.vue';
 import NewsContent from '../pages/NewsContent.vue';
 import NewsAdminAdd from '../components/AdminPageComponents/NewsAdminAdd.vue';
+
 const routes = [
     {
         path: '/',
@@ -43,6 +44,7 @@ const routes = [
         component: NewsAdminAdd,
     },
 ];
+
 //newsContent
 const router = createRouter({
     scrollBehavior(to, from, savedPosition) {

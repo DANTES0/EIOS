@@ -28,6 +28,7 @@ const fetchData = async () => {
     const response = await useFetch(
         `${config.KirURL}/students/find/${authState.editUserId}`,
     ).json();
+
     array3.value = response.data.value;
 
     login.value = array3.value.user.login;
@@ -48,6 +49,7 @@ array.value.push(
 );
 
 let array2 = ref([]);
+
 array2.value.push(
     { label: '1', value: 1 },
     { label: '2', value: 2 },
@@ -68,6 +70,7 @@ const hideModal = (event) => {
     if (event.target.classList.contains('modal-add-user-wrapper')) {
         authState.isVisibleEditStudentModelComponent = false;
     }
+
     document.documentElement.classList.remove('modal-open');
 };
 
@@ -97,6 +100,7 @@ const sendNewStudent = async () => {
     authState.isVisibleEditStudentModelComponent = false;
     eventBus.emit('studentAdded');
 };
+
 document.documentElement.classList.add('modal-open');
 </script>
 

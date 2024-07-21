@@ -47,6 +47,7 @@ const addPhoto = async (file) => {
     if (!file) return;
 
     const formData = new FormData();
+
     formData.append('file', file);
 
     const response = await fetch(`${config.KirURL}/gallery/upload`, {
@@ -68,6 +69,7 @@ const addPhoto = async (file) => {
 
 const handleFileChange = (event) => {
     const file = event.target.files[0];
+
     if (file) {
         selectedFileName.value = file.name;
         selectedFile.value = file;
@@ -93,10 +95,10 @@ onMounted(() => {
             <div class="content-photo-title">Фотографии которые видны</div>
             <div class="upload-section">
                 <input
-                    type="file"
                     id="file-upload"
-                    @change="handleFileChange"
+                    type="file"
                     class="file-input"
+                    @change="handleFileChange"
                 />
                 <label for="file-upload" class="file-label">Выбрать фото</label>
                 <input
@@ -122,7 +124,7 @@ onMounted(() => {
                     class="photo"
                     :class="{ active: item.isVisible }"
                 />
-                <div class="checked" v-if="item.isVisible">
+                <div v-if="item.isVisible" class="checked">
                     <div class="delete-title">Удалить?</div>
                     <div class="key">
                         <div class="yes-key" @click="deletePhoto(item.id, index)">Да</div>

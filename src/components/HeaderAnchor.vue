@@ -32,6 +32,7 @@ let aewaeaewwrerwrweae = '12rwerewr414';
 //   // }
 // }
 </script>
+
 <template>
     <div v-if="$route.path == `/`" class="dropdown-anchor">
         <DropdownHeader></DropdownHeader>
@@ -43,4 +44,5 @@ let aewaeaewwrerwrweae = '12rwerewr414';
         <NewsFilters></NewsFilters>
     </div>
 </template>
+
 <style></style>

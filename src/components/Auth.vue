@@ -17,11 +17,14 @@ const hideAuth = (event) => {
     if (event.target.classList.contains('auth-wrapp')) {
         authState.isVisible = false;
     }
+
     document.documentElement.classList.remove('modal-open');
 };
+
 const authorize = async () => {
     if (login.value === '') {
         loginError.value = true;
+
         return;
     } else {
         loginError.value = false;
@@ -41,16 +44,19 @@ const authorize = async () => {
 
         if (error.value) {
             console.error('Ошибка при отправке запроса:', error.value);
+
             return;
         }
 
         const { accessToken, refreshToken } = data.value;
+
         store.dispatch('login', { accessToken, refreshToken });
         authState.isVisible = false;
     } catch (error) {
         console.error('Ошибка при отправке запроса:', error);
     }
 };
+
 document.documentElement.classList.add('modal-open');
 </script>
 
@@ -64,12 +70,12 @@ document.documentElement.classList.add('modal-open');
                 <div class="input-login">
                     <div class="input-login-title">Введите логин</div>
                     <input
-                        @click="loginError = false"
                         v-model="login"
                         placeholder="Логин...."
                         type="text"
                         class="input-login-text input"
                         :class="{ error: loginError }"
+                        @click="loginError = false"
                     />
                 </div>
                 <div class="input-passwaord">
@@ -82,11 +88,12 @@ document.documentElement.classList.add('modal-open');
                     />
                 </div>
                 <div class="not-auth">не могу войти</div>
-                <button @click="authorize" class="enter-auth">Авторизоваться</button>
+                <button class="enter-auth" @click="authorize">Авторизоваться</button>
             </div>
         </div>
     </div>
 </template>
+
 <style scoped>
 @font-face {
     font-family: JetBrainsMono;

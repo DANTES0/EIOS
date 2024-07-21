@@ -9,33 +9,30 @@ const fetch = async () => {
     const { statusCode } = await useAuthenticatedFetch(
         `${config.KirURL}/api/v1/admin`,
     ).get();
+
     console.log(statusCode);
+
     if (statusCode.value == '200') {
         authState.isAccess = true;
         console.log(authState.isAccess);
     }
+
     console.log('ЗАПРОС');
 };
+
 fetch();
-
-// function visibleAuth ()
-// {
-
-//   isVisible.value = !isVisible.value
-//   console.log(isVisible.value)
-// }
 </script>
 
 <template>
     <div class="wrap">
-        <Auth v-if="authState.isVisible"></Auth>
+        <Auth v-if="authState.isVisible" />
         <NavBar
             v-if="
                 $route.path != '/admin' &&
                 $route.path != `/news/get/admin/${$route.params.id}` &&
                 $route.path != `/news/get/admin`
             "
-        ></NavBar>
+        />
 
         <div class="main-background">
             <router-view />

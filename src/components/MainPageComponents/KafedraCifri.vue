@@ -14,10 +14,11 @@ const cifri = [
     },
 ];
 </script>
+
 <template>
     <div class="wrapper-cifri">
         <div class="numbers-wrapper">
-            <div class="numbers" v-for="i in 22" :key="i">{{ i }}</div>
+            <div v-for="i in 22" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="cifri" class="content-cifri-wrapper">
             <div class="title-cifri-wrapper">
@@ -35,6 +36,7 @@ const cifri = [
         </div>
     </div>
 </template>
+
 <style>
 @font-face {
     font-family: Ubuntu-Bold;

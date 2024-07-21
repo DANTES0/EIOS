@@ -20,6 +20,7 @@ const placeholder = ref('Поиск...');
 const placeholder2 = ref('Поиск...');
 
 let array = ref([]);
+
 array.value.push(
     { label: 'О714Б', value: 1 },
     { label: 'О715Б', value: 2 },
@@ -27,6 +28,7 @@ array.value.push(
 );
 
 let array2 = ref([]);
+
 array2.value.push(
     { label: '1', value: 1 },
     { label: '2', value: 2 },
@@ -47,6 +49,7 @@ const hideModal = (event) => {
     if (event.target.classList.contains('modal-add-user-wrapper')) {
         authState.isVisibleModalAddUsers = false;
     }
+
     document.documentElement.classList.remove('modal-open');
 };
 
@@ -69,6 +72,7 @@ const sendNewStudent = async () => {
     authState.isVisibleModalAddUsers = false;
     eventBus.emit('studentAdded');
 };
+
 document.documentElement.classList.add('modal-open');
 </script>
 
@@ -87,12 +91,12 @@ document.documentElement.classList.add('modal-open');
                 <div class="input-name wrap" style="margin-top: 40px">
                     <div class="input-name-title title">Введите Имя</div>
                     <input
-                        @click="loginError = false"
                         v-model="name"
                         placeholder="Логин...."
                         type="text"
                         class="input--name-text input"
                         :class="{ error: loginError }"
+                        @click="loginError = false"
                     />
                 </div>
                 <div class="input-login wrap">
@@ -107,12 +111,12 @@ document.documentElement.classList.add('modal-open');
                 <div class="input-password wrap">
                     <div class="input-login-title title">Введите пароль</div>
                     <input
-                        @click="loginError = false"
                         v-model="password"
                         placeholder="Логин...."
                         type="password"
                         class="input-login-text input"
                         :class="{ error: loginError }"
+                        @click="loginError = false"
                     />
                 </div>
                 <div class="select">

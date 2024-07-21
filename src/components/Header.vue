@@ -23,24 +23,24 @@ const toggleAuthVisibility = () => {
             <div class="page-header">
                 <Popper :placement="'right'" :hover="true" content="Главная страница">
                     <a
-                        class="page"
                         id="main"
+                        class="page"
                         data-title="Главная страница"
                         @click="$router.push('/')"
                     ></a>
                 </Popper>
                 <Popper :placement="'right'" :hover="true" content="Новости">
                     <a
-                        class="page"
                         id="q"
+                        class="page"
                         data-title="Новости"
                         @click="$router.push('/news')"
                     ></a>
                 </Popper>
                 <Popper :placement="'right'" :hover="true" content="Расписание">
                     <a
-                        class="page"
                         id="w"
+                        class="page"
                         data-title="Расписание"
                         @click="$router.push('/timetable')"
                     ></a>
@@ -52,64 +52,64 @@ const toggleAuthVisibility = () => {
                 >
                     <a
                         v-if="authState.isAccess"
-                        class="page"
                         id="e"
+                        class="page"
                         data-title="Комиссия"
                         @click="$router.push('/admin')"
                     ></a>
                 </Popper>
 
-                <a class="page" id="t" @click="$router.push('/gallery')"></a>
+                <a id="t" class="page" @click="$router.push('/gallery')"></a>
             </div>
             <div class="page-header-bottom">
                 <a
-                    @click="() => store.dispatch('logout')"
-                    class="page"
                     id="moodle"
+                    class="page"
                     data-title="moodle"
+                    @click="() => store.dispatch('logout')"
                 ></a>
                 <Popper :placement="'right'" :hover="true" content="Авторизоваться">
                     <a
-                        @click="toggleAuthVisibility"
-                        class="page"
                         id="profile"
+                        class="page"
                         data-title="Профиль"
+                        @click="toggleAuthVisibility"
                     ></a>
                 </Popper>
                 <Popper :placement="'right'" :hover="true" content="Главный сайт">
                     <a
+                        id="voenmeh"
                         href="https://www.voenmeh.ru/"
                         class="page"
-                        id="voenmeh"
                         data-title="voenmeh"
                     ></a>
                 </Popper>
                 <Popper :placement="'right'" :hover="true" content="Мудл">
                     <a
+                        id="moodle"
                         href="https://moodle.voenmeh.ru/login/index.php"
                         class="page"
-                        id="moodle"
                         data-title="moodle"
                     ></a>
                 </Popper>
                 <Popper :placement="'right'" :hover="true" content="Корпоративная почта">
                     <a
+                        id="mailvoenmeh"
                         href="https://mail.voenmeh.ru/mail/"
                         class="page"
-                        id="mailvoenmeh"
                         data-title="mailvoenmeh"
                     ></a>
                 </Popper>
             </div>
         </div>
         <div
-            class="header-wrapper-anchor-container"
             v-if="
                 !(
                     $route.path === '/newsContent' ||
                     $route.path.match(/^\/news\/get\/\d+$/)
                 )
             "
+            class="header-wrapper-anchor-container"
         >
             <div class="pum">
                 <a class="title" @click="$router.push('/')">

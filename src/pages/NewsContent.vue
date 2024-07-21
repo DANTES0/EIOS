@@ -16,6 +16,7 @@ async function loadNewsContent() {
 
     try {
         const response = await fetch(requestAddress);
+
         if (response.ok) {
             newsData.value = await response.json();
             console.log(newsData.value);
@@ -36,23 +37,23 @@ onMounted(() => {
     <div v-if="newsData" class="page-container">
         <div class="page-container-header">
             <NewsContentHeader
-                :newsHeaderHeadline="newsData.headline"
-                :newsHeaderMainInfo="newsData.mainInfo"
-                :newsHeaderCategory="newsData.category"
-                :newsHeaderDate="newsData.date"
+                :news-header-headline="newsData.headline"
+                :news-header-main-info="newsData.mainInfo"
+                :news-header-category="newsData.category"
+                :news-header-date="newsData.date"
             />
         </div>
 
         <div class="page-container-base">
-            <NewsContentBase :newsFullInfo="newsData.fullInfo" />
+            <NewsContentBase :news-full-info="newsData.fullInfo" />
         </div>
 
         <div class="page-container-base-slider">
-            <NewsContentPageSlider :newsImages="newsData.images" />
+            <NewsContentPageSlider :news-images="newsData.images" />
         </div>
     </div>
     <div v-else>
-        <p></p>
+        <p />
     </div>
 </template>
 

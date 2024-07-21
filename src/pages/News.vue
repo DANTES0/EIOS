@@ -54,8 +54,10 @@ async function loadNews() {
 
     try {
         const response = await fetch(requestAddress);
+
         if (response.ok) {
             const data = await response.json();
+
             newsData.value = data;
             console.log(newsData.value);
         } else {
@@ -78,24 +80,24 @@ function navigateToNews(newsId) {
 </script>
 
 <template>
-    <Tabs></Tabs>
+    <Tabs />
 
     <div class="news-page-container">
         <div class="news-page-content">
             <div v-for="newsItem in newsData" :key="newsItem.id" class="news-block">
                 <NewsBlock
+                    :news-tag="newsItem.category"
+                    :news-title="newsItem.headline"
+                    :news-date="newsItem.date"
+                    :news-image="newsItem.images[0]"
+                    :news-description="newsItem.fullInfo"
                     @click="navigateToNews(newsItem.id)"
-                    :newsTag="newsItem.category"
-                    :newsTitle="newsItem.headline"
-                    :newsDate="newsItem.date"
-                    :newsImage="newsItem.images[0]"
-                    :newsDescription="newsItem.fullInfo"
                 />
             </div>
         </div>
 
         <div class="pagination-wrapper">
-            <CustomPagination></CustomPagination>
+            <CustomPagination />
         </div>
     </div>
 </template>
