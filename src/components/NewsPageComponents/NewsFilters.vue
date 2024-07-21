@@ -36,6 +36,7 @@ const route = useRoute();
 
 const filtersContentHeight = computed(() => {
     let height = 0;
+
     if (!isShowData.value && !isShowCategories.value) {
         height += 60;
     } else if (isShowData.value && !isShowCategories.value) {
@@ -45,6 +46,7 @@ const filtersContentHeight = computed(() => {
     } else if (isShowData.value && isShowCategories.value) {
         height += 543.5;
     }
+
     return height;
 });
 
@@ -126,9 +128,11 @@ function loadFiltersFromUrl() {
 
     if (query.categories) {
         const selectedCategoriesArray = query.categories.split(';');
+
         for (let i = 0; i < selectedCategoriesArray.length; i++) {
             const category = selectedCategoriesArray[i];
             const index = categories.value.indexOf(category);
+
             if (index !== -1) {
                 selectedCategories.value[index] = true;
             }
@@ -143,6 +147,7 @@ function formatDateDots(date) {
         const day = date.getDate();
         const month = date.getMonth() + 1;
         const year = date.getFullYear();
+
         return `${day}.${month}.${year}`;
     } else {
         return null;
@@ -151,13 +156,14 @@ function formatDateDots(date) {
 
 function parseDate(dateStr) {
     const [day, month, year] = dateStr.split('.').map(Number);
+
     return new Date(year, month - 1, day);
 }
 </script>
 
 <template>
     <!-- кнопка отрытия фильтров -->
-    <div @click="showFilters" class="dropdown-button">
+    <div class="dropdown-button" @click="showFilters">
         <img src="../../assets/header/NewsFilters/filter-square.svg" alt="" />
         <label class="dropdown-button-text"> Фильтры </label>
     </div>
@@ -168,7 +174,7 @@ function parseDate(dateStr) {
 
         <div class="filters-content">
             <!-- кнопка отрытия категорий -->
-            <div @click="showCategories" class="dropdown-button">
+            <div class="dropdown-button" @click="showCategories">
                 <img
                     class="arrow-down-button"
                     src="../../assets/header/arrow_down.svg"
@@ -183,20 +189,20 @@ function parseDate(dateStr) {
                 <div class="categories-line"></div>
                 <div class="categories-content">
                     <div
-                        class="categories-content-item"
                         v-for="(category, index) in categories"
                         :key="index"
+                        class="categories-content-item"
                     >
                         <CustomCheckbox
-                            :label="category"
                             v-model="selectedCategories[index]"
+                            :label="category"
                         />
                     </div>
                 </div>
             </div>
 
             <!-- кнопка отрытия даты -->
-            <div @click="showData" class="dropdown-button" id="showDataButton">
+            <div id="showDataButton" class="dropdown-button" @click="showData">
                 <img
                     class="arrow-down-button"
                     src="../../assets/header/arrow_down.svg"
@@ -213,7 +219,6 @@ function parseDate(dateStr) {
                     <span class="data-start">С</span>
                     <VueDatePicker
                         v-model="dateStart"
-                        @update:model-value="handleStartDate"
                         dark
                         :enable-time-picker="false"
                         :format="format"
@@ -224,6 +229,7 @@ function parseDate(dateStr) {
                         calendar-class-name="dp-custom-calendar"
                         calendar-cell-class-name="dp-custom-cell"
                         hide-input-icon
+                        @update:model-value="handleStartDate"
                     >
                         <!-- убрать предварительную дату -->
                         <template #action-preview=""> </template>
@@ -232,7 +238,6 @@ function parseDate(dateStr) {
                     <span class="data-end">По</span>
                     <VueDatePicker
                         v-model="dateEnd"
-                        @update:model-value="handleEndDate"
                         dark
                         :enable-time-picker="false"
                         :format="format"
@@ -243,6 +248,7 @@ function parseDate(dateStr) {
                         calendar-class-name="dp-custom-calendar"
                         calendar-cell-class-name="dp-custom-cell"
                         hide-input-icon
+                        @update:model-value="handleEndDate"
                     >
                         <!-- убрать предварительную дату -->
                         <template #action-preview=""> </template>

@@ -18,6 +18,7 @@ const url = computed(() => {
 
 const fetchGroup = async () => {
     const response = await useFetch(url).json();
+
     array.value = response.data.value;
     filteredArray.value = array.value;
     console.log('LOG', array);
@@ -111,9 +112,9 @@ const deleteUser = async (id) => {
             </select>
 
             <input
+                v-model="searchQuery"
                 type="text"
                 placeholder="Поиск..."
-                v-model="searchQuery"
                 class="placeholder-userAll"
             />
         </div>
@@ -148,8 +149,8 @@ const deleteUser = async (id) => {
             </div>
 
             <div
-                v-if="filteredArray.length"
                 v-for="item in filteredArray"
+                v-if="filteredArray.length"
                 :key="item.id"
                 class="user-item"
             >

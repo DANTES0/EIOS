@@ -7,13 +7,16 @@ import IconPy from '../Icons/Icon/IconPy.vue';
 import IconC from '../Icons/Icon/IconC.vue';
 import IconJs from '../Icons/Icon/IconJs.vue';
 import IconTs from '../Icons/Icon/IconTs.vue';
+
 const isShowDropDown = ref(true);
+
 function showDropDown() {
     isShowDropDown.value = !isShowDropDown.value;
 }
 </script>
+
 <template>
-    <div @click="showDropDown" class="drop-btn-container">
+    <div class="drop-btn-container" @click="showDropDown">
         <img
             src="../../assets/header/arrow_down.svg"
             alt=""
@@ -21,7 +24,7 @@ function showDropDown() {
             :class="{ rotated: isShowDropDown }"
         />
         <img src="../../assets/header/folder.svg" alt="" class="folder" />
-        <label class="dropbtn" id="dropbtn"> Главная страница </label>
+        <label id="dropbtn" class="dropbtn"> Главная страница </label>
     </div>
     <Transition name="slide-fade">
         <div v-if="isShowDropDown" id="myDropdown" class="dropdown-content">
@@ -37,8 +40,8 @@ function showDropDown() {
                     <!-- <icon-base class="ml-[18px]" width="24" height="24"
                         ><icon-html
                     /></icon-base> -->
-                    <label class="label">о_кафедре.html</label></a
-                >
+                    <label class="label">о_кафедре.html</label>
+                </a>
                 <a href="#news" class="dropdown-content-a">
                     <img
                         src="../../assets/anchor_header/css.svg"
@@ -59,8 +62,8 @@ function showDropDown() {
                     <!-- <icon-base class="ml-[18px]" width="24" height="24"
                         ><icon-py /> ></icon-base
                     > -->
-                    <label class="label">работники_кафедры.py</label></a
-                >
+                    <label class="label">работники_кафедры.py</label>
+                </a>
                 <a href="#cifri" class="dropdown-content-a">
                     <img
                         src="../../assets/anchor_header/c++.svg"
@@ -71,8 +74,9 @@ function showDropDown() {
                     <!-- <icon-base class="ml-[18px]" width="24" height="24"
                         ><icon-c /> ></icon-base
                     > -->
-                    <label class="label">кафедра_в_цифрах.cpp</label> </a
-                ><a href="#gallery" class="dropdown-content-a">
+                    <label class="label">кафедра_в_цифрах.cpp</label>
+                </a>
+                <a href="#gallery" class="dropdown-content-a">
                     <img
                         src="../../assets/anchor_header/js.svg"
                         alt=""
@@ -81,8 +85,8 @@ function showDropDown() {
                     <!-- <icon-base class="ml-[18px]" width="24" height="24"
                         ><icon-js /> ></icon-base
                     > -->
-                    <label class="label">фотогалерея.js</label></a
-                >
+                    <label class="label">фотогалерея.js</label>
+                </a>
                 <a href="#footer" class="dropdown-content-a">
                     <img
                         src="../../assets/anchor_header/ts.svg"
@@ -99,6 +103,7 @@ function showDropDown() {
         </div>
     </Transition>
 </template>
+
 <style>
 .slide-fade-enter-active,
 .slide-fade-leave-active {

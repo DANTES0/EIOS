@@ -1,4 +1,5 @@
 <script setup></script>
+
 <template>
     <div class="tabs">
         <div class="tabs-line">
@@ -7,6 +8,7 @@
         </div>
     </div>
 </template>
+
 <style>
 .tabs {
     position: sticky;

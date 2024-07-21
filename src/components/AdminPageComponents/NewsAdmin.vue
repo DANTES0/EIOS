@@ -4,15 +4,18 @@ import NewsBlock from '../NewsPageComponents/NewsBlock.vue';
 import { useFetch } from '@vueuse/core';
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+
 let news = ref([]);
 const flag = ref(false);
 const route = useRoute();
 const router = useRouter();
 const loadNews = async () => {
     const response = await useFetch(`${config.KirURL}/news/get/all`).json();
+
     news.value = response.data.value;
     console.log(response.data.value);
 };
+
 loadNews();
 
 watch(route, () => {
@@ -44,23 +47,23 @@ function addNews() {
         </header>
 
         <div class="content-wrap-news">
-            <button @click="addNews" class="addNews">Добавить новость</button>
+            <button class="addNews" @click="addNews">Добавить новость</button>
             <button
-                @click="() => (flag = !flag)"
                 class="addNews"
                 style="margin-left: 900px"
+                @click="() => (flag = !flag)"
             >
                 Удаление новостей
             </button>
             <div class="news-page-content">
-                <div class="news-block" v-for="newsItem in news">
+                <div v-for="newsItem in news" class="news-block">
                     <NewsBlock
+                        :news-tag="newsItem.category"
+                        :news-title="newsItem.headline"
+                        :news-date="newsItem.date"
+                        :news-image="newsItem.images[0]"
+                        :news-description="newsItem.fullInfo"
                         @click="navigateToNews(newsItem.id)"
-                        :newsTag="newsItem.category"
-                        :newsTitle="newsItem.headline"
-                        :newsDate="newsItem.date"
-                        :newsImage="newsItem.images[0]"
-                        :newsDescription="newsItem.fullInfo"
                     ></NewsBlock>
                 </div>
             </div>

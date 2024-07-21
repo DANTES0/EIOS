@@ -1,10 +1,11 @@
 <script setup>
 // import NewsBlock from "./News.vue"
 </script>
+
 <template>
     <div class="news-wrapper">
         <div class="numbers-wrapper">
-            <div class="numbers" v-for="i in 18" :key="i">{{ i }}</div>
+            <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="news" class="content-news-wrapper">
             <div class="title-news-wrapper">

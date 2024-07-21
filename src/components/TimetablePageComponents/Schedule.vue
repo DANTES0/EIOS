@@ -5,14 +5,18 @@ import { onMounted } from 'vue';
 import { useStore } from 'vuex';
 import eventBus from '../../eventBus';
 import config from '../../config';
+
 const selectedOption = ref('1');
 const isValidOption = (value) => {
     const teacherAndNumberRegex = /^teacher\d+$/;
+
     return teacherAndNumberRegex.test(value);
 };
+
 eventBus.on('optionSelected', (value) => {
     selectedOption.value = value;
 });
+
 const urlTeacher = ref('');
 const url = ref('');
 const schedule = computed(() => {
@@ -23,7 +27,9 @@ const schedule = computed(() => {
     } else {
         url.value = `${config.KirURL}/api/schedule/group?groupId=` + selectedOption.value;
     }
+
     console.log(url.value);
+
     return url.value;
 });
 
@@ -51,6 +57,7 @@ const EleventhRowNechet = ref([{}, {}, {}, {}, {}, {}]);
 const TwelethRowNechet = ref([{}, {}, {}, {}, {}, {}]);
 const ThirteenRowNechet = ref([{}, {}, {}, {}, {}, {}]);
 const ThortheenRowNechet = ref([{}, {}, {}, {}, {}, {}]);
+
 async function fetchSchedule() {
     firstRowNechet.value = [{}, {}, {}, {}, {}, {}];
     SecondRowNechet.value = [{}, {}, {}, {}, {}, {}];
@@ -66,9 +73,12 @@ async function fetchSchedule() {
     TwelethRowNechet.value = [{}, {}, {}, {}, {}, {}];
     ThirteenRowNechet.value = [{}, {}, {}, {}, {}, {}];
     ThortheenRowNechet.value = [{}, {}, {}, {}, {}, {}];
+
     const response_prepod = await useFetch(schedule).json();
     const array = response_prepod.data.value;
+
     console.log(response_prepod.data.value);
+
     for (let i = 0; i < array.length; i++) {
         if (
             array[i].parityOfWeek == 'нечетная' &&
@@ -595,6 +605,7 @@ onMounted(() => {
     fetchSchedule();
 });
 </script>
+
 <template>
     <div class="shedule-wrap">
         <table>
@@ -1766,6 +1777,7 @@ onMounted(() => {
         </table>
     </div>
 </template>
+
 <style>
 @font-face {
     font-family: JetBrainsMono;

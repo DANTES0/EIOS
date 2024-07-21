@@ -37,6 +37,7 @@ function formatDateDots(date) {
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();
+
         return `${year}-${month}-${day}`;
     } else {
         return null;
@@ -45,22 +46,27 @@ function formatDateDots(date) {
 
 function parseDate(dateStr) {
     const [day, month, year] = dateStr.split('.').map(Number);
+
     return new Date(year, month - 1, day);
 }
 
 const handleStartDate = (modelData) => {
     dateStart.value = modelData;
 };
+
 const imagesArr = ref([]);
 const images = ref([]);
 const mainImageIndex = ref(null);
 
 const handleFiles = (event) => {
     const files = event.target.files;
+
     // console.log(files)
     for (let i = 0; i < files.length; i++) {
         imagesArr.value.push(files[i]);
+
         const reader = new FileReader();
+
         reader.onload = (e) => {
             images.value.push(e.target.result);
         };
@@ -70,6 +76,7 @@ const handleFiles = (event) => {
 
 const removeImage = (index) => {
     images.value.splice(index, 1);
+
     if (mainImageIndex.value === index) {
         mainImageIndex.value = null;
     } else if (mainImageIndex.value > index) {
@@ -88,6 +95,7 @@ const date = ref('');
 
 const giveMeAllArea = async () => {
     date.value = formatDateDots(dateStart.value);
+
     const formData = new FormData();
 
     let object = ref({
@@ -99,10 +107,13 @@ const giveMeAllArea = async () => {
         photoNumber: mainImageIndex.value,
         onMainPage: false,
     });
+
     console.log(object.value);
+
     const newsBlob = new Blob([JSON.stringify(object.value)], {
         type: 'application/json',
     });
+
     formData.append('news', newsBlob);
 
     // Добавляем каждый файл в formData под ключом 'images'
@@ -114,6 +125,7 @@ const giveMeAllArea = async () => {
     for (const [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
     }
+
     const response = await fetch(`${config.KirURL}/news/upload`, {
         method: 'POST',
         body: formData,
@@ -135,8 +147,8 @@ const handleOptionSelected = (option) => {
     <div class="content-wrap">
         <div class="title">Предпросмотр шапки</div>
         <NewsContentHeader
-            :newsHeaderHeadline="headLine"
-            :newsHeaderMainInfo="mainInfo"
+            :news-header-headline="headLine"
+            :news-header-main-info="mainInfo"
         />
 
         <div class="headerAdd">
@@ -175,7 +187,6 @@ const handleOptionSelected = (option) => {
                     <div class="date-date">
                         <VueDatePicker
                             v-model="dateStart"
-                            @update:model-value="handleStartDate"
                             dark
                             :enable-time-picker="false"
                             :format="format"
@@ -186,6 +197,7 @@ const handleOptionSelected = (option) => {
                             calendar-class-name="dp-custom-calendar"
                             calendar-cell-class-name="dp-custom-cell"
                             hide-input-icon
+                            @update:model-value="handleStartDate"
                         >
                             <!-- убрать предварительную дату -->
                             <template #action-preview=""></template>
@@ -202,7 +214,7 @@ const handleOptionSelected = (option) => {
 
         <div class="editPhoto">
             <label class="upload-label" for="file-input">Выберите фотографии</label>
-            <input type="file" id="file-input" multiple @change="handleFiles" />
+            <input id="file-input" type="file" multiple @change="handleFiles" />
             <div id="preview">
                 <div v-for="(image, index) in images" :key="index" class="primg">
                     <div class="preview-image">
@@ -211,9 +223,9 @@ const handleOptionSelected = (option) => {
                     </div>
                     <div class="radiobutton">
                         <input
+                            v-model="mainImageIndex"
                             type="radio"
                             :value="index"
-                            v-model="mainImageIndex"
                             class="radio"
                         />
                         <div class="title-radio">Сделать главной</div>

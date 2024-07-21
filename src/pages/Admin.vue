@@ -13,7 +13,9 @@ import UserTeachers from '../components/AdminPageComponents/UserTeachers.vue';
 import config from '../config';
 
 let isVisibleChangePhotoGallery = ref(false);
+
 import UserAll from '../components/AdminPageComponents/UsersAll.vue';
+
 let visible = ref(true);
 const store = useStore();
 
@@ -25,8 +27,10 @@ async function fetchData() {
     const { data, error, isFetching, statusCode } = await useAuthenticatedFetch(
         `${config.KirURL}/api/v1/admin`,
     ).get();
+
     console.log(statusCode);
     console.log(store.getters.accessToken);
+
     if (
         statusCode.value == '403' ||
         (statusCode.value == '401' && !store.getters.accessToken)
@@ -36,38 +40,35 @@ async function fetchData() {
     } else {
         // visible.value = true
     }
+
     if (error.value) {
         // console.error('Failed to fetch data:', error.value);
     } else {
         console.log('Data:', data.value);
     }
+
     if (!store.getters.isLoggedIn) {
         authState.isVisible = true;
         // visible.value = false
     }
 }
+
 fetchData();
 </script>
 
 <template>
-    <AddUserModalComponent
-        v-if="authState.isVisibleModalAddUsers"
-    ></AddUserModalComponent>
-    <EditUserStudentModalComponent
-        v-if="authState.isVisibleEditStudentModelComponent"
-    ></EditUserStudentModalComponent>
+    <AddUserModalComponent v-if="authState.isVisibleModalAddUsers" />
+    <EditUserStudentModalComponent v-if="authState.isVisibleEditStudentModelComponent" />
 
     <div class="admin-page-container">
-        <LeftAdminMenu></LeftAdminMenu>
+        <LeftAdminMenu />
 
         <div class="userAll-content">
-            <ChangePhotoGallery
-                v-if="authState.isArticle == 'ChangePhotoGallery'"
-            ></ChangePhotoGallery>
-            <UserAll v-if="authState.isArticle == 'UserAll'"></UserAll>
-            <UserStudent v-if="authState.isArticle == 'UserStudent'"></UserStudent>
-            <NewsAdmin v-if="authState.isArticle == 'NewsAdmin'"></NewsAdmin>
-            <UserTeachers v-if="authState.isArticle == 'UserTeachers'"></UserTeachers>
+            <ChangePhotoGallery v-if="authState.isArticle == 'ChangePhotoGallery'" />
+            <UserAll v-if="authState.isArticle == 'UserAll'" />
+            <UserStudent v-if="authState.isArticle == 'UserStudent'" />
+            <NewsAdmin v-if="authState.isArticle == 'NewsAdmin'" />
+            <UserTeachers v-if="authState.isArticle == 'UserTeachers'" />
         </div>
         <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN

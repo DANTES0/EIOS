@@ -48,10 +48,10 @@ const vfRscs = computed(() => newsSliderImages.newsImages.map((image) => new Img
 <template>
     <div class="photo-slider">
         <VueFlux
+            ref="$vueFlux"
             :options="vfOptions"
             :rscs="vfRscs"
             :transitions="transitions"
-            ref="$vueFlux"
         >
             <template #preloader="preloaderProps">
                 <FluxPreloader v-bind="preloaderProps" />

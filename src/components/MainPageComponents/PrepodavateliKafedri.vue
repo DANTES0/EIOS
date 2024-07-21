@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import PrepodavateliKafedriCarousel from './PrepodavateliKafedriCarousel.vue';
+
 let flag = ref(false);
 const props = defineProps({
     id: Number,
@@ -8,20 +9,23 @@ const props = defineProps({
     photo: String,
     post: String,
 });
+
 function next_prepodavatel() {
     flag.value = true;
     setTimeout(() => {
         flag.value = false; // Удаляем класс .anima
     }, 2000); // Короткий интервал времени
 }
+
 const resetAnimation = () => {
     flag.value = false;
 };
 </script>
+
 <template>
     <div class="wrapper-prepod">
         <div class="numbers-wrapper">
-            <div class="numbers" v-for="i in 25" :key="i">{{ i }}</div>
+            <div v-for="i in 25" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="prepod" class="content-prepod-wrapper">
             <div class="title-prepod-wrapper">
@@ -34,6 +38,7 @@ const resetAnimation = () => {
         </div>
     </div>
 </template>
+
 <style>
 @font-face {
     font-family: JetBrainsMono;

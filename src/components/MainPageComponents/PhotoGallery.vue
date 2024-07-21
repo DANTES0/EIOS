@@ -4,6 +4,7 @@ import { ref, onMounted } from 'vue';
 onMounted(() => {
     console.log(document.querySelector('.circle_gallery'));
 });
+
 let prop = defineProps({
     id_photo: Number,
     photo: Array,
@@ -32,36 +33,47 @@ const next_photo = () => {
         first.value = -1;
         // flag.value = 1;
     }
+
     first.value++;
+
     if (first.value == array_size.value - 1) {
         second.value = -1;
         // flag.value = 1;
     }
+
     // console.log(first.value)
     second.value++;
+
     if (second.value == array_size.value - 1) {
         third.value = -1;
     }
+
     // console.log(second.value)
     third.value++;
 
     // console.log(third.value)
 };
+
 const gradientActiveLeft = ref(false);
 const prev_photo = () => {
     gradientActiveLeft.value = !gradientActiveLeft.value;
     console.log(gradientActiveLeft.value);
     setTimeout(() => (gradientActiveLeft.value = !gradientActiveLeft.value), 800);
     third.value--;
+
     if (third.value == 0) {
         second.value = array_size.value;
         // flag.value = 1;
     }
+
     second.value--;
+
     if (second.value == 0) {
         first.value = array_size.value;
     }
+
     first.value--;
+
     if (second.value == array_size.value - 2) {
         third.value = array_size.value - 1;
         // flag.value = 1;
@@ -71,15 +83,18 @@ const prev_photo = () => {
     console.log(second.value);
     console.log(third.value);
 };
+
 let show = ref(true);
 const c = () => {};
+
 let circle = ref(null);
 let array = [];
 </script>
+
 <template>
     <div class="wrapper-gallery">
         <div class="numbers-wrapper">
-            <div class="numbers" v-for="i in 22" :key="i">{{ i }}</div>
+            <div v-for="i in 22" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="gallery" class="content-gallery-wrapper">
             <div class="title-gallery-wrapper">
@@ -142,6 +157,7 @@ let array = [];
         </div>
     </div>
 </template>
+
 <style scoped>
 @font-face {
     font-family: JetBrainsMono;

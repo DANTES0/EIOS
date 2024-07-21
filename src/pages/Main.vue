@@ -11,6 +11,7 @@ import { useFetch } from '@vueuse/core';
 import { computed, ref } from 'vue';
 import { onMounted } from 'vue';
 import config from '../config';
+
 const url = computed(() => {
     //return `http://25.61.98.183:8080/news/1`
     return `${config.KirURL}/news/get/last`;
@@ -63,8 +64,10 @@ const prevNews = () => {
             (currentNewsIndex.value - 1) % news.value.length,
         );
     }
+
     console.log(currentNewsIndex.value);
 };
+
 const currentNews = computed(() =>
     // news.value = news.value[currentNewsIndex.value]
     news.value ? news.value[currentNewsIndex.value] : null,
@@ -75,15 +78,18 @@ const currentPhotoGallery = computed(() => {
         // console.log(photo_galleries.value[i].filename)
         array[i] = photo_galleries.value[i].filename;
     }
+
     return array;
 });
 
 const fetchGallery = async () => {
     const response_gallery = await useFetch(photo_url).json();
+
     photo_galleries.value = response_gallery.data.value;
     photo_images.value = response_gallery.data.filename;
     console.log(response_gallery);
 };
+
 const aboba = async () => {
     const response = await useFetch(url).json();
 
@@ -107,8 +113,8 @@ onMounted(() => {
 
 <template>
     <div class="Main-page">
-        <Tabs></Tabs>
-        <Kafedra></Kafedra>
+        <Tabs />
+        <Kafedra />
         <News
             v-if="news && news.length > 1 && currentNewsIndex !== null"
             :id="currentNews.id"
@@ -118,10 +124,9 @@ onMounted(() => {
             :url="currentNews.images"
             @next="nextNews"
             @prev="prevNews"
-        >
-        </News>
-        <PrepodavateliKafedri></PrepodavateliKafedri>
-        <KafedraCifri></KafedraCifri>
+        />
+        <PrepodavateliKafedri />
+        <KafedraCifri />
         <PhotoGallery
             v-if="
                 photo_galleries &&
@@ -132,10 +137,10 @@ onMounted(() => {
             :photo="currentPhotoGallery"
             @prev_photo="prevPhotoGallery"
             @next_photo="nextPhotoGallery"
-        ></PhotoGallery>
-        <Footer></Footer>
-        <Terminal></Terminal>
-        <div class="clp-cont"></div>
+        />
+        <Footer />
+        <Terminal />
+        <div class="clp-cont" />
     </div>
 </template>
 

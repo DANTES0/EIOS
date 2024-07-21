@@ -23,7 +23,7 @@ const TextKafedra = [
 <template>
     <div class="wrapper">
         <div class="numbers-wrapper">
-            <div class="numbers" v-for="i in 25" :key="i">{{ i }}</div>
+            <div v-for="i in 25" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="kafedra" class="content-kafedra-wrapper">
             <div class="title-kafedra-wrapper">
@@ -34,8 +34,8 @@ const TextKafedra = [
             </div>
             <KafedraText
                 v-for="(value, index) in TextKafedra"
-                :key="index"
                 :id="index"
+                :key="index"
                 :title="value.title"
                 :description="value.description"
             ></KafedraText>

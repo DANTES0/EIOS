@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
+
 // import { createRequire } from 'module';
 // const require = createRequire(import.meta.url);
 let flag = ref(false);
@@ -15,6 +16,7 @@ const props = defineProps({
     nextId: Number,
     prevId: Number,
 });
+
 // console.log(props.countObject)
 function next_prepodavatel() {
     flag.value = true;
@@ -22,11 +24,14 @@ function next_prepodavatel() {
         flag.value = false; // Удаляем класс .anima
     }, 2000); // Короткий интервал времени
 }
+
 const resetAnimation = () => {
     flag.value = false;
 };
+
 let temp = ref(0);
 </script>
+
 <template>
     <div class="wrappper">
         <img
@@ -35,7 +40,7 @@ let temp = ref(0);
             class="prepod-image"
             :class="{ 'main-prepod-image': id == currentIndex }"
         />
-        <div class="prepod-description-block" v-if="id == currentIndex">
+        <div v-if="id == currentIndex" class="prepod-description-block">
             <h1 class="name-prepod">{{ name }}</h1>
             <h2 style="margin-bottom: 21px" class="spec-prepod info-prepod">
                 {{ post }}
@@ -44,6 +49,7 @@ let temp = ref(0);
         </div>
     </div>
 </template>
+
 <style scoped>
 .wrappper {
     display: flex;

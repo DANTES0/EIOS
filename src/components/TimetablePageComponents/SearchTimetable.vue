@@ -10,6 +10,7 @@ import VueSelect from 'vue3-select-component';
 import Multiselect from '@vueform/multiselect';
 import eventBus from '../../eventBus.js';
 import config from '../../config';
+
 let options = ['1', '2', '3'];
 let array = ref([]);
 // const selected = ref("");
@@ -22,21 +23,27 @@ const teacherUrl = computed(() => {
 let placeholder = ref('Поиск...');
 const fetchGroup = async () => {
     const response = await useFetch(url).json();
+
     console.log(response.data.value);
+
     const responseTeacher = await useFetch(teacherUrl).json();
+
     console.log(responseTeacher.data.value);
+
     for (let i = 0; i < response.data.value.length; i++) {
         array.value.push({
             label: response.data.value[i].name,
             value: response.data.value[i].id,
         });
     }
+
     for (let i = 0; i < responseTeacher.data.value.length; i++) {
         array.value.push({
             label: responseTeacher.data.value[i].name,
             value: `teacher${responseTeacher.data.value[i].id}`,
         });
     }
+
     console.log(array.value);
 };
 
@@ -53,6 +60,7 @@ const handleOptionSelected = (option) => {
 };
 // updat
 </script>
+
 <template>
     <div class="search-timetable-wrap">
         <div class="search-timetable-text">Поиск по группе или преподавателю</div>
@@ -81,6 +89,7 @@ const handleOptionSelected = (option) => {
         </div>
     </div>
 </template>
+
 <!-- src="@vueform/multiselect/themes/default.css" -->
 <style scoped>
 @font-face {
