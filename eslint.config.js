@@ -2,6 +2,7 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import pluginVue from 'eslint-plugin-vue';
 import stylisticJs from '@stylistic/eslint-plugin-js';
+import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default [
     {
@@ -14,6 +15,7 @@ export default [
     ...pluginVue.configs[
         ('flat/essential', 'flat/strongly-recommended', 'flat/recommended')
     ],
+    pluginPrettierRecommended,
     {
         plugins: {
             '@stylistic/js': stylisticJs,
@@ -21,9 +23,6 @@ export default [
         rules: {
             'vue/padding-line-between-blocks': ['error', 'always'],
             'vue/enforce-style-attribute': ['error', { allow: ['scoped'] }],
-            'vue/html-indent': 'off',
-            'vue/singleline-html-element-content-newline': 'off',
-            'vue/html-self-closing': 'off',
             'vue/component-tags-order': [
                 'error',
                 {
