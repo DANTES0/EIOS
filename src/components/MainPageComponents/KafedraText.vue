@@ -27,11 +27,7 @@ defineProps({
     </div>
 </template>
 
-<style>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
+<style scoped>
 .kafedraText-title-nechet {
     font-size: 30px;
     color: #d9d9d9;

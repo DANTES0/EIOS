@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .tabs {
     position: sticky;
     top: 0;

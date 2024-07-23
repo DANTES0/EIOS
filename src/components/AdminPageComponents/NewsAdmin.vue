@@ -72,11 +72,6 @@ function addNews() {
 </template>
 
 <style scoped>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
-
 .addNews {
     font-family: JetBrainsMono;
     font-size: 24px;

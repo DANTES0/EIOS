@@ -17,7 +17,7 @@ import { VPagination } from 'vuetify/components';
     />
 </template>
 
-<style>
+<style scoped>
 @import url('vuetify/styles');
 
 .custom-pagination .v-btn__content {
@@ -26,9 +26,7 @@ import { VPagination } from 'vuetify/components';
     font-size: 36px;
 }
 
-*,
-::before,
-::after {
+* ::before ::after {
     box-sizing: content-box;
 }
 </style>

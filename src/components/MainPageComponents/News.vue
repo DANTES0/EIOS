@@ -69,15 +69,7 @@ defineProps({
     </div>
 </template>
 
-<style>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
-@font-face {
-    font-family: Rubik;
-    src: url('../../assets/Rubik.ttf');
-}
+<style scoped>
 .card-news-down-tags-blur {
     position: absolute;
     width: 100%;

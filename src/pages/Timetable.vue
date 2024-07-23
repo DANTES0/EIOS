@@ -12,10 +12,9 @@ import Schedule from '../components/TimetablePageComponents/Schedule.vue';
     </div>
 </template>
 
-<style>
+<style scoped>
 .timetable-page {
     width: 100%;
-    height: 2500px;
     display: flex;
     align-items: center;
     justify-content: center;

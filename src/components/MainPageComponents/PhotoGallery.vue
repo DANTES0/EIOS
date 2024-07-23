@@ -159,10 +159,6 @@ let array = [];
 </template>
 
 <style scoped>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../assets/JetBrainsMono.ttf');
-}
 .line-gradient {
     height: 2px;
     width: 300px;

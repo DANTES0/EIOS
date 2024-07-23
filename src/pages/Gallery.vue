@@ -4,4 +4,4 @@
     <div class="Gallery-page" />
 </template>
 
-<style></style>
+<style scoped></style>

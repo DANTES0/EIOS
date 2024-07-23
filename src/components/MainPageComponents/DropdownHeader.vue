@@ -104,7 +104,7 @@ function showDropDown() {
     </Transition>
 </template>
 
-<style>
+<style scoped>
 .slide-fade-enter-active,
 .slide-fade-leave-active {
     transition: all 0.3s ease;
@@ -116,10 +116,6 @@ function showDropDown() {
     opacity: 0;
 }
 
-@font-face {
-    font-family: Nunito;
-    src: url('../../assets/Nunito.ttf');
-}
 .label {
     margin-left: 7px;
     cursor: pointer;
@@ -148,7 +144,7 @@ function showDropDown() {
         hue-rotate(146deg) brightness(122%) contrast(120%);
 }
 .rotated {
-    transform: rotate(90deg);
+    transform: rotate(0deg);
 }
 .drop-btn-container {
     display: flex;

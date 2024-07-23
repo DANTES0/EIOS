@@ -102,7 +102,7 @@ function navigateToNews(newsId) {
     </div>
 </template>
 
-<style>
+<style scoped>
 .news-page-container {
     display: block;
     margin: auto auto;

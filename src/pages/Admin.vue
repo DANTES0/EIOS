@@ -76,7 +76,7 @@ fetchData();
     </div>
 </template>
 
-<style>
+<style scoped>
 .admin-page-container {
     display: flex;
     flex-direction: row;

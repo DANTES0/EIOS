@@ -148,10 +148,6 @@ document.documentElement.classList.add('modal-open');
 </template>
 
 <style scoped>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
 .modal-open {
     position: fixed;
     overflow: hidden;
