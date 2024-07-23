@@ -37,16 +37,7 @@ const cifri = [
     </div>
 </template>
 
-<style>
-@font-face {
-    font-family: Ubuntu-Bold;
-    src: url('../../assets/Ubuntu-Bold.ttf');
-}
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
-
+<style scoped>
 .description-cifri {
     font-family: JetBrainsMono;
     font-size: 20px;

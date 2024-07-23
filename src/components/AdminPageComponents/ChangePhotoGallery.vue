@@ -137,10 +137,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
 .add-photo {
     width: 186px;
     height: 40px;

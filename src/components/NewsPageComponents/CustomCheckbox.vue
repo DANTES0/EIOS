@@ -30,7 +30,7 @@ function toggleCheckbox() {
 }
 </script>
 
-<style>
+<style scoped>
 #checkbox-category {
     margin-left: 10px;
     user-select: none;

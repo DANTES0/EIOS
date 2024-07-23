@@ -43,16 +43,7 @@
     </div>
 </template>
 
-<style>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
-@font-face {
-    font-family: Rubik;
-    src: url('../../assets/Rubik.ttf');
-}
-
+<style scoped>
 .kapybaras {
     width: 301px;
     height: 297px;

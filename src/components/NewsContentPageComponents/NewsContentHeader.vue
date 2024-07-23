@@ -47,21 +47,6 @@ const newsHeaderData = defineProps({
 </template>
 
 <style scoped>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
-
-@font-face {
-    font-family: Rubik;
-    src: url('../../assets/Rubik.ttf');
-}
-
-@font-face {
-    font-family: Nunito;
-    src: url('../../assets/Nunito.ttf');
-}
-
 .header-container {
     width: 90%;
     height: auto; /* 400px */

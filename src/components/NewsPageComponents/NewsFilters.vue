@@ -259,16 +259,7 @@ function parseDate(dateStr) {
     </div>
 </template>
 
-<style>
-@font-face {
-    font-family: Nunito;
-    src: url('../../assets/Nunito.ttf');
-}
-
-:root {
-    --blue-color: rgb(0, 84, 255);
-}
-
+<style scoped>
 /* стили для линий */
 .filters-line {
     margin-left: 22px;
@@ -279,13 +270,13 @@ function parseDate(dateStr) {
     margin-left: 21.5px;
     width: 1px;
     height: 330px;
-    background-color: var(--blue-color);
+    background-color: rgb(0, 84, 255);
 }
 .data-line {
     margin-left: 21.5px;
     width: 1px;
     height: 148px;
-    background-color: var(--blue-color);
+    background-color: rgb(0, 84, 255);
 }
 
 /* стили для кнопки */
@@ -357,7 +348,7 @@ function parseDate(dateStr) {
     font-size: 16px;
 }
 
-.datapicker-input {
+:deep(.datapicker-input) {
     color: #cccccc;
     font-family: Rubik;
     font-size: 16px;
@@ -367,41 +358,21 @@ function parseDate(dateStr) {
     border-radius: 0px;
 }
 
-.datapicker-input:hover {
-    border-color: var(--blue-color);
+:deep(.datapicker-input:hover) {
+    border-color: rgb(0, 84, 255);
 }
 
-.dp-custom-calendar .dp__calendar_item {
+:deep(.dp-custom-calendar .dp__calendar_item) {
     font-family: Rubik;
 }
 
-.dp-custom-cell:hover {
-    background-color: var(--blue-color);
+:deep(.dp-custom-cell:hover) {
+    background-color: rgb(0, 84, 255);
 }
 
-.dp__theme_dark {
-    --dp-primary-color: var(--blue-color);
-    --dp-text-color: #cccccc;
-    --dp-secondary-color: #787878;
-    --dp-border-color: rgb(128, 128, 128);
-}
-
-:root {
-    --dp-font-family: Nunito;
-    --dp-font-size: 0.75rem;
-    --dp-border-radius: 0px;
-    --dp-cell-border-radius: 0px;
-    --dp-cell-size: 30px;
-    --dp-menu-min-width: 225px;
-}
-
-.dp__action_button {
+:deep(.dp__action_button) {
     --dp-action-button-height: 25px;
 }
-
-/* .dp__month_year_select {
-        color: #cccccc !important;
-    } */
 
 .arrow-down-button {
     transform-origin: 65% 50%;

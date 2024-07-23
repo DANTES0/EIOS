@@ -222,10 +222,6 @@ const deleteUser = async (id) => {
 </template>
 
 <style scoped>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
 .wrap-input-btn {
     display: flex;
     flex-direction: row;

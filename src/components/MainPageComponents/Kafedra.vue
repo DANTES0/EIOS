@@ -43,16 +43,7 @@ const TextKafedra = [
     </div>
 </template>
 
-<style>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
-@font-face {
-    font-family: Rubik;
-    src: url('../../assets/Rubik.ttf');
-}
-
+<style scoped>
 .content-kafedra-wrapper {
     width: 100%;
 }
@@ -64,23 +55,6 @@ const TextKafedra = [
     flex-direction: row;
     justify-content: start;
     align-items: start;
-}
-.tabs {
-    width: 100%;
-    height: 28px;
-    background-color: #181818;
-}
-.numbers {
-    color: #999999;
-    margin-top: 14px;
-    font-size: 16px;
-    font-family: JetBrainsMono;
-    font-weight: 100;
-    margin-left: 26px;
-}
-.numbers-wrapper {
-    display: flex;
-    flex-direction: column;
 }
 .title-kafedra {
     font-size: 48px;

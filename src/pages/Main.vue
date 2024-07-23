@@ -144,7 +144,7 @@ onMounted(() => {
     </div>
 </template>
 
-<style>
+<style scoped>
 .container {
     margin-top: 71px;
     max-width: 1390px;

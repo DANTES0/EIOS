@@ -188,6 +188,7 @@ const toggleAuthVisibility = () => {
     background-image: url('../assets/header/voenmeh.svg');
     background-size: contain;
     background-position: 50%;
+    background-repeat: no-repeat;
     transform: scale(1.4);
     filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
         contrast(89%);

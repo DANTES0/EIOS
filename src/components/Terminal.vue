@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 @font-face {
     font-family: JetBrainsMono;
     src: url('../assets/JetBrainsMono.ttf');

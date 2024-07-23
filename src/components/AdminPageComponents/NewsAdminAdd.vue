@@ -245,11 +245,6 @@ const handleOptionSelected = (option) => {
 </template>
 
 <style scoped>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
-
 .primg {
     width: 195px;
     margin-right: 60px;

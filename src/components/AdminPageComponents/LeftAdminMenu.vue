@@ -153,14 +153,6 @@ const isActiveUsers = ref(false);
 </template>
 
 <style scoped>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
-@font-face {
-    font-family: Russo-One;
-    src: url('../../assets/RussoOne-Regular.ttf');
-}
 .slide-fade-enter-active,
 .slide-fade-leave-active {
     transition: all 0.3s ease;

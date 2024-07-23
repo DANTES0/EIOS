@@ -39,12 +39,7 @@ const resetAnimation = () => {
     </div>
 </template>
 
-<style>
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('../../assets/JetBrainsMono.ttf');
-}
-
+<style scoped>
 .wrapper-prepod {
     height: 900px;
     background-color: #1f1f1f;
