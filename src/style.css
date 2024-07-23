@@ -1,3 +1,24 @@
+@font-face {
+    font-family: JetBrainsMono;
+    src: url('./assets/fonts/JetBrainsMono.ttf');
+}
+@font-face {
+    font-family: Rubik;
+    src: url('./assets/fonts/Rubik.ttf');
+}
+@font-face {
+    font-family: Nunito;
+    src: url('./assets/fonts/Nunito.ttf');
+}
+@font-face {
+    font-family: Russo-One;
+    src: url('./assets/fonts/RussoOne-Regular.ttf');
+}
+@font-face {
+    font-family: Ubuntu-Bold;
+    src: url('./assets/fonts/Ubuntu-Bold.ttf');
+}
+
 * {
     margin: 0;
     padding: 0;

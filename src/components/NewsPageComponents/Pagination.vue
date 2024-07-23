@@ -39,7 +39,7 @@ import { ref } from 'vue';
 const activeIndex = ref(0);
 </script>
 
-<style>
+<style scoped>
 .pagination-row {
     display: flex;
     align-items: center;
