@@ -1,7 +1,7 @@
 <script setup>
 import Tabs from '../components/Tabs.vue';
 import NewsBlock from '../components/NewsPageComponents/NewsBlock.vue';
-import Pagination from '../components/NewsPageComponents/Pagination.vue';
+import VPagination from '../components/NewsPageComponents/VPagination.vue';
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import CustomPagination from '../components/NewsPageComponents/CustomPagination.vue';
@@ -11,46 +11,32 @@ const newsData = ref([]);
 const route = useRoute();
 const router = useRouter();
 
-const currentPage = ref(1);
-const itemsPerPage = 10;
-
-// const currentIP = true;
-// let IPAddress = '';
-
-// if (currentIP) {
-//     IPAddress = '25.61.98.183';
-// } else {
-//     IPAddress = '25.59.204.137'
-// }
-
 async function loadNews() {
-    let requestAddress = `${config.KirURL}/news/get/all`;
+    const urlAddress = config.ServerURL;
+
+    let requestAddress = `${urlAddress}/news/get/all`;
 
     const categories = route.query.categories ? route.query.categories.split(';') : [];
     const startDate = route.query.startDate ? route.query.startDate : null;
     const endDate = route.query.endDate ? route.query.endDate : null;
 
     if (categories.length === 0 && !startDate && !endDate) {
-        requestAddress = `${config.KirURL}/news/get/all`;
+        requestAddress = `${urlAddress}/news/get/all`;
     } else if (categories.length === 0 && startDate && endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}&endDate=${endDate}`;
+        requestAddress = `${urlAddress}/news/get/all?startDate=${startDate}&endDate=${endDate}`;
     } else if (categories.length > 0 && !startDate && !endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}`;
+        requestAddress = `${urlAddress}/news/get/all?categories=${categories.join(';')}`;
     } else if (categories.length > 0 && startDate && endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`;
+        requestAddress = `${urlAddress}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`;
     } else if (categories.length === 0 && startDate && !endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?startDate=${startDate}`;
+        requestAddress = `${urlAddress}/news/get/all?startDate=${startDate}`;
     } else if (categories.length > 0 && startDate && !endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`;
+        requestAddress = `${urlAddress}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`;
     } else if (categories.length === 0 && !startDate && endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?endDate=${endDate}`;
+        requestAddress = `${urlAddress}/news/get/all?endDate=${endDate}`;
     } else if (categories.length > 0 && !startDate && endDate) {
-        requestAddress = `${config.KirURL}/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`;
+        requestAddress = `${urlAddress}/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`;
     }
-
-    console.log(categories);
-    console.log(startDate);
-    console.log(endDate);
 
     try {
         const response = await fetch(requestAddress);
@@ -97,7 +83,7 @@ function navigateToNews(newsId) {
         </div>
 
         <div class="pagination-wrapper">
-            <CustomPagination />
+            <VPagination />
         </div>
     </div>
 </template>
@@ -106,7 +92,6 @@ function navigateToNews(newsId) {
 .news-page-container {
     display: block;
     margin: auto auto;
-    /* background-color: blueviolet; */
     width: 1422px;
 
     min-height: 674px;
@@ -115,7 +100,6 @@ function navigateToNews(newsId) {
     margin-top: 30px;
     margin-bottom: 78px;
 }
-
 .news-page-content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -123,22 +107,17 @@ function navigateToNews(newsId) {
 
     padding-bottom: 50px;
 }
-
 .news-block {
     cursor: pointer;
     width: 425px;
     height: 532px;
     transition: transform 0.2s ease-in-out;
-    /* background-color: black; */
 }
-
 .news-block:hover {
     transform: scale(1.04);
 }
-
 .pagination-wrapper {
     margin: 0 auto;
-    /* background-color: yellow; */
     width: 1064px;
     height: 92px;
     display: flex;
