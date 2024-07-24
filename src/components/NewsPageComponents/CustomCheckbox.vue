@@ -1,10 +1,3 @@
-<template>
-    <div class="custom-checkbox-wrapper" @click="toggleCheckbox">
-        <input v-model="model" type="checkbox" :value="value" />
-        <span id="checkbox-category">{{ label }}</span>
-    </div>
-</template>
-
 <script setup>
 import { computed } from 'vue';
 
@@ -29,6 +22,13 @@ function toggleCheckbox() {
     model.value = !model.value;
 }
 </script>
+
+<template>
+    <div class="custom-checkbox-wrapper" @click="toggleCheckbox">
+        <input v-model="model" type="checkbox" :value="value" />
+        <span id="checkbox-category">{{ label }}</span>
+    </div>
+</template>
 
 <style scoped>
 #checkbox-category {

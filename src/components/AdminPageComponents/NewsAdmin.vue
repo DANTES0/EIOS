@@ -10,7 +10,7 @@ const flag = ref(false);
 const route = useRoute();
 const router = useRouter();
 const loadNews = async () => {
-    const response = await useFetch(`${config.KirURL}/news/get/all`).json();
+    const response = await useFetch(`${config.ServerURL}/news/get/all`).json();
 
     news.value = response.data.value;
     console.log(response.data.value);
@@ -24,7 +24,7 @@ watch(route, () => {
 
 async function navigateToNews(newsId) {
     if (flag.value == true) {
-        await useFetch(`${config.KirURL}/news/delete/${newsId}`, {
+        await useFetch(`${config.ServerURL}/news/delete/${newsId}`, {
             method: 'POST',
         });
         flag.value = !flag.value;

@@ -31,7 +31,7 @@ const authorize = async () => {
     }
 
     try {
-        const { data, error } = await useFetch(`${config.KirURL}/api/auth/login`, {
+        const { data, error } = await useFetch(`${config.ServerURL}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify({
                 login: login.value,

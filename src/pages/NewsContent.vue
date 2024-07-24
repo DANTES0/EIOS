@@ -12,7 +12,7 @@ const IPAddress = '25.61.98.183'; // Используйте здесь тот ж
 
 async function loadNewsContent() {
     const newsId = route.params.id;
-    const requestAddress = `${config.KirURL}/news/get/${newsId}`;
+    const requestAddress = `${config.ServerURL}/news/get/${newsId}`;
 
     try {
         const response = await fetch(requestAddress);

@@ -12,7 +12,7 @@ async function refreshAccessToken() {
 
     console.log('А сюда', refreshToken);
 
-    const response = await fetch(`${config.KirURL}/api/auth/token`, {
+    const response = await fetch(`${config.ServerURL}/api/auth/token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

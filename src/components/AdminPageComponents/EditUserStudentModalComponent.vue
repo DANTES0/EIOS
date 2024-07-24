@@ -26,7 +26,7 @@ let array3 = ref([]);
 
 const fetchData = async () => {
     const response = await useFetch(
-        `${config.KirURL}/students/find/${authState.editUserId}`,
+        `${config.ServerURL}/students/find/${authState.editUserId}`,
     ).json();
 
     array3.value = response.data.value;
@@ -80,7 +80,7 @@ const sendNewStudent = async () => {
     }
 
     const { data, error } = await useFetch(
-        `${config.KirURL}/students/edit/${authState.editUserId}`,
+        `${config.ServerURL}/students/edit/${authState.editUserId}`,
         {
             method: 'POST',
             body: JSON.stringify({

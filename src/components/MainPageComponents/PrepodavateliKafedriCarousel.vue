@@ -9,7 +9,7 @@ import config from '../../config';
 
 let flag = ref(false);
 const prepod_url = computed(() => {
-    return `${config.KirURL}/api/v1/teacher/getAll`;
+    return `${config.ServerURL}/api/v1/teacher/getAll`;
 });
 let prepod = ref(null);
 let currentIndex = ref(1);
