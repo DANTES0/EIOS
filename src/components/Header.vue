@@ -3,6 +3,8 @@
 import HeaderAnchor from './HeaderAnchor.vue';
 import { authState } from '../authState';
 import { useStore } from 'vuex';
+import IconEducation from './Icons/Icon/IconEducation.vue';
+import IconBase from './Icons/IconBase.vue';
 
 const store = useStore();
 
@@ -43,6 +45,18 @@ const toggleAuthVisibility = () => {
                         class="page"
                         data-title="Расписание"
                         @click="$router.push('/timetable')"
+                    ></a>
+                </Popper>
+                <Popper
+                    :placement="'right'"
+                    :hover="true"
+                    content="Список преподавателей"
+                >
+                    <a
+                        id="f"
+                        class="page"
+                        data-title="Комиссия"
+                        @click="$router.push('/teachers')"
                     ></a>
                 </Popper>
                 <Popper
@@ -238,6 +252,14 @@ const toggleAuthVisibility = () => {
         contrast(89%);
     display: block;
 }
+#f {
+    background-image: url('../assets/header/prepod.svg');
+    background-size: contain;
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
+    display: block;
+    transform: scale(1.3);
+}
 #r {
     /* background-image: url("../assets/voenmeh3.svg"); */
     transform: scale(2.5);
@@ -246,6 +268,10 @@ const toggleAuthVisibility = () => {
     /* filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%) contrast(89%); */
 }
 #r:hover {
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
+}
+#f:hover {
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
         contrast(110%);
 }

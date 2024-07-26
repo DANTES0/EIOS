@@ -3,6 +3,7 @@ import Main from '../pages/Main.vue';
 import NewsPage from '../pages/NewsPage.vue';
 import Timetable from '../pages/Timetable.vue';
 import Gallery from '../pages/Gallery.vue';
+import AllPrepodavateli from '../pages/AllPrepodavateli.vue';
 import Admin from '../pages/Admin.vue';
 import NewsContent from '../pages/NewsContent.vue';
 import NewsAdminAdd from '../components/AdminPageComponents/NewsAdminAdd.vue';
@@ -27,6 +28,11 @@ const routes = [
         path: '/admin',
         name: 'Admin',
         component: Admin,
+    },
+    {
+        path: '/teachers',
+        name: 'Teachers',
+        component: AllPrepodavateli,
     },
     {
         path: '/news/get/:id',
