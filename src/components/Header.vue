@@ -18,7 +18,11 @@ const toggleAuthVisibility = () => {
     <div
         class="header-wrapper"
         :style="{
-            width: $route.path.match(/^\/news\/get\/\d+$/) ? 'auto' : '',
+            width:
+                $route.path.match(/^\/news\/get\/\d+$/) ||
+                $route.path === '/teachers/detail'
+                    ? 'auto'
+                    : '',
         }"
     >
         <div class="header-wrapper-container">
@@ -120,7 +124,8 @@ const toggleAuthVisibility = () => {
             v-if="
                 !(
                     $route.path === '/newsContent' ||
-                    $route.path.match(/^\/news\/get\/\d+$/)
+                    $route.path.match(/^\/news\/get\/\d+$/) ||
+                    $route.path === '/teachers/detail'
                 )
             "
             class="header-wrapper-anchor-container"

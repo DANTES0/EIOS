@@ -7,6 +7,7 @@ import AllPrepodavateli from '../pages/AllPrepodavateli.vue';
 import Admin from '../pages/Admin.vue';
 import NewsContent from '../pages/NewsContent.vue';
 import NewsAdminAdd from '../components/AdminPageComponents/NewsAdminAdd.vue';
+import PrepodDetails from '../components/PrepodavateliPageComponents/PrepodDetails.vue';
 
 const routes = [
     {
@@ -33,6 +34,11 @@ const routes = [
         path: '/teachers',
         name: 'Teachers',
         component: AllPrepodavateli,
+    },
+    {
+        path: '/teachers/detail',
+        name: 'TeacherDetail',
+        component: PrepodDetails,
     },
     {
         path: '/news/get/:id',
