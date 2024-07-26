@@ -25,7 +25,7 @@ async function fetchData() {
     //     headers: {Authorization: `Bearer`+' eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2l6YXIiLCJleHAiOjE3MTYwNjQ0NDYsInJvbGVzIjpbeyJpZCI6MSwibmFtZSI6IlJPTEVfQURNSU4ifV19.VoMXIWD-RxJjbRGHd3BosqAIvIXEfQ5vLM6P1z-3hrP7LLvNHfGqErtlH8-xkIRPe6fOsvKmk_A8mN9nHxQAjA'}
     // })
     const { data, error, isFetching, statusCode } = await useAuthenticatedFetch(
-        `${config.KirURL}/api/v1/admin`,
+        `${config.ServerURL}/api/v1/admin`,
     ).get();
 
     console.log(statusCode);

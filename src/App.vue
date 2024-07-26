@@ -7,7 +7,7 @@ import config from './config';
 
 const fetch = async () => {
     const { statusCode } = await useAuthenticatedFetch(
-        `${config.KirURL}/api/v1/admin`,
+        `${config.ServerURL}/api/v1/admin`,
     ).get();
 
     console.log(statusCode);

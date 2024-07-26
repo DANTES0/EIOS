@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Main from '../pages/Main.vue';
-import News from '../pages/News.vue';
+import NewsPage from '../pages/NewsPage.vue';
 import Timetable from '../pages/Timetable.vue';
 import Gallery from '../pages/Gallery.vue';
 import Admin from '../pages/Admin.vue';
@@ -15,8 +15,8 @@ const routes = [
     },
     {
         path: '/news',
-        name: 'News',
-        component: News,
+        name: 'NewsPage',
+        component: NewsPage,
     },
     {
         path: '/timetable',

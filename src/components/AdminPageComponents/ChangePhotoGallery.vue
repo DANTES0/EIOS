@@ -15,7 +15,7 @@ const handleMouseLeave = (index) => {
 };
 
 const photo_url = computed(() => {
-    return `${config.KirURL}/gallery/get`;
+    return `${config.ServerURL}/gallery/get`;
 });
 
 const fetchPhoto = async () => {
@@ -29,7 +29,7 @@ const fetchPhoto = async () => {
 };
 
 const deletePhoto = async (id, index) => {
-    await useFetch(`${config.KirURL}/gallery/delete/${id}`, {
+    await useFetch(`${config.ServerURL}/gallery/delete/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const addPhoto = async (file) => {
 
     formData.append('file', file);
 
-    const response = await fetch(`${config.KirURL}/gallery/upload`, {
+    const response = await fetch(`${config.ServerURL}/gallery/upload`, {
         method: 'POST',
         body: formData,
         headers: {

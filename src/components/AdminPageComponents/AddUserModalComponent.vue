@@ -54,7 +54,7 @@ const hideModal = (event) => {
 };
 
 const sendNewStudent = async () => {
-    const { data, error } = await useFetch(`${config.KirURL}/students/register`, {
+    const { data, error } = await useFetch(`${config.ServerURL}/students/register`, {
         method: 'POST',
         body: JSON.stringify({
             login: login.value,

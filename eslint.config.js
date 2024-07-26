@@ -26,7 +26,7 @@ export default [
             'vue/component-tags-order': [
                 'error',
                 {
-                    order: [['script', 'template'], 'style'],
+                    order: ['script', 'template', 'style'],
                 },
             ],
             '@stylistic/js/padding-line-between-statements': [

@@ -15,7 +15,7 @@ let flagName = ref(true);
 let flagCourse = ref(true);
 
 const url = computed(() => {
-    return `${config.KirURL}/api/v1/students/all`;
+    return `${config.ServerURL}/api/v1/students/all`;
 });
 
 const fetchGroup = async () => {
@@ -109,7 +109,7 @@ function sortByCourse() {
 
 const deleteUser = async (id) => {
     try {
-        const response = await fetch(`${config.KirURL}/user/delete/${id}`, {
+        const response = await fetch(`${config.ServerURL}/user/delete/${id}`, {
             method: 'POST',
         });
 

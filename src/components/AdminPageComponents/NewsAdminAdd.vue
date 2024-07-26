@@ -126,7 +126,7 @@ const giveMeAllArea = async () => {
         console.log(`${key}: ${value}`);
     }
 
-    const response = await fetch(`${config.KirURL}/news/upload`, {
+    const response = await fetch(`${config.ServerURL}/news/upload`, {
         method: 'POST',
         body: formData,
         // Не устанавливаем Content-Type заголовок, fetch сделает это автоматически

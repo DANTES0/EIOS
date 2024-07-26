@@ -14,10 +14,10 @@ import config from '../config';
 
 const url = computed(() => {
     //return `http://25.61.98.183:8080/news/1`
-    return `${config.KirURL}/news/get/last`;
+    return `${config.ServerURL}/news/get/last`;
 });
 const photo_url = computed(() => {
-    return `${config.KirURL}/gallery/get`;
+    return `${config.ServerURL}/gallery/get`;
 });
 
 const extractedId = ref(null);
