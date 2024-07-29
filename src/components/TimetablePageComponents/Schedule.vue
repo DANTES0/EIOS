@@ -20,12 +20,15 @@ eventBus.on('optionSelected', (value) => {
 const urlTeacher = ref('');
 const url = ref('');
 const schedule = computed(() => {
+    console.log(config.ServerURL);
+
     if (isValidOption(selectedOption.value)) {
         url.value =
-            `${config.KirURL}/api/schedule/teacher?teacherId=` +
+            `${config.ServerURL}/api/schedule/teacher?teacherId=` +
             selectedOption.value.replace(/\D/g, '');
     } else {
-        url.value = `${config.KirURL}/api/schedule/group?groupId=` + selectedOption.value;
+        url.value =
+            `${config.ServerURL}/api/schedule/group?groupId=` + selectedOption.value;
     }
 
     console.log(url.value);

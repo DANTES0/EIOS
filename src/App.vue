@@ -55,6 +55,6 @@ fetch();
     height: 400px;
 }
 .main-background {
-    width: 100vw;
+    width: 83.6%;
 }
 </style>

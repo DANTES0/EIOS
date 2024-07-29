@@ -15,10 +15,10 @@ let options = ['1', '2', '3'];
 let array = ref([]);
 // const selected = ref("");
 const url = computed(() => {
-    return `${config.KirURL}/api/v1/group/all`;
+    return `${config.ServerURL}/api/v1/group/all`;
 });
 const teacherUrl = computed(() => {
-    return `${config.KirURL}/api/v1/teacher/getAll`;
+    return `${config.ServerURL}/api/v1/teacher/getAll`;
 });
 let placeholder = ref('Поиск...');
 const fetchGroup = async () => {

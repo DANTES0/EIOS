@@ -327,7 +327,7 @@ const toggleAuthVisibility = () => {
     position: sticky;
     top: 0;
     left: 0;
-    width: 320px;
+    width: 16.6%;
     height: 100vh;
     background-color: #0d101f;
     display: flex;
@@ -338,7 +338,7 @@ const toggleAuthVisibility = () => {
 }
 .header-wrapper-container {
     background-color: #181818;
-    width: 58px;
+    width: 15%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -351,7 +351,7 @@ const toggleAuthVisibility = () => {
     border-right: 1px solid #2b2b2b;
 }
 .header-wrapper-anchor-container {
-    width: 262px;
+    width: 85%;
     height: 100%;
     background-color: #181818;
 }
