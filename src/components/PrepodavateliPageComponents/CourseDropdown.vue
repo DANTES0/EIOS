@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import config from '../../config';
+import { useFetch } from '@vueuse/core';
 
 const hideDropdown = ref(true);
 </script>

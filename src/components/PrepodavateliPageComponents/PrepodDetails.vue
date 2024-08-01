@@ -5,6 +5,18 @@ import IconVk from '../Icons/Icon/IconVk.vue';
 import IconTelegram from '../Icons/Icon/IconTelegram.vue';
 import IconPhone from '../Icons/Icon/IconPhone.vue';
 import CourseDropdown from './CourseDropdown.vue';
+
+defineProps({
+    name: { type: String, default: 'Вальштейн Константин Владимирович' },
+    photo: { type: String, default: '' },
+    mail: { type: String, default: '' },
+    telegram: { type: String, default: '' },
+    vkontakte: { type: String, default: '' },
+    phone: { type: String, default: '' },
+    description: { type: String, default: '' },
+    post: { type: String, default: '' },
+    rank: { type: String, default: '' },
+});
 </script>
 
 <template>
