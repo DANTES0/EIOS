@@ -52,16 +52,16 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 ## EsLint Docs
 
-https://eslint.org/docs/latest/rules/
-https://eslint.style/packages/js
-https://eslint.vuejs.org/rules/#deprecated
+-   https://eslint.org/docs/latest/rules/
+-   https://eslint.style/packages/js
+-   https://eslint.vuejs.org/rules/#deprecated
 
 ## Vue Style Guide
 
-https://v3.ru.vuejs.org/ru/style-guide/
+-   https://v3.ru.vuejs.org/ru/style-guide/
 
 ## TailWind
 
-https://tailwindcss.com/
-https://tailwindcss.ru/docs/responsive-design/?ysclid=lzfdvxahaw128163659
-https://tailwindcss.ru/docs/dark-mode/?ysclid=lzfcdi53bp706594357
+-   https://tailwindcss.com/
+-   https://tailwindcss.ru/docs/responsive-design/?ysclid=lzfdvxahaw128163659
+-   https://tailwindcss.ru/docs/dark-mode/?ysclid=lzfcdi53bp706594357
