@@ -61,3 +61,7 @@ html {
     display: flex;
     flex-direction: column;
 }
+
+body * {
+    @apply transition-colors duration-200;
+}
