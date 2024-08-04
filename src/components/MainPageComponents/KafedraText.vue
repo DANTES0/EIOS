@@ -10,16 +10,20 @@ defineProps({
     <div v-if="id % 2 == 0" class="kafedraText-content-wrapper">
         <div class="kafedraText-line"></div>
         <div class="kafedraText-content">
-            <h1 class="kafedraText-title">{{ title }}</h1>
-            <h2 class="kafedraText-description">
+            <h1 class="kafedraText-title text-[#18589E] dark:text-[#d9d9d9]">
+                {{ title }}
+            </h1>
+            <h2 class="kafedraText-description text-[#0C2340] dark:text-[#999999]">
                 {{ description }}
             </h2>
         </div>
     </div>
     <div v-if="id % 2 != 0" class="kafedraText-content-wrapper-nechet">
         <div class="kafedraText-content-nechet">
-            <h1 class="kafedraText-title-nechet">{{ title }}</h1>
-            <h2 class="kafedraText-description-nechet">
+            <h1 class="kafedraText-title-nechet text-[#18589E] dark:text-[#d9d9d9]">
+                {{ title }}
+            </h1>
+            <h2 class="kafedraText-description-nechet text-[#0C2340] dark:text-[#999999]">
                 {{ description }}
             </h2>
         </div>
@@ -30,7 +34,7 @@ defineProps({
 <style scoped>
 .kafedraText-title-nechet {
     font-size: 30px;
-    color: #d9d9d9;
+    /* color: #d9d9d9; */
     text-align: right;
 }
 .kafedraText-description-nechet {
@@ -53,13 +57,13 @@ defineProps({
     margin-bottom: 50px;
 }
 .kafedraText-content-nechet {
-    color: #999999;
+    /* color: #999999; */
     font-family: JetBrainsMono;
     margin-right: 30px;
 }
 .kafedraText-title {
     font-size: 30px;
-    color: #d9d9d9;
+    /* color: #d9d9d9; */
 }
 .kafedraText-description {
     margin-top: 27px;
@@ -77,7 +81,7 @@ defineProps({
     margin-left: 60px;
 }
 .kafedraText-content {
-    color: #999999;
+    /* color: #999999; */
     font-family: JetBrainsMono;
     margin-left: 30px;
 }

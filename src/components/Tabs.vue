@@ -1,10 +1,12 @@
 <script setup></script>
 
 <template>
-    <div class="tabs">
-        <div class="tabs-line">
+    <div class="tabs bg-[#0C2340] dark:bg-[#181818]">
+        <div class="tabs-line bg-white dark:bg-[#1f1f1f]">
             <img src="../assets/anchor_header/html.svg" alt="" class="tabs-image" />
-            <label class="tabs-title">о_кафедре.html</label>
+            <label class="tabs-title text-black dark:text-[#cccccc]"
+                >о_кафедре.html</label
+            >
         </div>
     </div>
 </template>
@@ -25,7 +27,7 @@
     font-family: Rubik;
     font-size: 14px;
     font-weight: 100;
-    color: #cccccc;
+    /* color: #cccccc; */
     margin-right: 14px;
 }
 .tabs-line {
@@ -35,7 +37,7 @@
     justify-content: space-between;
     width: 158px;
     height: 100%;
-    background-color: #1f1f1f;
+    /* background-color: #1f1f1f; */
     border-right: 1px solid #2b2b2b;
 }
 </style>

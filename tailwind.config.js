@@ -11,4 +11,8 @@ export default {
         extend: {},
     },
     plugins: [],
+    darkMode: 'selector',
 };
+//ИСПОЛЬЗОВАНИЕ ТЕМЫ
+//localStorage.theme = 'dark' - Включение тюмного режима
+//localStorage.removeItem('theme') - Убрать тему и использовать предпочтения OC

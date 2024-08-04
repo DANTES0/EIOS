@@ -12,6 +12,28 @@ const toggleAuthVisibility = () => {
     authState.isVisible = !authState.isVisible;
     console.log(authState.isVisible);
 };
+
+const changeTheme = () => {
+    // localStorage.theme = 'light';
+
+    if (localStorage.theme === 'light') {
+        localStorage.theme = 'dark';
+    } else if (localStorage.theme === 'dark') {
+        localStorage.theme = 'light';
+    }
+
+    if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+
+    store.dispatch('logout');
+};
 </script>
 
 <template>
@@ -25,7 +47,9 @@ const toggleAuthVisibility = () => {
                     : '',
         }"
     >
-        <div class="header-wrapper-container">
+        <div
+            class="header-wrapper-container bg-[#0C2340] dark:bg-[#181818] border-r border-white dark:border-[#2b2b2b]"
+        >
             <div class="page-header">
                 <Popper :placement="'right'" :hover="true" content="Главная страница">
                     <a
@@ -81,10 +105,10 @@ const toggleAuthVisibility = () => {
             </div>
             <div class="page-header-bottom">
                 <a
-                    id="moodle"
+                    id="settings"
                     class="page"
                     data-title="moodle"
-                    @click="() => store.dispatch('logout')"
+                    @click="changeTheme"
                 ></a>
                 <Popper :placement="'right'" :hover="true" content="Авторизоваться">
                     <a
@@ -128,11 +152,14 @@ const toggleAuthVisibility = () => {
                     $route.path === '/teachers/detail'
                 )
             "
-            class="header-wrapper-anchor-container"
+            class="header-wrapper-anchor-container bg-[#0C2340] dark:bg-[#181818] border-r border-white dark:border-[#2b2b2b]"
         >
             <div class="pum">
-                <a class="title" @click="$router.push('/')">
-                    Кафедра <span style="color: white">О</span>7
+                <a
+                    class="title text-white dark:text-[#1e66f5]"
+                    @click="$router.push('/')"
+                >
+                    Кафедра <span class="text-[#1e66f5] dark:text-white">О</span>7
                 </a>
             </div>
             <HeaderAnchor></HeaderAnchor>
@@ -227,6 +254,13 @@ const toggleAuthVisibility = () => {
     filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
         contrast(89%);
 }
+#settings {
+    background-image: url('../assets/header/bottom/settings.svg');
+    background-size: contain;
+    transform: scale(1.3);
+    filter: invert(54%) sepia(1%) saturate(0%) hue-rotate(341deg) brightness(93%)
+        contrast(89%);
+}
 #profile {
     background-image: url('../assets/header/bottom/profile.svg');
     background-size: contain;
@@ -284,6 +318,10 @@ const toggleAuthVisibility = () => {
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
         contrast(110%);
 }
+#settings:hover {
+    filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
+        contrast(110%);
+}
 #profile:hover {
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(100%)
         contrast(110%);
@@ -323,7 +361,7 @@ const toggleAuthVisibility = () => {
 }
 .header-wrapper {
     /* position: fixed; */
-    border-right: 1px solid #2b2b2b;
+    /* border-right: 1px solid #2b2b2b; */
     position: sticky;
     top: 0;
     left: 0;
@@ -337,7 +375,7 @@ const toggleAuthVisibility = () => {
     font-family: Russo-One;
 }
 .header-wrapper-container {
-    background-color: #181818;
+    /* background-color: #181818; */
     width: 15%;
     height: 100%;
     display: flex;
@@ -348,18 +386,18 @@ const toggleAuthVisibility = () => {
     font-weight: 700;
     font-family: Jost;
     color: white;
-    border-right: 1px solid #2b2b2b;
+    /* border-right: 1px solid #2b2b2b; */
 }
 .header-wrapper-anchor-container {
     width: 85%;
     height: 100%;
-    background-color: #181818;
+    /* background-color: #181818; */
 }
 .title {
     font-size: 24px;
     cursor: pointer;
     text-decoration: none;
-    color: #1e66f5;
+    /* color: #1e66f5; */
     user-select: none;
     margin-left: 20px;
     margin-bottom: 20px;

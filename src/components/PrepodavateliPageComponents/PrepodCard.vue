@@ -16,7 +16,7 @@ defineProps({
             :src="photo"
         />
         <div
-            class="absolute bottom-0 h-[384px] w-[338px] bg-[#181818] border border-[#CCCCCC] rounded-[24px] flex flex-col items-center font-[JetBrainsMono]"
+            class="absolute bottom-0 h-[384px] w-[338px] dark:bg-[#181818] border border-[#CCCCCC] rounded-[24px] flex flex-col items-center font-[JetBrainsMono]"
         >
             <h1 class="text-white text-[28px] mt-[55%]">{{ name }}</h1>
             <ul class="text-white mt-[46px] font-thin" type="i">

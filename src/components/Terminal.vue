@@ -1,7 +1,7 @@
 <template>
-    <div class="terminal-tabs">
+    <div class="terminal-tabs bg-[#0C2340] dark:bg-[#181818]">
         <div class="termainal-tabs-wrapper">
-            <div class="title-terminal">ТЕРМИНАЛ</div>
+            <div class="title-terminal text-white dark:text-[#9ea6b1]">ТЕРМИНАЛ</div>
             <div class="arrow-terminal-up" />
         </div>
     </div>
@@ -37,7 +37,7 @@
     width: 150px;
     font-family: JetBrainsMono;
     font-weight: 700;
-    color: #9ea6b1;
+    /* color: #9ea6b1; */
     font-size: 26px;
     margin-left: 15px;
     /* margin-top: 15px; */
@@ -49,6 +49,6 @@
     position: sticky;
     bottom: 0;
     z-index: 99;
-    background-color: #181818;
+    /* background-color: #181818; */
 }
 </style>

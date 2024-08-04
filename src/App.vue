@@ -24,7 +24,7 @@ fetch();
 </script>
 
 <template>
-    <div class="wrap">
+    <div class="bg-white dark:bg-[#1f1f1f] wrap">
         <Auth v-if="authState.isVisible" />
         <NavBar
             v-if="
@@ -42,7 +42,7 @@ fetch();
 
 <style scoped>
 * {
-    background-color: #1f1f1f;
+    /* background-color: #1f1f1f; */
     height: 100%;
 }
 .wrap {

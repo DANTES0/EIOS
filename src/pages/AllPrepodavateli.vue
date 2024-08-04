@@ -18,6 +18,7 @@ const fetchPrepod = async () => {
     items.value = response.data.value;
 
     console.log(response.data.value);
+    // localStorage.theme = 'dark';
 };
 
 function getShortName(fullName) {
@@ -29,7 +30,7 @@ function getShortName(fullName) {
         const [lastName, firstName, middleName] = nameParts;
 
         // Формируем сокращенное имя
-        return `${lastName} ${firstName[0]}. ${middleName[0]}.`;
+        return `${lastName} ${firstName[0]}.${middleName[0]}.`;
     }
 
     // В случае некорректного формата возвращаем исходное имя

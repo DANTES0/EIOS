@@ -21,16 +21,24 @@ const TextKafedra = [
 </script>
 
 <template>
-    <div class="wrapper">
+    <div class="wrapper bg-white dark:bg-[#1f1f1f]">
         <div class="numbers-wrapper">
-            <div v-for="i in 25" :key="i" class="numbers">{{ i }}</div>
+            <div
+                v-for="i in 25"
+                :key="i"
+                class="numbers text-[#0C2340] dark:text-[#999999]"
+            >
+                {{ i }}
+            </div>
         </div>
         <div id="kafedra" class="content-kafedra-wrapper">
             <div class="title-kafedra-wrapper">
-                <h1 class="title-kafedra">
+                <h1 class="title-kafedra text-dark dark:text-white">
                     <span style="color: #1e66f5">#</span>КАФЕДРА
                 </h1>
-                <label class="line-dashed">----------</label>
+                <label class="line-dashed text-[#006AFF] dark:text-white"
+                    >----------</label
+                >
             </div>
             <KafedraText
                 v-for="(value, index) in TextKafedra"
@@ -49,7 +57,7 @@ const TextKafedra = [
 }
 .wrapper {
     height: 850px;
-    background-color: #1f1f1f;
+    /* background-color: #1f1f1f; */
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -60,7 +68,7 @@ const TextKafedra = [
     font-size: 48px;
     font-family: JetBrainsMono;
     font-weight: 200;
-    color: white;
+    /* color: white; */
     margin-left: 128px;
     margin-top: 18px;
     width: 230px;
@@ -78,7 +86,7 @@ const TextKafedra = [
     left: 70px;
     font-size: 48px;
     font-weight: 500;
-    color: white;
+    /* color: white; */
     letter-spacing: 8px;
     user-select: none;
 }

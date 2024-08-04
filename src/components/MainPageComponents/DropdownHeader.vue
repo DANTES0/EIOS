@@ -24,12 +24,14 @@ function showDropDown() {
             :class="{ rotated: isShowDropDown }"
         />
         <img src="../../assets/header/folder.svg" alt="" class="folder" />
-        <label id="dropbtn" class="dropbtn"> Главная страница </label>
+        <label id="dropbtn" class="dropbtn text-white dark:text-[#cccccc]">
+            Главная страница
+        </label>
     </div>
     <Transition name="slide-fade">
         <div v-if="isShowDropDown" id="myDropdown" class="dropdown-content">
             <div class="dropdown-content-line"></div>
-            <div class="dropdown-content-content">
+            <div class="dropdown-content-content text-white dark:text-[#cccccc]">
                 <a href="#kafedra" class="dropdown-content-a">
                     <img
                         src="../../assets/anchor_header/html.svg"
@@ -153,7 +155,7 @@ function showDropDown() {
     flex-direction: row;
 }
 .dropbtn {
-    color: #cccccc;
+    /* color: #cccccc; */
     font-family: Nunito;
     font-weight: 200;
     font-size: 16px;
@@ -190,7 +192,7 @@ function showDropDown() {
     flex-direction: row;
     justify-content: start;
     align-items: center;
-    color: #cccccc;
+    /* color: #cccccc; */
     padding-bottom: 7px;
     text-decoration: none;
     font-family: Nunito;
