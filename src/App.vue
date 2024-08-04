@@ -4,6 +4,7 @@ import Auth from './components/Auth.vue';
 import { authState } from './authState';
 import useAuthenticatedFetch from './fetchInterceptor';
 import config from './config';
+import { onMounted } from 'vue';
 
 const fetch = async () => {
     const { statusCode } = await useAuthenticatedFetch(
@@ -21,6 +22,17 @@ const fetch = async () => {
 };
 
 fetch();
+onMounted(() => {
+    if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+});
 </script>
 
 <template>

@@ -63,5 +63,5 @@ html {
 }
 
 body * {
-    @apply transition-colors duration-200;
+    @apply transition-colors duration-300;
 }
