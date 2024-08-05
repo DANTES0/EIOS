@@ -39,16 +39,16 @@ const changeTheme = () => {
 <template>
     <div
         class="header-wrapper"
-        :style="{
-            width:
-                $route.path.match(/^\/news\/get\/\d+$/) ||
-                $route.path === '/teachers/detail'
-                    ? 'auto'
-                    : '',
-        }"
+        :class="
+            $route.path.match(/^\/teachers\/\d+$/) ||
+            $route.path.match(/^\/news\/get\/\d+$/)
+                ? 'w-auto'
+                : 'w-[16.6%]'
+        "
     >
         <div
-            class="header-wrapper-container bg-[#0C2340] dark:bg-[#181818] border-r border-white dark:border-[#2b2b2b]"
+            class="header-wrapper-container bg-[#0C2340] dark:bg-[#181818] border-r border-white dark:border-[#2b2b2b] min-w-[50px]"
+            :class="$route.path.match(/^\/teachers\/\d+$/) ? 'w-full' : 'w-[15%]'"
         >
             <div class="page-header">
                 <Popper :placement="'right'" :hover="true" content="Главная страница">
@@ -149,7 +149,8 @@ const changeTheme = () => {
                 !(
                     $route.path === '/newsContent' ||
                     $route.path.match(/^\/news\/get\/\d+$/) ||
-                    $route.path === '/teachers/detail'
+                    $route.path === '/teachers/detail' ||
+                    $route.path.match(/^\/teachers\/\d+$/)
                 )
             "
             class="header-wrapper-anchor-container bg-[#0C2340] dark:bg-[#181818] border-r border-white dark:border-[#2b2b2b]"
@@ -365,7 +366,7 @@ const changeTheme = () => {
     position: sticky;
     top: 0;
     left: 0;
-    width: 16.6%;
+    /* width: 16.6%; */
     height: 100vh;
     background-color: #0d101f;
     display: flex;
@@ -376,7 +377,7 @@ const changeTheme = () => {
 }
 .header-wrapper-container {
     /* background-color: #181818; */
-    width: 15%;
+    /* width: 15%; */
     height: 100%;
     display: flex;
     flex-direction: column;

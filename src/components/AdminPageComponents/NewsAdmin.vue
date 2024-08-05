@@ -56,7 +56,7 @@ function addNews() {
                 Удаление новостей
             </button>
             <div class="news-page-content">
-                <div v-for="newsItem in news" class="news-block">
+                <div v-for="(newsItem, index) in news" :key="index" class="news-block">
                     <NewsBlock
                         :news-tag="newsItem.category"
                         :news-title="newsItem.headline"

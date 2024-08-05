@@ -48,7 +48,16 @@ onMounted(() => {
             "
         />
 
-        <div class="main-background">
+        <div
+            class="main-background"
+            :class="
+                $route.path.match(/^\/teachers\/\d+$/) ||
+                $route.path.match(/^\/news\/get\/\d+$/) ||
+                $route.path.match(/^\/admin\/*/)
+                    ? 'w-[100%]'
+                    : 'w-[83.6%]'
+            "
+        >
             <router-view />
         </div>
     </div>
@@ -69,6 +78,6 @@ onMounted(() => {
     height: 400px;
 }
 .main-background {
-    width: 83.6%;
+    /* width: 83.6%; */
 }
 </style>

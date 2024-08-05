@@ -53,7 +53,7 @@ onMounted(fetchPrepod);
                 :photo="item.photo"
                 :rank="item.rank"
                 :post="item.post"
-                @click="$router.push('/teachers/detail')"
+                @click="$router.push(`/teachers/${item.id}`)"
             ></prepod-card>
         </div>
     </div>

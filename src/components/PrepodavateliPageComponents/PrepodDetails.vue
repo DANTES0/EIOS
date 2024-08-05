@@ -5,18 +5,27 @@ import IconVk from '../Icons/Icon/IconVk.vue';
 import IconTelegram from '../Icons/Icon/IconTelegram.vue';
 import IconPhone from '../Icons/Icon/IconPhone.vue';
 import CourseDropdown from './CourseDropdown.vue';
+import { onMounted } from 'vue';
+import router from '../../router/routes';
+import { useRoute, useRouter } from 'vue-router';
+import config from '../../config';
+import { computed, ref } from 'vue';
+import { useFetch } from '@vueuse/core';
 
-defineProps({
-    name: { type: String, default: 'Вальштейн Константин Владимирович' },
-    photo: { type: String, default: '' },
-    mail: { type: String, default: '' },
-    telegram: { type: String, default: '' },
-    vkontakte: { type: String, default: '' },
-    phone: { type: String, default: '' },
-    description: { type: String, default: '' },
-    post: { type: String, default: '' },
-    rank: { type: String, default: '' },
+const route = useRoute();
+const url = computed(() => {
+    return `${config.ServerURL}/api/v1/teacher/byId?id=${route.params.id}`;
 });
+const items = ref({});
+const fetchPrepodDetails = async () => {
+    const response = await useFetch(url).json();
+
+    items.value = response.data.value;
+
+    console.log(response.data.value);
+};
+
+onMounted(fetchPrepodDetails);
 </script>
 
 <template>
@@ -24,25 +33,25 @@ defineProps({
         <div
             class="bg-[#181818] h-[380px] w-full flex flex-row border-[1.5px] border-[#2B2B2B] items-center"
         >
-            <div class="flex items-center justify-center h-full">
+            <div class="flex items-center justify-center h-full ml-[104px]">
                 <div
                     class="w-[304px] h-[304px] rounded-full border-[4px] border-[#2B2B2B] flex justify-center items-center"
                 >
                     <img
-                        src="../../assets/default.png"
+                        :src="items.photo"
                         class="rounded-full w-[283px] h-[283px] object-cover object-top"
                     />
                 </div>
                 <div class="ml-[37px] font-[JetBrainsMono] text-white">
                     <div class="flex flex-col">
                         <h1 class="text-[28px] font-extrabold">
-                            Вальштейн Константин Владимирович
+                            {{ items.name }}
                         </h1>
                         <ul
                             class="text-[Nunito] text-[20px] font-thin mt-[19px] gap-[3px]"
                         >
-                            <li>Преподаватель</li>
-                            <li>Доцент технических наук</li>
+                            <li>{{ items.post }}</li>
+                            <li>{{ items.rank }}</li>
                         </ul>
                     </div>
                     <div>
@@ -54,32 +63,32 @@ defineProps({
                                     <icon-base width="24" height="24" icon-color="#ffffff"
                                         ><icon-mail
                                     /></icon-base>
-                                    <div class="ml-[10px]">sadasdsada@voenmeh.ru</div>
+                                    <div class="ml-[10px]">{{ items.mail }}</div>
                                 </div>
                                 <div class="flex flex-row w-[300px] items-center">
                                     <icon-base width="24" height="24" icon-color="#ffffff"
                                         ><icon-telegram
                                     /></icon-base>
-                                    <div class="ml-[10px]">@Pr3nk</div>
+                                    <div class="ml-[10px]">{{ items.telegram }}</div>
                                 </div>
                                 <div class="flex flex-row w-[300px] items-center">
                                     <icon-base width="24" height="24" icon-color="#ffffff"
                                         ><icon-phone
                                     /></icon-base>
-                                    <div class="ml-[10px]">+7 (911) 218-40-68</div>
+                                    <div class="ml-[10px]">{{ items.phone }}</div>
                                 </div>
                                 <div class="flex flex-row w-[300px] items-center">
                                     <icon-base width="24" height="24" icon-color="#ffffff"
                                         ><icon-vk
                                     /></icon-base>
-                                    <div class="ml-[10px]">vk/asdasdas.com</div>
+                                    <div class="ml-[10px]">{{ items.vkontakte }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="h-[70%] w-[1px] bg-white ml-[18px]"></div>
-                <div class="flex flex-col w-[35%] ml-[37px] h-[83%]">
+                <div class="flex flex-col ml-[37px] h-[83%]">
                     <div
                         class="font-extrabold text-[20px] font-[JetBrainsMono] text-white"
                     >
@@ -87,10 +96,7 @@ defineProps({
                     </div>
                     <div class="bg-[#0054FF] h-[2px] mb-[21px] w-[88px]"></div>
                     <div class="font-[Nunito] font-thin text-white text-[20px]">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Bibendum est ultricies integer quis auctor elit sed. Purus gravida
-                        quis blandit turpis. Eget mi proin sed libero enim sed.
+                        {{ items.description }}
                     </div>
                 </div>
             </div>
