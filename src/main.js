@@ -6,10 +6,16 @@ import './style.css';
 import './index.css';
 import store from './store';
 import Popper from 'vue3-popper';
+import PrimeVue from 'primevue/config';
+import Aura from '@primevue/themes/aura';
 
 createApp(App)
     .use(router)
-    .use(vuetify)
+    .use(PrimeVue, {
+        theme: {
+            preset: Aura,
+        },
+    })
     .use(store)
     .component('Popper', Popper)
     .mount('#app');
