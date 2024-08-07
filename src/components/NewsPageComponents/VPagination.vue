@@ -57,7 +57,10 @@ function onPageChange(event) {
     --p-paginator-background: transparent;
     --p-paginator-border-radius: 0px;
     --p-paginator-nav-button-border-radius: 0px;
-    /* --p-paginator-nav-button-selected-background: red;
-    --p-paginator-nav-button-selected-color: yellow; */
+    --p-paginator-nav-button-selected-background: rgb(0, 84, 255);
+    --p-paginator-nav-button-selected-color: #ececec;
+}
+:deep(.p-paginator-current) {
+    background-color: red;
 }
 </style>
