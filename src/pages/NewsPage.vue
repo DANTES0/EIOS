@@ -2,16 +2,21 @@
 import Tabs from '../components/Tabs.vue';
 import NewsBlock from '../components/NewsPageComponents/NewsBlock.vue';
 import VPagination from '../components/NewsPageComponents/VPagination.vue';
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import CustomPagination from '../components/NewsPageComponents/CustomPagination.vue';
 import config from '../config';
+import ProgressSpinner from 'primevue/progressspinner';
 
 const newsData = ref([]);
+const currentPage = ref(1);
+const newsPerPage = 12; // Отображаем одну новость на странице
+const isLoading = ref(false); // Добавляем состояние загрузки
 const route = useRoute();
 const router = useRouter();
 
 async function loadNews() {
+    isLoading.value = true; // Начало загрузки
+
     const urlAddress = config.ServerURL;
 
     let requestAddress = `${urlAddress}/news/get/all`;
@@ -45,12 +50,13 @@ async function loadNews() {
             const data = await response.json();
 
             newsData.value = data;
-            console.log(newsData.value);
         } else {
             console.error('Ошибка при загрузке данных:', response.statusText);
         }
     } catch (error) {
         console.error('Ошибка при выполнении запроса:', error);
+    } finally {
+        isLoading.value = false; // Окончание загрузки
     }
 }
 
@@ -63,14 +69,27 @@ watch(route, () => {
 function navigateToNews(newsId) {
     router.push(`/news/get/${newsId}`);
 }
+
+const paginatedNews = computed(() => {
+    const start = (currentPage.value - 1) * newsPerPage;
+    const end = start + newsPerPage;
+
+    console.log(newsData.value.slice(start, end));
+
+    return newsData.value.slice(start, end);
+});
 </script>
 
 <template>
     <Tabs />
 
     <div class="news-page-container">
+        <div v-if="isLoading" class="spinner-container">
+            <ProgressSpinner />
+        </div>
+
         <div class="news-page-content">
-            <div v-for="newsItem in newsData" :key="newsItem.id" class="news-block">
+            <div v-for="newsItem in paginatedNews" :key="newsItem.id" class="news-block">
                 <NewsBlock
                     :news-tag="newsItem.category"
                     :news-title="newsItem.headline"
@@ -82,8 +101,12 @@ function navigateToNews(newsId) {
             </div>
         </div>
 
-        <div class="pagination-wrapper">
-            <VPagination />
+        <div v-show="!isLoading" class="pagination-wrapper">
+            <VPagination
+                v-model:modelValue="currentPage"
+                :total-records="newsData.length"
+                :rows-per-page="newsPerPage"
+            />
         </div>
     </div>
 </template>
@@ -102,7 +125,7 @@ function navigateToNews(newsId) {
 }
 .news-page-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 50px 74px;
 
     padding-bottom: 50px;
@@ -123,5 +146,11 @@ function navigateToNews(newsId) {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 </style>

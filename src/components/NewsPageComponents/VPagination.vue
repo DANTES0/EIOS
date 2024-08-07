@@ -1,101 +1,63 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, watch, defineProps, defineEmits } from 'vue';
+import Paginator from 'primevue/paginator';
 
-const activeIndex = ref(0);
+const props = defineProps({
+    totalRecords: {
+        type: Number,
+        required: true,
+    },
+    rowsPerPage: {
+        type: Number,
+        default: 1,
+    },
+    modelValue: {
+        type: Number,
+        default: 1,
+    },
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const totalPages = computed(() => Math.ceil(props.totalRecords / props.rowsPerPage));
+
+watch(
+    () => props.modelValue,
+    (newValue) => {
+        if (newValue > totalPages.value) {
+            emit('update:modelValue', totalPages.value);
+        }
+    },
+);
+
+function onPageChange(event) {
+    emit('update:modelValue', event.page + 1);
+}
 </script>
 
 <template>
-    <div class="wrapper">
-        <div class="container">
-            <button class="arrow">
-                <img src="/src/assets/pagination/double_arrow_left.svg" alt="" />
-            </button>
-
-            <button class="arrow">
-                <img src="/src/assets/pagination/arrow_left.svg" alt="" />
-            </button>
-
-            <div class="pages-container">
-                <img
-                    class="bracket"
-                    src="/src/assets/pagination/bracket_left.svg"
-                    alt=""
-                />
-
-                <div class="numbers-container">
-                    <div v-for="(item, index) in 10" :key="index" class="numbers-wrapper">
-                        <div v-if="activeIndex === index" class="triangle" />
-                        <button @click="activeIndex = index">
-                            {{ index }}
-                        </button>
-                    </div>
-                </div>
-
-                <img
-                    class="bracket"
-                    src="/src/assets/pagination/bracket_right.svg"
-                    alt=""
-                />
-            </div>
-
-            <button class="arrow">
-                <img src="/src/assets/pagination/arrow_right.svg" alt="" />
-            </button>
-
-            <button class="arrow">
-                <img src="/src/assets/pagination/double_arrow_right.svg" alt="" />
-            </button>
-        </div>
+    <div class="card">
+        <Paginator
+            :rows="rowsPerPage"
+            :total-records="totalRecords"
+            :page-link-size="10"
+            :first="(modelValue - 1) * rowsPerPage"
+            @page="onPageChange"
+        />
     </div>
 </template>
 
 <style scoped>
-.wrapper {
-    display: block;
-    margin: 0 auto;
-}
-.container {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-}
-.arrow {
-    cursor: pointer;
-}
-.pages-container {
-    display: flex;
-    align-items: center;
-}
-.numbers-container {
-    margin: 0 12px 20px 12px;
+:deep(.p-paginator) {
     font-family: JetBrainsMono;
-    font-size: 36px;
-    color: rgb(104, 103, 103);
-    display: flex;
-    gap: 25px;
+    font-size: 1rem;
+    background-color: transparent;
 }
-.numbers-wrapper {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center the button vertically */
-    position: relative; /* Create a positioning context for the triangle */
-    padding-top: 20px; /* Add space for the triangle */
-}
-.numbers-wrapper button {
-    width: 54px;
-    position: relative; /* Ensure button is in the normal document flow */
-}
-.triangle {
-    position: absolute; /* Position triangle absolutely */
-    top: 0; /* Align the top of the triangle with the top of the numbers-wrapper */
-    left: 50%; /* Center the triangle horizontally */
-    transform: translateX(-50%) rotate(180deg); /* Centering and rotation */
-    width: 0;
-    height: 0;
-    border-left: 12px solid transparent; /* правый нижний угол */
-    border-right: 12px solid transparent; /* левый нижний угол */
-    border-bottom: 20px solid #1e66f5;
-    transition: all 0.3s ease-in-out;
+:deep(.p-paginator-page),
+:deep(.p-paginator-next),
+:deep(.p-paginator-prev),
+:deep(.p-paginator-last),
+:deep(.p-paginator-first) {
+    border-radius: 0px;
 }
 </style>
