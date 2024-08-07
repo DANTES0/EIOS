@@ -5,14 +5,18 @@ import VPagination from '../components/NewsPageComponents/VPagination.vue';
 import { ref, watch, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import config from '../config';
+import ProgressSpinner from 'primevue/progressspinner';
 
 const newsData = ref([]);
 const currentPage = ref(1);
 const newsPerPage = 12; // Отображаем одну новость на странице
+const isLoading = ref(false); // Добавляем состояние загрузки
 const route = useRoute();
 const router = useRouter();
 
 async function loadNews() {
+    isLoading.value = true; // Начало загрузки
+
     const urlAddress = config.ServerURL;
 
     let requestAddress = `${urlAddress}/news/get/all`;
@@ -51,6 +55,8 @@ async function loadNews() {
         }
     } catch (error) {
         console.error('Ошибка при выполнении запроса:', error);
+    } finally {
+        isLoading.value = false; // Окончание загрузки
     }
 }
 
@@ -78,6 +84,10 @@ const paginatedNews = computed(() => {
     <Tabs />
 
     <div class="news-page-container">
+        <div v-if="isLoading" class="spinner-container">
+            <ProgressSpinner />
+        </div>
+
         <div class="news-page-content">
             <div v-for="newsItem in paginatedNews" :key="newsItem.id" class="news-block">
                 <NewsBlock
@@ -91,7 +101,7 @@ const paginatedNews = computed(() => {
             </div>
         </div>
 
-        <div class="pagination-wrapper">
+        <div v-show="!isLoading" class="pagination-wrapper">
             <VPagination
                 v-model:modelValue="currentPage"
                 :total-records="newsData.length"
@@ -136,5 +146,11 @@ const paginatedNews = computed(() => {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 </style>

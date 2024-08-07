@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 import { format } from 'date-fns';
 
 const newsData = defineProps({
@@ -60,47 +60,63 @@ const processedTitle = () => {
         return newsData.newsTitle;
     }
 };
+
+const isImageLoaded = ref(false);
+
+const imageLoaded = () => {
+    isImageLoaded.value = true;
+    console.log('картьтнка');
+};
 </script>
 
 <template>
-    <div
-        class="news-block-wrapper"
-        :style="{ width: newsData.blockWidth, height: newsData.blockHeight }"
-        @click="$emit('click')"
-    >
-        <div class="news-block-tag-and-date-wrapper">
-            <div class="news-block-tag">
-                <img src="../../assets/News/image.svg" alt="" class="tag-icon" />
-                <div class="tag">{{ newsData.newsTag }}</div>
+    <div @click="$emit('click')">
+        <div
+            class="news-block-wrapper"
+            :style="{ width: newsData.blockWidth, height: newsData.blockHeight }"
+        >
+            <div class="news-block-tag-and-date-wrapper">
+                <div class="news-block-tag">
+                    <img src="../../assets/News/image.svg" alt="" class="tag-icon" />
+                    <div class="tag">{{ newsData.newsTag }}</div>
+                </div>
+
+                <div class="news-block-date">
+                    {{ format(newsData.newsDate, 'dd/MM/yyyy') }}
+                </div>
+            </div>
+            <!-- @click="$router.push('/newsContent')" -->
+            <div class="news-block-image">
+                <div v-show="!isImageLoaded" class="image-placeholder"></div>
+                <img
+                    v-show="isImageLoaded"
+                    :src="newsData.newsImage"
+                    alt=""
+                    class="news-block-image-background"
+                    @load="imageLoaded()"
+                />
+                <img
+                    v-show="isImageLoaded"
+                    :src="newsData.newsImage"
+                    alt=""
+                    class="news-block-image-foreground"
+                    :style="{
+                        maxWidth: newsData.foregroundWidth,
+                        maxHeight: newsData.foregroundHeight,
+                    }"
+                    @load="imageLoaded()"
+                />
+            </div>
+        </div>
+
+        <div v-if="newsData.newsShowSummary" class="news-block-summary">
+            <div class="news-block-title">
+                {{ processedTitle() }}
             </div>
 
-            <div class="news-block-date">
-                {{ format(newsData.newsDate, 'dd/MM/yyyy') }}
+            <div class="news-block-description">
+                {{ processedDescription() }}
             </div>
-        </div>
-        <!-- @click="$router.push('/newsContent')" -->
-        <div class="news-block-image">
-            <img :src="newsData.newsImage" alt="" class="news-block-image-background" />
-            <img
-                :src="newsData.newsImage"
-                alt=""
-                class="news-block-image-foreground"
-                :style="{
-                    maxWidth: newsData.foregroundWidth,
-                    maxHeight: newsData.foregroundHeight,
-                }"
-            />
-        </div>
-    </div>
-
-    <div v-if="newsData.newsShowSummary" class="news-block-summary">
-        <!-- @click="$router.push('/newsContent')" -->
-        <div class="news-block-title">
-            {{ processedTitle() }}
-        </div>
-
-        <div class="news-block-description">
-            {{ processedDescription() }}
         </div>
     </div>
 </template>
@@ -110,12 +126,10 @@ const processedTitle = () => {
     font-family: JetBrainsMono;
     src: url('../../assets/JetBrainsMono.ttf');
 }
-
 @font-face {
     font-family: Rubik;
     src: url('../../assets/Rubik.ttf');
 }
-
 /* размеры блока */
 .news-block-wrapper {
     margin-right: 71px;
@@ -128,7 +142,6 @@ const processedTitle = () => {
     flex-direction: column;
     border: solid 1px #999999;
 }
-
 .news-block-tag-and-date-wrapper {
     height: 48px;
     width: 100%;
@@ -138,19 +151,16 @@ const processedTitle = () => {
     align-items: center;
     gap: 78px;
 }
-
 .news-block-tag {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-
 .tag-icon {
     width: 24px;
     height: 24px;
     margin-left: 12px;
 }
-
 .tag {
     font-family: Rubik;
     font-size: 18;
@@ -158,7 +168,6 @@ const processedTitle = () => {
     /* color: #1e66f5;*/
     color: #cccccc;
 }
-
 .news-block-date {
     margin-top: 3px;
     font-family: Rubik;
@@ -167,14 +176,12 @@ const processedTitle = () => {
     color: #cccccc;
     margin-right: 53px;
 }
-
 .news-block-image {
     overflow: hidden;
     position: relative;
     width: 100%;
     height: 100%;
 }
-
 .news-block-image-background {
     width: 100%;
     height: 100%;
@@ -182,7 +189,6 @@ const processedTitle = () => {
     transform: scale(1.4);
     object-fit: cover;
 }
-
 /* картинка на переднем плане */
 .news-block-image-foreground {
     position: absolute;
@@ -191,13 +197,13 @@ const processedTitle = () => {
     right: 0;
     bottom: 0;
 
-    /* устанавливается высота и ширина здесь */
-    /* width: 315px;
-        height: 216px; */
-
     margin: auto auto;
 }
-
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
 .news-block-title {
     color: rgb(255, 255, 255);
     font-family: JetBrainsMono;
@@ -209,7 +215,6 @@ const processedTitle = () => {
 
     margin-top: 10px;
 }
-
 .news-block-description {
     color: rgba(255, 255, 255, 0.6);
     font-family: JetBrainsMono;

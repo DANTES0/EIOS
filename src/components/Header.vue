@@ -188,15 +188,15 @@ const changeTheme = () => {
 }
 /* .page:hover::after {
   content: attr(data-title);
-  position: absolute; 
+  position: absolute;
   left: 50px;
-  top: 5%; 
-  z-index: 19; 
-  background-color: #ffffff; 
-  font-family: Russo-One, sans-serif; 
-  font-size: 12px; 
+  top: 5%;
+  z-index: 19;
+  background-color: #ffffff;
+  font-family: Russo-One, sans-serif;
+  font-size: 12px;
   padding: 5px 10px;
-  border: 1px solid #333; 
+  border: 1px solid #333;
   border-radius: 10px;
 
   color: #838383;
@@ -227,6 +227,10 @@ const changeTheme = () => {
     flex-direction: row;
     /* justify-content: space-around; */
     align-items: center;
+}
+.inline-block {
+    margin: 0px !important;
+    border: none !important;
 }
 /* #q:hover::after {
   width: 100px;
@@ -279,6 +283,7 @@ const changeTheme = () => {
     display: flex;
     flex-direction: column;
     font-size: 20px;
+    /* margin-bottom: 10px; */
 }
 #w {
     background-image: url('../assets/header/third.svg');
