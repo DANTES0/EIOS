@@ -9,7 +9,7 @@ import ProgressSpinner from 'primevue/progressspinner';
 
 const newsData = ref([]);
 const currentPage = ref(1);
-const newsPerPage = 12; // Отображаем одну новость на странице
+const newsPerPage = 1; // Отображаем одну новость на странице
 const isLoading = ref(false); // Добавляем состояние загрузки
 const route = useRoute();
 const router = useRouter();
@@ -85,7 +85,7 @@ const paginatedNews = computed(() => {
 
     <div class="news-page-container">
         <div v-if="isLoading" class="spinner-container">
-            <ProgressSpinner />
+            <ProgressSpinner class="custom-spinner" />
         </div>
 
         <div class="news-page-content">
@@ -148,9 +148,15 @@ const paginatedNews = computed(() => {
     align-items: center;
 }
 .spinner-container {
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+}
+.custom-spinner {
+    --p-progressspinner-color-1: rgb(0, 84, 255);
+    --p-progressspinner-color-2: rgb(0, 84, 255);
+    --p-progressspinner-color-3: rgb(0, 84, 255);
+    --p-progressspinner-color-4: rgb(0, 84, 255);
 }
 </style>
