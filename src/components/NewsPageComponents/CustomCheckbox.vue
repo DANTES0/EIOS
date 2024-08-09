@@ -1,9 +1,10 @@
 <script setup>
 import { computed } from 'vue';
+import IconTick from '../Icons/Icon/IconTick.vue';
 
 const props = defineProps({
-    modelValue: { type: [Array, Boolean] },
-    value: { type: [Boolean, Object] },
+    modelValue: { type: [Array, Boolean], required: true },
+    value: { type: [Boolean, Object], required: true },
     label: { type: String },
 });
 
@@ -20,12 +21,16 @@ const model = computed({
 
 function toggleCheckbox() {
     model.value = !model.value;
+    console.log('Кликнул чекбокс, model.value:', model.value);
 }
 </script>
 
 <template>
     <div class="custom-checkbox-wrapper" @click="toggleCheckbox">
-        <input v-model="model" type="checkbox" :value="value" />
+        <div class="checkbox" :class="{ checked: model }">
+            <input v-model="model" type="checkbox" :value="value" />
+            <icon-tick v-show="!model" class="checkbox-icon" width="14" height="14" />
+        </div>
         <span id="checkbox-category">{{ label }}</span>
     </div>
 </template>
@@ -34,64 +39,54 @@ function toggleCheckbox() {
 #checkbox-category {
     margin-left: 10px;
     user-select: none;
-
     color: rgb(134, 134, 134);
     font-family: Nunito;
     font-size: 14px;
     font-weight: 300;
-
     cursor: pointer;
 }
-
 #checkbox-category:hover {
     color: #ddd;
 }
-
-input[type='checkbox'] {
-    appearance: none;
-    height: 20px;
+.checkbox {
+    position: relative;
     width: 20px;
-    background-color: transparent;
+    height: 20px;
     border: 1px solid rgb(128, 128, 128);
-    border-radius: none;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    outline: none;
-}
-
-input[type='checkbox']:after {
-    content: url('../../assets/header/NewsFilters/tick.svg');
-    transform: translateY(-1px) translateX(0.5px) scale(1);
-    color: white;
-    display: none;
-}
-input[type='checkbox']:hover {
-    background-color: transparent;
-}
-input[type='checkbox']:checked {
-    background-color: transparent;
-    border: 1px solid rgb(0, 84, 255);
-}
-input[type='checkbox']:checked:after {
-    display: block;
-}
-
-.custom-checkbox-wrapper {
-    display: flex;
-    height: 20px;
-    /* width: 161px; */
-    /* max-width: 161px; */
     cursor: pointer;
 }
-
+.checkbox input[type='checkbox'] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkbox-icon {
+    display: none;
+    color: #ffff;
+}
+.checkbox :checked {
+    border: 1px solid rgb(0, 84, 255);
+}
+input[type='checkbox']:checked + .checkbox-icon {
+    display: block;
+}
+/* input[type='checkbox']:checked {
+    border: 1px solid rgb(0, 84, 255);
+} */
+.custom-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
 .custom-checkbox-wrapper:hover #checkbox-category {
     color: #ddd;
 }
-
-.custom-checkbox-wrapper:hover input[type='checkbox'] {
-    background-color: transparent;
+.custom-checkbox-wrapper:hover .checkbox {
     border: 1px solid rgb(0, 84, 255);
 }
 </style>
