@@ -82,10 +82,7 @@ function applyFilters() {
         query.categories = selectedCategoriesNames;
     }
 
-    router.push({
-        name: 'News',
-        query: query,
-    });
+    router.push({ name: 'NewsPage', query }).catch((err) => console.error(err));
 }
 
 const handleStartDate = (modelData) => {

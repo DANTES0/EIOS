@@ -1,5 +1,4 @@
 <script setup>
-import { watch, computed } from 'vue';
 import IconTick from '../Icons/Icon/IconTick.vue';
 
 const props = defineProps({
@@ -9,26 +8,17 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const model = computed({
-    get() {
-        return props.modelValue;
-    },
-    set(value) {
-        emit('update:modelValue', value);
-    },
-});
-
 function toggleCheckbox() {
-    model.value = !model.value;
+    emit('update:modelValue', !props.modelValue);
 }
 </script>
 
 <template>
     <div class="custom-checkbox-wrapper" @click="toggleCheckbox">
-        <div class="checkbox" :class="{ checkedValue: model }">
+        <div class="checkbox" :class="{ checkedValue: props.modelValue }">
             <input type="checkbox" :checked="props.modelValue" />
             <IconTick
-                v-if="!props.modelValue"
+                v-if="props.modelValue"
                 class="checkbox-icon"
                 width="14"
                 height="14"
