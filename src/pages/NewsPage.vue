@@ -74,7 +74,7 @@ const paginatedNews = computed(() => {
     const start = (currentPage.value - 1) * newsPerPage;
     const end = start + newsPerPage;
 
-    console.log(newsData.value.slice(start, end));
+    // console.log(newsData.value.slice(start, end));
 
     return newsData.value.slice(start, end);
 });

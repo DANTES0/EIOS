@@ -1,11 +1,10 @@
 <script setup>
-import { computed } from 'vue';
+import { watch, computed } from 'vue';
 import IconTick from '../Icons/Icon/IconTick.vue';
 
 const props = defineProps({
-    modelValue: { type: [Array, Boolean], required: true },
-    value: { type: [Boolean, Object], required: true },
-    label: { type: String },
+    modelValue: Boolean,
+    label: String,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -21,15 +20,19 @@ const model = computed({
 
 function toggleCheckbox() {
     model.value = !model.value;
-    console.log('Кликнул чекбокс, model.value:', model.value);
 }
 </script>
 
 <template>
     <div class="custom-checkbox-wrapper" @click="toggleCheckbox">
-        <div class="checkbox" :class="{ checked: model }">
-            <input v-model="model" type="checkbox" :value="value" />
-            <icon-tick v-show="!model" class="checkbox-icon" width="14" height="14" />
+        <div class="checkbox" :class="{ checkedValue: model }">
+            <input type="checkbox" :checked="props.modelValue" />
+            <IconTick
+                v-if="!props.modelValue"
+                class="checkbox-icon"
+                width="14"
+                height="14"
+            />
         </div>
         <span id="checkbox-category">{{ label }}</span>
     </div>
@@ -69,15 +72,12 @@ function toggleCheckbox() {
     display: none;
     color: #ffff;
 }
-.checkbox :checked {
-    border: 1px solid rgb(0, 84, 255);
-}
 input[type='checkbox']:checked + .checkbox-icon {
     display: block;
 }
-/* input[type='checkbox']:checked {
+.checkedValue {
     border: 1px solid rgb(0, 84, 255);
-} */
+}
 .custom-checkbox-wrapper {
     display: flex;
     align-items: center;
