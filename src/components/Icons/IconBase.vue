@@ -1,8 +1,8 @@
 <script setup>
 defineProps({
     iconName: { type: String, default: 'box' },
-    width: { type: [Number, String], default: 18 },
-    height: { type: [Number, String], default: 18 },
+    width: { type: [Number, String], default: 20 },
+    height: { type: [Number, String], default: 20 },
     iconColor: { type: String, default: 'currentColor' },
 });
 </script>
@@ -10,11 +10,11 @@ defineProps({
 <template>
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        :width="width"
-        :height="height"
         viewBox="0 0 18 18"
         :aria-labelledby="iconName"
         role="presentation"
+        :width="width"
+        :height="height"
     >
         <g :fill="iconColor">
             <slot />
