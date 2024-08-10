@@ -188,14 +188,11 @@ function parseDate(dateStr) {
             <div v-if="isShowCategories" class="categories">
                 <div class="categories-line"></div>
                 <div class="categories-content">
-                    <div
-                        v-for="(category, index) in categories"
-                        :key="index"
-                        class="categories-content-item"
-                    >
+                    <div v-for="(category, index) in categories" :key="index">
                         <CustomCheckbox
                             v-model="selectedCategories[index]"
                             :label="category"
+                            class="categories-content-item"
                         />
                     </div>
                 </div>

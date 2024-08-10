@@ -65,7 +65,6 @@ const isImageLoaded = ref(false);
 
 const imageLoaded = () => {
     isImageLoaded.value = true;
-    console.log('картьтнка');
 };
 </script>
 
