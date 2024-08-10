@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useFetch } from '@vueuse/core';
 import { onMounted } from 'vue';
 // import Vuex from "vuex"
@@ -10,9 +10,18 @@ import VueSelect from 'vue3-select-component';
 import Multiselect from '@vueform/multiselect';
 import eventBus from '../../eventBus.js';
 import config from '../../config';
+import VInput from '../UX/VInput.vue';
 
 let options = ['1', '2', '3'];
 let array = ref([]);
+let array2 = ref([]);
+const selectedItem = ref('');
+
+watch(selectedItem, (item) => {
+    console.log(item);
+    eventBus.emit('optionSelected', item.id);
+});
+
 // const selected = ref("");
 const url = computed(() => {
     return `${config.ServerURL}/api/v1/group/all`;
@@ -32,20 +41,36 @@ const fetchGroup = async () => {
 
     for (let i = 0; i < response.data.value.length; i++) {
         array.value.push({
-            label: response.data.value[i].name,
-            value: response.data.value[i].id,
+            name: response.data.value[i].name, //value label
+            id: response.data.value[i].id,
         });
     }
 
     for (let i = 0; i < responseTeacher.data.value.length; i++) {
-        array.value.push({
-            label: responseTeacher.data.value[i].name,
-            value: `teacher${responseTeacher.data.value[i].id}`,
+        array2.value.push({
+            name: getShortName(responseTeacher.data.value[i].name),
+            id: `teacher${responseTeacher.data.value[i].id}`,
         });
     }
 
     console.log(array.value);
 };
+
+function getShortName(fullName) {
+    // Разбиваем полное имя на части
+    const nameParts = fullName.split(' ');
+
+    // Проверяем, что количество частей соответствует Фамилия Имя Отчество
+    if (nameParts.length === 3) {
+        const [lastName, firstName, middleName] = nameParts;
+
+        // Формируем сокращенное имя
+        return `${lastName} ${firstName[0]}.${middleName[0]}.`;
+    }
+
+    // В случае некорректного формата возвращаем исходное имя
+    return fullName;
+}
 
 onMounted(() => {
     fetchGroup();
@@ -73,20 +98,27 @@ const handleOptionSelected = (option) => {
       :searchable="true"
     /> -->
 
-        <div class="input-search">
-            <VueSelect
+        <div class="input-search w-[80%] ml-[22px] mt-[10px]">
+            <v-input
+                v-model="selectedItem"
+                :items="array"
+                :items2="array2"
+                :type-input="'stairsInput'"
+            ></v-input>
+            <!-- <VueSelect
                 v-model="selected"
                 :placeholder="placeholder"
                 :options="array"
                 @option-selected="handleOptionSelected"
             >
                 <template #no-options> По вашему запросу ничего не найдено </template>
-            </VueSelect>
+            </VueSelect> -->
             <!-- <input placeholder="Поиск..." type="" class="input-search-input">
         <select class="select-input" name="" id="">
             <option value=""></option>
         </select> -->
         </div>
+        <div class="h-4"></div>
     </div>
 </template>
 
@@ -193,7 +225,6 @@ const handleOptionSelected = (option) => {
     padding-left: 8px;
 }
 .input-search {
-    margin-left: 22px;
 }
 .search-timetable-wrap {
     height: 100%;
