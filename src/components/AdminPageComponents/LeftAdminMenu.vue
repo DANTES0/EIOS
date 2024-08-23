@@ -5,6 +5,7 @@ import { authState } from '../../authState';
 const isActiveMain = ref(false);
 const isActiveNews = ref(false);
 const isActiveUsers = ref(false);
+const isActiveTeachers = ref(false);
 </script>
 
 <template>
@@ -53,7 +54,16 @@ const isActiveUsers = ref(false);
                                     Фотогалерея
                                 </div>
                             </div>
-                            <div class="content-userPage-title">Разное</div>
+                            <div
+                                class="content-userPage-title"
+                                @click="
+                                    () => {
+                                        authState.isArticle = 'Various';
+                                    }
+                                "
+                            >
+                                Разное
+                            </div>
                         </div>
                     </Transition>
                 </div>
@@ -214,19 +224,19 @@ const isActiveUsers = ref(false);
     /* transform: rotate(180deg); */
     margin-bottom: 20px;
     transition: 0.2s ease;
-    margin-left: 20px;
+    margin-right: 10px;
     cursor: pointer;
 }
 .wrap {
     display: flex;
-    width: 275px;
+    width: 100%;
     flex-direction: row;
-    /* justify-content: center; */
+    justify-content: space-between;
     align-items: center;
 }
 .article {
     height: 42px;
-    width: 235px;
+    width: 80%;
     display: flex;
     flex-direction: row;
     align-items: center;

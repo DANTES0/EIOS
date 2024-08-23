@@ -1,8 +1,8 @@
 <script setup>
 defineProps({
     iconName: { type: String, default: 'box' },
-    width: { type: [Number, String], default: 20 },
-    height: { type: [Number, String], default: 20 },
+    width: { type: [Number, String], default: 24 },
+    height: { type: [Number, String], default: 24 },
     iconColor: { type: String, default: 'currentColor' },
 });
 </script>

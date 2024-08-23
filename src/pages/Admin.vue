@@ -15,6 +15,7 @@ import config from '../config';
 let isVisibleChangePhotoGallery = ref(false);
 
 import UserAll from '../components/AdminPageComponents/UsersAll.vue';
+import Various from '../components/AdminPageComponents/Various.vue';
 
 let visible = ref(true);
 const store = useStore();
@@ -69,6 +70,7 @@ fetchData();
             <UserStudent v-if="authState.isArticle == 'UserStudent'" />
             <NewsAdmin v-if="authState.isArticle == 'NewsAdmin'" />
             <UserTeachers v-if="authState.isArticle == 'UserTeachers'" />
+            <various v-if="authState.isArticle == 'Various'"></various>
         </div>
         <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN

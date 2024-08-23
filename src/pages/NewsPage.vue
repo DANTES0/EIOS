@@ -95,7 +95,7 @@ const paginatedNews = computed(() => {
                     :news-title="newsItem.headline"
                     :news-date="newsItem.date"
                     :news-image="newsItem.images[0]"
-                    :news-description="newsItem.fullInfo"
+                    :news-description="newsItem.mainInfo"
                     @click="navigateToNews(newsItem.id)"
                 />
             </div>

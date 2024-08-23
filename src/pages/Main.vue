@@ -115,6 +115,7 @@ onMounted(() => {
     <div class="Main-page">
         <Tabs />
         <Kafedra />
+        <div v-html="a"></div>
         <News
             v-if="news && news.length > 1 && currentNewsIndex !== null"
             :id="currentNews.id"

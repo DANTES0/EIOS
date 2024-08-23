@@ -25,7 +25,7 @@ watch(route, () => {
 async function navigateToNews(newsId) {
     if (flag.value == true) {
         await useFetch(`${config.ServerURL}/news/delete/${newsId}`, {
-            method: 'POST',
+            method: 'DELETE',
         });
         flag.value = !flag.value;
         loadNews();
@@ -62,7 +62,7 @@ function addNews() {
                         :news-title="newsItem.headline"
                         :news-date="newsItem.date"
                         :news-image="newsItem.images[0]"
-                        :news-description="newsItem.fullInfo"
+                        :news-description="newsItem.mainInfo"
                         @click="navigateToNews(newsItem.id)"
                     ></NewsBlock>
                 </div>

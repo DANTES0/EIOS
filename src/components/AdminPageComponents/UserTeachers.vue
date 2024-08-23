@@ -144,7 +144,7 @@ const deleteUser = async (id) => {
                 placeholder="Поиск..."
                 class="placeholder-userAll"
             />
-            <button class="addUser" @click="authState.isVisibleModalAddUsers = true">
+            <button class="addUser" @click="$router.push('/admin/teachers')">
                 Новый преподаватель
             </button>
         </div>

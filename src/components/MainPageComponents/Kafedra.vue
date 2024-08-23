@@ -21,7 +21,7 @@ const TextKafedra = [
 </script>
 
 <template>
-    <div class="wrapper bg-white dark:bg-[#1f1f1f]">
+    <div class="wrapper">
         <div class="numbers-wrapper">
             <div
                 v-for="i in 25"
@@ -33,7 +33,7 @@ const TextKafedra = [
         </div>
         <div id="kafedra" class="content-kafedra-wrapper">
             <div class="title-kafedra-wrapper">
-                <h1 class="title-kafedra text-dark dark:text-white">
+                <h1 class="title-kafedra text-black dark:text-white">
                     <span style="color: #1e66f5">#</span>КАФЕДРА
                 </h1>
                 <label class="line-dashed text-[#006AFF] dark:text-white"

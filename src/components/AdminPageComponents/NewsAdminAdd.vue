@@ -6,6 +6,8 @@ import VueSelect from 'vue3-select-component';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import config from '../../config';
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const array = ref([]);
 const categories = ref([
@@ -108,7 +110,7 @@ const giveMeAllArea = async () => {
         onMainPage: false,
     });
 
-    console.log(object.value);
+    console.log(mainText.value);
 
     const newsBlob = new Blob([JSON.stringify(object.value)], {
         type: 'application/json',
@@ -126,7 +128,7 @@ const giveMeAllArea = async () => {
         console.log(`${key}: ${value}`);
     }
 
-    const response = await fetch(`${config.ServerURL}/news/upload`, {
+    await fetch(`${config.ServerURL}/news/upload`, {
         method: 'POST',
         body: formData,
         // Не устанавливаем Content-Type заголовок, fetch сделает это автоматически
@@ -209,7 +211,13 @@ const handleOptionSelected = (option) => {
 
         <div class="titleNews">Основной текст новости</div>
         <div class="EditMainText">
-            <textarea v-model="mainText" type="text" class="inputMain"></textarea>
+            <!-- <textarea v-model="mainText" type="text" class="inputMain"></textarea> -->
+            <QuillEditor
+                v-model:content="mainText"
+                content-type="html"
+                theme="snow"
+                toolbar="full"
+            ></QuillEditor>
         </div>
 
         <div class="editPhoto">
@@ -240,6 +248,16 @@ const handleOptionSelected = (option) => {
                 <input type="checkbox" class="checkbox" />
             </div>
             <button class="btn" @click="giveMeAllArea">Подтвердить новость</button>
+            <!-- <button
+                class="btn"
+                @click="
+                    () => {
+                        console.log(mainText);
+                    }
+                "
+            >
+                Подтвердить новость
+            </button> -->
         </div>
     </div>
 </template>
@@ -365,7 +383,12 @@ const handleOptionSelected = (option) => {
 :deep(input[type='checkbox']::after) {
     transform: translateY(-8px) translateX(0.5px) scale(1);
 }
-
+:deep(.ql-toolbar) {
+    width: 100%;
+}
+:deep(.ql-container) {
+    width: 100%;
+}
 .enterBlo {
     width: 90%;
     height: 70px;
@@ -401,6 +424,7 @@ const handleOptionSelected = (option) => {
     background-color: #181818;
     height: 658px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }

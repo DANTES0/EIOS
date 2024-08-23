@@ -8,6 +8,7 @@ import Admin from '../pages/Admin.vue';
 import NewsContent from '../pages/NewsContent.vue';
 import NewsAdminAdd from '../components/AdminPageComponents/NewsAdminAdd.vue';
 import PrepodDetails from '../components/PrepodavateliPageComponents/PrepodDetails.vue';
+import TeachersChange from '../components/AdminPageComponents/TeachersChange.vue';
 
 const routes = [
     {
@@ -31,6 +32,11 @@ const routes = [
         component: Admin,
     },
     {
+        path: '/admin/teachers',
+        name: 'AddTeachers',
+        component: TeachersChange,
+    },
+    {
         path: '/teachers',
         name: 'Teachers',
         component: AllPrepodavateli,
@@ -45,14 +51,14 @@ const routes = [
         name: 'NewsContent',
         component: NewsContent,
     },
-    {
-        path: '/news/get/admin/:id',
-        name: 'NewsAdminAdd',
-        component: NewsAdminAdd,
-    },
+    // {
+    //     path: '/news/get/admin/:id',
+    //     name: 'NewsAdminAdd',
+    //     component: NewsAdminAdd,
+    // },
     {
         path: '/news/get/admin',
-        name: 'NewsAdminAdd1',
+        name: 'NewsAdminAdd',
         component: NewsAdminAdd,
     },
 ];

@@ -83,7 +83,9 @@ const handleOptionSelected = (option) => {
     placeholder.value = option.value;
     eventBus.emit('optionSelected', option.value);
 };
+
 // updat
+const temp = ref('');
 </script>
 
 <template>
@@ -105,6 +107,8 @@ const handleOptionSelected = (option) => {
                 :items2="array2"
                 :type-input="'stairsInput'"
             ></v-input>
+            {{ temp }}
+            <v-input v-model="temp" type-input="default"></v-input>
             <!-- <VueSelect
                 v-model="selected"
                 :placeholder="placeholder"

@@ -13,9 +13,7 @@ const newsBaseData = defineProps({
 <template>
     <div class="news-content-base-container">
         <div class="news-content-base">
-            <p class="base-text-content">
-                {{ newsBaseData.newsFullInfo }}
-            </p>
+            <p class="base-text-content" v-html="newsBaseData.newsFullInfo"></p>
 
             <!-- <p class="base-text-content">
         Вот вам яркий пример современных тенденций — перспективное планирование играет важную роль в формировании
@@ -48,6 +46,15 @@ const newsBaseData = defineProps({
 </template>
 
 <style scoped>
+:deep(ol) {
+    list-style-type: '-  ';
+}
+:deep(li::marker) {
+    color: #006aff;
+}
+:deep(li) {
+    margin-bottom: 15px;
+}
 .news-content-base-container {
     width: 100%;
     display: flex;

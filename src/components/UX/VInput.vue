@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import IconDownArrow from '../Icons/Icon/IconDownArrow.vue';
 import IconBase from '../Icons/IconBase.vue';
 
@@ -20,6 +20,10 @@ const props = defineProps({
         default: '',
         require: true,
     },
+    styleInput: {
+        type: String,
+        default: 'modern',
+    },
     options: {
         type: Array,
         default() {
@@ -39,21 +43,6 @@ const props = defineProps({
         },
     },
 });
-
-const emit = defineEmits(['update:modelValue']);
-// Список вариантов
-// const items = ref([
-//     { id: 1, name: 'О714' },
-//     { id: 2, name: 'О712' },
-//     { id: 3, name: 'О713' },
-//     { id: 4, name: 'О714' },
-// ]);
-// const items2 = ref([
-//     { id: 1, name: 'Ракова' },
-//     { id: 2, name: 'Мажайцев' },
-//     { id: 3, name: 'Верхолат' },
-//     { id: 4, name: 'Вальштейн' },
-// ]);
 
 const itemsType = ref([
     { id: 1, name: 'Преподаватели' },
@@ -78,6 +67,7 @@ const filteredTypes = computed(() => {
     );
 });
 
+const emit = defineEmits(['update:modelValue']);
 const selectItem = (item) => {
     // selectedItem.value = item;
     emit('update:modelValue', item);
@@ -98,6 +88,13 @@ const handleClickOutside = (event) => {
     }
 };
 
+watch(searchText, (value) => {
+    if (props.typeInput === 'default') {
+        emit('update:modelValue', value);
+    }
+});
+
+// watch(selectItem.value)
 onMounted(() => {
     document.addEventListener('click', handleClickOutside);
 });
@@ -108,7 +105,6 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div>{{}}</div>
     <div
         v-if="typeInput === 'selectedInput'"
         ref="dropdownRef"
@@ -172,7 +168,6 @@ onBeforeUnmount(() => {
             @click="handleFocus"
             ><icon-down-arrow></icon-down-arrow
         ></icon-base>
-
         <div
             v-if="showDropdown"
             class="absolute z-10 w-full bg-[#181818] border border-[#1E66F5] mt-1 rounded"
@@ -228,6 +223,25 @@ onBeforeUnmount(() => {
             </div>
             <!-- <div v-else class="p-1 text-gray-400 font-light">Ничего не найдено</div> -->
         </div>
+    </div>
+    <div
+        v-if="typeInput === 'default'"
+        ref="dropdownRef"
+        class="relative w-full font-light font-[JetBrainsMono]"
+    >
+        <input
+            v-model="searchText"
+            class="w-full bg-transparent outline-none font-light font-[JetBrainsMono]"
+            :class="[
+                props.styleInput === 'classic'
+                    ? 'border border-[#cccccc]  p-1 rounded focus:border-[#1E66F5]'
+                    : props.styleInput === 'modern'
+                      ? 'border-b border-[#cccccc] pl-[11px] pb-[8px]'
+                      : '',
+            ]"
+            :placeholder="placeholderText"
+            @focus="handleFocus"
+        />
     </div>
 </template>
 
