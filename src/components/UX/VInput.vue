@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
+import Inputmask from 'inputmask';
 import IconDownArrow from '../Icons/Icon/IconDownArrow.vue';
 import IconBase from '../Icons/IconBase.vue';
 
@@ -11,10 +12,13 @@ const typeSearch = ref('');
 const isRotated = ref(false);
 
 const dropdownRef = ref(null);
+const input = ref(null);
 
 //types: 'default, selectedInput', 'stairsInput'
 const props = defineProps({
     modelValue: { type: String, default: '', require: true },
+    placeholder: { type: String, default: 'Поиск...' },
+    mask: { type: String, default: '' },
     typeInput: {
         type: String,
         default: '',
@@ -97,6 +101,16 @@ watch(searchText, (value) => {
 // watch(selectItem.value)
 onMounted(() => {
     document.addEventListener('click', handleClickOutside);
+
+    if (props.mask) {
+        Inputmask({
+            mask: props.mask,
+            placeholder: '_',
+            showMaskOnHover: false,
+            showMaskOnFocus: true,
+        }).mask(input.value);
+        // input.value.mask('+7 (999) 999 99 99');
+    }
 });
 
 onBeforeUnmount(() => {
@@ -230,8 +244,9 @@ onBeforeUnmount(() => {
         class="relative w-full font-light font-[JetBrainsMono]"
     >
         <input
+            ref="input"
             v-model="searchText"
-            class="w-full bg-transparent outline-none font-light font-[JetBrainsMono]"
+            class="w-full bg-transparent outline-none font-light font-[JetBrainsMono] placeholder:text-[18px] text-[20px]"
             :class="[
                 props.styleInput === 'classic'
                     ? 'border border-[#cccccc]  p-1 rounded focus:border-[#1E66F5]'
@@ -239,7 +254,7 @@ onBeforeUnmount(() => {
                       ? 'border-b border-[#cccccc] pl-[11px] pb-[8px]'
                       : '',
             ]"
-            :placeholder="placeholderText"
+            :placeholder="placeholder"
             @focus="handleFocus"
         />
     </div>

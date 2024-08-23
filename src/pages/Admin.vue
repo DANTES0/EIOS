@@ -10,6 +10,7 @@ import UserStudent from '../components/AdminPageComponents/UserStudents.vue';
 import EditUserStudentModalComponent from '../components/AdminPageComponents/EditUserStudentModalComponent.vue';
 import NewsAdmin from '../components/AdminPageComponents/NewsAdmin.vue';
 import UserTeachers from '../components/AdminPageComponents/UserTeachers.vue';
+import TeachersChange from '../components/AdminPageComponents/TeachersChange.vue';
 import config from '../config';
 
 let isVisibleChangePhotoGallery = ref(false);
@@ -71,6 +72,9 @@ fetchData();
             <NewsAdmin v-if="authState.isArticle == 'NewsAdmin'" />
             <UserTeachers v-if="authState.isArticle == 'UserTeachers'" />
             <various v-if="authState.isArticle == 'Various'"></various>
+            <TeachersChange
+                v-if="authState.isArticle === 'TeachersChange'"
+            ></TeachersChange>
         </div>
         <!-- <div v-if="visible" style="color:aliceblue; font-size:30px" class="Admin-page">
         ADMIN
