@@ -107,8 +107,7 @@ const temp = ref('');
                 :items2="array2"
                 :type-input="'stairsInput'"
             ></v-input>
-            {{ temp }}
-            <v-input v-model="temp" type-input="default"></v-input>
+
             <!-- <VueSelect
                 v-model="selected"
                 :placeholder="placeholder"

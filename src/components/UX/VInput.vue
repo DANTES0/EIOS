@@ -4,7 +4,6 @@ import Inputmask from 'inputmask';
 import IconDownArrow from '../Icons/Icon/IconDownArrow.vue';
 import IconBase from '../Icons/IconBase.vue';
 
-const searchText = ref('');
 const selectedItem = ref(null);
 const showDropdown = ref(false);
 const placeholderText = ref('Поиск...');
@@ -47,7 +46,7 @@ const props = defineProps({
         },
     },
 });
-
+const searchText = ref(props.modelValue);
 const itemsType = ref([
     { id: 1, name: 'Преподаватели' },
     { id: 2, name: 'Группы' },
@@ -92,6 +91,12 @@ const handleClickOutside = (event) => {
     }
 };
 
+watch(
+    () => props.modelValue,
+    (newValue) => {
+        searchText.value = newValue;
+    },
+);
 watch(searchText, (value) => {
     if (props.typeInput === 'default') {
         emit('update:modelValue', value);

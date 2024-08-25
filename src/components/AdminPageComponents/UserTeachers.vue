@@ -62,7 +62,8 @@ watch(authState.isVisibleModalAddUsers, (newVal) => {
 
 const editUser = (id) => {
     authState.editUserId = id;
-    authState.isVisibleEditStudentModelComponent = true;
+    authState.isArticle = 'TeachersChange';
+    // authState.isVisibleEditStudentModelComponent = true;
 };
 
 eventBus.on('studentAdded', fetchGroup);
@@ -144,7 +145,15 @@ const deleteUser = async (id) => {
                 placeholder="Поиск..."
                 class="placeholder-userAll"
             />
-            <button class="addUser" @click="authState.isArticle = 'TeachersChange'">
+            <button
+                class="addUser"
+                @click="
+                    () => {
+                        authState.editUserId = '';
+                        authState.isArticle = 'TeachersChange';
+                    }
+                "
+            >
                 Новый преподаватель
             </button>
         </div>
