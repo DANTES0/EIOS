@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 import DropdownHeader from './MainPageComponents/DropdownHeader.vue';
 import SearchTimetable from './TimetablePageComponents/SearchTimetable.vue';
 import NewsFilters from './NewsPageComponents/NewsFilters.vue';
+import SearchPrepod from './PrepodavateliPageComponents/SearchPrepod.vue';
 
 // this.$refs.dropbtn.addEventListener("click", function (event) {
 //   document.getElementById("myDropdown").classList.toggle("show")
@@ -36,6 +37,7 @@ import NewsFilters from './NewsPageComponents/NewsFilters.vue';
     <div v-if="$route.path == `/news`" class="news-filters">
         <NewsFilters></NewsFilters>
     </div>
+    <div v-if="$route.path == `/teachers`" class=""><search-prepod></search-prepod></div>
 </template>
 
 <style scoped></style>

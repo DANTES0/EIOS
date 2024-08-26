@@ -40,7 +40,7 @@ const changeTheme = () => {
     <div
         class="header-wrapper"
         :class="
-            $route.path.match(/^\/teachers\/\d+$/) ||
+            $route.path.match(/^\/teachers\/detail\/*/) ||
             $route.path.match(/^\/news\/get\/\d+$/)
                 ? 'w-auto'
                 : 'w-[16.6%]'
@@ -150,7 +150,7 @@ const changeTheme = () => {
                     $route.path === '/newsContent' ||
                     $route.path.match(/^\/news\/get\/\d+$/) ||
                     $route.path === '/teachers/detail' ||
-                    $route.path.match(/^\/teachers\/\d+$/)
+                    $route.path.match(/^\/teachers\/detail\/*/)
                 )
             "
             class="header-wrapper-anchor-container bg-[#0C2340] dark:bg-[#181818] border-r border-white dark:border-[#2b2b2b]"

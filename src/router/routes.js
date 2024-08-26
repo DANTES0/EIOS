@@ -42,7 +42,7 @@ const routes = [
         component: AllPrepodavateli,
     },
     {
-        path: '/teachers/:id',
+        path: '/teachers/detail/:id',
         name: 'TeacherDetail',
         component: PrepodDetails,
     },

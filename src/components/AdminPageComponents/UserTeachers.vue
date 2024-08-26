@@ -15,7 +15,8 @@ let flagName = ref(true);
 let flagCourse = ref(true);
 
 const url = computed(() => {
-    return `${config.ServerURL}/api/v1/teachers/all`;
+    return `${config.ServerURL}/api/v1/teacher/getAll`;
+    // return `${config.ServerURL}/api/v1/teachers/all`;
 });
 
 const fetchGroup = async () => {
@@ -309,7 +310,7 @@ const deleteUser = async (id) => {
     background-color: #1a1a1a;
     color: #ffffff;
     outline: #1e66f5;
-    background: url('../../assets/admin/bottom.svg') no-repeat right center;
+    /* background: url('../../assets/admin/bottom.svg') no-repeat right center; */
     transition: 0.3s ease;
 }
 

@@ -82,11 +82,6 @@ const isActiveTeachers = ref(false);
                     >
                         <div class="newsPage-title title">Новости</div>
                     </div>
-                    <img
-                        :class="{ rotate: isActiveNews }"
-                        class="arrow"
-                        src="../../assets/Upper.svg"
-                    />
                 </div>
                 <div class="userPage-wrap">
                     <div class="wrap" @click="() => (isActiveUsers = !isActiveUsers)">

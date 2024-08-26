@@ -246,12 +246,12 @@ onBeforeUnmount(() => {
     <div
         v-if="typeInput === 'default'"
         ref="dropdownRef"
-        class="relative w-full font-light font-[JetBrainsMono]"
+        class="relative w-full font-light font-[JetBrainsMono] h-full"
     >
         <input
             ref="input"
             v-model="searchText"
-            class="w-full bg-transparent outline-none font-light font-[JetBrainsMono] placeholder:text-[18px] text-[20px]"
+            class="w-full bg-transparent outline-none font-light font-[JetBrainsMono] placeholder:text-[18px] text-[20px] h-full"
             :class="[
                 props.styleInput === 'classic'
                     ? 'border border-[#cccccc]  p-1 rounded focus:border-[#1E66F5]'
