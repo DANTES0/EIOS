@@ -195,27 +195,33 @@ const onSubmit = async () => {
             <div class="flex flex-col w-[35%] justify-between">
                 <div>
                     <div>ФИО</div>
-                    <v-input
-                        v-model="name"
-                        type-input="default"
-                        placeholder="Введите ФИО"
-                    ></v-input>
+                    <div class="h-[50px]">
+                        <v-input
+                            v-model="name"
+                            type-input="default"
+                            placeholder="Введите ФИО"
+                        ></v-input>
+                    </div>
                 </div>
                 <div>
                     <div>Логин</div>
-                    <v-input
-                        v-model="username"
-                        type-input="default"
-                        placeholder="Введите логин"
-                    ></v-input>
+                    <div class="h-[50px]">
+                        <v-input
+                            v-model="username"
+                            type-input="default"
+                            placeholder="Введите логин"
+                        ></v-input>
+                    </div>
                 </div>
                 <div>
                     <div>Пароль</div>
-                    <v-input
-                        v-model="password"
-                        type-input="default"
-                        placeholder="Введите пароль"
-                    ></v-input>
+                    <div class="h-[50px]">
+                        <v-input
+                            v-model="password"
+                            type-input="default"
+                            placeholder="Введите пароль"
+                        ></v-input>
+                    </div>
                 </div>
             </div>
             <div class="h-full w-[1px] flex items-center">
@@ -224,27 +230,33 @@ const onSubmit = async () => {
             <div class="flex flex-col w-[35%] justify-between">
                 <div>
                     <div>Должность</div>
-                    <v-input
-                        v-model="post"
-                        type-input="default"
-                        placeholder="Введите должность"
-                    ></v-input>
+                    <div class="h-[50px]">
+                        <v-input
+                            v-model="post"
+                            type-input="default"
+                            placeholder="Введите должность"
+                        ></v-input>
+                    </div>
                 </div>
                 <div>
                     <div>Ученое звание</div>
-                    <v-input
-                        v-model="rank"
-                        type-input="default"
-                        placeholder="Введите научную степень"
-                    ></v-input>
+                    <div class="h-[50px]">
+                        <v-input
+                            v-model="rank"
+                            type-input="default"
+                            placeholder="Введите научную степень"
+                        ></v-input>
+                    </div>
                 </div>
                 <div>
                     <div>Почта</div>
-                    <v-input
-                        v-model="mail"
-                        type-input="default"
-                        placeholder="Введите почту"
-                    ></v-input>
+                    <div class="h-[50px]">
+                        <v-input
+                            v-model="mail"
+                            type-input="default"
+                            placeholder="Введите почту"
+                        ></v-input>
+                    </div>
                 </div>
             </div>
         </div>
@@ -257,28 +269,34 @@ const onSubmit = async () => {
                 </div>
                 <div class="mt-[20px]">
                     <div>Телеграм</div>
-                    <v-input
-                        v-model="telegram"
-                        type-input="default"
-                        placeholder="Введите ссылку"
-                    ></v-input>
+                    <div class="h-[50px]">
+                        <v-input
+                            v-model="telegram"
+                            type-input="default"
+                            placeholder="Введите ссылку"
+                        ></v-input>
+                    </div>
                 </div>
                 <div>
                     <div>ВК</div>
-                    <v-input
-                        v-model="vkontakte"
-                        type-input="default"
-                        placeholder="Введите ссылку"
-                    ></v-input>
+                    <div class="h-[50px]">
+                        <v-input
+                            v-model="vkontakte"
+                            type-input="default"
+                            placeholder="Введите ссылку"
+                        ></v-input>
+                    </div>
                 </div>
                 <div>
                     <div>Номер телефона</div>
-                    <v-input
-                        v-model="phone"
-                        type-input="default"
-                        placeholder="Введите номер телефона"
-                        mask="+7 (999)-999-99-99"
-                    ></v-input>
+                    <div class="h-[50px]">
+                        <v-input
+                            v-model="phone"
+                            type-input="default"
+                            placeholder="Введите номер телефона"
+                            mask="+7 (999)-999-99-99"
+                        ></v-input>
+                    </div>
                 </div>
             </div>
             <div class="w-[35%]">
