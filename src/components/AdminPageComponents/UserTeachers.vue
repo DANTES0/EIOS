@@ -190,12 +190,12 @@ const deleteUser = async (id) => {
             </div>
 
             <div
-                v-for="item in filteredArray"
+                v-for="(item, index) in filteredArray"
                 v-if="filteredArray.length"
-                :key="item.id"
+                :key="index"
                 class="user-item"
             >
-                <span class="user-id">{{ item.id }}</span>
+                <span class="user-id">{{ index + 1 }}</span>
                 <span class="user-login">{{ item.login }}</span>
                 <span class="user-role">{{ item.post }}</span>
                 <span class="user-name">{{ item.name }}</span>

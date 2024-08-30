@@ -14,12 +14,14 @@ import config from '../config';
 
 const url = computed(() => {
     //return `http://25.61.98.183:8080/news/1`
-    return `${config.ServerURL}/news/get/last`;
+    return `${config.ServerURL}/api/v1/news?`;
 });
 const photo_url = computed(() => {
-    return `${config.ServerURL}/gallery/get`;
+    return `${config.ServerURL}/api/v1/gallery?`;
 });
-
+const photoUrl = computed(() => {
+    return `${config.ServerURL}/api/v1/image?`;
+});
 const extractedId = ref(null);
 const text = ref(null);
 const date = ref(null);
@@ -65,7 +67,7 @@ const prevNews = () => {
         );
     }
 
-    console.log(currentNewsIndex.value);
+    // console.log(currentNewsIndex.value);
 };
 
 const currentNews = computed(() =>
@@ -74,37 +76,59 @@ const currentNews = computed(() =>
 );
 
 const currentPhotoGallery = computed(() => {
-    for (let i = 0; i < photo_galleries.value.length; i = i + 1) {
-        // console.log(photo_galleries.value[i].filename)
-        array[i] = photo_galleries.value[i].filename;
+    for (let i = 0; i < photo_galleries.value.length; i++) {
+        // array[i] = updateGallery(photo_galleries.value[i].filename);
+        array[i] =
+            `${photoUrl.value}fileName=${photo_galleries.value[i].filename}&imageType=GalleryImage`;
     }
 
     return array;
 });
 
 const fetchGallery = async () => {
-    const response_gallery = await useFetch(photo_url).json();
+    const response_gallery = await useFetch(
+        photo_url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
+    ).json();
 
-    photo_galleries.value = response_gallery.data.value;
+    photo_galleries.value = response_gallery.data.value.data;
+
     photo_images.value = response_gallery.data.filename;
-    console.log(response_gallery);
+    console.log(response_gallery.data.value.data);
 };
 
+// const updateGallery = async () => {
+//     const responsePhoto = await useFetch(
+//         photoUrl.value +
+//             new URLSearchParams({
+//                 fileName: 'bear.jpg',
+//                 imageType: 'GalleryImage',
+//             }).toString(),
+//     );
+
+//     console.log(responsePhoto.data.value);
+
+//     return responsePhoto.data.value;
+// };
+
 const aboba = async () => {
-    const response = await useFetch(url).json();
+    const response = await useFetch(
+        url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
+    ).json();
+    // const response = await data.json();a
 
+    console.log(response.data.value.data);
     //если url - новость по индексу
-    extractedId.value = response.data.value.id;
-    text.value = response.data.value.headLine;
+    extractedId.value = response.data.value.data.id;
+    text.value = response.data.value.data.headLine;
 
-    news.value = response.data.value;
-    images.value = response.data.images;
-    console.log(response.data.value);
+    news.value = response.data.value.data;
+    images.value = response.data.value.data.images;
 };
 
 onMounted(() => {
     aboba();
     fetchGallery();
+    // console.log(updateGallery());
     // console.log(currentNews.value)
 });
 

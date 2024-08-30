@@ -16,6 +16,8 @@
         "@vueup/vue-quill": "^1.2.0",
         "@vueuse/core": "^10.9.0",
         "inputmask": "^5.0.9",
+        "jsonwebtoken": "^9.0.2",
+        "jwt-decode": "^4.0.0",
         "mitt": "^3.0.1",
         "npm": "^10.8.1",
         "primevue": "^4.0.4",

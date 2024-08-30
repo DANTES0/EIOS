@@ -10,7 +10,7 @@ import eventBus from '../eventBus';
 
 // import Terminal from '../components/Terminal.vue';
 const url = computed(() => {
-    return `${config.ServerURL}/api/v1/teacher/getAll`;
+    return `${config.ServerURL}/api/v1/teacher?`;
 });
 const items = ref([]);
 const searchedValue = ref('');
@@ -22,9 +22,11 @@ const filterTeacher = () => {
 };
 
 const fetchPrepod = async () => {
-    const response = await useFetch(url).json();
+    const response = await useFetch(
+        url.value + new URLSearchParams({ pageSize: 999, pageNumber: 0 }).toString(),
+    ).json();
 
-    items.value = response.data.value;
+    items.value = response.data.value.data;
     filteredArray.value = items.value;
     console.log(response.data.value);
     // localStorage.theme = 'dark';
@@ -63,7 +65,7 @@ watch(searchedValue, filterTeacher);
                 v-for="(item, index) in filteredArray"
                 :key="index"
                 :name="getShortName(item.name)"
-                :photo="item.photo"
+                :photo="`https://security-jwt-1.onrender.com/api/v1/image?fileName=${item.photo}&imageType=TeacherImage`"
                 :rank="item.rank"
                 :post="item.post"
                 @click="$router.push(`/teachers/detail/${item.id}`)"

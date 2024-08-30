@@ -9,7 +9,7 @@ import config from '../../config';
 
 let flag = ref(false);
 const prepod_url = computed(() => {
-    return `${config.ServerURL}/api/v1/teacher/getAll`;
+    return `${config.ServerURL}/api/v1/teacher?`;
 });
 let prepod = ref(null);
 let currentIndex = ref(1);
@@ -17,9 +17,13 @@ let nextId = ref([]);
 let prevId = ref([]);
 let temp_array = ref([]);
 const fetchPrepod = async () => {
-    const response_prepod = await useFetch(prepod_url).json();
+    const response_prepod = await useFetch(
+        prepod_url.value +
+            new URLSearchParams({ pageSize: 999, pageNumber: 0 }).toString(),
+    ).json();
 
-    prepod.value = response_prepod.data.value;
+    prepod.value = response_prepod.data.value.data;
+    console.log(prepod.value);
     prepod.value.sort();
 
     //   currentIndex.value++;
@@ -104,7 +108,7 @@ onMounted(() => {
                     :id="id"
                     :key="id"
                     :name="name"
-                    :photo="photo"
+                    :photo="`https://security-jwt-1.onrender.com/api/v1/image?fileName=${photo}&imageType=TeacherImage`"
                     :post="post"
                     :rank="rank"
                     :current-index="currentIndex"

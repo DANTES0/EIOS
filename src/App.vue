@@ -4,7 +4,26 @@ import Auth from './components/Auth.vue';
 import { authState } from './authState';
 import useAuthenticatedFetch from './fetchInterceptor';
 import config from './config';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
+import * as jwt_decode from 'jwt-decode'; // если используете npm или import
+
+const decodeJwt = computed(() => {
+    const token = localStorage.accessToken;
+
+    if (token) {
+        try {
+            const decodedPayload = jwt_decode(token);
+
+            return decodedPayload;
+        } catch (error) {
+            console.error('Invalid token:', error);
+        }
+    } else {
+        console.error('No token found in localStorage');
+    }
+
+    return null;
+});
 
 const fetch = async () => {
     const { statusCode } = await useAuthenticatedFetch(
