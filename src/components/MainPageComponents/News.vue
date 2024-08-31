@@ -56,11 +56,21 @@ defineProps({
                             src=""
                             alt=""
                             class="card-news-down-tags-blur"
-                            :style="{ backgroundImage: 'url(' + url[0] + ')' }"
+                            :style="{
+                                backgroundImage:
+                                    'url(' +
+                                    `https://security-jwt-1.onrender.com/api/v1/image?fileName=${url[0]}&imageType=NewsImage` +
+                                    ')',
+                            }"
                         />
                         <div
                             class="card-news-down-tags-image"
-                            :style="{ backgroundImage: 'url(' + url[0] + ')' }"
+                            :style="{
+                                backgroundImage:
+                                    'url(' +
+                                    `https://security-jwt-1.onrender.com/api/v1/image?fileName=${url[0]}&imageType=NewsImage` +
+                                    ')',
+                            }"
                         ></div>
                     </div>
                 </div>

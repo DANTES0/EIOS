@@ -15,13 +15,15 @@ const handleMouseLeave = (index) => {
 };
 
 const photo_url = computed(() => {
-    return `${config.ServerURL}/gallery/get`;
+    return `${config.ServerURL}/api/v1/gallery?`;
 });
 
 const fetchPhoto = async () => {
-    const response = await useFetch(photo_url).json();
+    const response = await useFetch(
+        photo_url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
+    ).json();
 
-    array.value = response.data.value.map((item) => ({
+    array.value = response.data.value.data.map((item) => ({
         ...item,
         isVisible: false,
     }));
@@ -29,7 +31,7 @@ const fetchPhoto = async () => {
 };
 
 const deletePhoto = async (id, index) => {
-    await useFetch(`${config.ServerURL}/gallery/delete/${id}`, {
+    await useFetch(`${config.ServerURL}/api/v1/gallery?id=${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -50,13 +52,15 @@ const addPhoto = async (file) => {
 
     formData.append('file', file);
 
-    const response = await fetch(`${config.ServerURL}/gallery/upload`, {
+    const response = await fetch(`${config.ServerURL}/api/v1/gallery`, {
         method: 'POST',
         body: formData,
         headers: {
             Accept: 'application/json',
         },
     });
+
+    console.log(formData);
 
     if (response.ok) {
         selectedFileName.value = '';
@@ -119,7 +123,7 @@ onMounted(() => {
                 @mouseleave="handleMouseLeave(index)"
             >
                 <img
-                    :src="item.filename"
+                    :src="`https://security-jwt-1.onrender.com/api/v1/image?fileName=${item.filename}&imageType=GalleryImage`"
                     alt=""
                     class="photo"
                     :class="{ active: item.isVisible }"

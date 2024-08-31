@@ -24,32 +24,35 @@ watch(selectedItem, (item) => {
 
 // const selected = ref("");
 const url = computed(() => {
-    return `${config.ServerURL}/api/v1/group/all`;
+    return `${config.ServerURL}/api/v1/group`;
 });
 const teacherUrl = computed(() => {
-    return `${config.ServerURL}/api/v1/teacher/getAll`;
+    return `${config.ServerURL}/api/v1/teacher?`;
 });
 let placeholder = ref('Поиск...');
 const fetchGroup = async () => {
     const response = await useFetch(url).json();
 
-    console.log(response.data.value);
+    console.log(response.data.value.data);
 
-    const responseTeacher = await useFetch(teacherUrl).json();
+    const responseTeacher = await useFetch(
+        teacherUrl.value +
+            new URLSearchParams({ pageSize: 999, pageNumber: 0 }).toString(),
+    ).json();
 
     console.log(responseTeacher.data.value);
 
-    for (let i = 0; i < response.data.value.length; i++) {
+    for (let i = 0; i < response.data.value.data.length; i++) {
         array.value.push({
-            name: response.data.value[i].name, //value label
-            id: response.data.value[i].id,
+            name: response.data.value.data[i].name, //value label
+            id: response.data.value.data[i].id,
         });
     }
 
-    for (let i = 0; i < responseTeacher.data.value.length; i++) {
+    for (let i = 0; i < responseTeacher.data.value.data.length; i++) {
         array2.value.push({
-            name: getShortName(responseTeacher.data.value[i].name),
-            id: `teacher${responseTeacher.data.value[i].id}`,
+            name: getShortName(responseTeacher.data.value.data[i].name),
+            id: `teacher${responseTeacher.data.value.data[i].id}`,
         });
     }
 

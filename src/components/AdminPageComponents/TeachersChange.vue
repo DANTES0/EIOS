@@ -41,7 +41,7 @@ const rank = ref('');
 const roles = [{ id: 3, name: 'ROLE_TEACHER' }];
 
 const url = computed(() => {
-    return `${config.ServerURL}/api/v1/teacher/byId?id=${authState.editUserId}`;
+    return `${config.ServerURL}/api/v1/teacher/${authState.editUserId}`;
 });
 const items = ref({});
 const fetchPrepodDetails = async () => {
@@ -49,6 +49,7 @@ const fetchPrepodDetails = async () => {
         const response = await useFetch(url).json();
 
         items.value = response.data.value;
+        console.log(items.value);
         // username.value = items.value.username;
         name.value = items.value.name;
         // password.value = items.value.password;
@@ -59,7 +60,7 @@ const fetchPrepodDetails = async () => {
         description.value = items.value.description;
         post.value = items.value.post;
         photo.value = items.value.photo;
-        imagePreview.value = items.value.photo;
+        imagePreview.value = `https://security-jwt-1.onrender.com/api/v1/image?fileName=${items.value.photo}&imageType=TeacherImage`;
         rank.value = items.value.rank;
         console.log(name.value); //
     }

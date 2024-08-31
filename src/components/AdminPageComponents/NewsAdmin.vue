@@ -10,10 +10,13 @@ const flag = ref(false);
 const route = useRoute();
 const router = useRouter();
 const loadNews = async () => {
-    const response = await useFetch(`${config.ServerURL}/news/get/all`).json();
+    const response = await useFetch(
+        `${config.ServerURL}/api/v1/news?` +
+            new URLSearchParams({ pageSize: 999, pageNumber: 0 }).toString(),
+    ).json();
 
-    news.value = response.data.value;
-    console.log(response.data.value);
+    news.value = response.data.value.data;
+    console.log(news.value);
 };
 
 loadNews();
@@ -24,7 +27,7 @@ watch(route, () => {
 
 async function navigateToNews(newsId) {
     if (flag.value == true) {
-        await useFetch(`${config.ServerURL}/news/delete/${newsId}`, {
+        await useFetch(`${config.ServerURL}/api/v1/news/${newsId}`, {
             method: 'DELETE',
         });
         flag.value = !flag.value;
@@ -61,7 +64,7 @@ function addNews() {
                         :news-tag="newsItem.category"
                         :news-title="newsItem.headline"
                         :news-date="newsItem.date"
-                        :news-image="newsItem.images[0]"
+                        :news-image="`https://security-jwt-1.onrender.com/api/v1/image?fileName=${newsItem.images[0]}&imageType=NewsImage`"
                         :news-description="newsItem.mainInfo"
                         @click="navigateToNews(newsItem.id)"
                     ></NewsBlock>

@@ -8,9 +8,7 @@ import config from '../../config';
 
 const selectedOption = ref('1');
 const isValidOption = (value) => {
-    const teacherAndNumberRegex = /^teacher\d+$/;
-
-    return teacherAndNumberRegex.test(value);
+    return value.includes('teacher');
 };
 
 eventBus.on('optionSelected', (value) => {
@@ -24,11 +22,20 @@ const schedule = computed(() => {
 
     if (isValidOption(selectedOption.value)) {
         url.value =
-            `${config.ServerURL}/api/schedule/teacher?teacherId=` +
-            selectedOption.value.replace(/\D/g, '');
+            `${config.ServerURL}/api/v1/schedule?` +
+            new URLSearchParams({
+                pageSize: 999,
+                pageNumber: 0,
+                teacherId: selectedOption.value.replace('teacher', ''),
+            }).toString();
     } else {
         url.value =
-            `${config.ServerURL}/api/schedule/group?groupId=` + selectedOption.value;
+            `${config.ServerURL}/api/v1/schedule?` +
+            new URLSearchParams({
+                pageSize: 999,
+                pageNumber: 0,
+                groupId: selectedOption.value,
+            }).toString();
     }
 
     console.log(url.value);
@@ -61,6 +68,19 @@ const TwelethRowNechet = ref([{}, {}, {}, {}, {}, {}]);
 const ThirteenRowNechet = ref([{}, {}, {}, {}, {}, {}]);
 const ThortheenRowNechet = ref([{}, {}, {}, {}, {}, {}]);
 
+function formatTime(dateString) {
+    // Создаем объект Date из переданной строки
+    const date = new Date(dateString);
+
+    // Получаем часы, минуты и секунды
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+
+    // Формируем строку в нужном формате
+    return `${hours}:${minutes}:${seconds}`;
+}
+
 async function fetchSchedule() {
     firstRowNechet.value = [{}, {}, {}, {}, {}, {}];
     SecondRowNechet.value = [{}, {}, {}, {}, {}, {}];
@@ -78,530 +98,532 @@ async function fetchSchedule() {
     ThortheenRowNechet.value = [{}, {}, {}, {}, {}, {}];
 
     const response_prepod = await useFetch(schedule).json();
-    const array = response_prepod.data.value;
+    const array = response_prepod.data.value.data;
 
-    console.log(response_prepod.data.value);
+    console.log(array);
+    console.log(formatTime(''));
 
     for (let i = 0; i < array.length; i++) {
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             firstRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             firstRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             firstRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             firstRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             firstRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             firstRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             SecondRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             SecondRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             SecondRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             SecondRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             SecondRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '09:00:00'
+            formatTime(array[i].timeStart) == '09:00:00'
         )
             SecondRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             ThirdRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             ThirdRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             ThirdRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             ThirdRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             ThirdRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             ThirdRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             FourthRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             FourthRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             FourthRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             FourthRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             FourthRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '10:50:00'
+            formatTime(array[i].timeStart) == '10:50:00'
         )
             FourthRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             FifthRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             FifthRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             FifthRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             FifthRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             FifthRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             FifthRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             SixthRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             SixthRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             SixthRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             SixthRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             SixthRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '12:40:00'
+            formatTime(array[i].timeStart) == '12:40:00'
         )
             SixthRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             SeventhRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             SeventhRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             SeventhRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             SeventhRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             SeventhRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             SeventhRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             EighthRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             EighthRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             EighthRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             EighthRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             EighthRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '14:55:00'
+            formatTime(array[i].timeStart) == '14:55:00'
         )
             EighthRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             NinethRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             NinethRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             NinethRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             NinethRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             NinethRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             NinethRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             TenthRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             TenthRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             TenthRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             TenthRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             TenthRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '16:45:00'
+            formatTime(array[i].timeStart) == '16:45:00'
         )
             TenthRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             EleventhRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             EleventhRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             EleventhRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             EleventhRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             EleventhRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             EleventhRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             TwelethRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             TwelethRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             TwelethRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             TwelethRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             TwelethRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '18:30:00'
+            formatTime(array[i].timeStart) == '18:30:00'
         )
             TwelethRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThirteenRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThirteenRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThirteenRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThirteenRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThirteenRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'нечетная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThirteenRowNechet.value[5] = array[i];
 
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Понедельник' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThortheenRowNechet.value[0] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Вторник' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThortheenRowNechet.value[1] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Среда' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThortheenRowNechet.value[2] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Четверг' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThortheenRowNechet.value[3] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Пятница' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThortheenRowNechet.value[4] = array[i];
         if (
             array[i].parityOfWeek == 'четная' &&
             array[i].dayOfWeek == 'Суббота' &&
-            array[i].timeStart == '20:05:00'
+            formatTime(array[i].timeStart) == '20:05:00'
         )
             ThortheenRowNechet.value[5] = array[i];
     }
-    //   console.log(firstRowNechet)
+
+    console.log(firstRowNechet);
 }
 
 onMounted(() => {
