@@ -13,6 +13,7 @@ function toggleCheckbox() {
 }
 
 console.log('aboba');
+console.log('lol');
 </script>
 
 <template>
