@@ -11,6 +11,8 @@ const emit = defineEmits(['update:modelValue']);
 function toggleCheckbox() {
     emit('update:modelValue', !props.modelValue);
 }
+
+console.log('aboba');
 </script>
 
 <template>
