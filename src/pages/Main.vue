@@ -138,6 +138,11 @@ onMounted(() => {
 <template>
     <div class="Main-page">
         <Tabs />
+        <!-- <Tabs
+            title="о_кафедре"
+            :show-icon="true"
+            icon-src="../assets/anchor_header/html.svg"
+        /> -->
         <Kafedra />
         <div v-html="a"></div>
         <News

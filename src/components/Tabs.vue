@@ -1,12 +1,27 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+
+const props = defineProps({
+    title: {
+        type: String,
+        default: 'о_кафедре.html', // Заголовок по умолчанию
+    },
+    showIcon: {
+        type: Boolean,
+        default: true, // Показывать иконку по умолчанию
+    },
+    iconSrc: {
+        type: String,
+        default: '../assets/anchor_header/html.svg', // Путь к иконке
+    },
+});
+</script>
 
 <template>
     <div class="tabs bg-[#0C2340] dark:bg-[#181818]">
         <div class="tabs-line bg-white dark:bg-[#1f1f1f]">
-            <img src="../assets/anchor_header/html.svg" alt="" class="tabs-image" />
-            <label class="tabs-title text-black dark:text-[#cccccc]"
-                >о_кафедре.html</label
-            >
+            <img v-if="showIcon" :src="iconSrc" alt="icon" class="tabs-image" />
+            <label class="tabs-title text-black dark:text-[#cccccc]">{{ title }}</label>
         </div>
     </div>
 </template>
@@ -18,26 +33,28 @@
     z-index: 99;
     border-bottom: 1px solid #2b2b2b;
 }
+.tabs-line {
+    display: inline-flex; /* Установить inline-flex для подгонки по содержимому */
+    align-items: center;
+    justify-content: flex-start; /* Ориентировать элементы слева направо */
+    min-width: 100px; /* Минимальная ширина */
+    max-width: max-content; /* Подстраиваться под содержимое */
+    padding: 0 8px; /* Отступы для удобства */
+    height: 100%;
+    border-right: 1px solid #2b2b2b;
+}
 .tabs-image {
     width: 16px;
     height: 16px;
-    margin-left: 7px;
+    margin-right: 7px; /* Отступ справа от иконки */
+    flex-shrink: 0; /* Предотвращает сжатие иконки */
 }
 .tabs-title {
     font-family: Rubik;
     font-size: 14px;
     font-weight: 100;
-    /* color: #cccccc; */
-    margin-right: 14px;
-}
-.tabs-line {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 158px;
-    height: 100%;
-    /* background-color: #1f1f1f; */
-    border-right: 1px solid #2b2b2b;
+    white-space: nowrap; /* Предотвращает перенос текста */
+    overflow: hidden; /* Если текст слишком длинный */
+    text-overflow: ellipsis; /* Добавляет троеточие */
 }
 </style>
