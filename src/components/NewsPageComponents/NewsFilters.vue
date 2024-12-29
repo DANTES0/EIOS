@@ -38,13 +38,13 @@ const filtersContentHeight = computed(() => {
     let height = 0;
 
     if (!isShowData.value && !isShowCategories.value) {
-        height += 60;
+        height += 50;
     } else if (isShowData.value && !isShowCategories.value) {
-        height += 213;
+        height += 205;
     } else if (!isShowData.value && isShowCategories.value) {
         height += 391;
     } else if (isShowData.value && isShowCategories.value) {
-        height += 543.5;
+        height += 547;
     }
 
     return height;
@@ -256,20 +256,20 @@ function parseDate(dateStr) {
 <style scoped>
 /* стили для линий */
 .filters-line {
-    margin-left: 22px;
+    margin-left: 19.5px;
     width: 1px;
     background-color: #787878;
 }
 .categories-line {
-    margin-left: 21.5px;
+    margin-left: 17px;
     width: 1px;
-    height: 330px;
+    height: 342px;
     background-color: rgb(0, 84, 255);
 }
 .data-line {
-    margin-left: 21.5px;
+    margin-left: 17px;
     width: 1px;
-    height: 148px;
+    height: 152px;
     background-color: rgb(0, 84, 255);
 }
 
