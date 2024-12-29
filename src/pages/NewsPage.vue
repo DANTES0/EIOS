@@ -11,11 +11,13 @@ const newsData = ref([]);
 const currentPage = ref(1);
 const newsPerPage = 1; // Отображаем одну новость на странице
 const isLoading = ref(false); // Добавляем состояние загрузки
+const areLoaded = ref(false); // Добавляем состояние загрузки
 const route = useRoute();
 const router = useRouter();
 
 async function loadNews() {
     isLoading.value = true; // Начало загрузки
+    areLoaded.value = false;
 
     const urlAddress = config.ServerURL;
 
@@ -50,11 +52,14 @@ async function loadNews() {
             const data = await response.json();
 
             newsData.value = data;
+            areLoaded.value = true;
         } else {
             console.error('Ошибка при загрузке данных:', response.statusText);
+            areLoaded.value = false;
         }
     } catch (error) {
         console.error('Ошибка при выполнении запроса:', error);
+        areLoaded.value = false;
     } finally {
         isLoading.value = false; // Окончание загрузки
     }
@@ -88,7 +93,7 @@ const paginatedNews = computed(() => {
             <ProgressSpinner class="custom-spinner" />
         </div>
 
-        <div class="news-page-content">
+        <div v-else-if="areLoaded && newsData.length" class="news-page-content">
             <div v-for="newsItem in paginatedNews" :key="newsItem.id" class="news-block">
                 <NewsBlock
                     :news-tag="newsItem.category"
@@ -101,7 +106,14 @@ const paginatedNews = computed(() => {
             </div>
         </div>
 
-        <div v-show="!isLoading" class="pagination-wrapper">
+        <div v-else class="error-message">
+            <p>Новости не удалось загрузить. Пожалуйста, попробуйте позже.</p>
+        </div>
+
+        <div
+            v-show="!isLoading && areLoaded && newsData.length"
+            class="pagination-wrapper"
+        >
             <VPagination
                 v-model:modelValue="currentPage"
                 :total-records="newsData.length"
@@ -112,6 +124,18 @@ const paginatedNews = computed(() => {
 </template>
 
 <style scoped>
+.error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    font-size: 18px;
+    font-family: Nunito;
+    font-weight: 200;
+
+    min-height: inherit;
+    max-height: inherit;
+}
 .news-page-container {
     display: block;
     margin: auto auto;
