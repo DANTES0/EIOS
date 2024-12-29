@@ -71,7 +71,7 @@ onMounted(() => {
             class="main-background"
             :class="
                 $route.path.match(/^\/teachers\/detail\/*/) ||
-                $route.path.match(/^\/news\/get\/\d+$/) ||
+                $route.path.match(/^\/news\/get\/*/) ||
                 $route.path.match(/^\/admin\/*/)
                     ? 'w-[100%]'
                     : 'w-[83.6%]'

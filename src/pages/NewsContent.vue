@@ -8,11 +8,10 @@ import config from '../config';
 
 const newsData = ref(null);
 const route = useRoute();
-const IPAddress = '25.61.98.183'; // Используйте здесь тот же IP, что и в News.vue
 
 async function loadNewsContent() {
     const newsId = route.params.id;
-    const requestAddress = `${config.ServerURL}/news/get/${newsId}`;
+    const requestAddress = `${config.ServerURL}/api/v1/news/${newsId}`;
 
     try {
         const response = await fetch(requestAddress);
@@ -49,7 +48,7 @@ onMounted(() => {
         </div>
 
         <div class="page-container-base-slider">
-            <NewsContentPageSlider :news-images="newsData.images" />
+            <NewsContentPageSlider :news-images="newsData.images.filename" />
         </div>
     </div>
     <div v-else>

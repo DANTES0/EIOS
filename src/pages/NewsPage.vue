@@ -8,8 +8,9 @@ import config from '../config';
 import ProgressSpinner from 'primevue/progressspinner';
 
 const newsData = ref([]);
+let newsTotal = 0;
 const currentPage = ref(1);
-const newsPerPage = 1; // Отображаем одну новость на странице
+const newsPerPage = 2; // Отображаем одну новость на странице
 const isLoading = ref(false); // Добавляем состояние загрузки
 const areLoaded = ref(false); // Добавляем состояние загрузки
 const route = useRoute();
@@ -21,38 +22,32 @@ async function loadNews() {
 
     const urlAddress = config.ServerURL;
 
-    let requestAddress = `${urlAddress}/news/get/all`;
-
     const categories = route.query.categories ? route.query.categories.split(';') : [];
     const startDate = route.query.startDate ? route.query.startDate : null;
     const endDate = route.query.endDate ? route.query.endDate : null;
 
-    if (categories.length === 0 && !startDate && !endDate) {
-        requestAddress = `${urlAddress}/news/get/all`;
-    } else if (categories.length === 0 && startDate && endDate) {
-        requestAddress = `${urlAddress}/news/get/all?startDate=${startDate}&endDate=${endDate}`;
-    } else if (categories.length > 0 && !startDate && !endDate) {
-        requestAddress = `${urlAddress}/news/get/all?categories=${categories.join(';')}`;
-    } else if (categories.length > 0 && startDate && endDate) {
-        requestAddress = `${urlAddress}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}&endDate=${endDate}`;
-    } else if (categories.length === 0 && startDate && !endDate) {
-        requestAddress = `${urlAddress}/news/get/all?startDate=${startDate}`;
-    } else if (categories.length > 0 && startDate && !endDate) {
-        requestAddress = `${urlAddress}/news/get/all?categories=${categories.join(';')}&startDate=${startDate}`;
-    } else if (categories.length === 0 && !startDate && endDate) {
-        requestAddress = `${urlAddress}/news/get/all?endDate=${endDate}`;
-    } else if (categories.length > 0 && !startDate && endDate) {
-        requestAddress = `${urlAddress}/news/get/all?categories=${categories.join(';')}&endDate=${endDate}`;
-    }
+    // Формируем объект параметров
+    const params = new URLSearchParams({
+        pageSize: newsPerPage,
+        pageNumber: currentPage.value - 1,
+        ...(categories.length > 0 && { category: categories.join(',') }),
+        ...(startDate && { startDate }),
+        ...(endDate && { endDate }),
+    });
+
+    const requestAddress = `${urlAddress}/api/v1/news?${params.toString()}`;
 
     try {
         const response = await fetch(requestAddress);
 
         if (response.ok) {
-            const data = await response.json();
+            const responseData = await response.json();
 
-            newsData.value = data;
+            newsData.value = responseData.data;
+            newsTotal = responseData.totalCount;
             areLoaded.value = true;
+
+            console.log(newsData.value);
         } else {
             console.error('Ошибка при загрузке данных:', response.statusText);
             areLoaded.value = false;
@@ -71,18 +66,18 @@ watch(route, () => {
     loadNews();
 });
 
+// Следим за изменением текущей страницы
+watch(currentPage, () => {
+    loadNews();
+});
+
 function navigateToNews(newsId) {
     router.push(`/news/get/${newsId}`);
 }
 
-const paginatedNews = computed(() => {
-    const start = (currentPage.value - 1) * newsPerPage;
-    const end = start + newsPerPage;
-
-    // console.log(newsData.value.slice(start, end));
-
-    return newsData.value.slice(start, end);
-});
+// function navigateToNews(newsId) {
+//     router.push(`/api/v1/news/${newsId}`);
+// }
 </script>
 
 <template>
@@ -94,12 +89,12 @@ const paginatedNews = computed(() => {
         </div>
 
         <div v-else-if="areLoaded && newsData.length" class="news-page-content">
-            <div v-for="newsItem in paginatedNews" :key="newsItem.id" class="news-block">
+            <div v-for="newsItem in newsData" :key="newsItem.id" class="news-block">
                 <NewsBlock
                     :news-tag="newsItem.category"
                     :news-title="newsItem.headline"
                     :news-date="newsItem.date"
-                    :news-image="newsItem.images[0]"
+                    :news-image="`https://security-jwt.onrender.com/api/v1/image?fileName=${newsItem.images[0].filename}&imageType=NewsImage`"
                     :news-description="newsItem.mainInfo"
                     @click="navigateToNews(newsItem.id)"
                 />
@@ -116,7 +111,7 @@ const paginatedNews = computed(() => {
         >
             <VPagination
                 v-model:modelValue="currentPage"
-                :total-records="newsData.length"
+                :total-records="newsTotal"
                 :rows-per-page="newsPerPage"
             />
         </div>

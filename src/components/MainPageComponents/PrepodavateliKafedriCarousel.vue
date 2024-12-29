@@ -108,7 +108,7 @@ onMounted(() => {
                     :id="id"
                     :key="id"
                     :name="name"
-                    :photo="`https://security-jwt-1.onrender.com/api/v1/image?fileName=${photo}&imageType=TeacherImage`"
+                    :photo="`https://security-jwt.onrender.com/api/v1/image?fileName=${photo}&imageType=TeacherImage`"
                     :post="post"
                     :rank="rank"
                     :current-index="currentIndex"

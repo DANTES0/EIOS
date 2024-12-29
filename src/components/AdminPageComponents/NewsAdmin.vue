@@ -64,7 +64,7 @@ function addNews() {
                         :news-tag="newsItem.category"
                         :news-title="newsItem.headline"
                         :news-date="newsItem.date"
-                        :news-image="`https://security-jwt-1.onrender.com/api/v1/image?fileName=${newsItem.images[0]}&imageType=NewsImage`"
+                        :news-image="`https://security-jwt.onrender.com/api/v1/image?fileName=${newsItem.images[0]}&imageType=NewsImage`"
                         :news-description="newsItem.mainInfo"
                         @click="navigateToNews(newsItem.id)"
                     ></NewsBlock>

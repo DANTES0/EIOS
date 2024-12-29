@@ -59,7 +59,7 @@ defineProps({
                             :style="{
                                 backgroundImage:
                                     'url(' +
-                                    `https://security-jwt-1.onrender.com/api/v1/image?fileName=${url[0]}&imageType=NewsImage` +
+                                    `https://security-jwt.onrender.com/api/v1/image?fileName=${url[0].filename}&imageType=NewsImage` +
                                     ')',
                             }"
                         />
@@ -68,7 +68,7 @@ defineProps({
                             :style="{
                                 backgroundImage:
                                     'url(' +
-                                    `https://security-jwt-1.onrender.com/api/v1/image?fileName=${url[0]}&imageType=NewsImage` +
+                                    `https://security-jwt.onrender.com/api/v1/image?fileName=${url[0].filename}&imageType=NewsImage` +
                                     ')',
                             }"
                         ></div>

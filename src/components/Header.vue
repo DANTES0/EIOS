@@ -41,7 +41,7 @@ const changeTheme = () => {
         class="header-wrapper"
         :class="
             $route.path.match(/^\/teachers\/detail\/*/) ||
-            $route.path.match(/^\/news\/get\/\d+$/)
+            $route.path.match(/^\/news\/get\/*/)
                 ? 'w-auto'
                 : 'w-[16.6%]'
         "
@@ -148,7 +148,7 @@ const changeTheme = () => {
             v-if="
                 !(
                     $route.path === '/newsContent' ||
-                    $route.path.match(/^\/news\/get\/\d+$/) ||
+                    $route.path.match(/^\/news\/get\/*/) ||
                     $route.path === '/teachers/detail' ||
                     $route.path.match(/^\/teachers\/detail\/*/)
                 )

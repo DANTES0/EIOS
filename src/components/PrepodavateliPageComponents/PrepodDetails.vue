@@ -38,7 +38,7 @@ onMounted(fetchPrepodDetails);
                     class="w-[304px] h-[304px] rounded-full border-[4px] border-[#2B2B2B] flex justify-center items-center"
                 >
                     <img
-                        :src="`https://security-jwt-1.onrender.com/api/v1/image?fileName=${items.photo}&imageType=TeacherImage`"
+                        :src="`https://security-jwt.onrender.com/api/v1/image?fileName=${items.photo}&imageType=TeacherImage`"
                         class="rounded-full w-[283px] h-[283px] object-cover object-top"
                     />
                 </div>

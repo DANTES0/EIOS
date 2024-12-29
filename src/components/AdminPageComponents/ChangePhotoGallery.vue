@@ -123,7 +123,7 @@ onMounted(() => {
                 @mouseleave="handleMouseLeave(index)"
             >
                 <img
-                    :src="`https://security-jwt-1.onrender.com/api/v1/image?fileName=${item.filename}&imageType=GalleryImage`"
+                    :src="`https://security-jwt.onrender.com/api/v1/image?fileName=${item.filename}&imageType=GalleryImage`"
                     alt=""
                     class="photo"
                     :class="{ active: item.isVisible }"

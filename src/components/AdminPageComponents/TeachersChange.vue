@@ -60,7 +60,7 @@ const fetchPrepodDetails = async () => {
         description.value = items.value.description;
         post.value = items.value.post;
         photo.value = items.value.photo;
-        imagePreview.value = `https://security-jwt-1.onrender.com/api/v1/image?fileName=${items.value.photo}&imageType=TeacherImage`;
+        imagePreview.value = `https://security-jwt.onrender.com/api/v1/image?fileName=${items.value.photo}&imageType=TeacherImage`;
         rank.value = items.value.rank;
         console.log(name.value); //
     }
