@@ -18,6 +18,7 @@ const props = defineProps({
 
 function getImageUrl() {
     // This path must be correct for your file
+    //return new URL(`../components/Icons/Icon/IconHtml`, import.meta.url);
     return new URL(`../assets/anchor_header/${props.iconFilename}`, import.meta.url);
 }
 </script>

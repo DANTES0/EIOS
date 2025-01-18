@@ -8,8 +8,7 @@ import PhotoGallery from '../components/MainPageComponents/PhotoGallery.vue';
 import Footer from '../components/Footer.vue';
 import Terminal from '../components/Terminal.vue';
 import { useFetch } from '@vueuse/core';
-import { computed, ref } from 'vue';
-import { onMounted } from 'vue';
+import { computed, ref, onUnmounted, onMounted } from 'vue';
 import config from '../config';
 
 const url = computed(() => {
@@ -35,6 +34,71 @@ let array = ref(Array);
 let news = ref([]);
 const currentNewsIndex = ref(0);
 const currentGalleryIndex = ref(0);
+
+const tabsTitle = ref('о_кафедре.html');
+const tabsIcon = ref('html.svg');
+
+// Ссылки на блоки
+const kafedraBlock = ref(null);
+const novostiBlock = ref(null);
+const prepodBlock = ref(null);
+const cifriBlock = ref(null);
+const photoGalleryBlock = ref(null);
+const contactsBlock = ref(null);
+
+// Настройка Intersection Observer
+const observer = ref(null);
+
+const updateTabs = (blockName) => {
+    switch (blockName) {
+        case 'kafedra':
+            tabsTitle.value = 'о_кафедре.html';
+            tabsIcon.value = 'html.svg';
+
+            //IconHtml.vue
+            break;
+
+        case 'novosti':
+            tabsTitle.value = 'главные_новости.css';
+            tabsIcon.value = 'css.svg';
+
+            break;
+
+        case 'prepodavateli':
+            tabsTitle.value = 'работники_кафедры.py';
+            tabsIcon.value = 'py.svg';
+
+            break;
+
+        case 'cifri':
+            tabsTitle.value = 'кафедра_в_цифрах.cpp';
+            tabsIcon.value = 'c++.svg';
+
+            break;
+
+        case 'gallery':
+            tabsTitle.value = 'фотогалерея.js';
+            tabsIcon.value = 'js.svg';
+
+            break;
+
+        case 'contacts':
+            tabsTitle.value = 'контакты.ts';
+            tabsIcon.value = 'ts.svg';
+
+            break;
+    }
+};
+
+const handleIntersect = (entries) => {
+    entries.forEach((entry) => {
+        console.log(entry.target.dataset.blockName); // Добавьте лог для диагностики
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            updateTabs(entry.target.dataset.blockName);
+        }
+    });
+};
 
 const nextPhotoGallery = () => {
     currentGalleryIndex.value =
@@ -116,7 +180,7 @@ const aboba = async () => {
     ).json();
     // const response = await data.json();a
 
-    console.log(response.data.value.data);
+    // console.log(response.data.value.data);
     //если url - новость по индексу
     extractedId.value = response.data.value.data.id;
     text.value = response.data.value.data.headLine;
@@ -126,10 +190,25 @@ const aboba = async () => {
 };
 
 onMounted(() => {
+    // Установите начальное значение для вкладок, соответствующее первому блоку
+    updateTabs('kafedra');
+
     aboba();
     fetchGallery();
-    // console.log(updateGallery());
-    // console.log(currentNews.value)
+
+    observer.value = new IntersectionObserver(handleIntersect, { threshold: 0.5 });
+
+    // Наблюдение за блоками
+    if (novostiBlock.value) observer.value.observe(novostiBlock.value);
+    if (kafedraBlock.value) observer.value.observe(kafedraBlock.value);
+    if (prepodBlock.value) observer.value.observe(prepodBlock.value);
+    if (cifriBlock.value) observer.value.observe(cifriBlock.value);
+    if (photoGalleryBlock.value) observer.value.observe(photoGalleryBlock.value);
+    if (contactsBlock.value) observer.value.observe(contactsBlock.value);
+});
+
+onUnmounted(() => {
+    if (observer.value) observer.value.disconnect();
 });
 
 //console.log(text)
@@ -137,35 +216,45 @@ onMounted(() => {
 
 <template>
     <div class="Main-page">
-        <Tabs title="о_кафедре" :show-icon="true" icon-filename="html.svg" />
-        <Kafedra />
+        <Tabs :title="tabsTitle" :show-icon="true" :icon-filename="tabsIcon" />
+        <div ref="kafedraBlock" data-block-name="kafedra">
+            <Kafedra />
+        </div>
         <div v-html="a"></div>
-        <News
-            v-if="news && news.length > 1 && currentNewsIndex !== null"
-            :id="currentNews.id"
-            :headline="currentNews.headline"
-            :category="currentNews.category"
-            :date="currentNews.date"
-            :url="currentNews.images"
-            @next="nextNews"
-            @prev="prevNews"
-        />
-        <PrepodavateliKafedri />
-        <KafedraCifri />
-        <PhotoGallery
-            v-if="
-                photo_galleries &&
-                photo_galleries.length > 1 &&
-                currentGalleryIndex !== null
-            "
-            :id_photo="currentPhotoGallery"
-            :photo="currentPhotoGallery"
-            @prev_photo="prevPhotoGallery"
-            @next_photo="nextPhotoGallery"
-        />
+        <div ref="novostiBlock" data-block-name="novosti">
+            <News
+                v-if="news && news.length > 1 && currentNewsIndex !== null"
+                :id="currentNews.id"
+                :headline="currentNews.headline"
+                :category="currentNews.category"
+                :date="currentNews.date"
+                :url="currentNews.images"
+                @next="nextNews"
+                @prev="prevNews"
+            />
+        </div>
+        <div ref="prepodBlock" data-block-name="prepodavateli">
+            <PrepodavateliKafedri />
+        </div>
+        <div ref="cifriBlock" data-block-name="cifri">
+            <KafedraCifri />
+        </div>
+        <div ref="photoGalleryBlock" data-block-name="gallery">
+            <PhotoGallery
+                v-if="
+                    photo_galleries &&
+                    photo_galleries.length > 1 &&
+                    currentGalleryIndex !== null
+                "
+                :id_photo="currentPhotoGallery"
+                :photo="currentPhotoGallery"
+                @prev_photo="prevPhotoGallery"
+                @next_photo="nextPhotoGallery"
+            />
+        </div>
         <Footer />
         <Terminal />
-        <div class="clp-cont" />
+        <div ref="contactsBlock" data-block-name="contacts" class="clp-cont"></div>
     </div>
 </template>
 
