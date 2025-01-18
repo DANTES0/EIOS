@@ -57,7 +57,7 @@ watch(searchedValue, filterTeacher);
 
 <template>
     <div class="h-full">
-        <tabs></tabs>
+        <Tabs title="Преподаватели" :show-icon="false" />
         <div
             class="flex flex-wrap mt-[30px] ml-[30px] mr-[30px] items-center justify-center gap-14"
         >
