@@ -10,18 +10,30 @@ const props = defineProps({
         type: Boolean,
         default: true, // Показывать иконку по умолчанию
     },
-    iconSrc: {
+    iconFilename: {
         type: String,
-        default: '../assets/anchor_header/html.svg', // Путь к иконке
+        default: '', // Путь к иконке
     },
 });
+
+function getImageUrl() {
+    // This path must be correct for your file
+    return new URL(`../assets/anchor_header/${props.iconFilename}`, import.meta.url);
+}
 </script>
 
 <template>
     <div class="tabs bg-[#0C2340] dark:bg-[#181818]">
         <div class="tabs-line bg-white dark:bg-[#1f1f1f]">
-            <img v-if="showIcon" :src="iconSrc" alt="icon" class="tabs-image" />
-            <label class="tabs-title text-black dark:text-[#cccccc]">{{ title }}</label>
+            <img
+                v-if="props.showIcon"
+                :src="getImageUrl()"
+                alt="icon"
+                class="tabs-image"
+            />
+            <label class="tabs-title text-black dark:text-[#cccccc]">{{
+                props.title
+            }}</label>
         </div>
     </div>
 </template>
