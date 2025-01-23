@@ -118,6 +118,7 @@
 }
 .footer-reference-title {
     margin-left: 16px;
+    font-weight: 700;
 }
 .footer-reference-ref {
     width: 40px;

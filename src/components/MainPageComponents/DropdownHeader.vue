@@ -150,7 +150,8 @@ function showDropDown() {
 }
 .drop-btn-container {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 7px;
     align-items: center;
     flex-direction: row;
 }
