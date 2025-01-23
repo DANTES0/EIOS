@@ -162,6 +162,7 @@
     border: 1px solid white;
     border-right: none;
     border-left: none;
+    border-bottom: none;
     position: absolute;
     bottom: 40px;
     z-index: 0;
