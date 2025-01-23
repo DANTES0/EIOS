@@ -4,9 +4,10 @@
     <div id="footer" class="footer-container">
         <div class="footer-title">
             <div class="foorer-title-wrap">
-                <div class="title-voenmeh">Военмех</div>
+                <div class="title-voenmeh">БГТУ "ВОЕНМЕХ"</div>
                 <div class="title-kafedra-o7">
-                    Кафедра <span style="color: #ccc">О</span>7
+                    Кафедра O7
+                    <!-- <span style="color: #ccc">О</span>7 -->
                 </div>
             </div>
         </div>
@@ -128,16 +129,17 @@
 .foorer-title-wrap {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 14px;
     align-items: center;
     height: 100%;
 }
 .title-kafedra-o7 {
     font-family: JetBrainsMono;
     font-size: 30px;
-    color: #1e66f5;
+    /* color: #1e66f5; */
     font-weight: 700;
-    margin-right: 54px;
+    /* margin-right: 54px; */
 }
 .title-voenmeh {
     font-family: JetBrainsMono;
@@ -168,7 +170,7 @@
     z-index: 0;
 }
 .footer-title {
-    width: 566px;
+    width: 485px;
     height: 75px;
     background-color: #191919;
     border: 1px solid #1e66f5;
