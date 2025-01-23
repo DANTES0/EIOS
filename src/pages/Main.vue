@@ -7,9 +7,10 @@ import KafedraCifri from '../components/MainPageComponents/KafedraCifri.vue';
 import PhotoGallery from '../components/MainPageComponents/PhotoGallery.vue';
 import Footer from '../components/Footer.vue';
 import Terminal from '../components/Terminal.vue';
-import { useFetch } from '@vueuse/core';
-import { computed, ref, onUnmounted, onMounted } from 'vue';
 import config from '../config';
+import { useFetch } from '@vueuse/core';
+import { useRouter } from 'vue-router';
+import { computed, ref, onUnmounted, onMounted } from 'vue';
 
 const url = computed(() => {
     //return `http://25.61.98.183:8080/news/1`
@@ -35,6 +36,7 @@ let news = ref([]);
 const currentNewsIndex = ref(0);
 const currentGalleryIndex = ref(0);
 
+const router = useRouter(); // Подключаем Vue Router
 const tabsTitle = ref('о_кафедре.html');
 const tabsIcon = ref('html.svg');
 
@@ -49,11 +51,20 @@ const contactsBlock = ref(null);
 // Настройка Intersection Observer
 const observer = ref(null);
 
+const updateRoute = (hash) => {
+    const currentRoute = router.currentRoute.value;
+
+    if (currentRoute.hash !== hash) {
+        router.push({ hash });
+    }
+};
+
 const updateTabs = (blockName) => {
     switch (blockName) {
         case 'kafedra':
             tabsTitle.value = 'о_кафедре.html';
             tabsIcon.value = 'html.svg';
+            updateRoute('#kafedra');
 
             //IconHtml.vue
             break;
@@ -61,30 +72,35 @@ const updateTabs = (blockName) => {
         case 'novosti':
             tabsTitle.value = 'главные_новости.css';
             tabsIcon.value = 'css.svg';
+            updateRoute('#news');
 
             break;
 
         case 'prepodavateli':
             tabsTitle.value = 'работники_кафедры.py';
             tabsIcon.value = 'py.svg';
+            updateRoute('#prepod');
 
             break;
 
         case 'cifri':
             tabsTitle.value = 'кафедра_в_цифрах.cpp';
             tabsIcon.value = 'c++.svg';
+            updateRoute('#cifri');
 
             break;
 
         case 'gallery':
             tabsTitle.value = 'фотогалерея.js';
             tabsIcon.value = 'js.svg';
+            updateRoute('#gallery');
 
             break;
 
         case 'contacts':
             tabsTitle.value = 'контакты.ts';
             tabsIcon.value = 'ts.svg';
+            updateRoute('#footer');
 
             break;
     }
