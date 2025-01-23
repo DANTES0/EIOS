@@ -16,7 +16,7 @@ defineProps({
         <div id="news" class="content-news-wrapper">
             <div class="title-news-wrapper">
                 <h1 class="title-news"><span style="color: #1e66f5">#</span>НОВОСТИ</h1>
-                <label class="line-dashed">----------</label>
+                <label class="line-dashed">---------</label>
             </div>
             <div class="container-news">
                 <img
@@ -247,5 +247,15 @@ defineProps({
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.line-dashed {
+    position: relative;
+    top: -38px;
+    left: 70px;
+    font-size: 48px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 8px;
+    user-select: none;
 }
 </style>

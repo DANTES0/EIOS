@@ -101,7 +101,7 @@ let array = [];
                 <h1 class="title-gallery">
                     <span style="color: #1e66f5">#</span>ФОТОГАЛЕРЕЯ
                 </h1>
-                <label class="line-dashed-gallery">---------------</label>
+                <label class="line-dashed-gallery">-------------</label>
             </div>
             <div class="content-wrapper-gallery">
                 <div class="gallery-image-block">
@@ -340,7 +340,7 @@ let array = [];
 .line-dashed-gallery {
     position: relative;
     top: -38px;
-    left: -90px;
+    left: -85px;
     font-size: 48px;
     font-weight: 500;
     color: white;

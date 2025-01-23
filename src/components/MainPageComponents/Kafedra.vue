@@ -37,7 +37,7 @@ const TextKafedra = [
                     <span style="color: #1e66f5">#</span>КАФЕДРА
                 </h1>
                 <label class="line-dashed text-[#006AFF] dark:text-white"
-                    >----------</label
+                    >---------</label
                 >
             </div>
             <KafedraText
@@ -83,7 +83,7 @@ const TextKafedra = [
 .line-dashed {
     position: relative;
     top: -38px;
-    left: 70px;
+    left: 71px;
     font-size: 48px;
     font-weight: 500;
     /* color: white; */

@@ -23,7 +23,7 @@ const cifri = [
         <div id="cifri" class="content-cifri-wrapper">
             <div class="title-cifri-wrapper">
                 <h1 class="title-cifri"><span style="color: #1e66f5">#</span>ЦИФРЫ</h1>
-                <label class="line-dashed-cifri">--------</label>
+                <label class="line-dashed-cifri">-------</label>
             </div>
             <div class="cifri-frame pl-16">
                 <div v-for="(item, i) in cifri" :key="i" class="cifri-block">
@@ -90,7 +90,7 @@ const cifri = [
 .line-dashed-cifri {
     position: relative;
     top: -38px;
-    left: -165px;
+    left: -167px;
     font-size: 48px;
     font-weight: 500;
     color: white;
