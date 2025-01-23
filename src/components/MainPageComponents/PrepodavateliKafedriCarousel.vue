@@ -121,7 +121,7 @@ onMounted(() => {
             ></div>
         </div>
 
-        <div class="line-anima" :class="{ setup: flag }"></div>
+        <!-- <div class="line-anima" :class="{ setup: flag }"></div> -->
     </div>
 </template>
 

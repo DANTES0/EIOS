@@ -56,11 +56,7 @@
                 <div class="footer-ref-a">
                     <a href="" class="footer-reference-ref vk"></a>
                     <a href="" class="footer-reference-ref discord"></a>
-                    <a
-                        style="margin-right: 78px"
-                        href=""
-                        class="footer-reference-ref email"
-                    ></a>
+                    <a href="" class="footer-reference-ref email"></a>
                 </div>
             </div>
         </div>
@@ -83,7 +79,7 @@
     justify-content: center;
     align-items: center;
     margin-left: 24px;
-    margin-top: 46px;
+    /* margin-top: 46px; */
 }
 .footer-description-text {
     font-weight: 300;
@@ -92,7 +88,7 @@
 .footer-description {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-around;
     align-items: start;
 }
 .vk {
@@ -120,6 +116,7 @@
 .footer-reference-title {
     margin-left: 16px;
     font-weight: 700;
+    color: white;
 }
 .footer-reference-ref {
     width: 40px;
@@ -137,14 +134,14 @@
 .title-kafedra-o7 {
     font-family: JetBrainsMono;
     font-size: 30px;
-    /* color: #1e66f5; */
+    color: white;
     font-weight: 700;
     /* margin-right: 54px; */
 }
 .title-voenmeh {
     font-family: JetBrainsMono;
     font-size: 30px;
-    color: #ccc;
+    color: white;
     font-weight: 700;
     margin-left: 18px;
 }
@@ -192,7 +189,7 @@
 }
 .footer-reference {
     position: absolute;
-    width: 672px;
+    width: 580px;
     height: 75px;
     background-color: #191919;
     border: 1px solid #1e66f5;

@@ -171,6 +171,8 @@ defineProps({
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    /* justify-content: end;
+    gap: 20px; */
     align-items: center;
     margin-top: 10px;
 }
@@ -198,7 +200,9 @@ defineProps({
 .description-text-news {
     font-family: JetBrainsMono;
     margin-left: 45px;
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: -10px;
     width: 350px;
     height: 200px;
     font-size: 20px;
