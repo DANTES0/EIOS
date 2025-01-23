@@ -128,7 +128,7 @@ function showDropDown() {
     margin-left: 22px;
 }
 .dropdown-content-line {
-    margin-left: 22px;
+    margin-left: 21px;
     width: 2px;
     height: calc(28px * 6 + 10px);
     background-color: #787878;
@@ -163,6 +163,7 @@ function showDropDown() {
     border: none;
     cursor: pointer;
     padding-right: 56px;
+    user-select: none;
 }
 
 .dropbtn:hover,
@@ -190,11 +191,11 @@ function showDropDown() {
     width: 220px;
     height: 28px;
     display: flex;
-    flex-direction: row;
-    justify-content: start;
+    /* flex-direction: row;
+    justify-content: start;*/
     align-items: center;
     /* color: #cccccc; */
-    padding-bottom: 7px;
+    /* padding-bottom: 7px; */
     text-decoration: none;
     font-family: Nunito;
     font-weight: 200;
