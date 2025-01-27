@@ -22,11 +22,14 @@ const photo_url = computed(() => {
 const photoUrl = computed(() => {
     return `${config.ServerURL}/api/v1/image?`;
 });
+
+//переменные для новостей
 const extractedId = ref(null);
-const text = ref(null);
-const date = ref(null);
-const category = ref(null);
-const images = ref(null);
+const text = ref('');
+const date = ref('');
+const category = ref('');
+const images = ref([]);
+
 const photo_images = ref(null);
 
 let photo_galleries = ref(null);
@@ -38,10 +41,7 @@ let array = ref(Array);
 //массив для новостей
 let news = ref([]);
 const currentNewsIndex = ref(0);
-const isNewsLoading = ref(false);
 const newsError = ref(null);
-
-isNewsLoading;
 
 const currentGalleryIndex = ref(0);
 
@@ -202,32 +202,34 @@ const fetchGallery = async () => {
 //     return responsePhoto.data.value;
 // };
 
-const areLoaded = ref(false);
+const newsAreLoading = ref(false);
+const newsAreLoaded = ref(false);
 const fetchNews = async () => {
-    isNewsLoading.value = true;
-    newsError.value = null;
-    isFinished.value = false;
+    newsAreLoading.value = true; // Начало загрузки
+    newsAreLoaded.value = false;
 
     try {
-        const { isFinished, canAbort, statusCode, error, data } = await useFetch(
+        console.log('пффыводалфоджыва');
+
+        const { statusCode, data } = await useFetch(
             url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
         ).json();
-
-        areLoaded.value = isFinished.value;
-        console.log(areLoaded.value);
 
         if (statusCode.value == 200) {
             extractedId.value = data.value.data.id;
             text.value = data.value.data.headLine;
             news.value = data.value.data;
             images.value = data.value.data.images;
+            newsAreLoaded.value = true;
+        } else {
+            //console.log('statusCode.value = ' + statusCode.value);
+            newsAreLoaded.value = false;
         }
     } catch (error) {
-        newsError.value = error.message;
+        console.log(error);
+        newsAreLoaded.value = false;
     } finally {
-        isNewsLoading.value = false;
-        areLoaded.value = true;
-        console.log(areLoaded.value);
+        newsAreLoading.value = false;
     }
 };
 
@@ -260,19 +262,26 @@ onUnmounted(() => {
         <div ref="kafedraBlock" data-block-name="kafedra">
             <Kafedra />
         </div>
-        <!-- <div v-html="a"></div> -->
         <div ref="novostiBlock" data-block-name="novosti">
-            <News
+            <!-- <News
                 v-if="news && news.length > 1 && currentNewsIndex !== null"
                 :id="currentNews.id"
-                :is-finished="isFinished"
-                :headline="currentNews.headline"
-                :category="currentNews.category"
-                :date="currentNews.date"
-                :url="currentNews.images"
+                :are-loaded="newsAreLoaded"
+                :is-loading="newsAreLoading"
+            /> -->
+            <News
+                v-if="news && news.length > 1 && currentNewsIndex !== null"
+                :id="currentNews.id || null"
+                :are-loaded="newsAreLoaded"
+                :is-loading="newsAreLoading"
+                :headline="currentNews.headline || ''"
+                :category="currentNews.category || ''"
+                :date="currentNews.date || ''"
+                :url="currentNews.images || []"
                 @next="nextNews"
                 @prev="prevNews"
             />
+            <News v-else :are-loaded="newsAreLoaded" :is-loading="newsAreLoading" />
             <!-- <News /> -->
         </div>
         <div ref="prepodBlock" data-block-name="prepodavateli">

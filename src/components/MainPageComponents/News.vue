@@ -7,7 +7,8 @@ const props = defineProps({
     category: String,
     date: String,
     url: String,
-    isFinished: Boolean,
+    isLoading: Boolean,
+    areLoaded: Boolean,
 });
 </script>
 
@@ -21,15 +22,11 @@ const props = defineProps({
                 <h1 class="title-news"><span style="color: #1e66f5">#</span>НОВОСТИ</h1>
                 <label class="line-dashed">---------</label>
             </div>
-            <div v-if="!props.isFinished" class="spinner-container">
+            <div v-if="isLoading" class="spinner-container">
                 <progress-spinner class="custom-spinner" />
             </div>
-            <!-- <div class="spinner-container">
-                <progress-spinner class="custom-spinner" />
-            </div> -->
-            <!-- вот это вот надо скрывать если ниче не грузит-->
 
-            <div v-else class="container-news">
+            <div v-else-if="areLoaded" class="container-news">
                 <img
                     src="../../assets/News/kapybars_in_circle.png"
                     alt=""
@@ -86,11 +83,27 @@ const props = defineProps({
                     </div>
                 </div>
             </div>
+
+            <div v-else class="error-message">
+                <p>Ошибка загрузки данных. Попробуйте позже.</p>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+.error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    font-size: 18px;
+    font-family: Nunito;
+    font-weight: 200;
+
+    min-height: 58.5vh;
+    padding-bottom: 120px;
+}
 .spinner-container {
     min-height: 58.5vh;
     display: flex;
