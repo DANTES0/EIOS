@@ -23,7 +23,7 @@ const fetchPrepod = async () => {
     ).json();
 
     prepod.value = response_prepod.data.value.data;
-    console.log(prepod.value);
+    // console.log(prepod.value);
     prepod.value.sort();
 
     //   currentIndex.value++;
@@ -46,11 +46,11 @@ const fetchPrepod = async () => {
     for (let i = 0; i < prepod.value.length; i++) {
         if (currentIndex.value == prepod.value[i].id) {
             temp_array.value[0] = prepod.value[prevId.value[i]];
-            console.log(prepod.value[prevId.value[i]]);
+            // console.log(prepod.value[prevId.value[i]]);
             temp_array.value[1] = prepod.value[currentIndex.value];
-            console.log(prepod.value[currentIndex.value]);
+            // console.log(prepod.value[currentIndex.value]);
             temp_array.value[2] = prepod.value[nextId.value[i]];
-            console.log(prepod.value[nextId.value[i]]);
+            // console.log(prepod.value[nextId.value[i]]);
         }
     }
 };
@@ -65,11 +65,11 @@ const next = computed(() => {
     for (let i = 0; i < prepod.value.length; i++) {
         if (currentIndex.value == prepod.value[i].id) {
             temp_array.value[0] = prepod.value[prevId.value[i]];
-            console.log(prepod.value[prevId.value[i]]);
+            // console.log(prepod.value[prevId.value[i]]);
             temp_array.value[1] = prepod.value[currentIndex.value];
-            console.log(prepod.value[currentIndex.value]);
+            // console.log(prepod.value[currentIndex.value]);
             temp_array.value[2] = prepod.value[nextId.value[i]];
-            console.log(prepod.value[nextId.value[i]]);
+            // console.log(prepod.value[nextId.value[i]]);
         }
     }
 });
@@ -84,11 +84,11 @@ const prev = () => {
     for (let i = 0; i < prepod.value.length; i++) {
         if (currentIndex.value == prepod.value[i].id) {
             temp_array.value[0] = prepod.value[prevId.value[i]];
-            console.log(prepod.value[prevId.value[i]]);
+            // console.log(prepod.value[prevId.value[i]]);
             temp_array.value[1] = prepod.value[currentIndex.value];
-            console.log(prepod.value[currentIndex.value]);
+            // console.log(prepod.value[currentIndex.value]);
             temp_array.value[2] = prepod.value[nextId.value[i]];
-            console.log(prepod.value[nextId.value[i]]);
+            // console.log(prepod.value[nextId.value[i]]);
         }
     }
 };

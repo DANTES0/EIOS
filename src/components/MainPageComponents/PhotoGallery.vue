@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 
 onMounted(() => {
-    console.log(document.querySelector('.circle_gallery'));
+    // console.log(document.querySelector('.circle_gallery'));
 });
 
 let prop = defineProps({
@@ -18,7 +18,7 @@ let array_size = ref(Object.keys(prop.photo).filter((key) => !isNaN(key)).length
 const gradientActive = ref(false);
 const next_photo = () => {
     gradientActive.value = !gradientActive.value;
-    console.log(gradientActive.value);
+    // console.log(gradientActive.value);
     setTimeout(() => (gradientActive.value = !gradientActive.value), 800);
     //   let count = 0;
 
@@ -57,7 +57,7 @@ const next_photo = () => {
 const gradientActiveLeft = ref(false);
 const prev_photo = () => {
     gradientActiveLeft.value = !gradientActiveLeft.value;
-    console.log(gradientActiveLeft.value);
+    // console.log(gradientActiveLeft.value);
     setTimeout(() => (gradientActiveLeft.value = !gradientActiveLeft.value), 800);
     third.value--;
 
@@ -79,9 +79,9 @@ const prev_photo = () => {
         // flag.value = 1;
     }
 
-    console.log(first.value);
-    console.log(second.value);
-    console.log(third.value);
+    // console.log(first.value);
+    // console.log(second.value);
+    // console.log(third.value);
 };
 
 let show = ref(true);

@@ -28,12 +28,21 @@ const date = ref(null);
 const category = ref(null);
 const images = ref(null);
 const photo_images = ref(null);
+
 let photo_galleries = ref(null);
+const isPhotoGalleryLoading = ref(false);
+const photoGalleryError = ref(null);
+
 let array = ref(Array);
 
 //массив для новостей
 let news = ref([]);
 const currentNewsIndex = ref(0);
+const isNewsLoading = ref(false);
+const newsError = ref(null);
+
+isNewsLoading;
+
 const currentGalleryIndex = ref(0);
 
 const router = useRouter(); // Подключаем Vue Router
@@ -69,6 +78,7 @@ const updateTabs = (blockName) => {
             //IconHtml.vue
             break;
 
+        //отсутствует вообще
         case 'novosti':
             tabsTitle.value = 'главные_новости.css';
             tabsIcon.value = 'css.svg';
@@ -76,6 +86,7 @@ const updateTabs = (blockName) => {
 
             break;
 
+        //отсутствует пустой блок, но присутствует
         case 'prepodavateli':
             tabsTitle.value = 'работники_кафедры.py';
             tabsIcon.value = 'py.svg';
@@ -90,6 +101,7 @@ const updateTabs = (blockName) => {
 
             break;
 
+        //отсутствует вообще
         case 'gallery':
             tabsTitle.value = 'фотогалерея.js';
             tabsIcon.value = 'js.svg';
@@ -108,7 +120,7 @@ const updateTabs = (blockName) => {
 
 const handleIntersect = (entries) => {
     entries.forEach((entry) => {
-        console.log(entry.target.dataset.blockName); // Добавьте лог для диагностики
+        //console.log(entry.target.dataset.blockName); // Добавьте лог для диагностики
 
         if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
             updateTabs(entry.target.dataset.blockName);
@@ -173,7 +185,7 @@ const fetchGallery = async () => {
     photo_galleries.value = response_gallery.data.value.data;
 
     photo_images.value = response_gallery.data.filename;
-    console.log(response_gallery.data.value.data);
+    // console.log(response_gallery.data.value.data);
 };
 
 // const updateGallery = async () => {
@@ -190,26 +202,40 @@ const fetchGallery = async () => {
 //     return responsePhoto.data.value;
 // };
 
-const aboba = async () => {
-    const response = await useFetch(
-        url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
-    ).json();
-    // const response = await data.json();a
+const areLoaded = ref(false);
+const fetchNews = async () => {
+    isNewsLoading.value = true;
+    newsError.value = null;
+    isFinished.value = false;
 
-    // console.log(response.data.value.data);
-    //если url - новость по индексу
-    extractedId.value = response.data.value.data.id;
-    text.value = response.data.value.data.headLine;
+    try {
+        const { isFinished, canAbort, statusCode, error, data } = await useFetch(
+            url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
+        ).json();
 
-    news.value = response.data.value.data;
-    images.value = response.data.value.data.images;
+        areLoaded.value = isFinished.value;
+        console.log(areLoaded.value);
+
+        if (statusCode.value == 200) {
+            extractedId.value = data.value.data.id;
+            text.value = data.value.data.headLine;
+            news.value = data.value.data;
+            images.value = data.value.data.images;
+        }
+    } catch (error) {
+        newsError.value = error.message;
+    } finally {
+        isNewsLoading.value = false;
+        areLoaded.value = true;
+        console.log(areLoaded.value);
+    }
 };
 
 onMounted(() => {
     // Установите начальное значение для вкладок, соответствующее первому блоку
     updateTabs('kafedra');
 
-    aboba();
+    fetchNews();
     fetchGallery();
 
     observer.value = new IntersectionObserver(handleIntersect, { threshold: 0.5 });
@@ -226,8 +252,6 @@ onMounted(() => {
 onUnmounted(() => {
     if (observer.value) observer.value.disconnect();
 });
-
-//console.log(text)
 </script>
 
 <template>
@@ -236,11 +260,12 @@ onUnmounted(() => {
         <div ref="kafedraBlock" data-block-name="kafedra">
             <Kafedra />
         </div>
-        <div v-html="a"></div>
+        <!-- <div v-html="a"></div> -->
         <div ref="novostiBlock" data-block-name="novosti">
             <News
                 v-if="news && news.length > 1 && currentNewsIndex !== null"
                 :id="currentNews.id"
+                :is-finished="isFinished"
                 :headline="currentNews.headline"
                 :category="currentNews.category"
                 :date="currentNews.date"
@@ -248,6 +273,7 @@ onUnmounted(() => {
                 @next="nextNews"
                 @prev="prevNews"
             />
+            <!-- <News /> -->
         </div>
         <div ref="prepodBlock" data-block-name="prepodavateli">
             <PrepodavateliKafedri />

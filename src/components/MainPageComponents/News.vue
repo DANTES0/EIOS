@@ -1,10 +1,13 @@
 <script setup>
-defineProps({
+import ProgressSpinner from 'primevue/progressspinner';
+
+const props = defineProps({
     id: Number,
     headline: String,
     category: String,
     date: String,
     url: String,
+    isFinished: Boolean,
 });
 </script>
 
@@ -18,7 +21,15 @@ defineProps({
                 <h1 class="title-news"><span style="color: #1e66f5">#</span>НОВОСТИ</h1>
                 <label class="line-dashed">---------</label>
             </div>
-            <div class="container-news">
+            <div v-if="!props.isFinished" class="spinner-container">
+                <progress-spinner class="custom-spinner" />
+            </div>
+            <!-- <div class="spinner-container">
+                <progress-spinner class="custom-spinner" />
+            </div> -->
+            <!-- вот это вот надо скрывать если ниче не грузит-->
+
+            <div v-else class="container-news">
                 <img
                     src="../../assets/News/kapybars_in_circle.png"
                     alt=""
@@ -80,6 +91,19 @@ defineProps({
 </template>
 
 <style scoped>
+.spinner-container {
+    min-height: 58.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 120px;
+}
+.custom-spinner {
+    --p-progressspinner-color-1: rgb(0, 84, 255);
+    --p-progressspinner-color-2: rgb(0, 84, 255);
+    --p-progressspinner-color-3: rgb(0, 84, 255);
+    --p-progressspinner-color-4: rgb(0, 84, 255);
+}
 .card-news-down-tags-blur {
     position: absolute;
     width: 100%;
