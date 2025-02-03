@@ -1,148 +1,140 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-
-onMounted(() => {
-    // console.log(document.querySelector('.circle_gallery'));
-});
+import { ref, reactive } from 'vue';
+import ProgressSpinner from 'primevue/progressspinner';
 
 let prop = defineProps({
     id_photo: Number,
     photo: Array,
+    isLoading: Boolean,
+    isLoaded: Boolean,
 });
-let j = ref(0);
+
 let first = ref(0);
 let second = ref(1);
 let third = ref(2);
-let flag = ref(0);
-let array_size = ref(Object.keys(prop.photo).filter((key) => !isNaN(key)).length);
+let array_size = ref(
+    prop.photo ? Object.keys(prop.photo).filter((key) => !isNaN(key)).length : 0,
+);
+let prevFirst = ref(array_size.value - 1); // Левая доп. фотка
+let nextThird = ref(3); // Правая доп. фотка
+
 const gradientActive = ref(false);
-const next_photo = () => {
-    gradientActive.value = !gradientActive.value;
-    // console.log(gradientActive.value);
-    setTimeout(() => (gradientActive.value = !gradientActive.value), 800);
-    //   let count = 0;
-
-    // for (let key in prop.photo) {
-    //   if (typeof prop.photo[key] === "string") {
-    //     count++;
-    //   }
-    // }
-    // console.log(count)
-    // console.log(Object.keys(prop.photo).length)
-    if (third.value == 1) {
-        first.value = -1;
-        // flag.value = 1;
-    }
-
-    first.value++;
-
-    if (first.value == array_size.value - 1) {
-        second.value = -1;
-        // flag.value = 1;
-    }
-
-    // console.log(first.value)
-    second.value++;
-
-    if (second.value == array_size.value - 1) {
-        third.value = -1;
-    }
-
-    // console.log(second.value)
-    third.value++;
-
-    // console.log(third.value)
-};
-
 const gradientActiveLeft = ref(false);
-const prev_photo = () => {
-    gradientActiveLeft.value = !gradientActiveLeft.value;
-    // console.log(gradientActiveLeft.value);
-    setTimeout(() => (gradientActiveLeft.value = !gradientActiveLeft.value), 800);
-    third.value--;
 
-    if (third.value == 0) {
-        second.value = array_size.value;
-        // flag.value = 1;
-    }
-
-    second.value--;
-
-    if (second.value == 0) {
-        first.value = array_size.value;
-    }
-
-    first.value--;
-
-    if (second.value == array_size.value - 2) {
-        third.value = array_size.value - 1;
-        // flag.value = 1;
-    }
-
-    // console.log(first.value);
-    // console.log(second.value);
-    // console.log(third.value);
+const next_photo = () => {
+    prevFirst.value = (prevFirst.value + 1) % array_size.value;
+    first.value = (first.value + 1) % array_size.value;
+    second.value = (second.value + 1) % array_size.value;
+    third.value = (third.value + 1) % array_size.value;
+    nextThird.value = (nextThird.value + 1) % array_size.value;
 };
 
-let show = ref(true);
-const c = () => {};
+const prev_photo = () => {
+    prevFirst.value = (prevFirst.value - 1 + array_size.value) % array_size.value;
+    first.value = (first.value - 1 + array_size.value) % array_size.value;
+    second.value = (second.value - 1 + array_size.value) % array_size.value;
+    third.value = (third.value - 1 + array_size.value) % array_size.value;
+    nextThird.value = (nextThird.value - 1 + array_size.value) % array_size.value;
+};
 
-let circle = ref(null);
-let array = [];
+const loadedImages = reactive([
+    ref(false),
+    ref(false),
+    ref(false),
+    ref(false),
+    ref(false),
+]);
+
+const imageIsLoaded = (index) => {
+    loadedImages[index].value = true;
+    console.log('обновил');
+};
 </script>
 
 <template>
     <div class="wrapper-gallery">
         <div class="numbers-wrapper">
-            <div v-for="i in 22" :key="i" class="numbers">{{ i }}</div>
+            <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
         </div>
-        <div id="gallery" class="content-gallery-wrapper">
+        <div class="content-gallery-wrapper">
             <div class="title-gallery-wrapper">
                 <h1 class="title-gallery">
                     <span style="color: #1e66f5">#</span>ФОТОГАЛЕРЕЯ
                 </h1>
                 <label class="line-dashed-gallery">-------------</label>
             </div>
-            <div class="content-wrapper-gallery">
+
+            <div v-if="isLoading" class="spinner-container">
+                <progress-spinner class="custom-spinner" />
+            </div>
+
+            <div v-else-if="isLoaded" class="content-wrapper-gallery">
                 <div class="gallery-image-block">
                     <div
-                        style=""
                         class="gallery-image-arrow back-image-arrow"
                         @click="prev_photo"
                     ></div>
+
+                    <img
+                        v-if="prevFirst >= 0"
+                        :src="photo[prevFirst]"
+                        class="gallery-image hidden-image"
+                        style="left: -15%"
+                    />
+
                     <div
-                        src=""
-                        alt=""
-                        class="gallery-image"
-                        :style="{
-                            backgroundImage: 'url(' + photo[first] + ')',
-                        }"
+                        v-show="!loadedImages[1].value"
+                        class="image-placeholder"
                         style="left: 5%"
                     ></div>
+                    <img
+                        v-show="loadedImages[1].value"
+                        :src="photo[first]"
+                        class="gallery-image"
+                        style="left: 5%"
+                        @load="imageIsLoaded(1)"
+                    />
+
                     <div
-                        src=""
-                        alt=""
-                        class="gallery-image main-image-gallery"
-                        :style="{
-                            backgroundImage: 'url(' + photo[second] + ')',
-                        }"
+                        v-show="!loadedImages[2].value"
+                        class="image-placeholder main-image-placeholder"
                         style="left: 24%"
                     ></div>
+                    <img
+                        v-show="loadedImages[2].value"
+                        :src="photo[second]"
+                        class="gallery-image main-image-gallery"
+                        style="left: 24%"
+                        @load="imageIsLoaded(2)"
+                    />
+
                     <div
-                        src=""
-                        alt=""
-                        class="gallery-image"
-                        :style="{
-                            backgroundImage: 'url(' + photo[third] + ')',
-                        }"
+                        v-show="!loadedImages[3].value"
+                        class="image-placeholder"
                         style="right: 5%"
                     ></div>
+                    <img
+                        v-show="loadedImages[3].value"
+                        :src="photo[third]"
+                        class="gallery-image"
+                        style="right: 5%"
+                        @load="imageIsLoaded(3)"
+                    />
+
+                    <img
+                        v-if="nextThird < array_size"
+                        :src="photo[nextThird]"
+                        class="gallery-image hidden-image"
+                        style="right: -15%"
+                        loading="eager"
+                    />
+
                     <div
                         class="gallery-image-arrow next-image-arrow"
                         @click="next_photo"
                     ></div>
                 </div>
-                <!-- @click="$emit('next_photo')" -->
+
                 <div
                     class="line-gradient"
                     :class="{
@@ -150,15 +142,60 @@ let array = [];
                         'gradient-active-left': gradientActiveLeft,
                     }"
                 ></div>
-                <!-- <div  class="gallery-circle-block">
-          <div @click="c" ref="circle"class="circle_gallery" v-for="i in 6" ></div>
-        </div> -->
+            </div>
+
+            <div v-else class="error-message">
+                <p>Ошибка загрузки данных. Попробуйте позже.</p>
             </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+.image-placeholder {
+    width: 500px;
+    height: 360px;
+    background-color: #363636;
+    position: absolute;
+}
+.main-image-placeholder {
+    width: 750px;
+    height: 500px;
+    z-index: 99;
+    opacity: 1;
+    transition: 0.3s ease;
+}
+.main-image-placeholder:hover {
+    transform: scale(1.22);
+}
+.hidden-image {
+    display: none;
+}
+.error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    font-size: 18px;
+    font-family: Nunito;
+    font-weight: 200;
+
+    min-height: 58.5vh;
+    padding-bottom: 120px;
+}
+.spinner-container {
+    min-height: 58.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 120px;
+}
+.custom-spinner {
+    --p-progressspinner-color-1: rgb(0, 84, 255);
+    --p-progressspinner-color-2: rgb(0, 84, 255);
+    --p-progressspinner-color-3: rgb(0, 84, 255);
+    --p-progressspinner-color-4: rgb(0, 84, 255);
+}
 .line-gradient {
     height: 2px;
     width: 300px;
@@ -263,9 +300,7 @@ let array = [];
 .gallery-image {
     width: 500px;
     height: 360px;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    object-fit: cover; /* Чтобы изображение заполняло блок */
     position: absolute;
     opacity: 0.33;
 }
@@ -355,6 +390,6 @@ let array = [];
     transition: 0.3s ease;
 }
 .main-image-gallery:hover {
-    transform: scale(1.35);
+    transform: scale(1.22);
 }
 </style>

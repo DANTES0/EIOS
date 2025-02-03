@@ -107,6 +107,9 @@ function showDropDown() {
 </template>
 
 <style scoped>
+.dropdown-content-content {
+    margin-left: 10px;
+}
 .slide-fade-enter-active,
 .slide-fade-leave-active {
     transition: all 0.3s ease;
@@ -179,7 +182,7 @@ function showDropDown() {
 .dropdown-content {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     background-color: transparent;
     min-width: 160px;

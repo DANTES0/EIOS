@@ -1,15 +1,24 @@
 <script setup>
 import ProgressSpinner from 'primevue/progressspinner';
+import { defineProps, ref } from 'vue';
+import NewsBlock from '/src/components/NewsPageComponents/NewsBlock.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const props = defineProps({
-    id: Number,
+    id: String,
     headline: String,
     category: String,
     date: String,
-    url: String,
-    isLoading: Boolean,
+    url: Array,
+    areLoading: Boolean,
     areLoaded: Boolean,
 });
+
+function navigateToNews(newsId) {
+    router.push(`/news/get/${newsId}`);
+}
 </script>
 
 <template>
@@ -22,7 +31,7 @@ const props = defineProps({
                 <h1 class="title-news"><span style="color: #1e66f5">#</span>НОВОСТИ</h1>
                 <label class="line-dashed">---------</label>
             </div>
-            <div v-if="isLoading" class="spinner-container">
+            <div v-if="areLoading" class="spinner-container">
                 <progress-spinner class="custom-spinner" />
             </div>
 
@@ -47,41 +56,19 @@ const props = defineProps({
                         </button>
                     </div>
                 </div>
-                <div class="card-news-block">
-                    <div class="card-news-up-block">
-                        <div class="card-news-up-tags">
-                            <img
-                                src="../../assets/News/image.svg"
-                                alt=""
-                                class="img-tags"
-                            />
-                            <div class="tags-title">{{ category }}</div>
-                        </div>
-                        <div class="card-news-up-date">{{ date }}</div>
-                    </div>
-                    <div class="card-news-down-tags">
-                        <img
-                            src=""
-                            alt=""
-                            class="card-news-down-tags-blur"
-                            :style="{
-                                backgroundImage:
-                                    'url(' +
-                                    `https://security-jwt.onrender.com/api/v1/image?fileName=${url[0].filename}&imageType=NewsImage` +
-                                    ')',
-                            }"
-                        />
-                        <div
-                            class="card-news-down-tags-image"
-                            :style="{
-                                backgroundImage:
-                                    'url(' +
-                                    `https://security-jwt.onrender.com/api/v1/image?fileName=${url[0].filename}&imageType=NewsImage` +
-                                    ')',
-                            }"
-                        ></div>
-                    </div>
-                </div>
+                <NewsBlock
+                    :key="id"
+                    class="news-block"
+                    :news-tag="category"
+                    :news-title="headline"
+                    :news-date="date"
+                    :news-image="`https://security-jwt.onrender.com/api/v1/image?fileName=${url[0].filename}&imageType=NewsImage`"
+                    :news-description="''"
+                    :news-show-summary="false"
+                    :block-width="'540px'"
+                    :block-height="'395px'"
+                    @click="navigateToNews(id)"
+                />
             </div>
 
             <div v-else class="error-message">
@@ -92,6 +79,9 @@ const props = defineProps({
 </template>
 
 <style scoped>
+.news-block {
+    cursor: pointer;
+}
 .error-message {
     display: flex;
     justify-content: center;

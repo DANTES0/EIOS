@@ -3,12 +3,6 @@ import { ref } from 'vue';
 import PrepodavateliKafedriCarousel from './PrepodavateliKafedriCarousel.vue';
 
 let flag = ref(false);
-const props = defineProps({
-    id: Number,
-    name: String,
-    photo: String,
-    post: String,
-});
 
 function next_prepodavatel() {
     flag.value = true;

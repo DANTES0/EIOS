@@ -26,22 +26,17 @@ const photoUrl = computed(() => {
 //переменные для новостей
 const extractedId = ref(null);
 const text = ref('');
-const date = ref('');
-const category = ref('');
 const images = ref([]);
 
 const photo_images = ref(null);
 
 let photo_galleries = ref(null);
-const isPhotoGalleryLoading = ref(false);
-const photoGalleryError = ref(null);
 
 let array = ref(Array);
 
 //массив для новостей
 let news = ref([]);
 const currentNewsIndex = ref(0);
-const newsError = ref(null);
 
 const currentGalleryIndex = ref(0);
 
@@ -75,10 +70,8 @@ const updateTabs = (blockName) => {
             tabsIcon.value = 'html.svg';
             updateRoute('#kafedra');
 
-            //IconHtml.vue
             break;
 
-        //отсутствует вообще
         case 'novosti':
             tabsTitle.value = 'главные_новости.css';
             tabsIcon.value = 'css.svg';
@@ -86,7 +79,7 @@ const updateTabs = (blockName) => {
 
             break;
 
-        //отсутствует пустой блок, но присутствует
+        //пустой блок, но присутствует
         case 'prepodavateli':
             tabsTitle.value = 'работники_кафедры.py';
             tabsIcon.value = 'py.svg';
@@ -101,7 +94,6 @@ const updateTabs = (blockName) => {
 
             break;
 
-        //отсутствует вообще
         case 'gallery':
             tabsTitle.value = 'фотогалерея.js';
             tabsIcon.value = 'js.svg';
@@ -177,30 +169,33 @@ const currentPhotoGallery = computed(() => {
     return array;
 });
 
+const galleryIsLoading = ref(false);
+const galleryIsLoaded = ref(false);
 const fetchGallery = async () => {
-    const response_gallery = await useFetch(
-        photo_url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
-    ).json();
+    galleryIsLoading.value = true; // Начало загрузки
+    galleryIsLoaded.value = false;
 
-    photo_galleries.value = response_gallery.data.value.data;
+    try {
+        const { statusCode, data } = await useFetch(
+            photo_url.value +
+                new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
+        ).json();
 
-    photo_images.value = response_gallery.data.filename;
-    // console.log(response_gallery.data.value.data);
+        if (statusCode.value == 200) {
+            photo_galleries.value = data.value.data;
+            photo_images.value = data.filename;
+            galleryIsLoaded.value = true;
+        } else {
+            //console.log('statusCode.value = ' + statusCode.value);
+            galleryIsLoaded.value = false;
+        }
+    } catch (error) {
+        console.log(error);
+        galleryIsLoaded.value = false;
+    } finally {
+        galleryIsLoading.value = false;
+    }
 };
-
-// const updateGallery = async () => {
-//     const responsePhoto = await useFetch(
-//         photoUrl.value +
-//             new URLSearchParams({
-//                 fileName: 'bear.jpg',
-//                 imageType: 'GalleryImage',
-//             }).toString(),
-//     );
-
-//     console.log(responsePhoto.data.value);
-
-//     return responsePhoto.data.value;
-// };
 
 const newsAreLoading = ref(false);
 const newsAreLoaded = ref(false);
@@ -209,8 +204,6 @@ const fetchNews = async () => {
     newsAreLoaded.value = false;
 
     try {
-        console.log('пффыводалфоджыва');
-
         const { statusCode, data } = await useFetch(
             url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
         ).json();
@@ -234,7 +227,6 @@ const fetchNews = async () => {
 };
 
 onMounted(() => {
-    // Установите начальное значение для вкладок, соответствующее первому блоку
     updateTabs('kafedra');
 
     fetchNews();
@@ -263,17 +255,11 @@ onUnmounted(() => {
             <Kafedra />
         </div>
         <div ref="novostiBlock" data-block-name="novosti">
-            <!-- <News
-                v-if="news && news.length > 1 && currentNewsIndex !== null"
-                :id="currentNews.id"
-                :are-loaded="newsAreLoaded"
-                :is-loading="newsAreLoading"
-            /> -->
             <News
                 v-if="news && news.length > 1 && currentNewsIndex !== null"
                 :id="currentNews.id || null"
                 :are-loaded="newsAreLoaded"
-                :is-loading="newsAreLoading"
+                :are-loading="newsAreLoading"
                 :headline="currentNews.headline || ''"
                 :category="currentNews.category || ''"
                 :date="currentNews.date || ''"
@@ -281,8 +267,7 @@ onUnmounted(() => {
                 @next="nextNews"
                 @prev="prevNews"
             />
-            <News v-else :are-loaded="newsAreLoaded" :is-loading="newsAreLoading" />
-            <!-- <News /> -->
+            <News v-else :are-loaded="newsAreLoaded" :are-loading="newsAreLoading" />
         </div>
         <div ref="prepodBlock" data-block-name="prepodavateli">
             <PrepodavateliKafedri />
@@ -297,10 +282,17 @@ onUnmounted(() => {
                     photo_galleries.length > 1 &&
                     currentGalleryIndex !== null
                 "
-                :id_photo="currentPhotoGallery"
-                :photo="currentPhotoGallery"
+                :is-loaded="galleryIsLoaded"
+                :is-loading="galleryIsLoading"
+                :id_photo="currentPhotoGallery || null"
+                :photo="currentPhotoGallery || []"
                 @prev_photo="prevPhotoGallery"
                 @next_photo="nextPhotoGallery"
+            />
+            <PhotoGallery
+                v-else
+                :is-loaded="galleryIsLoaded"
+                :is-loading="galleryIsLoading"
             />
         </div>
         <Footer />

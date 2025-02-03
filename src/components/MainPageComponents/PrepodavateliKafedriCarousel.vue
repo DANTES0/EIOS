@@ -5,6 +5,7 @@ import { useFetch } from '@vueuse/core';
 import { computed, ref } from 'vue';
 import { onMounted } from 'vue';
 import PrepodavateliKafedriItem from './PrepodavateliKafedriItem.vue';
+import ProgressSpinner from 'primevue/progressspinner';
 import config from '../../config';
 
 let flag = ref(false);
@@ -16,42 +17,56 @@ let currentIndex = ref(1);
 let nextId = ref([]);
 let prevId = ref([]);
 let temp_array = ref([]);
+
+const teachersAreLoading = ref(false);
+const teachersAreLoaded = ref(false);
 const fetchPrepod = async () => {
-    const response_prepod = await useFetch(
-        prepod_url.value +
-            new URLSearchParams({ pageSize: 999, pageNumber: 0 }).toString(),
-    ).json();
+    teachersAreLoading.value = true; // Начало загрузки
+    teachersAreLoaded.value = false;
 
-    prepod.value = response_prepod.data.value.data;
-    // console.log(prepod.value);
-    prepod.value.sort();
+    try {
+        const { statusCode, data } = await useFetch(
+            prepod_url.value +
+                new URLSearchParams({ pageSize: 999, pageNumber: 0 }).toString(),
+        ).json();
 
-    //   currentIndex.value++;
-    for (let i = 0; i < prepod.value.length; i++) {
-        prepod.value[i].id = i;
+        if (statusCode.value == 200) {
+            prepod.value = data.value.data;
+            prepod.value.sort();
 
-        if (prepod.value[i].id == prepod.value.length - 1) {
-            nextId.value[i] = 0;
+            for (let i = 0; i < prepod.value.length; i++) {
+                prepod.value[i].id = i;
+
+                if (prepod.value[i].id == prepod.value.length - 1) {
+                    nextId.value[i] = 0;
+                } else {
+                    nextId.value[i] = i + 1;
+                }
+
+                if (prepod.value[i].id == 0) {
+                    prevId.value[i] = prepod.value.length - 1;
+                } else {
+                    prevId.value[i] = i - 1;
+                }
+            }
+
+            for (let i = 0; i < prepod.value.length; i++) {
+                if (currentIndex.value == prepod.value[i].id) {
+                    temp_array.value[0] = prepod.value[prevId.value[i]];
+                    temp_array.value[1] = prepod.value[currentIndex.value];
+                    temp_array.value[2] = prepod.value[nextId.value[i]];
+                }
+            }
+
+            teachersAreLoaded.value = true;
         } else {
-            nextId.value[i] = i + 1;
+            teachersAreLoaded.value = false;
         }
-
-        if (prepod.value[i].id == 0) {
-            prevId.value[i] = prepod.value.length - 1;
-        } else {
-            prevId.value[i] = i - 1;
-        }
-    }
-
-    for (let i = 0; i < prepod.value.length; i++) {
-        if (currentIndex.value == prepod.value[i].id) {
-            temp_array.value[0] = prepod.value[prevId.value[i]];
-            // console.log(prepod.value[prevId.value[i]]);
-            temp_array.value[1] = prepod.value[currentIndex.value];
-            // console.log(prepod.value[currentIndex.value]);
-            temp_array.value[2] = prepod.value[nextId.value[i]];
-            // console.log(prepod.value[nextId.value[i]]);
-        }
+    } catch (error) {
+        console.log(error);
+        teachersAreLoaded.value = false;
+    } finally {
+        teachersAreLoading.value = false;
     }
 };
 
@@ -100,7 +115,10 @@ onMounted(() => {
 
 <template>
     <div class="content-wrapper-prepod">
-        <div class="prepod-image-block">
+        <div v-if="teachersAreLoading" class="spinner-container">
+            <progress-spinner class="custom-spinner" />
+        </div>
+        <div v-else-if="teachersAreLoaded" class="prepod-image-block">
             <div style="" class="prepod-image-arrow back-image-arrow" @click="prev"></div>
             <div class="PrepodavateliKafedriItem-wrap">
                 <PrepodavateliKafedriItem
@@ -121,11 +139,40 @@ onMounted(() => {
             ></div>
         </div>
 
+        <div v-else class="error-message">
+            <p>Ошибка загрузки данных. Попробуйте позже.</p>
+        </div>
+
         <!-- <div class="line-anima" :class="{ setup: flag }"></div> -->
     </div>
 </template>
 
 <style scoped>
+.error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    font-size: 18px;
+    font-family: Nunito;
+    font-weight: 200;
+
+    min-height: 58.5vh;
+    padding-bottom: 120px;
+}
+.spinner-container {
+    min-height: 58.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 120px;
+}
+.custom-spinner {
+    --p-progressspinner-color-1: rgb(0, 84, 255);
+    --p-progressspinner-color-2: rgb(0, 84, 255);
+    --p-progressspinner-color-3: rgb(0, 84, 255);
+    --p-progressspinner-color-4: rgb(0, 84, 255);
+}
 .setup {
     animation: anima 2s ease !important;
 }

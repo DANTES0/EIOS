@@ -30,19 +30,34 @@ const resetAnimation = () => {
 };
 
 let temp = ref(0);
+
+const isImageLoaded = ref(false);
+
+const imageLoaded = () => {
+    isImageLoaded.value = true;
+};
 </script>
 
 <template>
     <div class="wrappper">
-        <img
-            :src="photo"
-            alt=""
-            class="prepod-image"
-            :class="{ 'main-prepod-image': id == currentIndex }"
-        />
-        <div v-if="id == currentIndex" class="prepod-description-block">
+        <div>
+            <div
+                v-show="!isImageLoaded"
+                class="image-placeholder"
+                :class="{ 'main-prepod-image': id === currentIndex }"
+            ></div>
+            <img
+                v-show="isImageLoaded"
+                :src="photo"
+                alt=""
+                class="prepod-image"
+                :class="{ 'main-prepod-image': id === currentIndex }"
+                @load="imageLoaded"
+            />
+        </div>
+        <div v-if="id === currentIndex" class="prepod-description-block">
             <h1 class="name-prepod">{{ name }}</h1>
-            <h2 style="margin-bottom: 21px" class="spec-prepod info-prepod">
+            <h2 class="spec-prepod info-prepod" style="margin-bottom: 10px">
                 {{ post }}
             </h2>
             <h2 class="stepen-prepod info-prepod">{{ rank }}</h2>
@@ -51,6 +66,17 @@ let temp = ref(0);
 </template>
 
 <style scoped>
+.main-image-placeholder {
+    width: 330px;
+    height: 330px;
+}
+.image-placeholder {
+    width: 238px;
+    height: 238px;
+    background-color: white;
+    border-radius: 100%;
+    opacity: 10%;
+}
 .wrappper {
     display: flex;
     flex-direction: column;
@@ -119,7 +145,7 @@ let temp = ref(0);
 .prepod-description-block {
     padding: 0 10px;
     margin-top: 40px;
-    width: 642px;
+    width: 565px;
     height: 218px;
     border-left: 1px solid #ffffff;
     border-right: 1px solid #ffffff;
