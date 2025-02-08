@@ -1,6 +1,6 @@
 <script setup>
 import ProgressSpinner from 'primevue/progressspinner';
-import { defineProps, ref } from 'vue';
+import { defineProps } from 'vue';
 import NewsBlock from '/src/components/NewsPageComponents/NewsBlock.vue';
 import { useRouter } from 'vue-router';
 

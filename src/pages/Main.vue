@@ -10,7 +10,7 @@ import Terminal from '../components/Terminal.vue';
 import config from '../config';
 import { useFetch } from '@vueuse/core';
 import { useRouter } from 'vue-router';
-import { computed, ref, onUnmounted, onMounted } from 'vue';
+import { computed, ref, onUnmounted, onMounted, watch } from 'vue';
 
 const url = computed(() => {
     //return `http://25.61.98.183:8080/news/1`
@@ -22,11 +22,6 @@ const photo_url = computed(() => {
 const photoUrl = computed(() => {
     return `${config.ServerURL}/api/v1/image?`;
 });
-
-//переменные для новостей
-const extractedId = ref(null);
-const text = ref('');
-const images = ref([]);
 
 const photo_images = ref(null);
 
@@ -137,22 +132,42 @@ const prevPhotoGallery = () => {
     // console.log(currentGalleryIndex.value)
 };
 
+const preloadImage = (imageUrl) => {
+    if (!imageUrl) return;
+    const img = new Image();
+
+    img.src = imageUrl;
+};
+
 const nextNews = () => {
     currentNewsIndex.value = (currentNewsIndex.value + 1) % news.value.length;
-    // console.log(currentNewsIndex.value)
+    preloadNextPrevImages();
 };
 
 const prevNews = () => {
-    if (currentNewsIndex.value == 0) {
-        currentNewsIndex.value = news.value.length - 1;
-    } else {
-        currentNewsIndex.value = Math.abs(
-            (currentNewsIndex.value - 1) % news.value.length,
-        );
-    }
-
-    // console.log(currentNewsIndex.value);
+    currentNewsIndex.value =
+        currentNewsIndex.value === 0 ? news.value.length - 1 : currentNewsIndex.value - 1;
+    preloadNextPrevImages();
 };
+
+const preloadNextPrevImages = () => {
+    console.log('Предзагрузка изображений. Текущий индекс:', currentNewsIndex.value);
+
+    // Логика предзагрузки изображений
+    const nextIndex = (currentNewsIndex.value + 1) % news.value.length;
+    const prevIndex =
+        currentNewsIndex.value === 0 ? news.value.length - 1 : currentNewsIndex.value - 1;
+
+    const nextImage = news.value[nextIndex]?.images?.[0]?.filename;
+    const prevImage = news.value[prevIndex]?.images?.[0]?.filename;
+
+    if (nextImage)
+        preloadImage(`${photoUrl.value}fileName=${nextImage}&imageType=NewsImage`);
+    if (prevImage)
+        preloadImage(`${photoUrl.value}fileName=${prevImage}&imageType=NewsImage`);
+};
+
+watch(currentNewsIndex, preloadNextPrevImages);
 
 const currentNews = computed(() =>
     // news.value = news.value[currentNewsIndex.value]
@@ -209,10 +224,7 @@ const fetchNews = async () => {
         ).json();
 
         if (statusCode.value == 200) {
-            extractedId.value = data.value.data.id;
-            text.value = data.value.data.headLine;
             news.value = data.value.data;
-            images.value = data.value.data.images;
             newsAreLoaded.value = true;
         } else {
             //console.log('statusCode.value = ' + statusCode.value);
@@ -227,6 +239,7 @@ const fetchNews = async () => {
 };
 
 onMounted(() => {
+    preloadNextPrevImages();
     updateTabs('kafedra');
 
     fetchNews();
@@ -241,6 +254,7 @@ onMounted(() => {
     if (cifriBlock.value) observer.value.observe(cifriBlock.value);
     if (photoGalleryBlock.value) observer.value.observe(photoGalleryBlock.value);
     if (contactsBlock.value) observer.value.observe(contactsBlock.value);
+    preloadNextPrevImages();
 });
 
 onUnmounted(() => {
