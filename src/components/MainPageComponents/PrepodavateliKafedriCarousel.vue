@@ -52,9 +52,11 @@ const fetchPrepod = async () => {
 
             for (let i = 0; i < prepod.value.length; i++) {
                 if (currentIndex.value == prepod.value[i].id) {
-                    temp_array.value[0] = prepod.value[prevId.value[i]];
-                    temp_array.value[1] = prepod.value[currentIndex.value];
-                    temp_array.value[2] = prepod.value[nextId.value[i]];
+                    temp_array.value[0] = prepod.value[prevId.value[prevId.value[i]]]; // Скрытый предыдущий
+                    temp_array.value[1] = prepod.value[prevId.value[i]]; // Предыдущий
+                    temp_array.value[2] = prepod.value[currentIndex.value]; // Текущий
+                    temp_array.value[3] = prepod.value[nextId.value[i]]; // Следующий
+                    temp_array.value[4] = prepod.value[nextId.value[nextId.value[i]]]; // Скрытый следующий
                 }
             }
 
@@ -79,12 +81,11 @@ const next = computed(() => {
 
     for (let i = 0; i < prepod.value.length; i++) {
         if (currentIndex.value == prepod.value[i].id) {
-            temp_array.value[0] = prepod.value[prevId.value[i]];
-            // console.log(prepod.value[prevId.value[i]]);
-            temp_array.value[1] = prepod.value[currentIndex.value];
-            // console.log(prepod.value[currentIndex.value]);
-            temp_array.value[2] = prepod.value[nextId.value[i]];
-            // console.log(prepod.value[nextId.value[i]]);
+            temp_array.value[0] = prepod.value[prevId.value[prevId.value[i]]]; // Скрытый предыдущий
+            temp_array.value[1] = prepod.value[prevId.value[i]]; // Предыдущий
+            temp_array.value[2] = prepod.value[currentIndex.value]; // Текущий
+            temp_array.value[3] = prepod.value[nextId.value[i]]; // Следующий
+            temp_array.value[4] = prepod.value[nextId.value[nextId.value[i]]]; // Скрытый следующий
         }
     }
 });
@@ -98,12 +99,11 @@ const prev = () => {
 
     for (let i = 0; i < prepod.value.length; i++) {
         if (currentIndex.value == prepod.value[i].id) {
-            temp_array.value[0] = prepod.value[prevId.value[i]];
-            // console.log(prepod.value[prevId.value[i]]);
-            temp_array.value[1] = prepod.value[currentIndex.value];
-            // console.log(prepod.value[currentIndex.value]);
-            temp_array.value[2] = prepod.value[nextId.value[i]];
-            // console.log(prepod.value[nextId.value[i]]);
+            temp_array.value[0] = prepod.value[prevId.value[prevId.value[i]]]; // Скрытый предыдущий
+            temp_array.value[1] = prepod.value[prevId.value[i]]; // Предыдущий
+            temp_array.value[2] = prepod.value[currentIndex.value]; // Текущий
+            temp_array.value[3] = prepod.value[nextId.value[i]]; // Следующий
+            temp_array.value[4] = prepod.value[nextId.value[nextId.value[i]]]; // Скрытый следующий
         }
     }
 };
@@ -122,15 +122,16 @@ onMounted(() => {
             <div style="" class="prepod-image-arrow back-image-arrow" @click="prev"></div>
             <div class="PrepodavateliKafedriItem-wrap">
                 <PrepodavateliKafedriItem
-                    v-for="{ id, name, photo, post, rank } in temp_array"
-                    :id="id"
-                    :key="id"
-                    :name="name"
-                    :photo="`https://security-jwt.onrender.com/api/v1/image?fileName=${photo}&imageType=TeacherImage`"
-                    :post="post"
-                    :rank="rank"
+                    v-for="(prepod, index) in temp_array"
+                    :id="prepod.id"
+                    :key="prepod.id"
+                    :name="prepod.name"
+                    :photo="`https://security-jwt.onrender.com/api/v1/image?fileName=${prepod.photo}&imageType=TeacherImage`"
+                    :post="prepod.post"
+                    :rank="prepod.rank"
                     :current-index="currentIndex"
-                ></PrepodavateliKafedriItem>
+                    :class="{ hidden: index === 0 || index === 4 }"
+                />
             </div>
             <div
                 class="prepod-image-arrow next-image-arrow"
@@ -148,6 +149,12 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
 .error-message {
     display: flex;
     justify-content: center;
