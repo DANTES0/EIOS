@@ -37,15 +37,15 @@ onMounted(() => {
         <div class="page-container-header">
             <NewsContentHeader
                 :news-header-headline="newsData.headline"
-                :news-header-main-info="newsData.mainInfo"
+                :news-header-main-info="newsData.fullInformation"
                 :news-header-category="newsData.category"
                 :news-header-date="newsData.date"
             />
         </div>
 
-        <div class="page-container-base">
-            <NewsContentBase :news-full-info="newsData.fullInfo" />
-        </div>
+        <!-- <div class="page-container-base">
+            <NewsContentBase :news-full-info="''" />
+        </div> -->
 
         <div class="page-container-base-slider">
             <NewsContentPageSlider :news-images="newsData.images.filename" />

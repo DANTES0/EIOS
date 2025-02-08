@@ -95,7 +95,7 @@ function navigateToNews(newsId) {
                     :news-title="newsItem.headline"
                     :news-date="newsItem.date"
                     :news-image="`https://security-jwt.onrender.com/api/v1/image?fileName=${newsItem.images[0].filename}&imageType=NewsImage`"
-                    :news-description="newsItem.mainInfo"
+                    :news-description="newsItem.mainInformation"
                     @click="navigateToNews(newsItem.id)"
                 />
             </div>
