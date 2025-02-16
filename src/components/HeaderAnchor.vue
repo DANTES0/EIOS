@@ -2,7 +2,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import DropdownHeader from './MainPageComponents/DropdownHeader.vue';
-import SearchTimetable from './TimetablePageComponents/SearchTimetable.vue';
+import SearchTimetable from './TimetablePageComponents/InputSearch.vue';
 import NewsFilters from './NewsPageComponents/NewsFilters.vue';
 import SearchPrepod from './PrepodavateliPageComponents/SearchPrepod.vue';
 

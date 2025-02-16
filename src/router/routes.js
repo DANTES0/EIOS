@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Main from '../pages/Main.vue';
+import Main from '../pages/MainPage.vue';
 import NewsPage from '../pages/NewsPage.vue';
-import Timetable from '../pages/Timetable.vue';
-import Gallery from '../pages/Gallery.vue';
-import AllPrepodavateli from '../pages/AllPrepodavateli.vue';
-import Admin from '../pages/Admin.vue';
+import Timetable from '../pages/TimetablePage.vue';
+import Gallery from '../pages/GalleryPage.vue';
+import AllPrepodavateli from '../pages/TeachersPage.vue';
+import Admin from '../pages/AdminPage.vue';
 import NewsContent from '../pages/NewsContent.vue';
 import NewsAdminAdd from '../components/AdminPageComponents/NewsAdminAdd.vue';
 import PrepodDetails from '../components/PrepodavateliPageComponents/PrepodDetails.vue';

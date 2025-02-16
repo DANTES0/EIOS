@@ -1,13 +1,13 @@
 <script setup>
 import Terminal from '../components/Terminal.vue';
 import Tabs from '../components/Tabs.vue';
-import Schedule from '../components/TimetablePageComponents/Schedule.vue';
+import LessonsTimetable from '../components/TimetablePageComponents/LessonsTimetable.vue';
 </script>
 
 <template>
     <div class="timetable-page">
         <Tabs title="Расписание" :show-icon="false" />
-        <Schedule />
+        <LessonsTimetable />
         <Terminal />
     </div>
 </template>

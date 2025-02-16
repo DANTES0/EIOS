@@ -9,7 +9,7 @@ import 'vue3-select-component/dist/style.css';
 import VueSelect from 'vue3-select-component';
 import Multiselect from '@vueform/multiselect';
 import eventBus from '../../eventBus.js';
-import config from '../../config';
+import config from '../../config.js';
 import VInput from '../UX/VInput.vue';
 
 let options = ['1', '2', '3'];
