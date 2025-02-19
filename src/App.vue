@@ -39,7 +39,7 @@ const fetch = async () => {
 
     console.log('ЗАПРОС');
 };
-//ss
+
 fetch();
 onMounted(() => {
     if (
