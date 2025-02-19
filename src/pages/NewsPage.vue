@@ -81,7 +81,7 @@ function navigateToNews(newsId) {
 </script>
 
 <template>
-    <Tabs title="Новости кафедры" :show-icon="false" />
+    <Tabs v-if="showTabs" title="Новости кафедры" :show-icon="false" />
 
     <div class="news-page-container">
         <div v-if="isLoading" class="spinner-container">

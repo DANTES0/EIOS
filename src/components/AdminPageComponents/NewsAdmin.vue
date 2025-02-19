@@ -4,20 +4,60 @@ import NewsBlock from '../NewsPageComponents/NewsBlock.vue';
 import { useFetch } from '@vueuse/core';
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import NewsPage from '../../pages/NewsPage.vue';
 
-let news = ref([]);
-const flag = ref(false);
+const newsData = ref([]);
+let newsTotal = 0;
+const currentPage = ref(1);
+const newsPerPage = 2; // Отображаем одну новость на странице
+const isLoading = ref(false); // Добавляем состояние загрузки
+const areLoaded = ref(false); // Добавляем состояние загрузки
 const route = useRoute();
 const router = useRouter();
-const loadNews = async () => {
-    const response = await useFetch(
-        `${config.ServerURL}/api/v1/news?` +
-            new URLSearchParams({ pageSize: 999, pageNumber: 0 }).toString(),
-    ).json();
 
-    news.value = response.data.value.data;
-    console.log(news.value);
-};
+async function loadNews() {
+    isLoading.value = true; // Начало загрузки
+    areLoaded.value = false;
+
+    const urlAddress = config.ServerURL;
+
+    const categories = route.query.categories ? route.query.categories.split(';') : [];
+    const startDate = route.query.startDate ? route.query.startDate : null;
+    const endDate = route.query.endDate ? route.query.endDate : null;
+
+    // Формируем объект параметров
+    const params = new URLSearchParams({
+        pageSize: newsPerPage,
+        pageNumber: currentPage.value - 1,
+        ...(categories.length > 0 && { category: categories.join(',') }),
+        ...(startDate && { startDate }),
+        ...(endDate && { endDate }),
+    });
+
+    const requestAddress = `${urlAddress}/api/v1/news?${params.toString()}`;
+
+    try {
+        const response = await fetch(requestAddress);
+
+        if (response.ok) {
+            const responseData = await response.json();
+
+            newsData.value = responseData.data;
+            newsTotal = responseData.totalCount;
+            areLoaded.value = true;
+
+            console.log(newsData.value);
+        } else {
+            console.error('Ошибка при загрузке данных:', response.statusText);
+            areLoaded.value = false;
+        }
+    } catch (error) {
+        console.error('Ошибка при выполнении запроса:', error);
+        areLoaded.value = false;
+    } finally {
+        isLoading.value = false; // Окончание загрузки
+    }
+}
 
 loadNews();
 
@@ -25,16 +65,13 @@ watch(route, () => {
     loadNews();
 });
 
-async function navigateToNews(newsId) {
-    if (flag.value == true) {
-        await useFetch(`${config.ServerURL}/api/v1/news/${newsId}`, {
-            method: 'DELETE',
-        });
-        flag.value = !flag.value;
-        loadNews();
-    } else {
-        router.push(`/news/get/admin/${newsId}`);
-    }
+// Следим за изменением текущей страницы
+watch(currentPage, () => {
+    loadNews();
+});
+
+function navigateToNews(newsId) {
+    router.push(`/news/get/${newsId}`);
 }
 
 function addNews() {
@@ -43,34 +80,12 @@ function addNews() {
 </script>
 
 <template>
-    <div class="content-news-admin">
-        <header class="content-header">
-            <div class="line"></div>
-            <h1>Новости</h1>
-        </header>
-
-        <div class="content-wrap-news">
-            <button class="addNews" @click="addNews">Добавить новость</button>
-            <button
-                class="addNews"
-                style="margin-left: 900px"
-                @click="() => (flag = !flag)"
-            >
-                Удаление новостей
-            </button>
-            <div class="news-page-content">
-                <div v-for="(newsItem, index) in news" :key="index" class="news-block">
-                    <NewsBlock
-                        :news-tag="newsItem.category"
-                        :news-title="newsItem.headline"
-                        :news-date="newsItem.date"
-                        :news-image="`https://security-jwt.onrender.com/api/v1/image?fileName=${newsItem.images[0]}&imageType=NewsImage`"
-                        :news-description="newsItem.mainInfo"
-                        @click="navigateToNews(newsItem.id)"
-                    ></NewsBlock>
-                </div>
-            </div>
-        </div>
+    <div class="news-page-container">
+        <button class="addNews" @click="addNews">Добавить новость</button>
+        <button class="addNews" style="margin-left: 900px" @click="() => (flag = !flag)">
+            Удаление новостей
+        </button>
+        <news-page :show-tabs="false" />
     </div>
 </template>
 
@@ -96,53 +111,16 @@ function addNews() {
     border-color: #1e66f5;
 }
 
-.news-block {
-    cursor: pointer;
-    width: 425px;
-    height: 532px;
-    transition: transform 0.2s ease-in-out;
-}
-.news-page-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 50px 74px;
-
-    padding-bottom: 50px;
-}
-.content-wrap-news {
+.news-page-container {
     display: block;
     margin: auto auto;
-    /* background-color: blueviolet; */
-    width: 1422px;
+    width: 100%;
 
     min-height: 674px;
     max-height: 2420px;
 
     margin-top: 30px;
     margin-bottom: 78px;
-}
-.content-news-admin {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-.content-header {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 20px;
-    height: 70.5px;
-    border-bottom: solid 1px #2b2b2b;
-    /* border-left: solid 1px #2B2B2B; */
-
-    background-color: #181818;
-}
-
-.line {
-    width: 1px;
-    height: 100%;
-    background-color: #2b2b2b;
 }
 
 .content-header h1 {

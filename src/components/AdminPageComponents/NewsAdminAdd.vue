@@ -100,7 +100,8 @@ const giveMeAllArea = async () => {
 
     const formData = new FormData();
 
-    let object = ref({
+    // Создаем объект, который будет содержать все текстовые данные
+    let object = {
         headline: headLine.value,
         mainInfo: mainInfo.value,
         category: category.value,
@@ -108,15 +109,14 @@ const giveMeAllArea = async () => {
         date: date.value,
         photoNumber: mainImageIndex.value,
         onMainPage: false,
-    });
+    };
 
-    console.log(mainText.value);
-
-    const newsBlob = new Blob([JSON.stringify(object.value)], {
-        type: 'application/json',
-    });
-
-    formData.append('news', newsBlob);
+    // Добавляем текстовые данные в formData
+    for (const key in object) {
+        if (object.hasOwnProperty(key)) {
+            formData.append(key, object[key]);
+        }
+    }
 
     // Добавляем каждый файл в formData под ключом 'images'
     imagesArr.value.forEach((file) => {
@@ -124,19 +124,28 @@ const giveMeAllArea = async () => {
     });
 
     // Логируем содержимое formData для отладки
+    console.log("Отправляемые данные:");
+
+    // Выводим данные в formData
     for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
+        if (value instanceof File) {
+            console.log(`${key}: [File] ${value.name}`); // Выводим название файла
+        } else {
+            console.log(`${key}: ${value}`); // Выводим текстовое значение
+        }
     }
 
-    await fetch(`${config.ServerURL}/news/upload`, {
+    // Отправка данных на сервер
+    await fetch(`${config.ServerURL}/api/v1/news`, {
         method: 'POST',
         body: formData,
-        // Не устанавливаем Content-Type заголовок, fetch сделает это автоматически
         headers: {
             Accept: 'application/json',
         },
     });
 };
+
+
 
 const handleOptionSelected = (option) => {
     console.log(option.value);
