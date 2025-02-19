@@ -96,7 +96,7 @@ onMounted(fetchSchedule);
     display: grid;
     grid-template-columns: 120px repeat(6, 1fr);
     grid-template-rows: auto;
-    gap: 4px;
+    /* gap: 4px; */
     width: 100%;
 }
 
