@@ -100,52 +100,54 @@ const giveMeAllArea = async () => {
 
     const formData = new FormData();
 
-    // Создаем объект, который будет содержать все текстовые данные
     let object = {
         headline: headLine.value,
-        mainInfo: mainInfo.value,
+        mainInformation: mainInfo.value,
         category: category.value,
-        fullInfo: mainText.value,
+        fullInformation: mainText.value,
         date: date.value,
         photoNumber: mainImageIndex.value,
         onMainPage: false,
     };
 
-    // Добавляем текстовые данные в formData
-    for (const key in object) {
-        if (object.hasOwnProperty(key)) {
-            formData.append(key, object[key]);
-        }
-    }
+    // Используем Blob для передачи JSON с типом 'application/json'
+    formData.append(
+        'news',
+        new Blob([JSON.stringify(object)], { type: 'application/json' }),
+    );
 
-    // Добавляем каждый файл в formData под ключом 'images'
+    // Добавляем изображения
     imagesArr.value.forEach((file) => {
         formData.append('images', file);
     });
 
     // Логируем содержимое formData для отладки
-    console.log("Отправляемые данные:");
-
-    // Выводим данные в formData
+    console.log('Отправляемые данные:');
     for (const [key, value] of formData.entries()) {
         if (value instanceof File) {
-            console.log(`${key}: [File] ${value.name}`); // Выводим название файла
+            console.log(`${key}: [File] ${value.name}`);
         } else {
-            console.log(`${key}: ${value}`); // Выводим текстовое значение
+            console.log(`${key}: ${value}`);
         }
     }
 
-    // Отправка данных на сервер
-    await fetch(`${config.ServerURL}/api/v1/news`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            Accept: 'application/json',
-        },
-    });
+    try {
+        const response = await fetch(`${config.ServerURL}/api/v1/news`, {
+            method: 'POST',
+            body: formData, // content-type будет автоматически установлен браузером
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            console.log('Успешный ответ:', data);
+        } else {
+            console.error('Ошибка при отправке данных:', response.status);
+        }
+    } catch (error) {
+        console.error('Ошибка запроса:', error);
+    }
 };
-
-
 
 const handleOptionSelected = (option) => {
     console.log(option.value);
