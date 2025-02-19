@@ -27,38 +27,46 @@ const scheduleUrl = computed(() => {
 
 // Данные о расписании
 const scheduleData = ref([]);
-const scheduleGrid = ref(Array.from({ length: 14 }, () => Array(7).fill(null)));
+const scheduleGrid = ref(Array.from({ length: 14 }, () => Array(6).fill(null)));
 
 // Временные слоты и дни недели
-const timeSlots = [
-    '09:00:00',
-    '10:50:00',
-    '12:40:00',
-    '14:55:00',
-    '16:45:00',
-    '18:30:00',
-    '20:05:00',
-];
+const timeSlots = ['09:00', '10:50', '12:40', '14:55', '16:45', '18:30', '20:05'];
 const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
 // Функция загрузки расписания
 async function fetchSchedule() {
-    scheduleGrid.value = Array.from({ length: 14 }, () => Array(7).fill(null));
+    scheduleGrid.value = Array.from({ length: 14 }, () => Array(6).fill(null));
 
     const { data } = await useFetch(scheduleUrl).json();
 
     scheduleData.value = data.value?.data || [];
 
     scheduleData.value.forEach((entry) => {
-        const timeIndex = timeSlots.indexOf(entry.timeStart);
+        const parsedTime = entry.timeStart.split('T')[1].slice(0, 5);
+        const timeIndex = timeSlots.indexOf(parsedTime);
         const dayIndex = days.indexOf(entry.dayOfWeek);
+        const weekOffset = entry.parityOfWeek === 'четная' ? 1 : 0;
+        const gridIndex = timeIndex * 2 + weekOffset;
+
+        console.log('Обрабатываем запись:', entry);
+        console.log(`parsedTime: ${parsedTime}, timeIndex: ${timeIndex}`);
+        console.log(`dayOfWeek: ${entry.dayOfWeek}, dayIndex: ${dayIndex}`);
+        console.log(`gridIndex: ${gridIndex}`);
 
         if (timeIndex !== -1 && dayIndex !== -1) {
-            const weekOffset = entry.parityOfWeek === 'четная' ? 1 : 0;
-
-            scheduleGrid.value[timeIndex * 2 + weekOffset][dayIndex] = entry;
+            if (gridIndex < scheduleGrid.value.length) {
+                scheduleGrid.value[gridIndex][dayIndex] = entry;
+            } else {
+                console.error(
+                    `Ошибка: gridIndex (${gridIndex}) выходит за пределы массива!`,
+                );
+            }
+        } else {
+            console.warn('Некорректные данные:', entry);
         }
     });
+
+    console.log('Итоговое scheduleGrid:', JSON.stringify(scheduleGrid.value, null, 2));
 }
 
 // Автоматическая загрузка при изменении группы/преподавателя
@@ -88,16 +96,17 @@ onMounted(fetchSchedule);
     display: grid;
     grid-template-columns: 120px repeat(6, 1fr);
     grid-template-rows: auto;
-    gap: 4px;
+    /* gap: 4px; */
     width: 100%;
 }
 
 .grid-header,
 .time-slot {
     font-weight: bold;
-    background: #f0f0f0;
+    background: #1f1f1f;
     text-align: center;
     padding: 8px;
+    border: 1px solid #ddd;
 }
 
 .time-slot {

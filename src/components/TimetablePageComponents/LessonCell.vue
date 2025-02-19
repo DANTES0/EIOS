@@ -1,7 +1,16 @@
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
     lesson: Object,
 });
+
+const teacherName = computed(
+    () => props.lesson?.teacher?.name || 'Преподаватель не указан',
+);
+const classroom = computed(() => props.lesson?.classroom || 'Аудитория не указана');
+
+console.log('LessonCell получил:', props.lesson);
 </script>
 
 <template>
@@ -9,8 +18,8 @@ defineProps({
         <div class="title">{{ lesson.subjectName }}</div>
         <div class="type">{{ lesson.type }}</div>
         <div class="info">
-            <span class="teacher">{{ lesson.teacherName }}</span>
-            <span class="room">{{ lesson.classroom }}</span>
+            <span class="teacher">{{ teacherName }}</span>
+            <span class="room">{{ classroom }}</span>
         </div>
     </div>
     <div v-else class="lesson-cell empty"></div>
@@ -21,10 +30,11 @@ defineProps({
     padding: 8px;
     border: 1px solid #ddd;
     text-align: center;
+    height: 180px;
 }
 
 .empty {
-    background: #f9f9f9;
+    background: #1f1f1f;
     min-height: 40px;
 }
 </style>
