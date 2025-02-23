@@ -32,10 +32,10 @@ function convertToShortName(fullName) {
 <template>
     <div v-if="lesson" class="lesson-cell">
         <div class="title">{{ lesson.subjectName }}</div>
-        <div class="type">{{ lesson.type }}</div>
-        <div class="info">
-            <span class="teacher" v-html="convertToShortName(teacherName)"></span>
-            <span class="room">{{ classroom }}</span>
+        <div class="teacher" v-html="convertToShortName(teacherName)"></div>
+        <div class="details">
+            <div class="type">{{ lesson.type }}</div>
+            <div class="room">{{ classroom }}</div>
         </div>
     </div>
     <div v-else class="lesson-cell empty"></div>
@@ -46,7 +46,7 @@ function convertToShortName(fullName) {
     padding: 8px;
     text-align: center;
     height: 180px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 100;
     text-align: left;
     display: flex;
@@ -63,13 +63,19 @@ function convertToShortName(fullName) {
     font-weight: 700;
 }
 
-.type {
+.teacher {
     margin-top: auto;
-    margin-bottom: 12px;
+    margin-bottom: 22px;
 }
 
-.info {
+.details {
     display: flex;
     justify-content: space-between;
+}
+
+.room {
+    font-size: 20px;
+    font-weight: 900;
+    color: #1e66f5;
 }
 </style>
