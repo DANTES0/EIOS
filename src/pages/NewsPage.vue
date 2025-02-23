@@ -6,11 +6,13 @@ import { ref, watch, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import config from '../config';
 import ProgressSpinner from 'primevue/progressspinner';
+import Select from 'primevue/select';
 
 const newsData = ref([]);
 let newsTotal = 0;
+const newsPerPageOptions = [2, 5, 10, 15];
 const currentPage = ref(1);
-const newsPerPage = 2; // Отображаем одну новость на странице
+const newsPerPage = ref(newsPerPageOptions[0]); // Отображаем одну новость на странице
 const isLoading = ref(false); // Добавляем состояние загрузки
 const areLoaded = ref(false); // Добавляем состояние загрузки
 const route = useRoute();
@@ -28,7 +30,7 @@ async function loadNews() {
 
     // Формируем объект параметров
     const params = new URLSearchParams({
-        pageSize: newsPerPage,
+        pageSize: newsPerPage.value,
         pageNumber: currentPage.value - 1,
         ...(categories.length > 0 && { category: categories.join(',') }),
         ...(startDate && { startDate }),
@@ -110,9 +112,19 @@ function navigateToNews(newsId) {
             class="pagination-wrapper"
         >
             <VPagination
-                v-model:modelValue="currentPage"
+                v-model:model-value="currentPage"
                 :total-records="newsTotal"
                 :rows-per-page="newsPerPage"
+            />
+        </div>
+
+        <div v-show="!isLoading && areLoaded && newsData.length">
+            <label>Показывать новостей на странице:</label>
+            <Select
+                v-model="newsPerPage"
+                :options="newsPerPageOptions"
+                class="news-select"
+                @change="loadNews"
             />
         </div>
     </div>
@@ -166,6 +178,11 @@ function navigateToNews(newsId) {
     justify-content: center;
     align-items: center;
 }
+
+.news-select {
+    margin: auto 2%;
+}
+
 .spinner-container {
     min-height: 80vh;
     display: flex;
