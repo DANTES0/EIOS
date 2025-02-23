@@ -72,9 +72,8 @@ const filteredTypes = computed(() => {
 
 const emit = defineEmits(['update:modelValue']);
 const selectItem = (item) => {
-    // selectedItem.value = item;
-    emit('update:modelValue', item);
-    searchText.value = item.name;
+    emit('update:modelValue', item); // Передаём объект
+    searchText.value = item.name; // В поле ввода — только имя
     showDropdown.value = false;
 };
 
@@ -102,6 +101,23 @@ watch(searchText, (value) => {
         emit('update:modelValue', value);
     }
 });
+watch(
+    () => props.modelValue,
+    (newValue) => {
+        searchText.value = newValue?.name || '';
+    },
+);
+watch(
+    () => props.modelValue,
+    (newValue) => {
+        if (typeof newValue === 'object' && newValue?.name) {
+            searchText.value = newValue.name;
+        } else {
+            searchText.value = newValue || '';
+        }
+    },
+    { immediate: true },
+);
 
 // watch(selectItem.value)
 onMounted(() => {

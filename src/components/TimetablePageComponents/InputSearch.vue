@@ -15,7 +15,7 @@ import VInput from '../UX/VInput.vue';
 let options = ['1', '2', '3'];
 let array = ref([]);
 let array2 = ref([]);
-const selectedItem = ref('');
+const selectedItem = ref({ name: '', id: '' });
 
 watch(selectedItem, (item) => {
     console.log(item);
@@ -89,6 +89,11 @@ const handleOptionSelected = (option) => {
 
 // updat
 const temp = ref('');
+
+function onSelectedItemChange(item) {
+    selectedItem.value = item; // Обновляем объект целиком
+    eventBus.emit('optionSelected', item.id); // Вызываем событие
+}
 </script>
 
 <template>
@@ -105,11 +110,12 @@ const temp = ref('');
 
         <div class="input-search w-[80%] ml-[22px] mt-[10px]">
             <v-input
-                v-model="selectedItem"
+                v-model="selectedItem.name"
                 :items="array"
                 :items2="array2"
                 :type-input="'stairsInput'"
-            ></v-input>
+                @update:model-value="onSelectedItemChange"
+            />
 
             <!-- <VueSelect
                 v-model="selected"

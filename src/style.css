@@ -39,7 +39,7 @@
     --p-select-hover-border-color: #9d9da6 !important;
     --p-select-background: transparent !important;
     --p-select-border-radius: 0 !important;
-    --p-select-overlay-background: #27272a !important;
+    --p-select-overlay-background: #1f1f1f !important;
     --p-select-overlay-border-radius: 0 !important;
     --p-select-overlay-border-color: #9d9da6 !important;
     --p-select-option-selected-background: rgb(0, 84, 255) !important;
@@ -47,6 +47,7 @@
     --p-select-option-selected-focus-background: rgb(0, 84, 255) !important;
     --p-overlay-select-background: #27272a !important;
     --p-select-option-group-background: 0 !important;
+    --p-select-option-border-radius: 0 !important;
 }
 
 * {
