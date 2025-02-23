@@ -86,6 +86,21 @@ function navigateToNews(newsId) {
     <Tabs v-if="showTabs" title="Новости кафедры" :show-icon="false" />
 
     <div class="news-page-container">
+        <div
+            v-show="!isLoading && areLoaded && newsData.length"
+            class="select-pages-amount"
+        >
+            <div class="select-pages-amount-wrapper">
+                <label>Новостей на странице</label>
+                <Select
+                    v-model="newsPerPage"
+                    :options="newsPerPageOptions"
+                    class="news-select"
+                    @change="loadNews"
+                />
+            </div>
+        </div>
+
         <div v-if="isLoading" class="spinner-container">
             <ProgressSpinner class="custom-spinner" />
         </div>
@@ -115,16 +130,6 @@ function navigateToNews(newsId) {
                 v-model:model-value="currentPage"
                 :total-records="newsTotal"
                 :rows-per-page="newsPerPage"
-            />
-        </div>
-
-        <div v-show="!isLoading && areLoaded && newsData.length">
-            <label>Показывать новостей на странице:</label>
-            <Select
-                v-model="newsPerPage"
-                :options="newsPerPageOptions"
-                class="news-select"
-                @change="loadNews"
             />
         </div>
     </div>
@@ -180,7 +185,8 @@ function navigateToNews(newsId) {
 }
 
 .news-select {
-    margin: auto 2%;
+    font-size: 1rem;
+    left: 1px;
 }
 
 .spinner-container {
@@ -194,5 +200,25 @@ function navigateToNews(newsId) {
     --p-progressspinner-color-2: rgb(0, 84, 255);
     --p-progressspinner-color-3: rgb(0, 84, 255);
     --p-progressspinner-color-4: rgb(0, 84, 255);
+}
+.select-pages-amount {
+    left: 10px;
+    display: flex;
+    justify-content: flex-end; /* Выравниваем по правому краю */
+    width: 100%; /* Занимает всю ширину родителя */
+    margin-bottom: 25px;
+}
+
+.select-pages-amount-wrapper {
+    display: flex; /* Делаем flex-контейнером */
+    align-items: center; /* Выравниваем элементы по вертикали */
+    gap: 10px; /* Отступ между элементами */
+}
+
+.select-pages-amount-wrapper label {
+    font-family: Nunito;
+    width: 180px;
+    text-align: right;
+    font-weight: 300;
 }
 </style>
