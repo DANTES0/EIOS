@@ -8,6 +8,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import config from '../../config';
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import router from '../../router/routes.js';
 
 const array = ref([]);
 const categories = ref([
@@ -141,6 +142,7 @@ const giveMeAllArea = async () => {
             const data = await response.json();
 
             console.log('Успешный ответ:', data);
+            router.back();
         } else {
             console.error('Ошибка при отправке данных:', response.status);
         }
@@ -172,14 +174,6 @@ const handleOptionSelected = (option) => {
                         v-model="headLine"
                         type="text"
                         class="inputArticle input"
-                    ></textarea>
-                </div>
-                <div class="headerMainDesc">
-                    <div class="title-header">Основная мысль новости</div>
-                    <textarea
-                        v-model="mainInfo"
-                        type="text"
-                        class="inputMainDesc input"
                     ></textarea>
                 </div>
             </div>
@@ -222,9 +216,8 @@ const handleOptionSelected = (option) => {
 
         <div class="titleNews">Основной текст новости</div>
         <div class="EditMainText">
-            <!-- <textarea v-model="mainText" type="text" class="inputMain"></textarea> -->
             <QuillEditor
-                v-model:content="mainText"
+                v-model:content="mainInfo"
                 content-type="html"
                 theme="snow"
                 toolbar="full"
@@ -258,7 +251,10 @@ const handleOptionSelected = (option) => {
                 <div class="checkNewsTitle">Отображать новость на главной странице?</div>
                 <input type="checkbox" class="checkbox" />
             </div>
-            <button class="btn" @click="giveMeAllArea">Подтвердить новость</button>
+            <div class="buttons">
+                <button class="btn" @click="router.back()">Отменить</button>
+                <button class="btn" @click="giveMeAllArea">Подтвердить новость</button>
+            </div>
             <!-- <button
                 class="btn"
                 @click="
@@ -356,6 +352,11 @@ const handleOptionSelected = (option) => {
     font-size: 26px;
 }
 
+.buttons {
+    display: flex;
+    gap: 10px; /* Можно уменьшить расстояние */
+}
+
 .btn {
     width: 310px;
     height: 70%;
@@ -363,7 +364,7 @@ const handleOptionSelected = (option) => {
     font-weight: 400;
     border: 1px solid #cccccc;
     border-radius: 4px;
-    margin-right: 24px;
+    margin-right: 15px;
     transition: 0.3s ease;
 }
 
@@ -441,9 +442,10 @@ const handleOptionSelected = (option) => {
 }
 
 .titleNews {
+    display: block;
     position: relative;
     margin-top: 32px;
-    margin-right: 1240px;
+    margin-right: 75%;
 }
 
 .inputMainDesc {
@@ -489,7 +491,7 @@ option {
 }
 
 .headerArticle {
-    width: 30%;
+    width: 100%;
     margin-left: 30px;
     margin-right: 35px;
 }
