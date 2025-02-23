@@ -93,6 +93,12 @@ onMounted(fetchSchedule);
 .schedule-table {
     width: 1412px;
     border-collapse: collapse;
+    font-family: JetBrainsMono;
+}
+
+.schedule-table tr {
+    height: 50px;
+    font-size: 24px;
 }
 
 .schedule-table th,
@@ -107,13 +113,17 @@ onMounted(fetchSchedule);
     font-weight: bold;
 }
 
+.schedule-table th:first-child {
+    min-width: 115px;
+}
+
 .time-slot {
     font-weight: bold;
     background: #1f1f1f;
 }
 
 .week-type {
-    font-size: 12px;
+    font-size: 20px;
     color: #666;
 }
 </style>
