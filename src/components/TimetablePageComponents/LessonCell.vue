@@ -9,8 +9,6 @@ const teacherName = computed(
     () => props.lesson?.teacher?.name || 'Преподаватель не указан',
 );
 const classroom = computed(() => props.lesson?.classroom || 'Аудитория не указана');
-
-console.log('LessonCell получил:', props.lesson);
 </script>
 
 <template>
@@ -28,7 +26,6 @@ console.log('LessonCell получил:', props.lesson);
 <style scoped>
 .lesson-cell {
     padding: 8px;
-    border: 1px solid #ddd;
     text-align: center;
     height: 180px;
 }
@@ -36,5 +33,6 @@ console.log('LessonCell получил:', props.lesson);
 .empty {
     background: #1f1f1f;
     min-height: 40px;
+    min-width: 215px;
 }
 </style>

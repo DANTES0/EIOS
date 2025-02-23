@@ -48,11 +48,6 @@ async function fetchSchedule() {
         const weekOffset = entry.parityOfWeek === 'четная' ? 1 : 0;
         const gridIndex = timeIndex * 2 + weekOffset;
 
-        console.log('Обрабатываем запись:', entry);
-        console.log(`parsedTime: ${parsedTime}, timeIndex: ${timeIndex}`);
-        console.log(`dayOfWeek: ${entry.dayOfWeek}, dayIndex: ${dayIndex}`);
-        console.log(`gridIndex: ${gridIndex}`);
-
         if (timeIndex !== -1 && dayIndex !== -1) {
             if (gridIndex < scheduleGrid.value.length) {
                 scheduleGrid.value[gridIndex][dayIndex] = entry;
@@ -65,8 +60,6 @@ async function fetchSchedule() {
             console.warn('Некорректные данные:', entry);
         }
     });
-
-    console.log('Итоговое scheduleGrid:', JSON.stringify(scheduleGrid.value, null, 2));
 }
 
 // Автоматическая загрузка при изменении группы/преподавателя
@@ -75,42 +68,48 @@ onMounted(fetchSchedule);
 </script>
 
 <template>
-    <div class="schedule-grid">
-        <!-- Заголовки дней недели -->
-        <div class="grid-header">Время</div>
-        <div v-for="day in days" :key="day" class="grid-header">{{ day }}</div>
-
-        <!-- Таблица расписания -->
-        <template v-for="(row, i) in scheduleGrid" :key="i">
-            <div class="time-slot">
-                <div>{{ timeSlots[Math.floor(i / 2)] }}</div>
-                <div class="week-type">{{ i % 2 === 0 ? 'Нечет' : 'Чет' }}</div>
-            </div>
-            <LessonCell v-for="(lesson, j) in row" :key="j" :lesson="lesson" />
-        </template>
-    </div>
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th>Время</th>
+                <th v-for="day in days" :key="day">{{ day }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(row, i) in scheduleGrid" :key="i">
+                <td class="time-slot">
+                    <div>{{ timeSlots[Math.floor(i / 2)] }}</div>
+                    <div class="week-type">{{ i % 2 === 0 ? 'Нечет' : 'Чет' }}</div>
+                </td>
+                <td v-for="(lesson, j) in row" :key="j">
+                    <LessonCell :lesson="lesson" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </template>
 
 <style scoped>
-.schedule-grid {
-    display: grid;
-    grid-template-columns: 120px repeat(6, 1fr);
-    grid-template-rows: auto;
-    /* gap: 4px; */
-    width: 100%;
+.schedule-table {
+    width: 1412px;
+    border-collapse: collapse;
 }
 
-.grid-header,
+.schedule-table th,
+.schedule-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.schedule-table th {
+    background: #1f1f1f;
+    font-weight: bold;
+}
+
 .time-slot {
     font-weight: bold;
     background: #1f1f1f;
-    text-align: center;
-    padding: 8px;
-    border: 1px solid #ddd;
-}
-
-.time-slot {
-    grid-column: 1;
 }
 
 .week-type {
