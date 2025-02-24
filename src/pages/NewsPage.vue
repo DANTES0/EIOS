@@ -73,6 +73,10 @@ watch(currentPage, () => {
     loadNews();
 });
 
+watch(newsPerPage, () => {
+    loadNews();
+});
+
 function navigateToNews(newsId) {
     router.push(`/news/get/${newsId}`);
 }
@@ -132,6 +136,15 @@ function navigateToNews(newsId) {
                 :rows-per-page="newsPerPage"
             />
         </div>
+
+        <div v-show="!isLoading && areLoaded && newsData.length">
+            <label>Показывать новостей на странице:</label>
+            <Select
+                v-model="newsPerPage"
+                :options="newsPerPageOptions"
+                class="news-select"
+            />
+        </div>
     </div>
 </template>
 
@@ -185,8 +198,7 @@ function navigateToNews(newsId) {
 }
 
 .news-select {
-    font-size: 1rem;
-    left: 1px;
+    margin: auto 2%;
 }
 
 .spinner-container {
