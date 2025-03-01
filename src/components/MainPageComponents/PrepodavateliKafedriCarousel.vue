@@ -126,7 +126,7 @@ onMounted(() => {
                     :id="prepod.id"
                     :key="prepod.id"
                     :name="prepod.name"
-                    :photo="`https://security-jwt.onrender.com/api/v1/image?fileName=${prepod.photo}&imageType=TeacherImage`"
+                    :photo="`https://security-jwt.onrender.com/api/v1/image?fileName=${prepod.photo?.fileName}&imageType=TeacherImage`"
                     :post="prepod.post"
                     :rank="prepod.rank"
                     :current-index="currentIndex"

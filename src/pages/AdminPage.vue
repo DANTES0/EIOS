@@ -90,6 +90,7 @@ fetchData();
 
 .userAll-content {
     display: flex;
+    flex-direction: column;
     width: calc(100% - 1px);
 }
 </style>

@@ -27,7 +27,7 @@ const imagePreview = ref('');
 //     photo: { type: String, default: '' },
 //     rank: { type: String, default: '' },
 // });
-const username = ref('');
+const login = ref('');
 const name = ref('');
 const password = ref('');
 const phone = ref('');
@@ -50,17 +50,17 @@ const fetchPrepodDetails = async () => {
 
         items.value = response.data.value;
         console.log(items.value);
-        // username.value = items.value.username;
+        login.value = items.value.login;
+        password.value = items.value.password;
         name.value = items.value.name;
-        // password.value = items.value.password;
         phone.value = items.value.phone;
         mail.value = items.value.mail;
         telegram.value = items.value.telegram;
         vkontakte.value = items.value.vkontakte;
         description.value = items.value.description;
         post.value = items.value.post;
-        photo.value = items.value.photo;
-        imagePreview.value = `https://security-jwt.onrender.com/api/v1/image?fileName=${items.value.photo}&imageType=TeacherImage`;
+        photo.value = items.value.photo.fileName;
+        imagePreview.value = `https://security-jwt.onrender.com/api/v1/image?fileName=${items.value.photo?.fileName}&imageType=TeacherImage`;
         rank.value = items.value.rank;
         console.log(name.value); //
     }
@@ -97,7 +97,21 @@ const onSubmit = async () => {
     if (photo.value) {
         const formData = new FormData();
 
-        formData.append('photo', photo.value);
+
+        /*formData.append('login', login.value);
+        formData.append('password', password.value);
+        formData.append('name', name.value);
+        formData.append('login', login.value);
+        formData.append('password', password.value);
+        formData.append('post', post.value);
+        formData.append('rank', rank.value);
+        formData.append('mail', mail.value);
+        formData.append('telegram', telegram.value);
+        formData.append('vkontakte', vkontakte.value);
+        formData.append('phone', phone.value);
+        formData.append('description', description.value);
+        formData.append('roles', roles);
+        formData.append('photo', photo.value);*/
 
         // const reader = new FileReader();
 
@@ -106,7 +120,7 @@ const onSubmit = async () => {
         //     photoBase64 = reader.result.split(',')[1]; // Get the base64 string without the data URL prefix
 
         const payload = {
-            username: username.value,
+            login: login.value,
             password: password.value,
             name: name.value,
             phone: phone.value,
@@ -115,17 +129,20 @@ const onSubmit = async () => {
             vkontakte: vkontakte.value,
             description: description.value,
             post: post.value,
-            photo: photoBase64,
             rank: rank.value,
             roles: roles,
         };
 
-        const response = await fetch(`${config.ServerURL}/api/auth/addTeacher`, {
+        formData.append(
+            'teacher',
+            new Blob([JSON.stringify(payload)], { type: 'application/json' }),
+        );
+
+        formData.append('images', photo.value);
+
+        const response = await fetch(`${config.ServerURL}/api/v1/teacher`, {
             method: 'POST',
-            body: payload,
-            headers: {
-                Accept: 'application/json',
-            },
+            body: formData,
         });
 
         console.log('Image uploaded successfully:', response);
@@ -133,7 +150,8 @@ const onSubmit = async () => {
         // };
 
         try {
-            // formData.append('username', username.value);
+            //formData.append('login', login.value);
+            //formData.append('password', password.value);
             // formData.append('name', name.value);
             // formData.append('login', login.value);
             // formData.append('password', password.value);
@@ -208,7 +226,7 @@ const onSubmit = async () => {
                     <div>Логин</div>
                     <div class="h-[50px]">
                         <v-input
-                            v-model="username"
+                            v-model="login"
                             type-input="default"
                             placeholder="Введите логин"
                         ></v-input>
