@@ -13,6 +13,14 @@ eventBus.on('optionSelected', (value) => {
     selectedOption.value = value;
 });
 
+//мне приходит цифра с сервера
+//мне нужно рисовать как чётную так и нечётную недели
+//при выводе недели проверять значение цифры с сервера
+//если цифра с сервера совпадает с неделей,которую компонент рисует сейчас
+//то добавлять ячейке предмета класс current с background-color: gray;
+//true - чётная
+//false - нечётная
+
 // URL для загрузки расписания
 const scheduleUrl = computed(() => {
     const params = new URLSearchParams({
@@ -28,6 +36,8 @@ const scheduleUrl = computed(() => {
 // Данные о расписании
 const scheduleData = ref([]);
 const scheduleGrid = ref(Array.from({ length: 14 }, () => Array(6).fill(null)));
+
+const scheduleCheckURL = `${config.ServerURL}/api/v1/schedule/check`;
 
 // Временные слоты и дни недели
 const timeSlots = ['09:00', '10:50', '12:40', '14:55', '16:45', '18:30', '20:05'];
@@ -62,9 +72,18 @@ async function fetchSchedule() {
     });
 }
 
+async function currentWeekIsEven() {
+    const { data } = await useFetch(scheduleCheckURL).json();
+
+    console.log(data);
+}
+
 // Автоматическая загрузка при изменении группы/преподавателя
 watch(selectedOption, fetchSchedule);
-onMounted(fetchSchedule);
+onMounted(() => {
+    fetchSchedule();
+    currentWeekIsEven();
+});
 </script>
 
 <template>
@@ -79,7 +98,9 @@ onMounted(fetchSchedule);
             <tr v-for="(row, i) in scheduleGrid" :key="i">
                 <td class="time-slot">
                     <div>{{ timeSlots[Math.floor(i / 2)] }}</div>
-                    <div class="week-type">{{ i % 2 === 0 ? 'Нечет' : 'Чет' }}</div>
+                    <div class="week-type" :class="{ currentWeek: 1 }">
+                        {{ i % 2 === 0 ? 'Нечет' : 'Чет' }}
+                    </div>
                 </td>
                 <td v-for="(lesson, j) in row" :key="j">
                     <LessonCell :lesson="lesson" />

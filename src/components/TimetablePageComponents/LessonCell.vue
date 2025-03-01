@@ -54,7 +54,7 @@ function convertToShortName(fullName) {
 }
 
 .empty {
-    background: #1f1f1f;
+    background: transparent;
     height: 180px;
     width: 215px;
 }
