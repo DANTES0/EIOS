@@ -65,7 +65,7 @@ watch(searchedValue, filterTeacher);
                 v-for="(item, index) in filteredArray"
                 :key="index"
                 :name="getShortName(item.name)"
-                :photo="`https://security-jwt.onrender.com/api/v1/image?fileName=${item.photo}&imageType=TeacherImage`"
+                :photo="`https://security-jwt.onrender.com/api/v1/image?fileName=${item.photo?.fileName}&imageType=TeacherImage`"
                 :rank="item.rank"
                 :post="item.post"
                 @click="$router.push(`/teachers/detail/${item.id}`)"

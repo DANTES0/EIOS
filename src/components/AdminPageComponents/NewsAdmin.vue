@@ -1,4 +1,4 @@
-<script setup>
+<script setup xmlns="http://www.w3.org/1999/html">
 import config from '../../config';
 import NewsBlock from '../NewsPageComponents/NewsBlock.vue';
 import { useFetch } from '@vueuse/core';
@@ -81,10 +81,20 @@ function addNews() {
 
 <template>
     <div class="news-page-container">
-        <button class="addNews" @click="addNews">Добавить новость</button>
-        <button class="addNews" style="margin-left: 900px" @click="() => (flag = !flag)">
-            Удаление новостей
-        </button>
+        <div class="button1">
+            <button class="addNews" @click="addNews">Добавить новость</button>
+        </div>
+        <div class="button2">
+            <button
+                class="addNews"
+                style="margin-left: 900px"
+                @click="() => (flag = !flag)"
+            >
+                Удаление новостей
+            </button>
+        </div>
+    </div>
+    <div class="news-list">
         <news-page :show-tabs="false" />
     </div>
 </template>
@@ -112,13 +122,10 @@ function addNews() {
 }
 
 .news-page-container {
-    display: block;
+    display: flex;
+    justify-content: space-between;
     margin: auto auto;
     width: 100%;
-
-    min-height: 674px;
-    max-height: 2420px;
-
     margin-top: 30px;
     margin-bottom: 78px;
 }
