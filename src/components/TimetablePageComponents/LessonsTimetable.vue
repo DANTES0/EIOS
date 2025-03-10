@@ -21,7 +21,6 @@ eventBus.on('optionSelected', (value) => {
 //true - чётная
 //false - нечётная
 
-// URL для загрузки расписания
 const scheduleUrl = computed(() => {
     const params = new URLSearchParams({
         pageSize: 999,
@@ -33,17 +32,14 @@ const scheduleUrl = computed(() => {
     return `${config.ServerURL}/api/v1/schedule?${params}`;
 });
 
-// Данные о расписании
 const scheduleData = ref([]);
 const scheduleGrid = ref(Array.from({ length: 14 }, () => Array(6).fill(null)));
 
 const scheduleCheckURL = `${config.ServerURL}/api/v1/schedule/check`;
 
-// Временные слоты и дни недели
 const timeSlots = ['09:00', '10:50', '12:40', '14:55', '16:45', '18:30', '20:05'];
 const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
-// Функция загрузки расписания
 async function fetchSchedule() {
     scheduleGrid.value = Array.from({ length: 14 }, () => Array(6).fill(null));
 
@@ -78,7 +74,6 @@ async function currentWeekIsEven() {
     console.log(data);
 }
 
-// Автоматическая загрузка при изменении группы/преподавателя
 watch(selectedOption, fetchSchedule);
 onMounted(() => {
     fetchSchedule();

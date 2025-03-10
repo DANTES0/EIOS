@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, watch } from 'vue';
+import { defineProps, ref } from 'vue';
 import { format } from 'date-fns';
 
 const newsData = defineProps({
