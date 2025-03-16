@@ -2,7 +2,7 @@
 import Tabs from '../components/Tabs.vue';
 import NewsBlock from '../components/NewsPageComponents/NewsBlock.vue';
 import VPagination from '../components/NewsPageComponents/VPagination.vue';
-import { ref, watch, computed } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import config from '../config';
 import ProgressSpinner from 'primevue/progressspinner';
@@ -12,23 +12,20 @@ const newsData = ref([]);
 let newsTotal = 0;
 const newsPerPageOptions = [2, 5, 10, 15];
 const currentPage = ref(1);
-const newsPerPage = ref(newsPerPageOptions[0]); // Отображаем одну новость на странице
-const isLoading = ref(false); // Добавляем состояние загрузки
-const areLoaded = ref(false); // Добавляем состояние загрузки
+const newsPerPage = ref(newsPerPageOptions[0]);
+const isLoading = ref(false);
+const areLoaded = ref(false);
 const route = useRoute();
 const router = useRouter();
 
 async function loadNews() {
-    isLoading.value = true; // Начало загрузки
+    isLoading.value = true;
     areLoaded.value = false;
 
     const urlAddress = config.ServerURL;
-
     const categories = route.query.categories ? route.query.categories.split(';') : [];
     const startDate = route.query.startDate ? route.query.startDate : null;
     const endDate = route.query.endDate ? route.query.endDate : null;
-
-    // Формируем объект параметров
     const params = new URLSearchParams({
         pageSize: newsPerPage.value,
         pageNumber: currentPage.value - 1,
@@ -36,7 +33,6 @@ async function loadNews() {
         ...(startDate && { startDate }),
         ...(endDate && { endDate }),
     });
-
     const requestAddress = `${urlAddress}/api/v1/news?${params.toString()}`;
 
     try {
@@ -58,7 +54,7 @@ async function loadNews() {
         console.error('Ошибка при выполнении запроса:', error);
         areLoaded.value = false;
     } finally {
-        isLoading.value = false; // Окончание загрузки
+        isLoading.value = false;
     }
 }
 
@@ -68,7 +64,6 @@ watch(route, () => {
     loadNews();
 });
 
-// Следим за изменением текущей страницы
 watch(currentPage, () => {
     loadNews();
 });
@@ -80,10 +75,6 @@ watch(newsPerPage, () => {
 function navigateToNews(newsId) {
     router.push(`/news/get/${newsId}`);
 }
-
-// function navigateToNews(newsId) {
-//     router.push(`/api/v1/news/${newsId}`);
-// }
 </script>
 
 <template>
