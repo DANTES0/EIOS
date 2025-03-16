@@ -60,13 +60,6 @@ async function loadNews() {
 
 loadNews();
 
-function selectChange() {
-    console.log('selectChange');
-    currentPage.value = 0;
-    console.log(currentPage.value);
-    loadNews();
-}
-
 watch(route, () => {
     loadNews();
 });
