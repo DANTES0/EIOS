@@ -98,7 +98,7 @@ function addNews() {
         </div>
     </div>
     <div class="news-list">
-        <news-page v-model="selectMode" :show-tabs="false" />
+        <news-page v-model:select-mode="selectMode" :show-tabs="false" />
     </div>
 </template>
 

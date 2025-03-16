@@ -2,7 +2,7 @@
 import Tabs from '../components/Tabs.vue';
 import NewsBlock from '../components/NewsPageComponents/NewsBlock.vue';
 import VPagination from '../components/NewsPageComponents/VPagination.vue';
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import config from '../config';
 import ProgressSpinner from 'primevue/progressspinner';
@@ -17,13 +17,7 @@ const isLoading = ref(false);
 const areLoaded = ref(false);
 const route = useRoute();
 const router = useRouter();
-const props = defineProps({
-    selectMode: {
-        type: Boolean,
-        required: true,
-    },
-});
-const emit = defineEmits(['update:selectMode']);
+const selectMode = defineModel('selectMode', { type: Boolean });
 const newsDelete = ref([]);
 
 async function loadNews() {
@@ -32,8 +26,9 @@ async function loadNews() {
 
     const urlAddress = config.ServerURL;
     const categories = route.query.categories ? route.query.categories.split(';') : [];
-    const startDate = route.query.startDate ? route.query.startDate : null;
-    const endDate = route.query.endDate ? route.query.endDate : null;
+    const startDate = route.query.startDate || null;
+    const endDate = route.query.endDate || null;
+
     const params = new URLSearchParams({
         pageSize: newsPerPage.value,
         pageNumber: currentPage.value - 1,
@@ -52,8 +47,6 @@ async function loadNews() {
             newsData.value = responseData.data;
             newsTotal = responseData.totalCount;
             areLoaded.value = true;
-
-            console.log(newsData.value);
         } else {
             console.error('Ошибка при загрузке данных:', response.statusText);
             areLoaded.value = false;
@@ -68,44 +61,28 @@ async function loadNews() {
 
 loadNews();
 
-watch(route, () => {
-    loadNews();
-});
+watch([route, currentPage, newsPerPage], () => {
+    if (newsPerPage.value !== newsPerPageOptions[0]) {
+        currentPage.value = 1;
+    }
 
-watch(currentPage, () => {
-    loadNews();
-});
-
-watch(newsPerPage, () => {
-    currentPage.value = 1;
     loadNews();
 });
 
 function navigateToNews(newsId) {
-    console.log(newsId);
-    console.log(props.selectMode);
-    if (props.selectMode === false) {
+    if (!selectMode.value) {
         router.push(`/news/get/${newsId}`);
     } else {
         newsDelete.value.push(newsId);
     }
 }
-
-// Отслеживаем изменения selectMode и синхронизируем с родителем
-watch(
-    () => props.selectMode,
-    (newValue) => {
-        emit('update:selectMode', !props.selectMode); // Обновляем значение в родительском компоненте
-    },
-);
 </script>
 
 <template>
     <Tabs v-if="showTabs" title="Новости кафедры" :show-icon="false" />
-
     <div class="news-page-container">
         <div>
-            <p>Режим удаления: {{ props.selectMode ? 'Включен' : 'Отключен' }}</p>
+            <p>Режим удаления: {{ selectMode ? 'Включен' : 'Отключен' }}</p>
         </div>
         <div
             v-show="!isLoading && areLoaded && newsData.length"
@@ -120,11 +97,9 @@ watch(
                 />
             </div>
         </div>
-
         <div v-if="isLoading" class="spinner-container">
             <ProgressSpinner class="custom-spinner" />
         </div>
-
         <div v-else-if="areLoaded && newsData.length" class="news-page-content">
             <div v-for="newsItem in newsData" :key="newsItem.id" class="news-block">
                 <NewsBlock
@@ -137,11 +112,9 @@ watch(
                 />
             </div>
         </div>
-
         <div v-else class="error-message">
             <p>Новости не удалось загрузить. Пожалуйста, попробуйте позже.</p>
         </div>
-
         <div
             v-show="!isLoading && areLoaded && newsData.length"
             class="pagination-wrapper"
