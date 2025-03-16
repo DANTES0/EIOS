@@ -127,15 +127,6 @@ function navigateToNews(newsId) {
                 :rows-per-page="newsPerPage"
             />
         </div>
-
-        <div v-show="!isLoading && areLoaded && newsData.length">
-            <label>Показывать новостей на странице:</label>
-            <Select
-                v-model="newsPerPage"
-                :options="newsPerPageOptions"
-                class="news-select"
-            />
-        </div>
     </div>
 </template>
 
