@@ -48,14 +48,6 @@ const fetchSchedule = async (selectedOption) => {
     }
 };
 
-//мне приходит цифра с сервера
-//мне нужно рисовать как чётную так и нечётную недели
-//при выводе недели проверять значение цифры с сервера
-//если цифра с сервера совпадает с неделей,которую компонент рисует сейчас
-//то добавлять ячейке предмета класс current с background-color: gray;
-//true - чётная
-//false - нечётная
-
 const currentWeekIsEven = async () => {
     const scheduleCheckURL = `${config.ServerURL}/api/v1/schedule/check`;
 
