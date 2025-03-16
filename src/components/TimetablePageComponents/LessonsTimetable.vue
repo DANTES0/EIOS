@@ -17,7 +17,13 @@ eventBus.on('optionSelected', (value) => {
 });
 
 async function loadSchedule() {
-    scheduleGrid.value = await fetchSchedule(selectedOption.value);
+    const newGrid = await fetchSchedule(selectedOption.value);
+
+    //очищаем только при успешном запросе
+    //Если сервер вернёт ошибку, старые данные не исчезнут.
+    if (newGrid.length) {
+        scheduleGrid.value = newGrid;
+    }
 }
 
 async function checkWeek() {
