@@ -60,6 +60,13 @@ async function loadNews() {
 
 loadNews();
 
+function selectChange() {
+    console.log('selectChange');
+    currentPage.value = 0;
+    console.log(currentPage.value);
+    loadNews();
+}
+
 watch(route, () => {
     loadNews();
 });
@@ -69,6 +76,7 @@ watch(currentPage, () => {
 });
 
 watch(newsPerPage, () => {
+    currentPage.value = 1;
     loadNews();
 });
 
@@ -91,7 +99,6 @@ function navigateToNews(newsId) {
                     v-model="newsPerPage"
                     :options="newsPerPageOptions"
                     class="news-select"
-                    @change="loadNews"
                 />
             </div>
         </div>
