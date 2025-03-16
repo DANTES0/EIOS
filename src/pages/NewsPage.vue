@@ -2,7 +2,7 @@
 import Tabs from '../components/Tabs.vue';
 import NewsBlock from '../components/NewsPageComponents/NewsBlock.vue';
 import VPagination from '../components/NewsPageComponents/VPagination.vue';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import config from '../config';
 import ProgressSpinner from 'primevue/progressspinner';
@@ -17,6 +17,14 @@ const isLoading = ref(false);
 const areLoaded = ref(false);
 const route = useRoute();
 const router = useRouter();
+const props = defineProps({
+    selectMode: {
+        type: Boolean,
+        required: true,
+    },
+});
+const emit = defineEmits(['update:selectMode']);
+const newsDelete = ref([]);
 
 async function loadNews() {
     isLoading.value = true;
@@ -74,14 +82,31 @@ watch(newsPerPage, () => {
 });
 
 function navigateToNews(newsId) {
-    router.push(`/news/get/${newsId}`);
+    console.log(newsId);
+    console.log(props.selectMode);
+    if (props.selectMode === false) {
+        router.push(`/news/get/${newsId}`);
+    } else {
+        newsDelete.value.push(newsId);
+    }
 }
+
+// Отслеживаем изменения selectMode и синхронизируем с родителем
+watch(
+    () => props.selectMode,
+    (newValue) => {
+        emit('update:selectMode', !props.selectMode); // Обновляем значение в родительском компоненте
+    },
+);
 </script>
 
 <template>
     <Tabs v-if="showTabs" title="Новости кафедры" :show-icon="false" />
 
     <div class="news-page-container">
+        <div>
+            <p>Режим удаления: {{ props.selectMode ? 'Включен' : 'Отключен' }}</p>
+        </div>
         <div
             v-show="!isLoading && areLoaded && newsData.length"
             class="select-pages-amount"
@@ -125,15 +150,6 @@ function navigateToNews(newsId) {
                 v-model:model-value="currentPage"
                 :total-records="newsTotal"
                 :rows-per-page="newsPerPage"
-            />
-        </div>
-
-        <div v-show="!isLoading && areLoaded && newsData.length">
-            <label>Показывать новостей на странице:</label>
-            <Select
-                v-model="newsPerPage"
-                :options="newsPerPageOptions"
-                class="news-select"
             />
         </div>
     </div>
