@@ -5,6 +5,7 @@ import { useFetch } from '@vueuse/core';
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import NewsPage from '../../pages/NewsPage.vue';
+import News from '../MainPageComponents/News.vue';
 
 const newsData = ref([]);
 let newsTotal = 0;
@@ -14,6 +15,7 @@ const isLoading = ref(false); // Добавляем состояние загр�
 const areLoaded = ref(false); // Добавляем состояние загрузки
 const route = useRoute();
 const router = useRouter();
+const selectMode = ref(false);
 
 async function loadNews() {
     isLoading.value = true; // Начало загрузки
@@ -74,6 +76,11 @@ function navigateToNews(newsId) {
     router.push(`/news/get/${newsId}`);
 }
 
+const toggleSelectMode = () => {
+    console.log(selectMode.value);
+    selectMode.value = !selectMode.value;
+};
+
 function addNews() {
     router.push(`/news/get/admin`);
 }
@@ -85,17 +92,13 @@ function addNews() {
             <button class="addNews" @click="addNews">Добавить новость</button>
         </div>
         <div class="button2">
-            <button
-                class="addNews"
-                style="margin-left: 900px"
-                @click="() => (flag = !flag)"
-            >
+            <button class="addNews" style="margin-left: 900px" @click="toggleSelectMode">
                 Удаление новостей
             </button>
         </div>
     </div>
     <div class="news-list">
-        <news-page :show-tabs="false" />
+        <news-page v-model="selectMode" :show-tabs="false" />
     </div>
 </template>
 
