@@ -11,6 +11,7 @@ import eventBus from '../../eventBus';
 
 const selectedOption = ref('1');
 const scheduleGrid = ref([]);
+const isEven = ref(null);
 
 eventBus.on('optionSelected', (value) => {
     selectedOption.value = value;
@@ -19,17 +20,13 @@ eventBus.on('optionSelected', (value) => {
 async function loadSchedule() {
     const newGrid = await fetchSchedule(selectedOption.value);
 
-    //очищаем только при успешном запросе
-    //Если сервер вернёт ошибку, старые данные не исчезнут.
     if (newGrid.length) {
         scheduleGrid.value = newGrid;
     }
 }
 
 async function checkWeek() {
-    const isEven = await currentWeekIsEven();
-
-    console.log(isEven);
+    isEven.value = await currentWeekIsEven();
 }
 
 watch(selectedOption, loadSchedule);
@@ -48,10 +45,19 @@ onMounted(() => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(row, i) in scheduleGrid" :key="i">
-                <td class="time-slot">
+            <tr
+                v-for="(row, i) in scheduleGrid"
+                :key="i"
+                :class="{ 'current-week': isEven !== null && isEven === (i % 2 !== 0) }"
+            >
+                <td
+                    class="time-slot"
+                    :class="{
+                        'current-week': isEven !== null && isEven === (i % 2 !== 0),
+                    }"
+                >
                     <div>{{ timeSlots[Math.floor(i / 2)] }}</div>
-                    <div class="week-type" :class="{ currentWeek: 1 }">
+                    <div class="week-type">
                         {{ i % 2 === 0 ? 'Нечет' : 'Чет' }}
                     </div>
                 </td>
@@ -96,8 +102,56 @@ onMounted(() => {
     background: #1f1f1f;
 }
 
+/* Выделение всей строки и time-slot */
+.current-week {
+    background-color: gray;
+}
+
 .week-type {
     font-size: 20px;
     color: #666;
+}
+</style>
+
+<style scoped>
+.schedule-table {
+    width: 1412px;
+    border-collapse: collapse;
+    font-family: JetBrainsMono;
+}
+
+.schedule-table tr {
+    height: 50px;
+    font-size: 24px;
+}
+
+.schedule-table th,
+.schedule-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.schedule-table th {
+    background: #1f1f1f;
+    font-weight: bold;
+}
+
+.schedule-table th:first-child {
+    min-width: 115px;
+}
+
+.time-slot {
+    font-weight: bold;
+    background: #1f1f1f;
+}
+
+.week-type {
+    font-size: 20px;
+    color: #666;
+}
+
+.current-week {
+    background-color: #313131;
 }
 </style>
