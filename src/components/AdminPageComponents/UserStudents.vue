@@ -15,13 +15,16 @@ let flagName = ref(true);
 let flagCourse = ref(true);
 
 const url = computed(() => {
-    return `${config.ServerURL}/api/v1/students/all`;
+    return `${config.ServerURL}/api/v1/students?`;
+    // return `${config.ServerURL}/api/v1/teachers/all`;
 });
 
 const fetchGroup = async () => {
-    const response = await useFetch(url).json();
+    const response = await useFetch(
+        url.value + new URLSearchParams({ pageSize: 999, pageNumber: 0 }).toString(),
+    ).json();
 
-    array.value = response.data.value;
+    array.value = response.data.value.data;
     filteredArray.value = array.value;
     console.log('LOG', array);
 };

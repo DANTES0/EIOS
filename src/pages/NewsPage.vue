@@ -18,13 +18,14 @@ const areLoaded = ref(false);
 const route = useRoute();
 const router = useRouter();
 const selectMode = defineModel('selectMode', { type: Boolean });
+const forceDelete = defineModel('forceDelete', { type: Boolean });
 const newsDelete = ref([]);
+const urlAddress = config.ServerURL;
 
 async function loadNews() {
     isLoading.value = true;
     areLoaded.value = false;
 
-    const urlAddress = config.ServerURL;
     const categories = route.query.categories ? route.query.categories.split(';') : [];
     const startDate = route.query.startDate || null;
     const endDate = route.query.endDate || null;
@@ -70,20 +71,58 @@ watch([route, currentPage, newsPerPage], () => {
 });
 
 function navigateToNews(newsId) {
+    // Явно останавливаем всплытие
+
     if (!selectMode.value) {
         router.push(`/news/get/${newsId}`);
     } else {
-        newsDelete.value.push(newsId);
+        console.log('test11');
+
+        // Пример проверки: если newsId уже есть в массиве newsDelete, не добавлять его
+        if (!newsDelete.value.includes(newsId)) {
+            newsDelete.value = [...newsDelete.value, newsId];
+        } else {
+            newsDelete.value = newsDelete.value.filter((id) => id !== newsId);
+        }
     }
 }
+
+async function deleteNews() {
+    console.log('deleteNews', newsDelete.value);
+
+    for (const item of newsDelete.value) {
+        const requestAddress = `${urlAddress}/api/v1/news/${item}`; // исправленный URL
+
+        try {
+            const response = await fetch(requestAddress, { method: 'DELETE' });
+
+            if (!response.ok) {
+                console.error(
+                    `Ошибка ${response.status}: не удалось удалить новость ${item}`,
+                );
+            }
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса:', error);
+        }
+    }
+
+    forceDelete.value = false;
+    newsDelete.value = [];
+    loadNews();
+}
+
+watch(forceDelete, (newVal) => {
+    console.log('test');
+
+    if (newVal) {
+        deleteNews(); // вызываем функцию для удаления новостей
+    }
+});
 </script>
 
 <template>
     <Tabs v-if="showTabs" title="Новости кафедры" :show-icon="false" />
     <div class="news-page-container">
-        <div>
-            <p>Режим удаления: {{ selectMode ? 'Включен' : 'Отключен' }}</p>
-        </div>
         <div
             v-show="!isLoading && areLoaded && newsData.length"
             class="select-pages-amount"
@@ -101,14 +140,19 @@ function navigateToNews(newsId) {
             <ProgressSpinner class="custom-spinner" />
         </div>
         <div v-else-if="areLoaded && newsData.length" class="news-page-content">
-            <div v-for="newsItem in newsData" :key="newsItem.id" class="news-block">
+            <div
+                v-for="newsItem in newsData"
+                :key="newsItem.id"
+                class="news-block"
+                :class="{ selected: newsDelete.includes(newsItem.id) }"
+                @click="navigateToNews(newsItem.id)"
+            >
                 <NewsBlock
                     :news-tag="newsItem.category"
                     :news-title="newsItem.headline"
-                    :news-date="newsItem.date"
+                    :news-date="new Date(newsItem.date)"
                     :news-image="`https://security-jwt.onrender.com/api/v1/image?fileName=${newsItem.images[0].filename}&imageType=NewsImage`"
                     :news-description="newsItem.mainInformation"
-                    @click="navigateToNews(newsItem.id)"
                 />
             </div>
         </div>
@@ -179,6 +223,12 @@ function navigateToNews(newsId) {
 
 .news-select {
     margin: auto 2%;
+}
+
+.selected {
+    border: 3px solid lightblue;
+    border-radius: 10px;
+    transition: border 0.2s ease-in-out;
 }
 
 .spinner-container {

@@ -16,6 +16,7 @@ const areLoaded = ref(false); // Добавляем состояние загр�
 const route = useRoute();
 const router = useRouter();
 const selectMode = ref(false);
+const forceDelete = ref(false);
 
 async function loadNews() {
     isLoading.value = true; // Начало загрузки
@@ -81,6 +82,12 @@ const toggleSelectMode = () => {
     selectMode.value = !selectMode.value;
 };
 
+const toggleForceDelete = () => {
+    console.log('forceDelete');
+    console.log(forceDelete.value);
+    forceDelete.value = !forceDelete.value;
+};
+
 function addNews() {
     router.push(`/news/get/admin`);
 }
@@ -91,14 +98,30 @@ function addNews() {
         <div class="button1">
             <button class="addNews" @click="addNews">Добавить новость</button>
         </div>
-        <div class="button2">
-            <button class="addNews" style="margin-left: 900px" @click="toggleSelectMode">
-                Удаление новостей
+        <button v-if="!selectMode" class="addNews" @click="toggleSelectMode">
+            Удаление новостей
+        </button>
+        <div v-else class="button3 flex gap-4">
+            <button class="addNews" @click="toggleSelectMode">Отменить</button>
+            <button
+                class="addNews"
+                @click="
+                    () => {
+                        toggleSelectMode();
+                        toggleForceDelete();
+                    }
+                "
+            >
+                Подтвердить
             </button>
         </div>
     </div>
     <div class="news-list">
-        <news-page v-model:select-mode="selectMode" :show-tabs="false" />
+        <news-page
+            v-model:select-mode="selectMode"
+            v-model:force-delete="forceDelete"
+            :show-tabs="false"
+        />
     </div>
 </template>
 
@@ -127,10 +150,13 @@ function addNews() {
 .news-page-container {
     display: flex;
     justify-content: space-between;
-    margin: auto auto;
     width: 100%;
     margin-top: 30px;
     margin-bottom: 78px;
+}
+
+.button3 {
+    display: flex;
 }
 
 .content-header h1 {
