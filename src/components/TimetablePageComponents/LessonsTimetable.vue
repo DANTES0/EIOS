@@ -102,7 +102,6 @@ onMounted(() => {
     background: #1f1f1f;
 }
 
-/* Выделение всей строки и time-slot */
 .current-week {
     background-color: gray;
 }

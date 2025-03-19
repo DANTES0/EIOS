@@ -1,8 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import Inputmask from 'inputmask';
-import IconDownArrow from '../Icons/Icon/IconDownArrow.vue';
-import IconBase from '../Icons/IconBase.vue';
 
 const selectedItem = ref(null);
 const showDropdown = ref(false);
@@ -13,39 +11,16 @@ const isRotated = ref(false);
 const dropdownRef = ref(null);
 const input = ref(null);
 
-//types: 'default, selectedInput', 'stairsInput'
 const props = defineProps({
     modelValue: { type: String, default: '', require: true },
     placeholder: { type: String, default: 'Поиск...' },
     mask: { type: String, default: '' },
-    typeInput: {
-        type: String,
-        default: '',
-        require: true,
-    },
-    styleInput: {
-        type: String,
-        default: 'modern',
-    },
-    options: {
-        type: Array,
-        default() {
-            return [];
-        },
-    },
-    items: {
-        type: Array,
-        default() {
-            return [];
-        },
-    },
-    items2: {
-        type: Array,
-        default() {
-            return [];
-        },
-    },
+    typeInput: { type: String, default: '', require: true },
+    styleInput: { type: String, default: 'modern' },
+    items: { type: Array, default: () => [] },
+    items2: { type: Array, default: () => [] },
 });
+
 const searchText = ref(props.modelValue);
 const itemsType = ref([
     { id: 1, name: 'Преподаватели' },
@@ -53,28 +28,64 @@ const itemsType = ref([
 ]);
 
 const filteredItems = computed(() => {
-    return props.items.filter((item) =>
-        item.name.toLowerCase().includes(searchText.value.toLowerCase()),
-    );
+    // Если выбран пункт "Группы", фильтруем группы
+    if (typeSearch.value === 'Группы') {
+        return props.items.filter((item) =>
+            item.name.toLowerCase().includes(searchText.value.toLowerCase()),
+        );
+    }
+
+    return [];
 });
 
 const filteredItems2 = computed(() => {
-    return props.items2.filter((item) =>
-        item.name.toLowerCase().includes(searchText.value.toLowerCase()),
-    );
+    // Если выбран пункт "Преподаватели", фильтруем преподавателей
+    if (typeSearch.value === 'Преподаватели') {
+        return props.items2.filter((item) =>
+            item.name.toLowerCase().includes(searchText.value.toLowerCase()),
+        );
+    }
+
+    return [];
 });
 
 const filteredTypes = computed(() => {
+    if (typeSearch.value === '') {
+        // Если текст поиска пустой, показываем категории "Преподаватели" и "Группы"
+        if (!searchText.value.trim()) {
+            return itemsType.value;
+        }
+
+        // Если есть ввод текста, объединяем списки для поиска
+        const allItems = [...props.items, ...props.items2];
+
+        return allItems.filter((item) =>
+            item.name.toLowerCase().includes(searchText.value.toLowerCase()),
+        );
+    }
+
+    // Если выбрана категория, возвращаем пункты меню, соответствующие вводу
     return itemsType.value.filter((item) =>
         item.name.toLowerCase().includes(searchText.value.toLowerCase()),
     );
 });
 
 const emit = defineEmits(['update:modelValue']);
+
 const selectItem = (item) => {
-    emit('update:modelValue', item); // Передаём объект
-    searchText.value = item.name; // В поле ввода — только имя
+    selectedItem.value = item;
+    searchText.value = item.name; // Устанавливаем только текстовое значение
+    emit('update:modelValue', item); // Генерируем событие для родительского компонента
     showDropdown.value = false;
+    isRotated.value = false;
+
+    if (typeSearch.value === '') {
+        typeSearch.value = item.name.includes('Преподаватели')
+            ? 'Преподаватели'
+            : 'Группы';
+    }
+
+    placeholderText.value = item.name; // Обновляем placeholder выбранным значением
 };
 
 const handleFocus = () => {
@@ -86,42 +97,28 @@ const handleClickOutside = (event) => {
     if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
         showDropdown.value = false;
         isRotated.value = false;
-        // typeSearch.value = '';
     }
+};
+
+const goBack = () => {
+    typeSearch.value = '';
+    placeholderText.value = 'Поиск...';
 };
 
 watch(
     () => props.modelValue,
     (newValue) => {
-        searchText.value = newValue;
-    },
-);
-watch(searchText, (value) => {
-    if (props.typeInput === 'default') {
-        emit('update:modelValue', value);
-    }
-});
-watch(
-    () => props.modelValue,
-    (newValue) => {
-        searchText.value = newValue?.name || '';
-    },
-);
-watch(
-    () => props.modelValue,
-    (newValue) => {
-        if (typeof newValue === 'object' && newValue?.name) {
-            searchText.value = newValue.name;
+        if (newValue && typeof newValue === 'object') {
+            searchText.value = newValue.name || '';
         } else {
-            searchText.value = newValue || '';
+            searchText.value = '';
         }
     },
     { immediate: true },
 );
 
-// watch(selectItem.value)
 onMounted(() => {
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('click', handleClickOutside, true); // Используем "capture" фазу.
 
     if (props.mask) {
         Inputmask({
@@ -130,92 +127,71 @@ onMounted(() => {
             showMaskOnHover: false,
             showMaskOnFocus: true,
         }).mask(input.value);
-        // input.value.mask('+7 (999) 999 99 99');
     }
 });
 
 onBeforeUnmount(() => {
-    document.removeEventListener('click', handleClickOutside);
+    document.removeEventListener('click', handleClickOutside, true);
 });
 </script>
 
 <template>
-    <div
-        v-if="typeInput === 'selectedInput'"
-        ref="dropdownRef"
-        class="relative w-[200px] font-light font-[JetBrainsMono]"
-    >
+    <div v-if="typeInput === 'stairsInput'" ref="dropdownRef" class="relative w-full">
         <input
             v-model="searchText"
-            class="w-full bg-[#181818] border border-[#cccccc] outline-none font-light font-[JetBrainsMono] p-1 rounded"
-            :placeholder="'Поиск...'"
-            @focus="handleFocus"
-        />
-
-        <div
-            v-if="showDropdown"
-            class="absolute z-10 w-full bg-[#181818] border border-[#cccccc] mt-1 rounded"
-        >
-            <ul v-if="filteredItems.length">
-                <li
-                    v-for="item in filteredItems"
-                    :key="item.id"
-                    class="p-1 hover:bg-[#333333] cursor-pointer"
-                    @click="selectItem(item)"
-                >
-                    {{ item.name }}
-                </li>
-            </ul>
-            <div v-else class="p-1 text-gray-400 font-light">Ничего не найдено</div>
-        </div>
-    </div>
-    <div
-        v-if="typeInput === 'stairsInput'"
-        ref="dropdownRef"
-        class="relative w-full font-light font-[JetBrainsMono]"
-    >
-        <input
-            v-model="searchText"
-            class="w-full bg-[#181818] border border-[#cccccc] outline-none font-light font-[JetBrainsMono] p-1 rounded focus:border-[#1E66F5]"
+            class="w-full bg-[#181818] border border-[#cccccc] outline-none font-light p-1 rounded focus:border-[#1E66F5]"
             :placeholder="placeholderText"
             @focus="handleFocus"
         />
         <div
-            v-if="placeholderText === 'Преподаватели' || placeholderText === 'Группы'"
+            v-if="placeholderText !== 'Поиск...'"
             class="absolute top-[5.5px] right-0 mr-[12px] cursor-pointer hover:text-[#1E66F5]"
             @click="
                 () => {
-                    typeSearch = '';
-                    placeholderText = 'Поиск...';
                     searchText = '';
+                    placeholderText = 'Поиск...';
+                    typeSearch = '';
                 }
             "
         >
             X
         </div>
-
-        <icon-base
-            v-if="placeholderText === 'Поиск...'"
-            :width="24"
-            :height="24"
-            class="absolute top-[5.5px] right-0 mr-[5px] cursor-pointer hover:text-[#1E66F5]"
-            :class="[{ 'rotate-180': isRotated }, { 'rotate-90': !isRotated }]"
-            @click="handleFocus"
-            ><icon-down-arrow></icon-down-arrow
-        ></icon-base>
         <div
             v-if="showDropdown"
             class="absolute z-10 w-full bg-[#181818] border border-[#1E66F5] mt-1 rounded"
         >
-            <ul v-if="filteredTypes.length && typeSearch === ''">
+            <ul v-if="typeSearch === '' && !searchText.trim()">
+                <li
+                    v-for="item in itemsType"
+                    :key="item.id"
+                    class="p-1 hover:bg-[#333333] cursor-pointer"
+                    @click="
+                        () => {
+                            placeholderText = item.name;
+                            typeSearch = item.name;
+                        }
+                    "
+                >
+                    {{ item.name }}
+                </li>
+            </ul>
+
+            <!-- Объединённый список при вводе текста -->
+            <ul v-if="typeSearch === '' && searchText.trim()">
                 <li
                     v-for="item in filteredTypes"
                     :key="item.id"
                     class="p-1 hover:bg-[#333333] cursor-pointer"
                     @click="
                         () => {
-                            typeSearch = item.name;
-                            placeholderText = item.name;
+                            if (props.items2.includes(item)) {
+                                placeholderText = 'Преподаватели';
+                                typeSearch = 'Преподаватели';
+                            } else if (props.items.includes(item)) {
+                                placeholderText = 'Группы';
+                                typeSearch = 'Группы';
+                            }
+                            selectItem(item);
                         }
                     "
                 >
@@ -228,6 +204,12 @@ onBeforeUnmount(() => {
                 class="overflow-y-auto max-h-[200px]"
             >
                 <li
+                    class="p-1 text-blue-400 cursor-pointer hover:underline"
+                    @click="goBack"
+                >
+                    Вернуться назад
+                </li>
+                <li
                     v-for="item in filteredItems2"
                     :key="item.id"
                     class="p-1 hover:bg-[#333333] cursor-pointer"
@@ -236,7 +218,14 @@ onBeforeUnmount(() => {
                     {{ item.name }}
                 </li>
             </ul>
+
             <ul v-if="filteredItems.length && typeSearch === 'Группы'">
+                <li
+                    class="p-1 text-blue-400 cursor-pointer hover:underline"
+                    @click="goBack"
+                >
+                    Вернуться назад
+                </li>
                 <li
                     v-for="item in filteredItems"
                     :key="item.id"
@@ -246,38 +235,18 @@ onBeforeUnmount(() => {
                     {{ item.name }}
                 </li>
             </ul>
+
             <div
                 v-if="
                     !filteredItems2.length &&
                     !filteredTypes.length &&
                     !filteredItems.length
                 "
-                class="p-1 text-gray-400 font-light"
+                class="p-1 text-gray-400"
             >
                 Ничего не найдено
             </div>
-            <!-- <div v-else class="p-1 text-gray-400 font-light">Ничего не найдено</div> -->
         </div>
-    </div>
-    <div
-        v-if="typeInput === 'default'"
-        ref="dropdownRef"
-        class="relative w-full font-light font-[JetBrainsMono] h-full"
-    >
-        <input
-            ref="input"
-            v-model="searchText"
-            class="w-full bg-transparent outline-none font-light font-[JetBrainsMono] placeholder:text-[18px] text-[20px] h-full"
-            :class="[
-                props.styleInput === 'classic'
-                    ? 'border border-[#cccccc]  p-1 rounded focus:border-[#1E66F5]'
-                    : props.styleInput === 'modern'
-                      ? 'border-b border-[#cccccc] pl-[11px] pb-[8px]'
-                      : '',
-            ]"
-            :placeholder="placeholder"
-            @focus="handleFocus"
-        />
     </div>
 </template>
 
