@@ -62,7 +62,11 @@ function navigateToNews(newsId) {
                     :news-tag="category"
                     :news-title="headline"
                     :news-date="date"
-                    :news-image="`https://security-jwt.onrender.com/api/v1/image?fileName=${url[0].filename}&imageType=NewsImage`"
+                    :news-image="
+                        url && url.length > 0
+                            ? `https://security-jwt.onrender.com/api/v1/image?fileName=${url[0].filename}&imageType=NewsImage`
+                            : ''
+                    "
                     :news-description="''"
                     :news-show-summary="false"
                     :block-width="'540px'"

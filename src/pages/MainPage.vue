@@ -298,7 +298,7 @@ onUnmounted(() => {
                 "
                 :is-loaded="galleryIsLoaded"
                 :is-loading="galleryIsLoading"
-                :id_photo="currentPhotoGallery || null"
+                :id_photo="Number(currentPhotoGallery) || null"
                 :photo="currentPhotoGallery || []"
                 @prev_photo="prevPhotoGallery"
                 @next_photo="nextPhotoGallery"
