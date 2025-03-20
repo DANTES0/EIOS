@@ -20,6 +20,7 @@ let temp_array = ref([]);
 
 const teachersAreLoading = ref(false);
 const teachersAreLoaded = ref(false);
+
 const fetchPrepod = async () => {
     teachersAreLoading.value = true; // Начало загрузки
     teachersAreLoaded.value = false;
@@ -27,12 +28,17 @@ const fetchPrepod = async () => {
     try {
         const { statusCode, data } = await useFetch(
             prepod_url.value +
-                new URLSearchParams({ pageSize: 999, pageNumber: 0 }).toString(),
+                new URLSearchParams({
+                    pageSize: 999,
+                    pageNumber: 0,
+                    cover: true,
+                }).toString(),
         ).json();
 
         if (statusCode.value == 200) {
             prepod.value = data.value.data;
             prepod.value.sort();
+            console.log(prepod.value);
 
             for (let i = 0; i < prepod.value.length; i++) {
                 prepod.value[i].id = i;

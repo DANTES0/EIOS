@@ -10,87 +10,78 @@ import config from '../../config';
 const login = ref();
 const password = ref();
 const roles = ref([{ id: 3, name: 'ROLE_STUDENT' }]);
+const name = ref();
+const group = ref();
+const course = ref();
 
-const selected = ref(null);
+const selectedGroupId = ref(null);
+const selectedCourse = ref(null);
 const placeholder = ref('Поиск...');
+const placeholder2 = ref('Поиск...');
 
-const fetchRoles = async () => {
+let array = ref([]);
+
+const fetchGroups = async () => {
     try {
-        const response = await fetch(`${config.ServerURL}/api/v1/roles/all`);
+        const response = await fetch(`${config.ServerURL}/api/v1/group`);
         const data = await response.json();
 
-        console.log('Fetched roles:', data); // Log the full response
-
-        // Check if data is an array
-        if (Array.isArray(data)) {
-            array.value = data.map((role) => ({ label: role.name, value: role.id }));
-        } else {
-            console.error('Invalid data structure:', data); // Log error if data is not an array
-        }
+        console.log('Fetched groups:', data); // Логируем данные
+        array.value = data.data; // Сохраняем список групп
     } catch (error) {
-        console.error('Ошибка при получении ролей:', error);
+        console.error('Ошибка при получении групп:', error);
     }
 };
 
 onMounted(() => {
-    fetchRoles();
+    fetchGroups();
 });
 
-let array = ref([]);
-
-let array2 = ref([]);
-
-array2.value.push(
+const array2 = ref([
     { label: '1', value: 1 },
     { label: '2', value: 2 },
     { label: '3', value: 3 },
-);
+    { label: '4', value: 4 },
+]);
 
-const handleRoleSelected = (option) => {
-    roles.value = [{ id: option.value }]; // Передаём как массив объектов
+const handleOptionSelected = (option) => {
+    selectedGroupId.value = option.value;
+    group.value = option.value;  // Присваиваем выбранную группу в переменную group
     placeholder.value = option.label;
-    selected.value = option;
+};
+
+
+const handleOptionSelected2 = (option) => {
+    selectedCourse.value = option.value;
+    placeholder2.value = option.label;
 };
 
 const hideModal = (event) => {
     if (event.target.classList.contains('modal-add-user-wrapper')) {
-        authState.isVisibleAddUserModalComponent = false;
+        authState.isVisibleAddUserStudentModalComponent = false;
     }
 
     document.documentElement.classList.remove('modal-open');
 };
 
-const sendNewUser = async () => {
-    const payload = {
-        login: login.value,
-        password: password.value,
-        roles: roles.value, // Должен быть массив объектов [{ id: 3 }]
-    };
+const sendNewStudent = async () => {
+    const { data, error } = await useFetch(`${config.ServerURL}/students/register`, {
+        method: 'POST',
+        body: JSON.stringify({
+            login: login.value,
+            password: password.value,
+            roles: roles.value,
+            name: name.value,
+            group: group.value,
+            course: course.value,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).json();
 
-    console.log("Отправляемые данные:", JSON.stringify(payload)); // Лог перед отправкой
-
-    try {
-        const response = await fetch(`${config.ServerURL}/api/v1/users`, {
-            method: 'POST',
-            body: JSON.stringify(payload),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Ошибка при создании пользователя:', response.status, errorText);
-            return;
-        }
-
-        const data = await response.json().catch(() => null);
-        console.log('Пользователь успешно создан:', data);
-        authState.isVisibleAddUserModalComponent = false;
-        eventBus.emit('userAdded');
-    } catch (error) {
-        console.error('Ошибка при создании пользователя:', error);
-    }
+    authState.isVisibleAddUserStudentModalComponent = false;
+    eventBus.emit('studentAdded');
 };
 
 document.documentElement.classList.add('modal-open');
@@ -98,21 +89,32 @@ document.documentElement.classList.add('modal-open');
 
 <template>
     <div
-        v-if="authState.isVisibleAddUserModalComponent"
+        v-if="authState.isVisibleAddUserStudentModalComponent"
         class="modal-add-user-wrapper"
-        :class="{ 'modal-open': authState.isVisibleAddUserModalComponent }"
+        :class="{ 'modal-open': authState.isVisibleAddUserStudentModalComponent }"
         @click="hideModal"
     >
         <div class="modal-add-user-container">
             <div class="modal-add-user-block">
                 <div class="modal-add-user-title" style="font-size: 28px">
-                    Добавление пользователя
+                    Добавление аккаунта студента
+                </div>
+                <div class="input-name wrap" style="margin-top: 40px">
+                    <div class="input-name-title title">Введите Имя</div>
+                    <input
+                        v-model="name"
+                        placeholder="Логин...."
+                        type="text"
+                        class="input--name-text input"
+                        :class="{ error: loginError }"
+                        @click="loginError = false"
+                    />
                 </div>
                 <div class="input-login wrap">
                     <div class="input-login-title title">Введите логин</div>
                     <input
                         v-model="login"
-                        placeholder="Логин...."
+                        placeholder="Пароль...."
                         type="text"
                         class="input-login-text input"
                     />
@@ -121,7 +123,7 @@ document.documentElement.classList.add('modal-open');
                     <div class="input-login-title title">Введите пароль</div>
                     <input
                         v-model="password"
-                        placeholder="Пароль...."
+                        placeholder="Логин...."
                         type="password"
                         class="input-login-text input"
                         :class="{ error: loginError }"
@@ -129,17 +131,29 @@ document.documentElement.classList.add('modal-open');
                     />
                 </div>
                 <div class="select">
-                    <div class="input-role wrap">
-                        <div class="input-login-title title">Роль</div>
+                    <div class="input-group wrap">
+                        <div class="input-login-title title">Номер группы</div>
                         <VueSelect
-                            v-model="selected"
+                            v-model="selectedGroupId"
                             :placeholder="placeholder"
-                            :options="array"
-                            @option-selected="handleRoleSelected"
-                        ></VueSelect>
+                            :options="array.map((g) => ({ label: g.name, value: g.id }))"
+                            @option-selected="handleOptionSelected"
+                        />
+                    </div>
+                    <div class="input-course wrap">
+                        <div class="input-login-title title">Курс обучения</div>
+                        <VueSelect
+                            v-if="array2.length > 0"
+                            v-model="selectedCourse"
+                            :placeholder="placeholder2"
+                            :options="array2"
+                            @option-selected="handleOptionSelected2"
+                        />
                     </div>
                 </div>
-                <button class="enter-modal-add-user" @click="sendNewUser">Создать</button>
+                <button class="enter-modal-add-user" @click="sendNewStudent">
+                    Создать
+                </button>
             </div>
         </div>
     </div>
@@ -155,7 +169,6 @@ document.documentElement.classList.add('modal-open');
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    margin-top: 1%;
 }
 .input-course {
     margin-left: 90px;
@@ -241,7 +254,6 @@ document.documentElement.classList.add('modal-open');
 }
 .modal-add-user-title {
     margin-top: 20px;
-    margin-bottom: 10%;
 }
 
 :deep(.no-results) {

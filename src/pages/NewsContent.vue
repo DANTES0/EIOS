@@ -48,7 +48,7 @@ onMounted(() => {
         </div> -->
 
         <div class="page-container-base-slider">
-            <NewsContentPageSlider :news-images="newsData.images.filename" />
+            <NewsContentPageSlider :news-images="newsData.images" />
         </div>
     </div>
     <div v-else>

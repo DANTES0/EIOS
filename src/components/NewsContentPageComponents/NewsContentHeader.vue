@@ -26,9 +26,7 @@ const newsHeaderData = defineProps({
                 </div>
             </div>
             <div class="text-news">
-                <div class="text-news-text">
-                    {{ newsHeaderData.newsHeaderMainInfo }}
-                </div>
+                <div class="text-news-text" v-html="newsHeaderData.newsHeaderMainInfo"></div>
             </div>
         </div>
         <div class="header-box2">

@@ -10,23 +10,7 @@ import { authState } from '../../authState';
 
 // const selectedImage = ref('');
 const imagePreview = ref('');
-// const hoverImage = ref(false);
 
-// const props = defineProps({
-//     id: { type: String, default: '' },
-//     username: { type: String, default: '' },
-//     name: { type: String, default: '' },
-//     login: { type: String, default: '' },
-//     password: { type: String, default: '' },
-//     phone: { type: String, default: '' },
-//     mail: { type: String, default: '' },
-//     telegram: { type: String, default: '' },
-//     vkontakte: { type: String, default: '' },
-//     description: { type: String, default: '' },
-//     post: { type: String, default: '' },
-//     photo: { type: String, default: '' },
-//     rank: { type: String, default: '' },
-// });
 const login = ref('');
 const name = ref('');
 const password = ref('');
@@ -38,6 +22,7 @@ const description = ref('');
 const post = ref('');
 const photo = ref('');
 const rank = ref('');
+const cover = ref(false);
 const roles = [{ id: 3, name: 'ROLE_TEACHER' }];
 
 const url = computed(() => {
@@ -53,7 +38,7 @@ const fetchPrepodDetails = async () => {
         login.value = items.value.login;
         password.value = items.value.password;
         name.value = items.value.name;
-        phone.value = items.value.phone;
+        phone.value = items.value.phone.replace(/\D/g, '');
         mail.value = items.value.mail;
         telegram.value = items.value.telegram;
         vkontakte.value = items.value.vkontakte;
@@ -62,13 +47,19 @@ const fetchPrepodDetails = async () => {
         photo.value = items.value.photo.fileName;
         imagePreview.value = `https://security-jwt.onrender.com/api/v1/image?fileName=${items.value.photo?.fileName}&imageType=TeacherImage`;
         rank.value = items.value.rank;
-        console.log(name.value); //
+        cover.value = items.value.cover;
+        console.log(items.value); // Должны быть данные, которые вы хотите отобразить
+        console.log(items.value.phone);
     }
 };
 
 onMounted(() => {
     fetchPrepodDetails();
-}); //
+});
+onBeforeMount(() => {
+    fetchPrepodDetails();
+});
+//
 // onBeforeMount(fetchPrepodDetails);
 // onUpdated(fetchPrepodDetails);
 
@@ -92,33 +83,8 @@ const triggerFileInput = () => {
 };
 
 const onSubmit = async () => {
-    let photoBase64 = '';
-
     if (photo.value) {
         const formData = new FormData();
-
-
-        /*formData.append('login', login.value);
-        formData.append('password', password.value);
-        formData.append('name', name.value);
-        formData.append('login', login.value);
-        formData.append('password', password.value);
-        formData.append('post', post.value);
-        formData.append('rank', rank.value);
-        formData.append('mail', mail.value);
-        formData.append('telegram', telegram.value);
-        formData.append('vkontakte', vkontakte.value);
-        formData.append('phone', phone.value);
-        formData.append('description', description.value);
-        formData.append('roles', roles);
-        formData.append('photo', photo.value);*/
-
-        // const reader = new FileReader();
-
-        // reader.readAsDataURL(photo.value);
-        // reader.onload = () => {
-        //     photoBase64 = reader.result.split(',')[1]; // Get the base64 string without the data URL prefix
-
         const payload = {
             login: login.value,
             password: password.value,
@@ -130,6 +96,7 @@ const onSubmit = async () => {
             description: description.value,
             post: post.value,
             rank: rank.value,
+            cover: cover.value,
             roles: roles,
         };
 
@@ -147,25 +114,6 @@ const onSubmit = async () => {
 
         console.log('Image uploaded successfully:', response);
         console.log('Image uploaded successfully:', phone);
-        // };
-
-        try {
-            //formData.append('login', login.value);
-            //formData.append('password', password.value);
-            // formData.append('name', name.value);
-            // formData.append('login', login.value);
-            // formData.append('password', password.value);
-            // formData.append('post', post.value);
-            // formData.append('rank', rank.value);
-            // formData.append('mail', mail.value);
-            // formData.append('telegram', telegram.value);
-            // formData.append('vkontakte', vkontakte.value);
-            // formData.append('phone', phone.value);
-            // formData.append('description', description.value);
-            // formData.append('roles', roles);
-        } catch (error) {
-            console.error('Error uploading image:', error);
-        }
     }
 };
 </script>
@@ -309,12 +257,16 @@ const onSubmit = async () => {
                 <div>
                     <div>Номер телефона</div>
                     <div class="h-[50px]">
-                        <v-input
+                        <!-- Применяем маску для телефона на уровне компонента CustomInput -->
+                        <CustomInput
                             v-model="phone"
-                            type-input="default"
+                            mask="+7 (999) 999 99 99"
                             placeholder="Введите номер телефона"
-                            mask="+7 (999)-999-99-99"
-                        ></v-input>
+                        />
+                    </div>
+                    <div class="checkTeacher">
+                        <div class="checkTeacherTitle">Отображать на главной странице?</div>
+                        <input type="checkbox" class="checkbox" v-model="cover" />
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import { authState } from '../../authState';
 const isActiveMain = ref(false);
 const isActiveNews = ref(false);
 const isActiveUsers = ref(false);
-const isActiveTeachers = ref(false);
+
 </script>
 
 <template>
@@ -99,7 +99,7 @@ const isActiveTeachers = ref(false);
                             <div
                                 class="content-userPage-wrap"
                                 :class="{
-                                    lineActive: authState.isArticle == 'UserTeachers',
+                                    lineActive: authState.isArticle === 'UserTeachers',
                                 }"
                             >
                                 <div
@@ -116,7 +116,7 @@ const isActiveTeachers = ref(false);
                             <div
                                 class="content-userPage-wrap"
                                 :class="{
-                                    lineActive: authState.isArticle == 'UserStudent',
+                                    lineActive: authState.isArticle === 'UserStudent',
                                 }"
                             >
                                 <div
@@ -130,11 +130,27 @@ const isActiveTeachers = ref(false);
                                     Студенты
                                 </div>
                             </div>
-                            <div class="content-userPage-title">Администраторы</div>
                             <div
                                 class="content-userPage-wrap"
                                 :class="{
-                                    lineActive: authState.isArticle == 'UserAll',
+                                    lineActive: authState.isArticle === 'UserAdmin',
+                                }"
+                            >
+                                <div
+                                    class="content-userPage-title"
+                                    @click="
+                                        () => {
+                                            authState.isArticle = 'UserAdmin';
+                                        }
+                                    "
+                                >
+                                    Администраторы
+                                </div>
+                            </div>
+                            <div
+                                class="content-userPage-wrap"
+                                :class="{
+                                    lineActive: authState.isArticle === 'UserAll',
                                 }"
                             >
                                 <div

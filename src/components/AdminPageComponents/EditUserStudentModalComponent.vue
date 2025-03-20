@@ -17,8 +17,8 @@ const name = ref();
 const group = ref();
 const course = ref();
 
-const selected = ref(null);
-const selected2 = ref(null);
+const selectedGroupId = ref(null);
+const selectedCourse = ref(null);
 const placeholder = ref('Поиск...');
 const placeholder2 = ref('Поиск...');
 
@@ -26,44 +26,52 @@ let array3 = ref([]);
 
 const fetchData = async () => {
     const response = await useFetch(
-        `${config.ServerURL}/students/find/${authState.editUserId}`,
+        `${config.ServerURL}/api/v1/students/${authState.editUserId}`,
     ).json();
 
     array3.value = response.data.value;
 
-    login.value = array3.value.user.login;
-    password.value = array3.value.user.password;
+    login.value = array3.value.login;
+    password.value = array3.value.password;
     name.value = array3.value.name;
-    placeholder.value = array3.value.group;
-    placeholder2.value = array3.value.course;
-};
 
-fetchData();
+    // Проверяем структуру данных перед присвоением placeholder'ов
+    placeholder.value = response.data.value.group?.name || 'Выберите группу';
+    placeholder2.value = response.data.value.course || 'Выберите курс';
+};
 
 let array = ref([]);
 
-array.value.push(
-    { label: 'О714Б', value: 1 },
-    { label: 'О715Б', value: 2 },
-    { label: 'О716Б', value: 3 },
-);
-
-let array2 = ref([]);
-
-array2.value.push(
+const array2 = ref([
     { label: '1', value: 1 },
     { label: '2', value: 2 },
     { label: '3', value: 3 },
-);
+    { label: '4', value: 4 },
+]);
+
+const fetchGroups = async () => {
+    try {
+        const response = await fetch(`${config.ServerURL}/api/v1/group`);
+        const data = await response.json();
+
+        console.log('Fetched groups:', data); // Логируем данные
+        array.value = data.data; // Сохраняем список групп
+    } catch (error) {
+        console.error('Ошибка при получении групп:', error);
+    }
+};
+
+fetchGroups();
+fetchData();
 
 const handleOptionSelected = (option) => {
+    selectedGroupId.value = option.value;
     placeholder.value = option.label;
-    group.value = option.label;
 };
 
 const handleOptionSelected2 = (option) => {
+    selectedCourse.value = option.value;
     placeholder2.value = option.label;
-    course.value = option.label;
 };
 
 const hideModal = (event) => {
@@ -80,16 +88,16 @@ const sendNewStudent = async () => {
     }
 
     const { data, error } = await useFetch(
-        `${config.ServerURL}/students/edit/${authState.editUserId}`,
+        `${config.ServerURL}/api/v1/students/${authState.editUserId}`,
         {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({
                 login: login.value,
                 password: password.value,
                 roles: roles.value,
                 name: name.value,
-                group: placeholder.value,
-                course: placeholder2.value,
+                groupId: selectedGroupId.value,
+                course: selectedCourse.value,
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -148,20 +156,21 @@ document.documentElement.classList.add('modal-open');
                     <div class="input-group wrap">
                         <div class="input-login-title title">Номер группы</div>
                         <VueSelect
-                            v-model="selected"
+                            v-model="selectedGroupId"
                             :placeholder="placeholder"
-                            :options="array"
+                            :options="array.map((g) => ({ label: g.name, value: g.id }))"
                             @option-selected="handleOptionSelected"
-                        ></VueSelect>
+                        />
                     </div>
                     <div class="input-course wrap">
                         <div class="input-login-title title">Курс обучения</div>
                         <VueSelect
-                            v-model="selected2"
+                            v-if="array2.length > 0"
+                            v-model="selectedCourse"
                             :placeholder="placeholder2"
                             :options="array2"
                             @option-selected="handleOptionSelected2"
-                        ></VueSelect>
+                        />
                     </div>
                 </div>
                 <button class="enter-modal-add-user" @click="sendNewStudent">

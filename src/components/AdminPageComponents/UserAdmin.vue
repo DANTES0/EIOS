@@ -10,22 +10,23 @@ let searchQuery = ref('');
 let searchCriterion = ref('id');
 let flag = ref(true);
 let flagLogin = ref(true);
-let flagName = ref(true);
-
-const url = computed(() => {
-    return `${config.ServerURL}/api/v1/users/all`;
-});
+const role = 'ROLE_ADMIN';
 
 const editUser = (id) => {
     authState.editUserId = id;
     authState.isVisibleEditUserModelComponent = true;
 };
 
+const url = computed(() => {
+    return `${config.ServerURL}/api/v1/users/all`;
+});
+
 const fetchGroup = async () => {
     const response = await useFetch(
         `${url.value}?${new URLSearchParams({
             pageSize: 999,
             pageNumber: 0,
+            role: role, // Передаем роль в строке параметров
         }).toString()}`,
     ).json();
 
@@ -41,6 +42,8 @@ const filterUsers = () => {
                 return user.id.toString().includes(searchQuery.value);
             } else if (searchCriterion.value === 'login') {
                 return user.login.toLowerCase().includes(searchQuery.value.toLowerCase());
+            } else if (searchCriterion.value === 'name') {
+                return user.name.toLowerCase().includes(searchQuery.value.toLowerCase());
             } else if (searchCriterion.value === 'roles') {
                 return user.roles[0]
                     .toLowerCase()
@@ -56,12 +59,6 @@ watch([searchQuery, searchCriterion], filterUsers);
 
 onMounted(() => {
     fetchGroup();
-});
-
-watch(authState.isVisibleModalAddUsers, (newVal) => {
-    if (!newVal) {
-        fetchGroup();
-    }
 });
 
 function sortById() {
@@ -120,12 +117,6 @@ const deleteUser = async (id) => {
                 placeholder="Поиск..."
                 class="placeholder-userAll"
             />
-            <button
-                class="addUser"
-                @click="authState.isVisibleAddUserModalComponent = true"
-            >
-                Новый пользователь
-            </button>
         </div>
         <div class="text-list-userAll">Список пользователей</div>
         <div class="user-list">
@@ -159,9 +150,7 @@ const deleteUser = async (id) => {
             >
                 <span class="user-id">{{ index + 1 }}</span>
                 <span class="user-login">{{ item.login }}</span>
-                <span class="user-role">{{
-                    item.roles && item.roles[0] ? item.roles[0].name : 'Не указана'
-                }}</span>
+                <span class="user-role">{{ item.roles[0].name }}</span>
                 <span class="user-edit">
                     <button>
                         <img

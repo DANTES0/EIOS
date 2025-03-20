@@ -16,6 +16,7 @@
         "@vuepic/vue-datepicker": "^8.5.1",
         "@vueup/vue-quill": "^1.2.0",
         "@vueuse/core": "^10.9.0",
+        "date-fns": "^4.1.0",
         "inputmask": "^5.0.9",
         "jsonwebtoken": "^9.0.2",
         "jwt-decode": "^4.0.0",

@@ -112,8 +112,8 @@ function sortByCourse() {
 
 const deleteUser = async (id) => {
     try {
-        const response = await fetch(`${config.ServerURL}/user/delete/${id}`, {
-            method: 'POST',
+        const response = await fetch(`${config.ServerURL}/api/v1/students/${id}`, {
+            method: 'DELETE',
         });
 
         if (response.ok) {
@@ -147,7 +147,7 @@ const deleteUser = async (id) => {
                 placeholder="Поиск..."
                 class="placeholder-userAll"
             />
-            <button class="addUser" @click="authState.isVisibleModalAddUsers = true">
+            <button class="addUser" @click="authState.isVisibleAddUserStudentModalComponent = true">
                 Новый пользователь
             </button>
         </div>
@@ -189,14 +189,14 @@ const deleteUser = async (id) => {
             </div>
 
             <div
-                v-for="item in filteredArray"
+                v-for="(item, index) in filteredArray"
                 v-if="filteredArray.length"
-                :key="item.id"
+                :key="index"
                 class="user-item"
             >
-                <span class="user-id">{{ item.id }}</span>
+                <span class="user-id">{{index + 1}}</span>
                 <span class="user-login">{{ item.login }}</span>
-                <span class="user-role">{{ item.group }}</span>
+                <span class="user-role">{{ item.group.name }}</span>
                 <span class="user-role">{{ item.course }}</span>
                 <span class="user-name">{{ item.name }}</span>
                 <span class="user-edit">

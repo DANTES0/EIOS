@@ -220,7 +220,7 @@ const fetchNews = async () => {
 
     try {
         const { statusCode, data } = await useFetch(
-            url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0 }).toString(),
+            url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0, cover: true }).toString(),
         ).json();
 
         if (statusCode.value == 200) {

@@ -12,28 +12,21 @@ import {
 } from 'vue-flux';
 import 'vue-flux/style.css';
 
-// Импортируем изображения
-import pivo1 from '../../assets/NewsContent/pivo1.jpg';
-import pivo2 from '../../assets/NewsContent/pivo2.jpg';
-import pivo3 from '../../assets/NewsContent/pivo3.jpg';
-
 // Определяем пропсы для компонента с значением по умолчанию
 const newsSliderImages = defineProps({
     newsImages: {
         type: Array,
-        default: () => [pivo1, pivo2, pivo3],
+        required: true, // Убедимся, что пропс обязателен
     },
 });
 
-const transitions = shallowReactive([
-    {
-        component: Slide,
-        options: shallowReactive({
-            totalDuration: 1400,
-            easing: 'ease-in-out',
-        }),
-    },
-]);
+const transitions = shallowReactive([{
+    component: Slide,
+    options: shallowReactive({
+        totalDuration: 1400,
+        easing: 'ease-in-out',
+    }),
+}]);
 
 const $vueFlux = ref();
 
@@ -41,8 +34,13 @@ const vfOptions = shallowReactive({
     autoplay: true,
 });
 
-// Создаем массив ресурсов из пропсов
-const vfRscs = computed(() => newsSliderImages.newsImages.map((image) => new Img(image)));
+// Создаем массив ресурсов из пропсов с динамически генерируемыми URL
+const vfRscs = computed(() =>
+    newsSliderImages.newsImages.map(image => {
+        const imageUrl = `https://security-jwt.onrender.com/api/v1/image?fileName=${image.filename}&imageType=NewsImage`;
+        return new Img(imageUrl);  // Используем сформированный URL вместо импортированного пути
+    })
+);
 </script>
 
 <template>
@@ -74,8 +72,6 @@ const vfRscs = computed(() => newsSliderImages.newsImages.map((image) => new Img
             </template>
         </VueFlux>
     </div>
-
-    <!--  <button @click="$vueFlux.show('next')">NEXT</button>-->
 </template>
 
 <style scoped>

@@ -32,29 +32,35 @@ const fetchRoles = async () => {
     }
 };
 
+const fetchData = async () => {
+    const response = await useFetch(
+        `${config.ServerURL}/api/v1/users/${authState.editUserId}`,
+    ).json();
+
+    const userData = response.data.value; // Присваиваем данные пользователя
+
+    login.value = userData.login;
+
+    // Проверяем структуру данных перед присвоением placeholder'ов
+    placeholder.value = userData.role?.name || 'Выберите роль';
+};
+
 onMounted(() => {
     fetchRoles();
+    fetchData();
 });
 
 let array = ref([]);
 
-let array2 = ref([]);
-
-array2.value.push(
-    { label: '1', value: 1 },
-    { label: '2', value: 2 },
-    { label: '3', value: 3 },
-);
-
 const handleRoleSelected = (option) => {
-    roles.value = [{ id: option.value }]; // Передаём как массив объектов
+    roles.value = [{ id: option.value }]; // Передаем выбранную роль
     placeholder.value = option.label;
     selected.value = option;
 };
 
 const hideModal = (event) => {
     if (event.target.classList.contains('modal-add-user-wrapper')) {
-        authState.isVisibleAddUserModalComponent = false;
+        authState.isVisibleEditUserModelComponent = false;
     }
 
     document.documentElement.classList.remove('modal-open');
@@ -64,32 +70,40 @@ const sendNewUser = async () => {
     const payload = {
         login: login.value,
         password: password.value,
-        roles: roles.value, // Должен быть массив объектов [{ id: 3 }]
+        roles: roles.value, // Роль как массив объектов
     };
 
-    console.log("Отправляемые данные:", JSON.stringify(payload)); // Лог перед отправкой
-
     try {
-        const response = await fetch(`${config.ServerURL}/api/v1/users`, {
-            method: 'POST',
-            body: JSON.stringify(payload),
-            headers: {
-                'Content-Type': 'application/json',
+        const response = await fetch(
+            `${config.ServerURL}/api/v1/users/${authState.editUserId}`,
+            {
+                method: 'PUT', // Изменение пользователя
+                body: JSON.stringify(payload),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             },
-        });
+        );
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('Ошибка при создании пользователя:', response.status, errorText);
+
+            console.error(
+                'Ошибка при обновлении пользователя:',
+                response.status,
+                errorText,
+            );
+
             return;
         }
 
-        const data = await response.json().catch(() => null);
-        console.log('Пользователь успешно создан:', data);
-        authState.isVisibleAddUserModalComponent = false;
-        eventBus.emit('userAdded');
+        const data = await response.json();
+
+        console.log('Пользователь успешно обновлен:', data);
+        authState.isVisibleEditUserModelComponent = false;
+        eventBus.emit('userUpdated');
     } catch (error) {
-        console.error('Ошибка при создании пользователя:', error);
+        console.error('Ошибка при обновлении пользователя:', error);
     }
 };
 
@@ -98,9 +112,9 @@ document.documentElement.classList.add('modal-open');
 
 <template>
     <div
-        v-if="authState.isVisibleAddUserModalComponent"
+        v-if="authState.isVisibleEditUserModelComponent"
         class="modal-add-user-wrapper"
-        :class="{ 'modal-open': authState.isVisibleAddUserModalComponent }"
+        :class="{ 'modal-open': authState.isVisibleEditUserModelComponent }"
         @click="hideModal"
     >
         <div class="modal-add-user-container">
@@ -125,18 +139,18 @@ document.documentElement.classList.add('modal-open');
                         type="password"
                         class="input-login-text input"
                         :class="{ error: loginError }"
-                        @click="loginError = false"
                     />
                 </div>
                 <div class="select">
                     <div class="input-role wrap">
                         <div class="input-login-title title">Роль</div>
                         <VueSelect
+                            v-if="array.length > 0"
                             v-model="selected"
                             :placeholder="placeholder"
                             :options="array"
                             @option-selected="handleRoleSelected"
-                        ></VueSelect>
+                        />
                     </div>
                 </div>
                 <button class="enter-modal-add-user" @click="sendNewUser">Создать</button>
