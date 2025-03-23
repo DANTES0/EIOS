@@ -3,6 +3,7 @@ import { computed } from 'vue';
 
 const props = defineProps({
     lesson: Object,
+    isTeacherSchedule: Boolean, // Новый пропс
 });
 
 const teacherName = computed(
@@ -12,6 +13,7 @@ const classroom = computed(() => props.lesson?.classroom || '-');
 const lessonType = computed(() =>
     props.lesson.type === 'Лабораторная' ? 'Лаб.' : props.lesson.type,
 );
+const groupName = computed(() => props.lesson?.group?.name || '-');
 
 function convertToShortName(fullName) {
     let shortName = fullName
@@ -35,7 +37,12 @@ function convertToShortName(fullName) {
 <template>
     <div v-if="lesson" class="lesson-cell">
         <div class="title">{{ lesson.subjectName }}</div>
-        <div class="teacher" v-html="convertToShortName(teacherName)"></div>
+
+        <!-- Если отображаем расписание препода, показываем группу -->
+        <div v-if="isTeacherSchedule" class="group">{{ lesson.group.name }}</div>
+        <!-- Если расписание группы, показываем ФИО препода -->
+        <div v-else class="teacher" v-html="convertToShortName(teacherName)"></div>
+
         <div class="details">
             <div class="type">{{ lessonType }}</div>
             <div class="room">{{ classroom }}</div>
@@ -66,7 +73,8 @@ function convertToShortName(fullName) {
     font-weight: 700;
 }
 
-.teacher {
+.teacher,
+.group {
     margin-top: auto;
     margin-bottom: 22px;
 }

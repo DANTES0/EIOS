@@ -15,11 +15,14 @@ import VTimetableInput from '../UX/VTimetableInput.vue';
 let options = ['1', '2', '3'];
 let array = ref([]);
 let array2 = ref([]);
-const selectedItem = ref({ name: '', id: '' });
+const selectedItem = ref({ name: '', id: '', type: '' });
 
 watch(selectedItem, (item) => {
     console.log(item);
-    eventBus.emit('optionSelected', item.id);
+
+    const lessonsData = [item.id, item.type];
+
+    eventBus.emit('optionSelected', lessonsData);
 });
 
 // const selected = ref("");
@@ -46,6 +49,7 @@ const fetchGroup = async () => {
         array.value.push({
             name: response.data.value.data[i].name, //value label
             id: response.data.value.data[i].id,
+            type: 'group',
         });
     }
 
@@ -53,6 +57,7 @@ const fetchGroup = async () => {
         array2.value.push({
             name: getShortName(responseTeacher.data.value.data[i].name),
             id: `teacher${responseTeacher.data.value.data[i].id}`,
+            type: 'teacher',
         });
     }
 
@@ -92,7 +97,10 @@ const temp = ref('');
 
 function onSelectedItemChange(item) {
     selectedItem.value = item; // Обновляем объект целиком
-    eventBus.emit('optionSelected', item.id); // Вызываем событие
+
+    const lessonsData = [item.id, item.type];
+
+    eventBus.emit('optionSelected', lessonsData); // Вызываем событие
 }
 </script>
 

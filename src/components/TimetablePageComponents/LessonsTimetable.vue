@@ -12,9 +12,11 @@ import eventBus from '../../eventBus';
 const selectedOption = ref('1');
 const scheduleGrid = ref([]);
 const isEven = ref(null);
+const scheduleType = ref('');
 
 eventBus.on('optionSelected', (value) => {
-    selectedOption.value = value;
+    selectedOption.value = value[0];
+    scheduleType.value = value[1];
 });
 
 async function loadSchedule() {
@@ -22,6 +24,7 @@ async function loadSchedule() {
 
     if (newGrid.length) {
         scheduleGrid.value = newGrid;
+        console.log(newGrid);
     }
 }
 
@@ -62,7 +65,10 @@ onMounted(() => {
                     </div>
                 </td>
                 <td v-for="(lesson, j) in row" :key="j">
-                    <LessonCell :lesson="lesson" />
+                    <LessonCell
+                        :lesson="lesson"
+                        :is-teacher-schedule="scheduleType === 'teacher'"
+                    />
                 </td>
             </tr>
         </tbody>
