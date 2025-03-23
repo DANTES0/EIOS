@@ -88,24 +88,45 @@ const selectItem = (item) => {
     placeholderText.value = item.name;
 
     // Добавляем класс для изменения цвета текста
-    inputClass.value = 'selected-text';
+    inputClass.value = 'custom-placeholder';
+};
+
+const handleClearButton = () => {
+    searchText.value = '';
+    placeholderText.value = 'Поиск...';
+    typeSearch.value = '';
+    inputClass.value = '';
 };
 
 const handleFocus = () => {
     showDropdown.value = true;
     isRotated.value = true;
+    inputClass.value = '';
 };
 
 const handleClickOutside = (event) => {
     if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
         showDropdown.value = false;
         isRotated.value = false;
+
+        if (
+            placeholderText.value !== 'Поиск...' &&
+            placeholderText.value !== 'Группы' &&
+            placeholderText.value !== 'Преподаватели'
+        )
+            inputClass.value = 'custom-placeholder';
     }
 };
 
 const goBack = () => {
+    // Если уже выбран элемент, не очищаем плейсхолдер
+    if (selectedItem.value) {
+        placeholderText.value = selectedItem.value.name;
+    } else {
+        placeholderText.value = 'Поиск...';
+    }
+
     typeSearch.value = '';
-    placeholderText.value = 'Поиск...';
 };
 
 watch(
@@ -152,13 +173,7 @@ onBeforeUnmount(() => {
         <div
             v-if="placeholderText !== 'Поиск...'"
             class="absolute top-[5.5px] right-0 mr-[12px] cursor-pointer hover:text-[#1E66F5]"
-            @click="
-                () => {
-                    searchText = '';
-                    placeholderText = 'Поиск...';
-                    typeSearch = '';
-                }
-            "
+            @click="handleClearButton"
         >
             X
         </div>
@@ -268,7 +283,7 @@ onBeforeUnmount(() => {
 /* .selected-text {
     color: #1e66f5 !important;
 } */
-input::placeholder {
+input.custom-placeholder::placeholder {
     color: #fbfbfe;
 }
 </style>
