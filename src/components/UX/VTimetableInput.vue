@@ -73,11 +73,25 @@ const filteredTypes = computed(() => {
 const emit = defineEmits(['update:modelValue']);
 const inputClass = ref('');
 const selectItem = (item) => {
+    if (selectedItem.value && selectedItem.value.id === item.id) {
+        showDropdown.value = false;
+        isRotated.value = false;
+        inputClass.value = 'custom-placeholder';
+
+        // Обновляем placeholderText даже если элемент не изменился
+        placeholderText.value = item.name;
+
+        return;
+    }
+
     selectedItem.value = item;
     searchText.value = item.name;
     emit('update:modelValue', JSON.parse(JSON.stringify(item)));
     showDropdown.value = false;
     isRotated.value = false;
+
+    // Обновляем placeholderText
+    placeholderText.value = item.name;
 
     if (typeSearch.value === '') {
         typeSearch.value = item.name.includes('Преподаватели')
@@ -85,9 +99,6 @@ const selectItem = (item) => {
             : 'Группы';
     }
 
-    placeholderText.value = item.name;
-
-    // Добавляем класс для изменения цвета текста
     inputClass.value = 'custom-placeholder';
 };
 
