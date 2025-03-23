@@ -7,6 +7,7 @@ import VButton from '../UX/VButton.vue';
 import config from '../../config';
 import { useFetch } from '@vueuse/core';
 import { authState } from '../../authState';
+import router from '../../router/routes.js';
 
 // const selectedImage = ref('');
 const imagePreview = ref('');
@@ -35,7 +36,7 @@ const fetchPrepodDetails = async () => {
 
         items.value = response.data.value;
         console.log(items.value);
-        login.value = items.value.login;
+        login.value = items.value.user.login;
         password.value = items.value.password;
         name.value = items.value.name;
         phone.value = items.value.phone.replace(/\D/g, '');
@@ -105,12 +106,28 @@ const onSubmit = async () => {
             new Blob([JSON.stringify(payload)], { type: 'application/json' }),
         );
 
-        formData.append('images', photo.value);
+        formData.append('photo', photo.value);
 
-        const response = await fetch(`${config.ServerURL}/api/v1/teacher`, {
-            method: 'POST',
-            body: formData,
-        });
+        let response;
+
+        if (authState.editUserId) {
+            response = await fetch(
+                `${config.ServerURL}/api/v1/teacher/${authState.editUserId}`,
+                {
+                    method: 'PUT',
+                    body: formData,
+                },
+            );
+        } else {
+            response = await fetch(`${config.ServerURL}/api/v1/teacher`, {
+                method: 'POST',
+                body: formData,
+            });
+        }
+
+        if (response.ok) {
+            authState.isArticle = 'UserTeachers';
+        }
 
         console.log('Image uploaded successfully:', response);
         console.log('Image uploaded successfully:', phone);
@@ -257,16 +274,18 @@ const onSubmit = async () => {
                 <div>
                     <div>Номер телефона</div>
                     <div class="h-[50px]">
-                        <!-- Применяем маску для телефона на уровне компонента CustomInput -->
-                        <CustomInput
+                        <v-input
                             v-model="phone"
-                            mask="+7 (999) 999 99 99"
+                            type-input="default"
                             placeholder="Введите номер телефона"
-                        />
+                            mask="+7 (999)-999-99-99"
+                        ></v-input>
                     </div>
                     <div class="checkTeacher">
-                        <div class="checkTeacherTitle">Отображать на главной странице?</div>
-                        <input type="checkbox" class="checkbox" v-model="cover" />
+                        <div class="checkTeacherTitle">
+                            Отображать на главной странице?
+                        </div>
+                        <input v-model="cover" type="checkbox" class="checkbox" />
                     </div>
                 </div>
             </div>

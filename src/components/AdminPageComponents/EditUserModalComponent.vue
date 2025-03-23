@@ -9,7 +9,7 @@ import config from '../../config';
 
 const login = ref();
 const password = ref();
-const roles = ref([{ id: 3, name: 'ROLE_STUDENT' }]);
+const roles = ref([]);
 
 const selected = ref(null);
 const placeholder = ref('Поиск...');
@@ -41,8 +41,11 @@ const fetchData = async () => {
 
     login.value = userData.login;
 
+    console.log("РОЛИ", userData);
+
     // Проверяем структуру данных перед присвоением placeholder'ов
-    placeholder.value = userData.role?.name || 'Выберите роль';
+    placeholder.value = userData.roles[0]?.name || 'Выберите роль';
+    selected.value = userData.roles[0]?.name;
 };
 
 onMounted(() => {
@@ -53,7 +56,7 @@ onMounted(() => {
 let array = ref([]);
 
 const handleRoleSelected = (option) => {
-    roles.value = [{ id: option.value }]; // Передаем выбранную роль
+    roles.value[0] = { name: option.label, id: option.value }; // Передаем выбранную роль
     placeholder.value = option.label;
     selected.value = option;
 };
@@ -75,6 +78,7 @@ const sendNewUser = async () => {
 
     try {
         const response = await fetch(
+
             `${config.ServerURL}/api/v1/users/${authState.editUserId}`,
             {
                 method: 'PUT', // Изменение пользователя
@@ -84,7 +88,7 @@ const sendNewUser = async () => {
                 },
             },
         );
-
+        console.log("РоЛи", payload)
         if (!response.ok) {
             const errorText = await response.text();
 

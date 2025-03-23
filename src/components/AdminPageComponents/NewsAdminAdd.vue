@@ -108,7 +108,7 @@ const giveMeAllArea = async () => {
         fullInformation: mainText.value,
         date: date.value,
         photoNumber: mainImageIndex.value,
-        onMainPage: false,
+        cover: false,
     };
 
     // Используем Blob для передачи JSON с типом 'application/json'
@@ -218,7 +218,7 @@ const handleOptionSelected = (option) => {
         <div class="EditMainText">
             <QuillEditor
                 v-model:content="mainInfo"
-                content-type="html"
+                content-type="text"
                 theme="snow"
                 toolbar="full"
             ></QuillEditor>
@@ -249,7 +249,7 @@ const handleOptionSelected = (option) => {
         <div class="enterBlo">
             <div class="checkNews">
                 <div class="checkNewsTitle">Отображать новость на главной странице?</div>
-                <input type="checkbox" class="checkbox" />
+                <input v-model="cover" type="checkbox" class="checkbox" />
             </div>
             <div class="buttons">
                 <button class="btn" @click="router.back()">Отменить</button>

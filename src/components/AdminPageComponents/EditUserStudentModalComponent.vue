@@ -37,7 +37,11 @@ const fetchData = async () => {
 
     // Проверяем структуру данных перед присвоением placeholder'ов
     placeholder.value = response.data.value.group?.name || 'Выберите группу';
+    selectedGroupId.value = array3.value.group?.id;
     placeholder2.value = response.data.value.course || 'Выберите курс';
+    console.log(selectedCourse.value, response.data.value.course);
+    selectedCourse.value = placeholder2.value;
+    console.log(selectedCourse.value);
 };
 
 let array = ref([]);

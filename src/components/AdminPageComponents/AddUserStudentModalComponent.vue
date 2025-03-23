@@ -53,6 +53,7 @@ const handleOptionSelected = (option) => {
 
 const handleOptionSelected2 = (option) => {
     selectedCourse.value = option.value;
+    course.value = option.value;
     placeholder2.value = option.label;
 };
 
@@ -65,20 +66,32 @@ const hideModal = (event) => {
 };
 
 const sendNewStudent = async () => {
-    const { data, error } = await useFetch(`${config.ServerURL}/students/register`, {
+    console.log(
+        login.value,
+        password.value,
+        roles.value,
+        name.value,
+        group.value,
+        selectedGroupId.value,
+        course.value,
+        selectedCourse.value,
+    );
+    const { data, error } = await useFetch(`${config.ServerURL}/api/v1/students`, {
         method: 'POST',
         body: JSON.stringify({
             login: login.value,
             password: password.value,
             roles: roles.value,
             name: name.value,
-            group: group.value,
+            groupId: group.value,
             course: course.value,
         }),
         headers: {
             'Content-Type': 'application/json',
         },
     }).json();
+
+
 
     authState.isVisibleAddUserStudentModalComponent = false;
     eventBus.emit('studentAdded');
