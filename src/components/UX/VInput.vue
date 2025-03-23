@@ -71,11 +71,11 @@ const filteredTypes = computed(() => {
 });
 
 const emit = defineEmits(['update:modelValue']);
-
+const inputClass = ref('');
 const selectItem = (item) => {
     selectedItem.value = item;
-    searchText.value = item.name; // Устанавливаем только текстовое значение
-    emit('update:modelValue', item); // Генерируем событие для родительского компонента
+    searchText.value = item.name;
+    emit('update:modelValue', JSON.parse(JSON.stringify(item)));
     showDropdown.value = false;
     isRotated.value = false;
 
@@ -85,7 +85,10 @@ const selectItem = (item) => {
             : 'Группы';
     }
 
-    placeholderText.value = item.name; // Обновляем placeholder выбранным значением
+    placeholderText.value = item.name;
+
+    // Добавляем класс для изменения цвета текста
+    inputClass.value = 'selected-text';
 };
 
 const handleFocus = () => {
@@ -141,8 +144,11 @@ onBeforeUnmount(() => {
             v-model="searchText"
             class="w-full bg-[#181818] border border-[#cccccc] outline-none font-light p-1 rounded focus:border-[#1E66F5]"
             :placeholder="placeholderText"
+            :class="inputClass"
+            autocomplete="off"
             @focus="handleFocus"
         />
+
         <div
             v-if="placeholderText !== 'Поиск...'"
             class="absolute top-[5.5px] right-0 mr-[12px] cursor-pointer hover:text-[#1E66F5]"
@@ -258,5 +264,11 @@ onBeforeUnmount(() => {
 .rotate-90 {
     transform: rotate(0);
     transition: transform 0.3s ease;
+}
+/* .selected-text {
+    color: #1e66f5 !important;
+} */
+input::placeholder {
+    color: #fbfbfe;
 }
 </style>
