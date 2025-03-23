@@ -10,7 +10,7 @@ import VueSelect from 'vue3-select-component';
 import Multiselect from '@vueform/multiselect';
 import eventBus from '../../eventBus.js';
 import config from '../../config.js';
-import VInput from '../UX/VInput.vue';
+import VTimetableInput from '../UX/VTimetableInput.vue';
 
 let options = ['1', '2', '3'];
 let array = ref([]);
@@ -109,7 +109,7 @@ function onSelectedItemChange(item) {
     /> -->
 
         <div class="input-search w-[80%] ml-[22px] mt-[10px]">
-            <v-input
+            <v-timetable-input
                 v-model="selectedItem.name"
                 :items="array"
                 :items2="array2"
