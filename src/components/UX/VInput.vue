@@ -4,7 +4,6 @@ import Inputmask from 'inputmask';
 import IconDownArrow from '../Icons/Icon/IconDownArrow.vue';
 import IconBase from '../Icons/IconBase.vue';
 
-const selectedItem = ref(null);
 const showDropdown = ref(false);
 const placeholderText = ref('Поиск...');
 const typeSearch = ref('');
