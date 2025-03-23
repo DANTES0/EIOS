@@ -8,7 +8,10 @@ const props = defineProps({
 const teacherName = computed(
     () => props.lesson?.teacher?.name || 'Преподаватель не указан',
 );
-const classroom = computed(() => props.lesson?.classroom || 'Аудитория не указана');
+const classroom = computed(() => props.lesson?.classroom || '-');
+const lessonType = computed(() =>
+    props.lesson.type === 'Лабораторная' ? 'Лаб.' : props.lesson.type,
+);
 
 function convertToShortName(fullName) {
     let shortName = fullName
@@ -34,7 +37,7 @@ function convertToShortName(fullName) {
         <div class="title">{{ lesson.subjectName }}</div>
         <div class="teacher" v-html="convertToShortName(teacherName)"></div>
         <div class="details">
-            <div class="type">{{ lesson.type }}</div>
+            <div class="type">{{ lessonType }}</div>
             <div class="room">{{ classroom }}</div>
         </div>
     </div>
