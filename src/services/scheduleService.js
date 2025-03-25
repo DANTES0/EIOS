@@ -4,6 +4,7 @@ const timeSlots = ['09:00', '10:50', '12:40', '14:55', '16:45', '18:30', '20:05'
 const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
 const fetchSchedule = async (selectedOption) => {
+    console.log(selectedOption);
     const params = new URLSearchParams({
         pageSize: 999,
         pageNumber: 0,

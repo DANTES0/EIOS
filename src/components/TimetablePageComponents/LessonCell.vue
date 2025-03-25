@@ -1,5 +1,7 @@
 <script setup>
 import { computed } from 'vue';
+import { fetchSchedule } from '../../services/scheduleService.js';
+import eventBus from '../../eventBus.js';
 
 const props = defineProps({
     lesson: Object,
@@ -32,26 +34,72 @@ function convertToShortName(fullName) {
 
     return shortName;
 }
+
+function convertToShortNameWithoutNbsp(fullName) {
+    let shortName = fullName
+        .trim()
+        .split(' ')
+        .filter((word) => word.length > 0);
+
+    if (shortName.length >= 2) {
+        const nameLetter = shortName[1][0];
+        const middleNameLetter = shortName[2] ? shortName[2][0] : '';
+
+        shortName = `${shortName[0]} ${nameLetter}.${middleNameLetter ? middleNameLetter + '.' : ''}`;
+    } else {
+        shortName = shortName[0];
+    }
+
+    return shortName;
+}
 </script>
 
 <template>
     <div v-if="lesson" class="lesson-cell">
+
         <div class="title">{{ lesson.subjectName }}</div>
 
         <!-- Если отображаем расписание препода, показываем группу -->
-        <div v-if="isTeacherSchedule" class="group">{{ lesson.group.name }}</div>
+        <div v-if="isTeacherSchedule" class="group">
+            <span
+                class="clickable-text"
+                @click="
+                    eventBus.emit('optionSelectedClick', [
+                        lesson?.group?.id,
+                        'group',
+                        lesson?.group?.name,
+                    ])
+                "
+            >
+                {{ lesson.group.name }}
+            </span>
+        </div>
+
         <!-- Если расписание группы, показываем ФИО препода -->
-        <div v-else class="teacher" v-html="convertToShortName(teacherName)"></div>
+        <div v-else class="teacher">
+            <span
+                class="clickable-text"
+                @click="eventBus.emit('optionSelectedClick', [ 'teacher' + lesson?.teacher?.id, 'teacher', convertToShortNameWithoutNbsp(teacherName)])"
+                v-html="convertToShortName(teacherName)"
+            ></span>
+        </div>
 
         <div class="details">
-            <div class="type">{{ lessonType }}</div>
-            <div class="room">{{ classroom }}</div>
+            <div class="type" :class="{ 'green-background': lessonType === 'Консультация' }">{{ lessonType }}</div>
+            <div class="room" :class="{ 'green-background': lessonType === 'Консультация' }">{{ classroom }}</div>
         </div>
     </div>
     <div v-else class="lesson-cell empty"></div>
 </template>
 
+
 <style scoped>
+.green-background {
+
+   color: #00c279 !important; /* Светло-зеленый цвет */
+    font-weight: bold;
+
+}
 .lesson-cell {
     padding: 8px;
     text-align: center;
@@ -88,5 +136,11 @@ function convertToShortName(fullName) {
     font-size: 20px;
     font-weight: 900;
     color: #1e66f5;
+}
+
+.clickable-text:hover {
+    color: #1e66f5;
+    font-weight: bold;
+    cursor: pointer;
 }
 </style>

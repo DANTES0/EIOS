@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import Inputmask from 'inputmask';
+import eventBus from '../../eventBus.js';
 
 const selectedItem = ref(null);
 const showDropdown = ref(false);
@@ -73,6 +74,8 @@ const filteredTypes = computed(() => {
 const emit = defineEmits(['update:modelValue']);
 const inputClass = ref('');
 const selectItem = (item) => {
+    console.log('SELECTED2', selectedItem.value);
+
     if (selectedItem.value && selectedItem.value.id === item.id) {
         showDropdown.value = false;
         isRotated.value = false;
@@ -101,6 +104,19 @@ const selectItem = (item) => {
 
     inputClass.value = 'custom-placeholder';
 };
+
+eventBus.on('optionSelectedClick', (value) => {
+    console.log('SELECTED', value);
+    const [id, type, name] = value; // Распаковываем массив значений
+
+    selectItem({ id, type, name }); // Вызываем метод selectItem с объектом
+
+    if (type === 'teacher') {
+        typeSearch.value = 'Преподаватели';
+    } else {
+        typeSearch.value = 'Группы';
+    }
+});
 
 const handleClearButton = () => {
     searchText.value = '';
