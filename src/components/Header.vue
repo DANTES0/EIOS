@@ -3,8 +3,6 @@
 import HeaderAnchor from './HeaderAnchor.vue';
 import { authState } from '../authState';
 import { useStore } from 'vuex';
-import IconEducation from './Icons/Icon/IconEducation.vue';
-import IconBase from './Icons/IconBase.vue';
 
 const store = useStore();
 

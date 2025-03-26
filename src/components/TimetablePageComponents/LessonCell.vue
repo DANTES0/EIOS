@@ -56,7 +56,6 @@ function convertToShortNameWithoutNbsp(fullName) {
 
 <template>
     <div v-if="lesson" class="lesson-cell">
-
         <div class="title">{{ lesson.subjectName }}</div>
 
         <!-- Если отображаем расписание препода, показываем группу -->
@@ -79,26 +78,39 @@ function convertToShortNameWithoutNbsp(fullName) {
         <div v-else class="teacher">
             <span
                 class="clickable-text"
-                @click="eventBus.emit('optionSelectedClick', [ 'teacher' + lesson?.teacher?.id, 'teacher', convertToShortNameWithoutNbsp(teacherName)])"
+                @click="
+                    eventBus.emit('optionSelectedClick', [
+                        'teacher' + lesson?.teacher?.id,
+                        'teacher',
+                        convertToShortNameWithoutNbsp(teacherName),
+                    ])
+                "
                 v-html="convertToShortName(teacherName)"
             ></span>
         </div>
 
         <div class="details">
-            <div class="type" :class="{ 'green-background': lessonType === 'Консультация' }">{{ lessonType }}</div>
-            <div class="room" :class="{ 'green-background': lessonType === 'Консультация' }">{{ classroom }}</div>
+            <div
+                class="type"
+                :class="{ 'green-background': lessonType === 'Консультация' }"
+            >
+                {{ lessonType }}
+            </div>
+            <div
+                class="room"
+                :class="{ 'green-background': lessonType === 'Консультация' }"
+            >
+                {{ classroom }}
+            </div>
         </div>
     </div>
     <div v-else class="lesson-cell empty"></div>
 </template>
 
-
 <style scoped>
 .green-background {
-
-   color: #00c279 !important; /* Светло-зеленый цвет */
+    color: #00c279 !important; /* Светло-зеленый цвет */
     font-weight: bold;
-
 }
 .lesson-cell {
     padding: 8px;
