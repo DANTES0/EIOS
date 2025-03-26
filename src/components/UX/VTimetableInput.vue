@@ -317,4 +317,7 @@ input.custom-placeholder::placeholder {
 div {
     font-family: Nunito;
 }
+input {
+    border-color: rgb(128, 128, 128);
+}
 </style>
