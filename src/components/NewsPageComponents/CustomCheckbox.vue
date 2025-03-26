@@ -34,7 +34,7 @@ function toggleCheckbox() {
     user-select: none;
     color: rgb(134, 134, 134);
     font-family: Nunito;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 300;
     cursor: pointer;
 }

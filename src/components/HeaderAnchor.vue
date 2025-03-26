@@ -1,30 +1,18 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
 import DropdownHeader from './MainPageComponents/DropdownHeader.vue';
 import SearchTimetable from './TimetablePageComponents/InputSearch.vue';
+import CurrentWeekCheckbox from './UX/CurrentWeekCheckbox.vue';
 import NewsFilters from './NewsPageComponents/NewsFilters.vue';
 import SearchPrepod from './PrepodavateliPageComponents/SearchPrepod.vue';
+import { ref } from 'vue';
+import CustomCheckbox from './NewsPageComponents/CustomCheckbox.vue';
+import eventBus from '../eventBus.js';
 
-// this.$refs.dropbtn.addEventListener("click", function (event) {
-//   document.getElementById("myDropdown").classList.toggle("show")
-//   console.log("click")
-// })
-//Закрыть раскрывающийся список, если пользователь щелкнет за его пределами.
-//window.onclick = function (event) {
+const showCurrentWeek = ref(false);
 
-//   // if (!event.target.matches(".dropbtn")) {
-//   //   var dropdowns = document.getElementsByClassName("dropdown-content")
-//   //   var i
-
-//   //   for (i = 0; i < dropdowns.length; i++) {
-//   //     var openDropdown = dropdowns[i]
-//   //     if (openDropdown.classList.contains("show")) {
-//   //       openDropdown.classList.remove("show")
-//   //     }
-//   //   }
-//   // }
-// }
+function toggleWeekFilter() {
+    eventBus.emit('toggleCurrentWeek', showCurrentWeek.value);
+}
 </script>
 
 <template>
@@ -33,6 +21,7 @@ import SearchPrepod from './PrepodavateliPageComponents/SearchPrepod.vue';
     </div>
     <div v-if="$route.path == `/timetable`" class="search-timetable-anchor">
         <SearchTimetable></SearchTimetable>
+        <CurrentWeekCheckbox class="current-week-checkbox" />
     </div>
     <div v-if="$route.path == `/news`" class="news-filters">
         <NewsFilters></NewsFilters>
@@ -40,4 +29,9 @@ import SearchPrepod from './PrepodavateliPageComponents/SearchPrepod.vue';
     <div v-if="$route.path == `/teachers`" class=""><search-prepod></search-prepod></div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.current-week-checkbox {
+    margin-left: 22px;
+    margin-top: 12px;
+}
+</style>
