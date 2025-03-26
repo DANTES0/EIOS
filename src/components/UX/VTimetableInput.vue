@@ -191,7 +191,7 @@ onBeforeUnmount(() => {
     <div v-if="typeInput === 'stairsInput'" ref="dropdownRef" class="relative w-full">
         <input
             v-model="searchText"
-            class="w-full bg-[#181818] border border-[#cccccc] outline-none font-light p-1 rounded focus:border-[#1E66F5]"
+            class="w-full bg-[#181818] border border-[#cccccc] outline-none font-light p-1 focus:border-[#1E66F5]"
             :placeholder="placeholderText"
             :class="inputClass"
             autocomplete="off"
@@ -207,7 +207,7 @@ onBeforeUnmount(() => {
         </div>
         <div
             v-if="showDropdown"
-            class="absolute z-10 w-full bg-[#181818] border border-[#1E66F5] mt-1 rounded"
+            class="absolute z-10 w-full bg-[#181818] border border-[#1E66F5] mt-1"
         >
             <ul v-if="typeSearch === '' && !searchText.trim()">
                 <li
