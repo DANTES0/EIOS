@@ -106,7 +106,7 @@ function onSelectedItemChange(item) {
 
 <template>
     <div class="search-timetable-wrap">
-        <div class="search-timetable-text">Поиск по группе или преподавателю</div>
+        <!-- <div class="search-timetable-text">Поиск по группе <br />или преподавателю</div> -->
         <!-- <Multiselect
         v-model="value"
       placeholder="Select your character"
@@ -253,9 +253,10 @@ function onSelectedItemChange(item) {
     flex-direction: column;
 }
 .search-timetable-text {
-    font-family: JetBrainsMono;
+    font-family: Nunito;
+    line-height: 1.2rem;
     color: #ccc;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 300;
     margin-left: 22px;
 }

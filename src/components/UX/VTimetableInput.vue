@@ -107,6 +107,7 @@ const selectItem = (item) => {
 
 eventBus.on('optionSelectedClick', (value) => {
     console.log('SELECTED', value);
+
     const [id, type, name] = value; // Распаковываем массив значений
 
     selectItem({ id, type, name }); // Вызываем метод selectItem с объектом
@@ -312,5 +313,8 @@ onBeforeUnmount(() => {
 } */
 input.custom-placeholder::placeholder {
     color: #fbfbfe;
+}
+div {
+    font-family: Nunito;
 }
 </style>
