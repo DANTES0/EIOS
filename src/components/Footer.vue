@@ -18,10 +18,14 @@
                     alt=""
                     class="footer-description-icon"
                 />
-                <div class="footer-description-text">
+                <a
+                    href="https://yandex.ru/maps/?text=Новый корпус 190005, Санкт-Петербург ул. 1-я Красноармейская, д.1"
+                    target="_blank"
+                    class="footer-description-text"
+                >
                     Новый корпус 190005, Санкт-Петербург ул. 1-я Красноармейская, д.1 ст.
                     м. Технологический институт
-                </div>
+                </a>
             </div>
             <div class="footer-description-content">
                 <img
@@ -29,9 +33,9 @@
                     alt=""
                     class="footer-description-icon"
                 />
-                <div class="footer-description-text">
+                <a href="https://voenmeh.ru/education/faculties-and-departments/faco/kaf-o7" class="footer-description-text">
                     https://voenmeh.ru/education/faculties-and-departments/faco/kaf-o7
-                </div>
+                </a>
             </div>
             <div class="footer-description-content">
                 <img
@@ -39,7 +43,7 @@
                     alt=""
                     class="footer-description-icon"
                 />
-                <div class="footer-description-text">kaf_o7@voenmeh.ru</div>
+                <a href="mailto:kaf_o7@voenmeh.ru" class="footer-description-text">kaf_o7@voenmeh.ru</a>
             </div>
             <div class="footer-description-content">
                 <img
@@ -47,7 +51,9 @@
                     alt=""
                     class="footer-description-icon"
                 />
-                <div class="footer-description-text">+7 (812) 490-05-51</div>
+                <a href="tel:+78124900551" class="footer-description-text">
+                    +7 (812) 490-05-51
+                </a>
             </div>
         </div>
         <div class="footer-reference">
@@ -84,6 +90,12 @@
 .footer-description-text {
     font-weight: 300;
     font-size: 16px;
+    color: #cccccc; /* Цвет текста */
+    text-decoration: none; /* Убираем подчеркивание */
+}
+.footer-description-text:hover {
+    color: #ffffff; /* Изменяем цвет при наведении */
+    cursor: pointer; /* Добавляем указатель мыши */
 }
 .footer-description {
     display: flex;

@@ -16,6 +16,7 @@ const areLoaded = ref(false); // Добавляем состояние загр�
 const route = useRoute();
 const router = useRouter();
 const selectMode = ref(false);
+const editMode = ref(false);
 const forceDelete = ref(false);
 
 async function loadNews() {
@@ -82,6 +83,11 @@ const toggleSelectMode = () => {
     selectMode.value = !selectMode.value;
 };
 
+const toggleEditMode = () => {
+    console.log(editMode.value);
+    editMode.value = !editMode.value;
+};
+
 const toggleForceDelete = () => {
     console.log('forceDelete');
     console.log(forceDelete.value);
@@ -99,9 +105,12 @@ function addNews() {
             <button class="addNews" @click="addNews">Добавить новость</button>
         </div>
         <button v-if="!selectMode" class="addNews" @click="toggleSelectMode">
+            Редактировать новость
+        </button>
+        <button v-if="!selectMode" class="addNews" @click="toggleSelectMode, toggleEditMode">
             Удаление новостей
         </button>
-        <div v-else class="button3 flex gap-4">
+        <div v-if="selectMode && !editMode" class="button3 flex gap-4">
             <button class="addNews" @click="toggleSelectMode">Отменить</button>
             <button
                 class="addNews"
