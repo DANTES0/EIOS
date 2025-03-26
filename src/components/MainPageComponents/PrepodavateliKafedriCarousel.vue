@@ -7,6 +7,7 @@ import { onMounted } from 'vue';
 import PrepodavateliKafedriItem from './PrepodavateliKafedriItem.vue';
 import ProgressSpinner from 'primevue/progressspinner';
 import config from '../../config';
+import router from '../../router/routes.js';
 
 let flag = ref(false);
 const prepod_url = computed(() => {
@@ -35,8 +36,13 @@ const fetchPrepod = async () => {
                 }).toString(),
         ).json();
 
-        if (statusCode.value == 200) {
+        if (statusCode.value === 200) {
             prepod.value = data.value.data;
+            prepod.value.forEach((item) => {
+                item.teacherId = item.id; // Добавляем teacherId как свойство объекта
+                console.log('TSsfs', data.value);
+            });
+
             prepod.value.sort();
             console.log(prepod.value);
 
@@ -114,6 +120,10 @@ const prev = () => {
     }
 };
 
+const goToTeacherDetail = (teacherId) => {
+    router.push({ name: 'TeacherDetail', params: { id: teacherId } });
+};
+
 onMounted(() => {
     fetchPrepod();
 });
@@ -137,6 +147,7 @@ onMounted(() => {
                     :rank="prepod.rank"
                     :current-index="currentIndex"
                     :class="{ hidden: index === 0 || index === 4 }"
+                    @click="goToTeacherDetail(prepod.teacherId)"
                 />
             </div>
             <div
@@ -196,6 +207,7 @@ onMounted(() => {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    cursor: pointer;
 }
 
 @keyframes anima {
