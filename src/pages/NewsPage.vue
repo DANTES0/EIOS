@@ -121,7 +121,7 @@ watch(forceDelete, (newVal) => {
 </script>
 
 <template>
-    <Tabs v-if="showTabs" title="Новости кафедры" :show-icon="false" />
+    <Tabs title="Новости кафедры" :show-icon="false" />
     <div class="news-page-container">
         <div
             v-show="!isLoading && areLoaded && newsData.length"
