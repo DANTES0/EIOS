@@ -49,7 +49,7 @@ const changeTheme = () => {
             :class="$route.path.match(/^\/teachers\/\d+$/) ? 'w-full' : 'w-[15%]'"
         >
             <div class="page-header">
-                <Popper :placement="'right'" :hover="true" content="Главная страница">
+                <Popper :placement="'right'" :hover="true" content="Главная">
                     <a
                         id="main"
                         class="page"
@@ -73,11 +73,7 @@ const changeTheme = () => {
                         @click="$router.push('/timetable')"
                     ></a>
                 </Popper>
-                <Popper
-                    :placement="'right'"
-                    :hover="true"
-                    content="Список преподавателей"
-                >
+                <Popper :placement="'right'" :hover="true" content="Преподаватели">
                     <a
                         id="f"
                         class="page"
@@ -85,11 +81,7 @@ const changeTheme = () => {
                         @click="$router.push('/teachers')"
                     ></a>
                 </Popper>
-                <Popper
-                    :placement="'right'"
-                    :hover="true"
-                    content="Панель администратора"
-                >
+                <Popper :placement="'right'" :hover="true" content="Админ-панель">
                     <a
                         v-if="authState.isAccess"
                         id="e"
