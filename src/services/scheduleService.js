@@ -5,6 +5,7 @@ const days = ['Понедельник', 'Вторник', 'Среда', 'Чет�
 
 const fetchSchedule = async (selectedOption) => {
     console.log(selectedOption);
+
     const params = new URLSearchParams({
         pageSize: 999,
         pageNumber: 0,

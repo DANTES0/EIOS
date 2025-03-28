@@ -30,7 +30,7 @@ const url = computed(() => {
     return `${config.ServerURL}/api/v1/teacher/${authState.editUserId}`;
 });
 const items = ref({});
-const fetchPrepodDetails = async () => {
+const fetchTeacherDetails = async () => {
     if (authState.editUserId) {
         const response = await useFetch(url).json();
 
@@ -55,14 +55,11 @@ const fetchPrepodDetails = async () => {
 };
 
 onMounted(() => {
-    fetchPrepodDetails();
+    fetchTeacherDetails();
 });
 onBeforeMount(() => {
-    fetchPrepodDetails();
+    fetchTeacherDetails();
 });
-//
-// onBeforeMount(fetchPrepodDetails);
-// onUpdated(fetchPrepodDetails);
 
 const onImageSelected = (event) => {
     const file = event.target.files[0];

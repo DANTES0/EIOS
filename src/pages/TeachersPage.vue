@@ -1,6 +1,6 @@
 <script setup>
 import Tabs from '../components/Tabs.vue';
-import PrepodCard from '../components/PrepodavateliPageComponents/PrepodCard.vue';
+import TeacherCard from '../components/PrepodavateliPageComponents/TeacherCard.vue';
 import { useFetch } from '@vueuse/core';
 import config from '../config';
 import { onMounted, watch } from 'vue';
@@ -61,7 +61,7 @@ watch(searchedValue, filterTeacher);
         <div
             class="flex flex-wrap mt-[30px] ml-[30px] mr-[30px] items-center justify-center gap-14"
         >
-            <prepod-card
+            <teacher-card
                 v-for="(item, index) in filteredArray"
                 :key="index"
                 :name="getShortName(item.name)"
@@ -69,7 +69,7 @@ watch(searchedValue, filterTeacher);
                 :rank="item.rank"
                 :post="item.post"
                 @click="$router.push(`/teachers/detail/${item.id}`)"
-            ></prepod-card>
+            ></teacher-card>
         </div>
     </div>
 </template>

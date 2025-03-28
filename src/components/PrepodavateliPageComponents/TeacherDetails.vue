@@ -17,7 +17,7 @@ const url = computed(() => {
     return `${config.ServerURL}/api/v1/teacher/${route.params.id}`;
 });
 const items = ref({});
-const fetchPrepodDetails = async () => {
+const fetchTeacherDetails = async () => {
     const response = await useFetch(url).json();
 
     items.value = response.data.value;
@@ -25,7 +25,7 @@ const fetchPrepodDetails = async () => {
     console.log(response.data.value);
 };
 
-onMounted(fetchPrepodDetails);
+onMounted(fetchTeacherDetails);
 </script>
 
 <template>
