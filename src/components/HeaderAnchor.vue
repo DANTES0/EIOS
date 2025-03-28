@@ -4,7 +4,7 @@ import SearchTimetable from './TimetablePageComponents/InputSearch.vue';
 import CurrentWeekCheckbox from './UX/CurrentWeekCheckbox.vue';
 import CurrentWeekInfo from './UX/CurrentWeekInfo.vue';
 import NewsFilters from './NewsPageComponents/NewsFilters.vue';
-import SearchPrepod from './PrepodavateliPageComponents/SearchPrepod.vue';
+import SearchPrepod from './PrepodavateliPageComponents/InputSearch.vue';
 </script>
 
 <template>
