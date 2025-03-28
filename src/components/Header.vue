@@ -225,6 +225,8 @@ const changeTheme = () => {
     flex-direction: row;
     /* justify-content: space-around; */
     align-items: center;
+    /* font-family: JetBrainsMono;
+    font-weight: 900; */
 }
 .inline-block {
     margin: 0px !important;

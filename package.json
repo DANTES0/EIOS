@@ -21,6 +21,7 @@
         "jsonwebtoken": "^9.0.2",
         "jwt-decode": "^4.0.0",
         "mitt": "^3.0.1",
+        "normalize.css": "^8.0.1",
         "npm": "^10.8.1",
         "primevue": "^4.2.5",
         "vue": "^3.4.15",

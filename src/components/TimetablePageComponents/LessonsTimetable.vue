@@ -59,17 +59,13 @@ onMounted(() => {
                 v-show="!showCurrentWeek || (isEven !== null && isEven === (i % 2 !== 0))"
                 :key="i"
                 :class="{
-                    'current-week':
-                        isEven !== null && isEven === (i % 2 !== 0) && !showCurrentWeek,
+                    'current-week': isEven !== null && isEven === (i % 2 !== 0),
                 }"
             >
                 <td
                     class="time-slot"
                     :class="{
-                        'current-week':
-                            isEven !== null &&
-                            isEven === (i % 2 !== 0) &&
-                            !showCurrentWeek,
+                        'current-week': isEven !== null && isEven === (i % 2 !== 0),
                     }"
                 >
                     <div>{{ timeSlots[Math.floor(i / 2)] }}</div>

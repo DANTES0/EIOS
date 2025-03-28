@@ -1,22 +1,27 @@
 @font-face {
     font-family: JetBrainsMono;
-    src: url('./assets/fonts/JetBrainsMono.ttf');
+    src: url('./assets/fonts/JetBrainsMono.ttf') format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: Rubik;
-    src: url('./assets/fonts/Rubik.ttf');
+    src: url('./assets/fonts/Rubik.ttf') format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: Nunito;
-    src: url('./assets/fonts/Nunito.ttf');
+    src: url('./assets/fonts/Nunito.ttf') format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: Russo-One;
-    src: url('./assets/fonts/RussoOne-Regular.ttf');
+    src: url('./assets/fonts/RussoOne-Regular.ttf') format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: Ubuntu-Bold;
-    src: url('./assets/fonts/Ubuntu-Bold.ttf');
+    src: url('./assets/fonts/Ubuntu-Bold.ttf') format('truetype');
+    font-display: swap;
 }
 
 .dp__theme_dark {

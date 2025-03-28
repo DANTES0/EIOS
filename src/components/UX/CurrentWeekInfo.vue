@@ -18,7 +18,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div v-if="!showCurrentWeek" class="current-week-info">
+    <!-- v-if="!showCurrentWeek" -->
+    <div class="current-week-info">
         <label
             >Текущая неделя
             <br />
