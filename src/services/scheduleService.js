@@ -65,4 +65,41 @@ const currentWeekIsEven = async () => {
     }
 };
 
+export const fetchConsultations = async (teacherId) => {
+    const params = new URLSearchParams({
+        pageSize: 999,
+        pageNumber: 0,
+        teacherId: teacherId,
+        type: 'Консультация',
+    });
+
+    const scheduleUrl = `${config.ServerURL}/api/v1/schedule?${params}`;
+
+    try {
+        const response = await fetch(scheduleUrl);
+        const result = await response.json();
+
+        const scheduleData = result.data || [];
+        const scheduleGrid = Array.from({ length: timeSlots.length }, () =>
+            Array(days.length).fill(null),
+        );
+
+        scheduleData.forEach((entry) => {
+            const parsedTime = entry.timeStart.split('T')[1].slice(0, 5);
+            const timeIndex = timeSlots.indexOf(parsedTime);
+            const dayIndex = days.indexOf(entry.dayOfWeek);
+
+            if (timeIndex !== -1 && dayIndex !== -1) {
+                scheduleGrid[timeIndex][dayIndex] = entry;
+            }
+        });
+
+        return scheduleGrid;
+    } catch (error) {
+        console.error('Ошибка при загрузке консультаций:', error);
+
+        return [];
+    }
+};
+
 export { fetchSchedule, currentWeekIsEven, timeSlots, days };

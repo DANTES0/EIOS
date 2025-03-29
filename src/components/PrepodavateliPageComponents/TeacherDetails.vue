@@ -11,6 +11,7 @@ import { useRoute, useRouter } from 'vue-router';
 import config from '../../config';
 import { computed, ref } from 'vue';
 import { useFetch } from '@vueuse/core';
+import TeacherConsultations from './TeacherConsultations.vue';
 
 const route = useRoute();
 const url = computed(() => {
@@ -116,6 +117,7 @@ onMounted(fetchTeacherDetails);
             <div class="h-[300px] w-[1px] mt-[100px] bg-white"></div>
             <div class="flex flex-col w-[48%] ml-[70px]">
                 <div class="text-[28px] font-extrabold">Ближайшие консультации</div>
+                <TeacherConsultations />
             </div>
         </div>
     </div>

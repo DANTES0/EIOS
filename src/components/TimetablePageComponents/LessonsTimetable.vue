@@ -30,7 +30,6 @@ async function loadSchedule() {
 
     if (newGrid.length) {
         scheduleGrid.value = newGrid;
-        console.log(newGrid);
     }
 }
 
