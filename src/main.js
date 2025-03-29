@@ -8,6 +8,7 @@ import store from './store';
 import Popper from 'vue3-popper';
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
+import VueLazyload from 'vue-lazyload';
 
 createApp(App)
     .use(router)
@@ -17,5 +18,6 @@ createApp(App)
         },
     })
     .use(store)
+    .use(VueLazyload)
     .component('Popper', Popper)
     .mount('#app');

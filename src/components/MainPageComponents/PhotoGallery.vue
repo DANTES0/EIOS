@@ -77,7 +77,7 @@ const imageIsLoaded = (index) => {
 
                     <img
                         v-if="prevFirst >= 0"
-                        :src="photo[prevFirst]"
+                        v-lazy="photo[prevFirst]"
                         class="gallery-image hidden-image"
                         style="left: -15%"
                     />
@@ -89,9 +89,10 @@ const imageIsLoaded = (index) => {
                     ></div>
                     <img
                         v-show="loadedImages[1].value"
-                        :src="photo[first]"
+                        v-lazy="photo[first]"
                         class="gallery-image"
                         style="left: 5%"
+                        loading="eager"
                         @load="imageIsLoaded(1)"
                     />
 
@@ -102,9 +103,10 @@ const imageIsLoaded = (index) => {
                     ></div>
                     <img
                         v-show="loadedImages[2].value"
-                        :src="photo[second]"
+                        v-lazy="photo[second]"
                         class="gallery-image main-image-gallery"
                         style="left: 24%"
+                        loading="eager"
                         @load="imageIsLoaded(2)"
                     />
 
@@ -115,15 +117,16 @@ const imageIsLoaded = (index) => {
                     ></div>
                     <img
                         v-show="loadedImages[3].value"
-                        :src="photo[third]"
+                        v-lazy="photo[third]"
                         class="gallery-image"
                         style="right: 5%"
+                        loading="eager"
                         @load="imageIsLoaded(3)"
                     />
 
                     <img
                         v-if="nextThird < array_size"
-                        :src="photo[nextThird]"
+                        v-lazy="photo[nextThird]"
                         class="gallery-image hidden-image"
                         style="right: -15%"
                         loading="eager"
@@ -303,6 +306,10 @@ const imageIsLoaded = (index) => {
     object-fit: cover; /* Чтобы изображение заполняло блок */
     position: absolute;
     opacity: 0.33;
+    will-change: transform, opacity;
+    transition:
+        transform 0.1s ease-in-out,
+        opacity 0.1s ease-in-out;
 }
 .back-image-arrow {
     background-image: url('../../assets/PrepodavateliKafedri/arrow_back.svg');

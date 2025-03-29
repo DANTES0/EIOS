@@ -26,6 +26,7 @@
         "primevue": "^4.2.5",
         "vue": "^3.4.15",
         "vue-flux": "^7.0.0-beta.5",
+        "vue-lazyload": "^3.0.0",
         "vue-multiselect": "^3.0.0",
         "vue-router": "^4.3.0",
         "vue-select": "^4.0.0-beta.6",
