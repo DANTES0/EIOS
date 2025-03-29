@@ -131,7 +131,7 @@ const imageLoaded = () => {
 }
 /* размеры блока */
 .news-block-wrapper {
-    margin-right: 71px;
+    /* margin-right: 71px; */
 
     /* устанавливается высота и ширина здесь */
     width: 100%;

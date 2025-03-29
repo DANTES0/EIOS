@@ -41,12 +41,16 @@ const changeTheme = () => {
             $route.path.match(/^\/teachers\/detail\/*/) ||
             $route.path.match(/^\/news\/get\/*/)
                 ? 'w-auto'
-                : 'w-[16.6%]'
+                : 'laptop:w-[21.6vw] desktop:w-[18.6vw]'
         "
     >
-        <div
+        <!-- <div
             class="header-wrapper-container bg-[#0C2340] dark:bg-[#181818] border-r border-white dark:border-[#2b2b2b] min-w-[50px]"
             :class="$route.path.match(/^\/teachers\/\d+$/) ? 'w-full' : 'w-[15%]'"
+        > -->
+        <div
+            class="bg-[#0C2340] dark:bg-[#181818] border-r border-white dark:border-[#2b2b2b] min-w-[50px] h-full flex flex-col items-center justify-between"
+            :class="$route.path.match(/^\/teachers\/\d+$/) ? 'w-full' : 'w-[3.2vw]'"
         >
             <div class="page-header">
                 <Popper :placement="'right'" :hover="true" content="Главная">
@@ -392,7 +396,7 @@ const changeTheme = () => {
     /* background-color: #181818; */
 }
 .title {
-    font-size: 24px;
+    font-size: 1.6vw;
     cursor: pointer;
     text-decoration: none;
     /* color: #1e66f5; */
@@ -408,8 +412,8 @@ const changeTheme = () => {
 .page {
     cursor: pointer;
     font-weight: 300;
-    width: 35px;
-    height: 35px;
+    width: 2vw;
+    aspect-ratio: 1;
     margin-bottom: 20px;
     display: block;
 }

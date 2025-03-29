@@ -68,7 +68,7 @@ onMounted(() => {
         />
 
         <div
-            class="main-background"
+            class=""
             :class="
                 $route.path.match(/^\/teachers\/detail\/*/) ||
                 $route.path.match(/^\/news\/get\/*/) ||
@@ -90,6 +90,7 @@ onMounted(() => {
 .wrap {
     display: flex;
     flex-direction: row;
+    flex: 1;
 }
 .text-vo {
     width: 100%;

@@ -20,11 +20,18 @@ function showDropDown() {
         <img
             src="../../assets/header/arrow_down.svg"
             alt=""
-            class="arrow_down"
+            class="arrow_down aspect-square w-[2vw] desktop:w-[24px]"
             :class="{ rotated: isShowDropDown }"
         />
-        <img src="../../assets/header/folder.svg" alt="" class="folder" />
-        <label id="dropbtn" class="dropbtn text-white dark:text-[#cccccc]">
+        <img
+            src="../../assets/header/folder.svg"
+            alt=""
+            class="w-[1.8vw] desktop:w-[24px] aspect-square"
+        />
+        <label
+            id="dropbtn"
+            class="dropbtn text-[1.3vw] desktop:text-[16px] text-white dark:text-[#cccccc]"
+        >
             Главная страница
         </label>
     </div>
@@ -39,9 +46,7 @@ function showDropDown() {
                         class="anchor-img"
                         style="transform: scale(0.7)"
                     />
-                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
-                        ><icon-html
-                    /></icon-base> -->
+
                     <label class="label">о_кафедре.html</label>
                 </a>
                 <a href="#news" class="dropdown-content-a">
@@ -50,9 +55,7 @@ function showDropDown() {
                         alt=""
                         class="anchor-img"
                     />
-                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
-                        ><icon-css></icon-css
-                    ></icon-base> -->
+
                     <label class="label">главные_новости.css</label>
                 </a>
                 <a href="#prepod" class="dropdown-content-a">
@@ -61,9 +64,7 @@ function showDropDown() {
                         alt=""
                         class="anchor-img"
                     />
-                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
-                        ><icon-py /> ></icon-base
-                    > -->
+
                     <label class="label">работники_кафедры.py</label>
                 </a>
                 <a href="#cifri" class="dropdown-content-a">
@@ -73,9 +74,7 @@ function showDropDown() {
                         class="anchor-img"
                         style="transform: scale(1.4)"
                     />
-                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
-                        ><icon-c /> ></icon-base
-                    > -->
+
                     <label class="label">кафедра_в_цифрах.cpp</label>
                 </a>
                 <a href="#gallery" class="dropdown-content-a">
@@ -84,9 +83,7 @@ function showDropDown() {
                         alt=""
                         class="anchor-img"
                     />
-                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
-                        ><icon-js /> ></icon-base
-                    > -->
+
                     <label class="label">фотогалерея.js</label>
                 </a>
                 <a href="#footer" class="dropdown-content-a">
@@ -96,9 +93,7 @@ function showDropDown() {
                         class="anchor-img"
                         style="transform: scale(0.7)"
                     />
-                    <!-- <icon-base class="ml-[18px]" width="24" height="24"
-                        ><icon-ts /> ></icon-base
-                    > -->
+
                     <label class="label">контакты.ts</label>
                 </a>
             </div>
@@ -108,7 +103,7 @@ function showDropDown() {
 
 <style scoped>
 .dropdown-content-content {
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 .slide-fade-enter-active,
 .slide-fade-leave-active {
@@ -126,9 +121,15 @@ function showDropDown() {
     cursor: pointer;
 }
 .anchor-img {
-    width: 23px;
-    height: 23px;
-    margin-left: 22px;
+    width: 1.4vw;
+    margin-left: 1.8vw;
+}
+@media (min-width: 1920px) {
+    .anchor-img {
+        width: 23px;
+        height: 23px;
+        margin-left: 1.8vw;
+    }
 }
 .dropdown-content-line {
     margin-left: 21px;
@@ -141,6 +142,8 @@ function showDropDown() {
     margin-left: 10px;
     transform: rotate(-90deg);
     transition: 0.3s ease;
+    /* aspect-ratio: 1;
+    width: 2vw; */
 }
 
 .arrow_down:hover,
@@ -162,10 +165,10 @@ function showDropDown() {
     /* color: #cccccc; */
     font-family: Nunito;
     font-weight: 200;
-    font-size: 16px;
+    font-size: 1.2vw;
     border: none;
     cursor: pointer;
-    padding-right: 56px;
+    /* padding-right: 56px; */
     user-select: none;
 }
 
@@ -191,7 +194,7 @@ function showDropDown() {
 }
 
 .dropdown-content-a {
-    width: 220px;
+    /* width: 220px; */
     height: 28px;
     display: flex;
     /* flex-direction: row;
@@ -202,8 +205,8 @@ function showDropDown() {
     text-decoration: none;
     font-family: Nunito;
     font-weight: 200;
-    font-size: 16px;
-    margin-right: 15px;
+    font-size: 0.95vw;
+    /* margin-right: 15px; */
     cursor: pointer;
 }
 .dropdown-content-a:hover {

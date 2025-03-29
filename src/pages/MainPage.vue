@@ -268,7 +268,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="Main-page">
+    <div class="Main-page laptop:w-[78.4vw] desktop:w-[81.4vw]">
         <Tabs :title="tabsTitle" :show-icon="true" :icon-filename="tabsIcon" />
         <div ref="kafedraBlock" data-block-name="kafedra">
             <Kafedra />
@@ -323,7 +323,7 @@ onUnmounted(() => {
 <style scoped>
 .container {
     margin-top: 71px;
-    max-width: 1390px;
+    /* max-width: 1390px; */
     margin: 0 auto;
     font-family: Jost;
     color: #408afa;
@@ -341,7 +341,7 @@ onUnmounted(() => {
     align-items: center;
 }
 .Main-page {
-    height: 100%;
+    /* height: 100%; */
     position: relative;
 }
 </style>

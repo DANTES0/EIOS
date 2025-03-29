@@ -179,8 +179,9 @@ function navigateToNews(newsId) {
     align-items: center;
 }
 .kapybaras {
-    width: 301px;
-    height: 297px;
+    /* width: 301px; */
+    height: 18vw;
+    aspect-ratio: 1;
     margin-left: 66px;
     margin-top: 74px;
 }
