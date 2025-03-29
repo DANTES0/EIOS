@@ -2,7 +2,7 @@
 import Kafedra from '../components/MainPageComponents/Kafedra.vue';
 import News from '../components/MainPageComponents/News.vue';
 import Tabs from '../components/Tabs.vue';
-import PrepodavateliKafedri from '../components/MainPageComponents/PrepodavateliKafedri.vue';
+import PrepodavateliKafedri from '../components/MainPageComponents/TeachingStaff.vue';
 import KafedraCifri from '../components/MainPageComponents/KafedraCifri.vue';
 import PhotoGallery from '../components/MainPageComponents/PhotoGallery.vue';
 import Footer from '../components/Footer.vue';
@@ -220,7 +220,12 @@ const fetchNews = async () => {
 
     try {
         const { statusCode, data } = await useFetch(
-            url.value + new URLSearchParams({ pageSize: 10, pageNumber: 0, cover: true }).toString(),
+            url.value +
+                new URLSearchParams({
+                    pageSize: 10,
+                    pageNumber: 0,
+                    cover: true,
+                }).toString(),
         ).json();
 
         if (statusCode.value == 200) {

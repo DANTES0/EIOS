@@ -4,9 +4,9 @@
 import { useFetch } from '@vueuse/core';
 import { computed, ref } from 'vue';
 import { onMounted } from 'vue';
-import PrepodavateliKafedriItem from './PrepodavateliKafedriItem.vue';
+import PrepodavateliKafedriItem from './TeachingStaffСarouselItem.vue';
 import ProgressSpinner from 'primevue/progressspinner';
-import config from '../../config';
+import config from '../../config.js';
 import router from '../../router/routes.js';
 
 let flag = ref(false);

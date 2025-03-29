@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import PrepodavateliKafedriCarousel from './PrepodavateliKafedriCarousel.vue';
+import PrepodavateliKafedriCarousel from './TeachingStaffСarousel.vue';
 
 let flag = ref(false);
 
