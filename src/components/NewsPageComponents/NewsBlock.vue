@@ -71,10 +71,10 @@ const imageLoaded = () => {
 <template>
     <div @click="$emit('click')">
         <div
-            class="news-block-wrapper"
+            class="news-block-wrapper text-black dark:text-white"
             :style="{ width: newsData.blockWidth, height: newsData.blockHeight }"
         >
-            <div class="news-block-tag-and-date-wrapper">
+            <div class="news-block-tag-and-date-wrapper text-black dark:text-white">
                 <div class="news-block-tag">
                     <img src="../../assets/News/image.svg" alt="" class="tag-icon" />
                     <div class="tag">{{ newsData.newsTag }}</div>
@@ -139,12 +139,12 @@ const imageLoaded = () => {
 
     display: flex;
     flex-direction: column;
-    border: solid 1px #999999;
+    border: solid 1px;
 }
 .news-block-tag-and-date-wrapper {
     height: 48px;
     width: 100%;
-    border-bottom: 1px solid #999999;
+    border-bottom: 1px solid;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -164,15 +164,13 @@ const imageLoaded = () => {
     font-family: Rubik;
     font-size: 18;
     font-weight: 800;
-    /* color: #1e66f5;*/
-    color: #cccccc;
+
 }
 .news-block-date {
     margin-top: 3px;
     font-family: Rubik;
     font-size: 18px;
     font-weight: 800;
-    color: #cccccc;
     margin-right: 53px;
 }
 .news-block-image {

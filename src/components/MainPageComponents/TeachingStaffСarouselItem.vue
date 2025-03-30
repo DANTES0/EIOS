@@ -55,9 +55,9 @@ const imageLoaded = () => {
                 @load="imageLoaded"
             />
         </div>
-        <div v-if="id === currentIndex" class="prepod-description-block">
-            <h1 class="name-prepod">{{ name }}</h1>
-            <h2 class="spec-prepod info-prepod" style="margin-bottom: 10px">
+        <div v-if="id === currentIndex" class="prepod-description-block text-black dark:text-white border-l-[1px] border-r-[1px] border-gray-300 dark:border-white">
+            <h1 class="name-prepod ">{{ name }}</h1>
+            <h2 class="spec-prepod info-prepod " style="margin-bottom: 10px">
                 {{ post }}
             </h2>
             <h2 class="stepen-prepod info-prepod">{{ rank }}</h2>
@@ -133,13 +133,11 @@ const imageLoaded = () => {
     font-family: JetBrainsMono;
     font-size: 36;
     font-weight: 500;
-    color: #ffffff;
     margin-bottom: 39px;
 }
 .info-prepod {
     font-family: JetBrainsMono;
     font-size: 30;
-    color: #999999;
     font-weight: 300;
 }
 .prepod-description-block {
@@ -147,8 +145,6 @@ const imageLoaded = () => {
     margin-top: 40px;
     width: 565px;
     height: 218px;
-    border-left: 1px solid #ffffff;
-    border-right: 1px solid #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -17,16 +17,16 @@ const resetAnimation = () => {
 </script>
 
 <template>
-    <div class="wrapper-prepod">
-        <div class="numbers-wrapper">
+    <div class="wrapper-prepod  text-[#0C2340] dark:text-[#999999]">
+        <div class="numbers-wrapper text-[#0C2340] dark:text-[#999999]">
             <div v-for="i in 25" :key="i" class="numbers">{{ i }}</div>
         </div>
-        <div id="prepod" class="content-prepod-wrapper">
-            <div class="title-prepod-wrapper">
-                <h1 class="title-prepod">
+        <div id="prepod" class="content-prepod-wrapper  bg-white dark:bg-[#1f1f1f]">
+            <div class="title-prepod-wrapper text-black dark:text-white">
+                <h1 class="title-prepod ">
                     <span style="color: #1e66f5">#</span>ПРЕПОДАВАТЕЛИ КАФЕДРЫ
                 </h1>
-                <label class="line-dashed">------------------------</label>
+                <label class="line-dashed text-[#006AFF] dark:text-white">------------------------</label>
             </div>
             <PrepodavateliKafedriCarousel></PrepodavateliKafedriCarousel>
         </div>
@@ -36,7 +36,6 @@ const resetAnimation = () => {
 <style scoped>
 .wrapper-prepod {
     height: 900px;
-    background-color: #1f1f1f;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -48,7 +47,6 @@ const resetAnimation = () => {
     font-size: 48px;
     font-family: JetBrainsMono;
     font-weight: 200;
-    color: white;
     margin-left: 128px;
     margin-top: 18px;
     width: 650px;
@@ -66,7 +64,6 @@ const resetAnimation = () => {
     left: 66px;
     font-size: 48px;
     font-weight: 500;
-    color: white;
     letter-spacing: 8px;
     user-select: none;
 }
