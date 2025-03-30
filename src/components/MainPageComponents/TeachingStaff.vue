@@ -19,7 +19,7 @@ const resetAnimation = () => {
 <template>
     <div class="wrapper-prepod">
         <div class="numbers-wrapper">
-            <div v-for="i in 25" :key="i" class="numbers">{{ i }}</div>
+            <div v-for="i in 22" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="prepod" class="content-prepod-wrapper">
             <div class="title-prepod-wrapper">
@@ -35,14 +35,13 @@ const resetAnimation = () => {
 
 <style scoped>
 .wrapper-prepod {
-    height: 900px;
+    min-height: 850px;
     background-color: #1f1f1f;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: start;
-    margin-top: 20px;
 }
 .title-prepod {
     font-size: 48px;

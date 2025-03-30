@@ -18,7 +18,7 @@ const cifri = [
 <template>
     <div class="wrapper-cifri">
         <div class="numbers-wrapper">
-            <div v-for="i in 22" :key="i" class="numbers">{{ i }}</div>
+            <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="cifri" class="content-cifri-wrapper">
             <div class="title-cifri-wrapper">
@@ -116,7 +116,6 @@ const cifri = [
     flex-direction: row;
     justify-content: start;
     align-items: start;
-    margin-top: 90px;
 }
 .title-cifri {
     font-size: 48px;

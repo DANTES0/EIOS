@@ -262,7 +262,6 @@ function navigateToNews(newsId) {
     height: 700px;
     width: 100%;
     background-color: #191919;
-    margin-top: 120px;
     display: flex;
     flex-direction: row;
     justify-content: start;

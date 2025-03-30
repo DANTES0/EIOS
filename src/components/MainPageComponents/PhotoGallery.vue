@@ -361,7 +361,6 @@ const imageIsLoaded = (index) => {
     flex-direction: row;
     justify-content: start;
     align-items: start;
-    margin-top: 20px;
 }
 .title-gallery {
     font-size: 48px;

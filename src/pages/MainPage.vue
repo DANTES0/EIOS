@@ -342,7 +342,8 @@ onUnmounted(() => {
 .Main-page {
     /* height: 100%; */
     position: relative;
-    max-width: 100vw;
+    /* max-width: 100vw; */
+    width: 100%;
     overflow-x: hidden;
     background: transparent;
 }
