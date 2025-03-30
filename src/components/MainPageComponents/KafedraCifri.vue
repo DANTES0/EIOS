@@ -16,14 +16,14 @@ const cifri = [
 </script>
 
 <template>
-    <div class="wrapper-cifri">
-        <div class="numbers-wrapper">
+    <div class="wrapper-cifri text-[#0C2340] dark:text-[#999999]">
+        <div class="numbers-wrapper text-[#0C2340] dark:text-[#999999]">
             <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
         </div>
-        <div id="cifri" class="content-cifri-wrapper">
-            <div class="title-cifri-wrapper">
+        <div id="cifri" class="content-cifri-wrapper bg-white dark:bg-[#1f1f1f]">
+            <div class="title-cifri-wrapper text-black dark:text-white">
                 <h1 class="title-cifri"><span style="color: #1e66f5">#</span>ЦИФРЫ</h1>
-                <label class="line-dashed-cifri">-------</label>
+                <label class="line-dashed-cifri text-[#006AFF] dark:text-white">-------</label>
             </div>
             <div class="cifri-frame pl-16">
                 <div v-for="(item, i) in cifri" :key="i" class="cifri-block">
@@ -42,7 +42,6 @@ const cifri = [
     font-family: JetBrainsMono;
     font-size: 20px;
     font-weight: 700;
-    color: #d9d9d9;
     width: 180px;
     height: 41px;
     text-align: center;
@@ -93,7 +92,6 @@ const cifri = [
     left: -167px;
     font-size: 48px;
     font-weight: 500;
-    color: white;
     letter-spacing: 8px;
     user-select: none;
 }
@@ -110,18 +108,17 @@ const cifri = [
 }
 .wrapper-cifri {
     /* height: 850px; */
-    background-color: #191919;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: start;
+    margin-top: 90px;
 }
 .title-cifri {
     font-size: 48px;
     font-family: JetBrainsMono;
     font-weight: 200;
-    color: white;
     margin-left: 128px;
     margin-top: 18px;
     width: 650px;

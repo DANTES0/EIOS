@@ -4,7 +4,11 @@ export default {
     content: [],
     theme: {
         screens: { mobile: '640px', laptop: '1024px', desktop: '1920px' },
-        extend: {},
+        extend: {
+            colors: {
+                'brand-blue': '#1E66F5',
+              }
+        },
     },
     plugins: [],
     darkMode: 'selector',
