@@ -130,35 +130,41 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="content-wrapper-prepod">
-        <div v-if="teachersAreLoading" class="spinner-container">
-            <progress-spinner class="custom-spinner" />
-        </div>
-        <div v-else-if="teachersAreLoaded" class="prepod-image-block">
-            <div style="" class="prepod-image-arrow back-image-arrow" @click="prev"></div>
-            <div class="PrepodavateliKafedriItem-wrap">
-                <PrepodavateliKafedriItem
-                    v-for="(prepod, index) in temp_array"
-                    :id="prepod.id"
-                    :key="prepod.id"
-                    :name="prepod.name"
-                    :photo="`https://security-jwt.onrender.com/api/v1/image?fileName=${prepod.photo?.fileName}&imageType=TeacherImage`"
-                    :post="prepod.post"
-                    :rank="prepod.rank"
-                    :current-index="currentIndex"
-                    :class="{ hidden: index === 0 || index === 4 }"
-                    @click="goToTeacherDetail(prepod.teacherId)"
-                />
+    <div class="parent-wrapper">
+        <div class="content-wrapper-prepod">
+            <div v-if="teachersAreLoading" class="spinner-container">
+                <progress-spinner class="custom-spinner" />
             </div>
-            <div
-                class="prepod-image-arrow next-image-arrow"
-                style="margin-left: 15px"
-                @click="next"
-            ></div>
-        </div>
+            <div v-else-if="teachersAreLoaded" class="prepod-image-block">
+                <div
+                    style=""
+                    class="prepod-image-arrow back-image-arrow"
+                    @click="prev"
+                ></div>
+                <div class="PrepodavateliKafedriItem-wrap">
+                    <PrepodavateliKafedriItem
+                        v-for="(prepod, index) in temp_array"
+                        :id="prepod.id"
+                        :key="prepod.id"
+                        :name="prepod.name"
+                        :photo="`https://security-jwt.onrender.com/api/v1/image?fileName=${prepod.photo?.fileName}&imageType=TeacherImage`"
+                        :post="prepod.post"
+                        :rank="prepod.rank"
+                        :current-index="currentIndex"
+                        :class="{ hidden: index === 0 || index === 4 }"
+                        @click="goToTeacherDetail(prepod.teacherId)"
+                    />
+                </div>
+                <div
+                    class="prepod-image-arrow next-image-arrow"
+                    style="margin-left: 15px"
+                    @click="next"
+                ></div>
+            </div>
 
-        <div v-else class="error-message">
-            <p>Ошибка загрузки данных. Попробуйте позже.</p>
+            <div v-else class="error-message">
+                <p>Ошибка загрузки данных. Попробуйте позже.</p>
+            </div>
         </div>
 
         <!-- <div class="line-anima" :class="{ setup: flag }"></div> -->
@@ -307,19 +313,24 @@ onMounted(() => {
     width: 100%;
     height: 80%;
 }
-.content-prepod-wrapper {
+.parent-wrapper {
     width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
 }
 .content-wrapper-prepod {
     height: 700px;
-    width: 1450px;
+    width: 100%; /* Занимает всю доступную ширину */
+    max-width: 1450px; /* Ограничение максимальной ширины (опционально) */
     border-top: 1px solid #1e66f5;
     border-bottom: 1px solid #1e66f5;
-    margin-left: 52px;
+    margin: 0 auto; /* Центрирование блока, если max-width задан */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* overflow-x: hidden; */
+    padding: 0 20px; /* Добавьте отступы по бокам, если нужно */
+    box-sizing: border-box; /* Чтобы padding не увеличивал общую ширину */
 }
 </style>

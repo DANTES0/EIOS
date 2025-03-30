@@ -62,4 +62,7 @@ const resetAnimation = () => {
     letter-spacing: 8px;
     user-select: none;
 }
+.content-prepod-wrapper {
+    width: 100%;
+}
 </style>
