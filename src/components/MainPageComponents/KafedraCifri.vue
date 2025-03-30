@@ -109,7 +109,7 @@ const cifri = [
     align-items: center;
 }
 .wrapper-cifri {
-    height: 850px;
+    /* height: 850px; */
     background-color: #191919;
     width: 100%;
     display: flex;

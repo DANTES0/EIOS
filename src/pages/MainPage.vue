@@ -315,7 +315,7 @@ onUnmounted(() => {
             />
         </div>
         <Footer />
-        <Terminal />
+        <!-- <Terminal /> -->
         <div ref="contactsBlock" data-block-name="contacts" class="clp-cont"></div>
     </div>
 </template>
@@ -333,15 +333,17 @@ onUnmounted(() => {
     height: 700px;
     /* margin: 0 auto; */
 }
-.clp-cont {
+/* .clp-cont {
     width: 100%;
     height: 100%;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
-}
+} */
 .Main-page {
     /* height: 100%; */
     position: relative;
+    max-width: 100vw;
+    overflow-x: hidden;
+    background: transparent;
 }
 </style>

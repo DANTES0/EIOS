@@ -57,7 +57,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="bg-white dark:bg-[#1f1f1f] wrap">
+    <div class="bg-white dark:bg-[#1f1f1f] wrap layout-container">
         <Auth v-if="authState.isVisible" />
         <NavBar
             v-if="
@@ -68,7 +68,7 @@ onMounted(() => {
         />
 
         <div
-            class=""
+            class="main-content"
             :class="
                 $route.path.match(/^\/teachers\/detail\/*/) ||
                 $route.path.match(/^\/news\/get\/*/) ||
@@ -89,8 +89,16 @@ onMounted(() => {
 }
 .wrap {
     display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
     flex-direction: row;
     flex: 1;
+}
+.main-content {
+    flex-grow: 1; /* Занимает всё оставшееся пространство */
+    overflow-y: auto; /* Скролл только внутри контента */
+    height: 100vh; /* Высота по экрану */
 }
 .text-vo {
     width: 100%;

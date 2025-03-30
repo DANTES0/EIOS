@@ -33,7 +33,10 @@
                     alt=""
                     class="footer-description-icon"
                 />
-                <a href="https://voenmeh.ru/education/faculties-and-departments/faco/kaf-o7" class="footer-description-text">
+                <a
+                    href="https://voenmeh.ru/education/faculties-and-departments/faco/kaf-o7"
+                    class="footer-description-text"
+                >
                     https://voenmeh.ru/education/faculties-and-departments/faco/kaf-o7
                 </a>
             </div>
@@ -43,7 +46,9 @@
                     alt=""
                     class="footer-description-icon"
                 />
-                <a href="mailto:kaf_o7@voenmeh.ru" class="footer-description-text">kaf_o7@voenmeh.ru</a>
+                <a href="mailto:kaf_o7@voenmeh.ru" class="footer-description-text"
+                    >kaf_o7@voenmeh.ru</a
+                >
             </div>
             <div class="footer-description-content">
                 <img
@@ -159,11 +164,11 @@
 }
 .footer-container {
     width: 100%;
-    height: 429px;
+    /* height: 429px; */
     font-family: JetBrainsMono;
     color: #cccccc;
     font-size: 30px;
-    margin-top: 150px;
+    /* margin-top: 150px; */
     /* background-color: #0d101f; */
 }
 .footer-back {
@@ -175,7 +180,7 @@
     border-left: none;
     border-bottom: none;
     position: absolute;
-    bottom: 40px;
+    /* bottom: 40px; */
     z-index: 0;
 }
 .footer-title {
@@ -185,7 +190,7 @@
     border: 1px solid #1e66f5;
     position: absolute;
     z-index: 3;
-    bottom: 430px;
+    /* bottom: 430px; */
     left: 100px;
 }
 .footer-description {
@@ -195,7 +200,7 @@
     height: 352px;
     border-right: 1px solid white;
     border-top: 1px solid white;
-    border-bottom: 1px solid white;
+    /* border-bottom: 1px solid white; */
     z-index: 2;
     background-color: #1f1f1f;
 }
@@ -206,7 +211,7 @@
     background-color: #191919;
     border: 1px solid #1e66f5;
     z-index: 3;
-    bottom: 70px;
+    /* bottom: 70px; */
     left: 800px;
 }
 </style>

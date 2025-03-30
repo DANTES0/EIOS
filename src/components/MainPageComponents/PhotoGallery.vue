@@ -354,7 +354,7 @@ const imageIsLoaded = (index) => {
     align-items: center;
 }
 .wrapper-gallery {
-    height: 850px;
+    /* height: 850px; */
     background-color: #1f1f1f;
     width: 100%;
     display: flex;

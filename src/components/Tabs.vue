@@ -45,6 +45,7 @@ function getImageUrl() {
     top: 0;
     z-index: 99;
     border-bottom: 1px solid #2b2b2b;
+    width: 100%;
 }
 .tabs-line {
     display: inline-flex; /* Установить inline-flex для подгонки по содержимому */

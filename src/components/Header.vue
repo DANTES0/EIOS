@@ -362,12 +362,9 @@ const changeTheme = () => {
         contrast(110%);
 }
 .header-wrapper {
-    /* position: fixed; */
-    /* border-right: 1px solid #2b2b2b; */
     position: sticky;
     top: 0;
     left: 0;
-    /* width: 16.6%; */
     height: 100vh;
     background-color: #0d101f;
     display: flex;
@@ -375,10 +372,9 @@ const changeTheme = () => {
     align-items: center;
     flex-direction: row;
     font-family: Russo-One;
+    background: transparent;
 }
 .header-wrapper-container {
-    /* background-color: #181818; */
-    /* width: 15%; */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -388,18 +384,17 @@ const changeTheme = () => {
     font-weight: 700;
     font-family: Jost;
     color: white;
-    /* border-right: 1px solid #2b2b2b; */
+    overflow: hidden;
 }
 .header-wrapper-anchor-container {
     width: 85%;
     height: 100%;
-    /* background-color: #181818; */
+    overflow: hidden;
 }
 .title {
     font-size: 1.6vw;
     cursor: pointer;
     text-decoration: none;
-    /* color: #1e66f5; */
     user-select: none;
     margin-left: 20px;
     margin-bottom: 20px;
