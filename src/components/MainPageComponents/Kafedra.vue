@@ -126,5 +126,8 @@ const TextKafedra = [
     .title-kafedra {
         width: 18rem;
     }
+    .title-kafedra-wrapper {
+        padding-left: 10rem;
+    }
 }
 </style>
