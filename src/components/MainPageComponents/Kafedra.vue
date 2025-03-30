@@ -113,7 +113,7 @@ const TextKafedra = [
 
     .line-dashed {
         font-size: 2rem;
-        padding: 0.5rem 2.5rem 0 0;
+        padding: 0.5rem 2.5rem 0 3rem;
     }
 }
 

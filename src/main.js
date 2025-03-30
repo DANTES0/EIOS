@@ -1,7 +1,8 @@
 import { createApp } from 'vue';
 import router from './router/routes';
 import App from './App.vue';
-import 'normalize.css';
+import '../node_modules/normalize.css/package.json';
+import '../node_modules/modern-normalize/package.json';
 import './style.css';
 import './index.css';
 import store from './store';
