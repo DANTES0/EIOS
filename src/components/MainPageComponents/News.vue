@@ -462,7 +462,9 @@ onBeforeUnmount(() => {
         padding-left: 2.5rem;
         padding-right: 0.5rem;
     }
-
+    .back {
+        margin-left: 35px;
+    }
     .capybara_NewsBlock-wrapper {
         gap: 1.5rem;
     }
