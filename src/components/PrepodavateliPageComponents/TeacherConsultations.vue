@@ -9,29 +9,40 @@ const route = useRoute();
 const teacherId = route.params.id;
 const consultationsGrid = ref([]);
 const headerDates = ref([]);
-const currentDate = ref(new Date());
+const visibleTimeSlots = ref([]);
 
 async function loadConsultations() {
     try {
-        const params = new URLSearchParams({
-            pageSize: 999,
-            pageNumber: 0,
-            teacherId: teacherId,
-            type: 'Консультация',
-        });
+        const response = await fetch(
+            `${config.ServerURL}/api/v1/schedule/upcoming?teacherId=${teacherId}`,
+        );
+        const consultationsData = await response.json();
 
-        const response = await fetch(`${config.ServerURL}/api/v1/schedule?${params}`);
-        const result = await response.json();
-        const consultationsData = result.data || [];
+        // Получаем уникальные дни с консультациями
+        const uniqueDays = [...new Set(consultationsData.map((item) => item.dayOfWeek))];
 
-        const grid = Array.from({ length: timeSlots.length }, () =>
-            Array(days.length).fill(null),
+        // Находим ближайшие даты для этих дней
+        findClosestConsultationDays(consultationsData, uniqueDays);
+
+        // Получаем все временные слоты для отображения
+        const allTimes = consultationsData.map((item) =>
+            item.timeStart.split('T')[1].slice(0, 5),
         );
 
+        visibleTimeSlots.value = [...new Set(allTimes)].sort();
+
+        // Создаем сетку для отображения
+        const grid = Array.from({ length: visibleTimeSlots.value.length }, () =>
+            Array(headerDates.value.length).fill(null),
+        );
+
+        // Заполняем сетку данными
         consultationsData.forEach((entry) => {
-            const parsedTime = entry.timeStart.split('T')[1].slice(0, 5);
-            const timeIndex = timeSlots.indexOf(parsedTime);
-            const dayIndex = days.indexOf(entry.dayOfWeek);
+            const time = entry.timeStart.split('T')[1].slice(0, 5);
+            const timeIndex = visibleTimeSlots.value.indexOf(time);
+            const dayIndex = headerDates.value.findIndex(
+                (d) => d.dayOfWeek === entry.dayOfWeek,
+            );
 
             if (timeIndex >= 0 && dayIndex >= 0) {
                 grid[timeIndex][dayIndex] = entry;
@@ -39,59 +50,58 @@ async function loadConsultations() {
         });
 
         consultationsGrid.value = grid;
-        findClosestConsultationDays(consultationsData);
     } catch (error) {
         console.error('Ошибка при загрузке консультаций:', error);
     }
 }
 
-function findClosestConsultationDays(consultationsData) {
+function findClosestConsultationDays(consultationsData, uniqueDays) {
     const today = new Date();
     const foundDates = [];
-    let dayOffset = 0;
-    const maxDaysToCheck = 30;
 
-    while (foundDates.length < 3 && dayOffset < maxDaysToCheck) {
-        const checkDate = new Date(today);
+    // Для каждого уникального дня находим ближайшую дату
+    uniqueDays.forEach((dayOfWeek) => {
+        let dayOffset = 0;
+        const maxDaysToCheck = 30;
+        let found = false;
 
-        checkDate.setDate(today.getDate() + dayOffset);
+        while (!found && dayOffset < maxDaysToCheck) {
+            const checkDate = new Date(today);
 
-        const dayName = days[checkDate.getDay() === 0 ? 6 : checkDate.getDay() - 1];
-        const hasConsultations = consultationsData.some(
-            (entry) => entry.dayOfWeek === dayName,
-        );
+            checkDate.setDate(today.getDate() + dayOffset);
 
-        if (hasConsultations) {
-            foundDates.push({
-                date: checkDate,
-                displayName: getDisplayDayName(checkDate),
-                dayIndex: days.indexOf(dayName),
-            });
+            const currentDayName =
+                days[checkDate.getDay() === 0 ? 6 : checkDate.getDay() - 1];
+
+            if (currentDayName === dayOfWeek) {
+                foundDates.push({
+                    date: new Date(checkDate),
+                    displayName: getDisplayDayName(checkDate, dayOfWeek),
+                    dayOfWeek: dayOfWeek,
+                    dayIndex: days.indexOf(dayOfWeek),
+                });
+                found = true;
+            }
+
+            dayOffset++;
         }
+    });
 
-        dayOffset++;
-    }
-
-    headerDates.value = foundDates;
+    // Сортируем даты по возрастанию
+    headerDates.value = foundDates.sort((a, b) => a.date - b.date).slice(0, 3);
 }
 
-function getDisplayDayName(date) {
+function getDisplayDayName(date, dayOfWeek) {
     const today = new Date();
     const tomorrow = new Date(today);
 
     tomorrow.setDate(today.getDate() + 1);
 
-    const dayAfterTomorrow = new Date(today);
-
-    dayAfterTomorrow.setDate(today.getDate() + 2);
-
     if (date.toDateString() === today.toDateString()) return 'Сегодня';
     if (date.toDateString() === tomorrow.toDateString()) return 'Завтра';
-    if (date.toDateString() === dayAfterTomorrow.toDateString()) return 'Послезавтра';
 
-    const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-
-    return `${dayNames[date.getDay()]}, ${date.getDate()}.${date.getMonth() + 1}`;
+    // Для всех остальных дней просто возвращаем название дня недели
+    return dayOfWeek;
 }
 
 onMounted(() => {
@@ -101,7 +111,7 @@ onMounted(() => {
 
 <template>
     <div class="consultations-container">
-        <table class="consultations-table">
+        <table v-if="headerDates.length > 0" class="consultations-table">
             <thead>
                 <tr>
                     <th>Время</th>
@@ -111,23 +121,28 @@ onMounted(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(row, timeIndex) in consultationsGrid" :key="timeIndex">
-                    <td class="time-slot">{{ timeSlots[timeIndex] }}</td>
+                <tr v-for="(time, timeIndex) in visibleTimeSlots" :key="timeIndex">
+                    <td class="time-slot">{{ time }}</td>
                     <td
                         v-for="(date, dateIndex) in headerDates"
                         :key="dateIndex"
                         class="consultation-cell"
                     >
                         <LessonCell
-                            v-if="row[date.dayIndex]"
-                            :lesson="row[date.dayIndex]"
+                            v-if="
+                                consultationsGrid[timeIndex] &&
+                                consultationsGrid[timeIndex][dateIndex]
+                            "
+                            :lesson="consultationsGrid[timeIndex][dateIndex]"
                             :is-teacher-schedule="false"
                         />
-                        <div v-else class="empty-cell"></div>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div v-else class="no-consultations">
+            На текущую неделю консультаций не запланировано
+        </div>
     </div>
 </template>
 
