@@ -469,4 +469,34 @@ onBeforeUnmount(() => {
         gap: 1.5rem;
     }
 }
+
+@media (min-width: 1440px) {
+    .line-dashed {
+        font-size: 3rem;
+        padding: 0.5rem 2.5rem 0 0;
+        width: 18rem;
+    }
+    .title-news {
+        width: 18rem;
+        font-size: 3.3rem;
+    }
+    .title-news-wrapper {
+        padding-left: 3rem;
+    }
+}
+
+@media (min-width: 1921px) {
+    .line-dashed {
+        font-size: 3rem;
+        padding: 0.5rem 2.5rem 0 0;
+        width: 18rem;
+    }
+    .title-news {
+        width: 18rem;
+        font-size: 3.3rem;
+    }
+    .title-news-wrapper {
+        padding-left: 3rem;
+    }
+}
 </style>
