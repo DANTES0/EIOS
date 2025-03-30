@@ -110,23 +110,23 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="consultations-container">
-        <table v-if="headerDates.length > 0" class="consultations-table">
+    <div class="consultations-container text-white">
+        <table v-if="headerDates.length > 0" class="consultations-table bg-[#0c2340] dark:bg-[#181818]">
             <thead>
                 <tr>
-                    <th>Время</th>
-                    <th v-for="(date, index) in headerDates" :key="index">
+                    <th class="border border-gray-300 dark:border-[#ddd] p-2 text-center font-bold min-w-[115px]">Время</th>
+                    <th v-for="(date, index) in headerDates" :key="index" class="border border-gray-300 dark:border-[#ddd] p-2 text-center font-bold">
                         {{ date.displayName }}
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(time, timeIndex) in visibleTimeSlots" :key="timeIndex">
-                    <td class="time-slot">{{ time }}</td>
+                    <td class="time-slot border border-gray-400 dark:border-[#ddd] p-2 text-center">{{ time }}</td>
                     <td
                         v-for="(date, dateIndex) in headerDates"
                         :key="dateIndex"
-                        class="consultation-cell"
+                        class="consultation-cell border border-gray-300 dark:border-[#ddd] p-2 text-center font-bold min-w-[115px]"
                     >
                         <LessonCell
                             v-if="
@@ -165,13 +165,11 @@ onMounted(() => {
 
 .consultations-table th,
 .consultations-table td {
-    border: 1px solid #2b2b2b;
     padding: 8px;
     text-align: center;
 }
 
 .consultations-table th {
-    background: #1f1f1f;
     font-weight: bold;
     min-width: 200px;
 }
@@ -182,7 +180,6 @@ onMounted(() => {
 
 .time-slot {
     font-weight: bold;
-    background: #1f1f1f;
 }
 
 .consultation-cell {

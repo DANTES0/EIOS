@@ -45,11 +45,17 @@ onMounted(() => {
 </script>
 
 <template>
-    <table class="schedule-table">
+    <table class="schedule-table text-black dark:text-white">
         <thead>
             <tr>
-                <th>Время</th>
-                <th v-for="day in days" :key="day">{{ day }}</th>
+                <th class="border border-gray-300 dark:border-[#ddd] p-2 text-center font-bold min-w-[115px]">Время</th>
+                <th 
+                    v-for="day in days" 
+                    :key="day" 
+                    class="border border-gray-300 dark:border-[#ddd] p-2 text-center font-bold"
+                >
+                    {{ day }}
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -58,21 +64,21 @@ onMounted(() => {
                 v-show="!showCurrentWeek || (isEven !== null && isEven === (i % 2 !== 0))"
                 :key="i"
                 :class="{
-                    'current-week': isEven !== null && isEven === (i % 2 !== 0),
+                'bg-gray-300 dark:bg-[#313131]': isEven !== null && isEven === (i % 2 !== 0),
                 }"
             >
                 <td
-                    class="time-slot"
+                    class="time-slot bg-white dark:bg-[#1f1f1f] border border-gray-400 dark:border-[#ddd] p-2 text-center"
                     :class="{
-                        'current-week': isEven !== null && isEven === (i % 2 !== 0),
+                        'bg-[#d1d5db] dark:bg-[#313131] border border-gray-400 dark:border-[#ddd]': isEven !== null && isEven === (i % 2 !== 0),
                     }"
                 >
                     <div>{{ timeSlots[Math.floor(i / 2)] }}</div>
-                    <div class="week-type">
+                    <div class="week-type text-black dark:text-white">
                         {{ i % 2 === 0 ? 'Нечет' : 'Чет' }}
                     </div>
                 </td>
-                <td v-for="(lesson, j) in row" :key="j">
+                <td v-for="(lesson, j) in row" :key="j" class="border border-gray-400 dark:border-[#ddd] p-2 text-center">
                     <LessonCell
                         :lesson="lesson"
                         :is-teacher-schedule="scheduleType === 'teacher'"
@@ -97,13 +103,11 @@ onMounted(() => {
 
 .schedule-table th,
 .schedule-table td {
-    border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
 }
 
 .schedule-table th {
-    background: #1f1f1f;
     font-weight: bold;
 }
 
@@ -113,15 +117,10 @@ onMounted(() => {
 
 .time-slot {
     font-weight: bold;
-    background: #1f1f1f;
 }
 
 .week-type {
     font-size: 20px;
-    color: #666;
 }
 
-.current-week {
-    background-color: #313131;
-}
 </style>

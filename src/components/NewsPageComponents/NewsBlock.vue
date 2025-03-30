@@ -112,11 +112,11 @@ const imageLoaded = () => {
         </div>
 
         <div v-if="newsData.newsShowSummary" class="news-block-summary">
-            <div class="news-block-title">
+            <div class="news-block-title text-black dark:text-white">
                 {{ processedTitle() }}
             </div>
 
-            <div class="news-block-description">
+            <div class="news-block-description text-black dark:text-white">
                 {{ processedDescription() }}
             </div>
         </div>
@@ -209,7 +209,6 @@ const imageLoaded = () => {
     background: transparent;
 }
 .news-block-title {
-    color: rgb(255, 255, 255);
     font-family: JetBrainsMono;
     font-size: 20px;
     font-weight: 700;
@@ -220,7 +219,6 @@ const imageLoaded = () => {
     margin-top: 10px;
 }
 .news-block-description {
-    color: rgba(255, 255, 255, 0.6);
     font-family: JetBrainsMono;
     font-size: 17px;
     font-weight: 700;

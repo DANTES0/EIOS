@@ -143,7 +143,7 @@ watch(forceDelete, (newVal) => {
             <div
                 v-for="newsItem in newsData"
                 :key="newsItem.id"
-                class="news-block"
+                class="news-block "
                 :class="{ selected: newsDelete.includes(newsItem.id) }"
                 @click="navigateToNews(newsItem.id)"
             >
