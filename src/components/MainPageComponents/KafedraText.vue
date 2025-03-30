@@ -85,4 +85,22 @@ defineProps({
     font-family: JetBrainsMono;
     margin-left: 30px;
 }
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+    h1 {
+        font-size: 1.5rem !important;
+    }
+    h2 {
+        font-size: 1.2rem !important;
+    }
+
+    .kafedraText-description {
+        margin-top: 1rem;
+        max-width: 40rem;
+    }
+
+    .kafedraText-description-nechet {
+        max-width: 40rem;
+    }
+}
 </style>

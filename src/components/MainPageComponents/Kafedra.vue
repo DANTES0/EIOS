@@ -56,6 +56,7 @@ const TextKafedra = [
     width: 100%;
 }
 .wrapper {
+    padding-top: 0.5rem;
     height: auto; /* Уберите фиксированную высоту */
     min-height: 850px; /* Если нужно минимальное значение */
     width: 100%; /* Замените на 100vw для учета окна просмотра */
@@ -74,8 +75,7 @@ const TextKafedra = [
 }
 .title-kafedra-wrapper {
     width: 230px;
-    padding-left: 128px;
-    padding-top: 18px;
+    padding-left: 7rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -94,5 +94,25 @@ const TextKafedra = [
     font-weight: 700;
     margin-left: 10px;
     color: white;
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+    .wrapper {
+        /* padding: 40px 60px; */
+        padding-left: 1rem;
+    }
+
+    .numbers {
+        margin-left: 0;
+    }
+
+    .title-kafedra {
+        font-size: 2.3rem;
+    }
+
+    .line-dashed {
+        font-size: 2rem;
+        padding: 0.5rem 2.5rem 0 0;
+    }
 }
 </style>

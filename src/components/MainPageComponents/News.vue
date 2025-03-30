@@ -66,48 +66,58 @@ onBeforeUnmount(() => {
             </div>
 
             <div v-else-if="areLoaded" class="container-news">
-                <img
-                    v-if="currentTheme !== 'dark'"
-                    src="../../assets/News/kapybars_in_circle_dark.png"
-                />
-                <img v-else src="../../assets/News/kapybars_in_circle.png" />
-                <div class="description-news text-black dark:text-white">
-                    <div
-                        class="general-block-description-news"
-                        :class="
-                            currentTheme !== 'dark' ? 'dark-theme-bg' : 'light-theme-bg'
-                        "
-                    >
-                        <div class="description-text-news">
-                            {{ headline }}
+                <div class="capybara_NewsBlock-wrapper">
+                    <div class="capybara_wrapper">
+                        <img
+                            v-if="currentTheme !== 'dark'"
+                            src="../../assets/News/kapybars_in_circle_dark.png"
+                        />
+                        <img v-else src="../../assets/News/kapybars_in_circle.png" />
+                        <div class="description-news text-black dark:text-white">
+                            <div
+                                class="general-block-description-news"
+                                :class="
+                                    currentTheme !== 'dark'
+                                        ? 'dark-theme-bg'
+                                        : 'light-theme-bg'
+                                "
+                            >
+                                <div class="description-text-news-wrapper">
+                                    <div class="description-text-news">
+                                        {{ headline }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="btn-next-back-wrapper text-[#006AFF] dark:text-white"
+                            >
+                                <button class="btn-news back" @click="$emit('prev')">
+                                    НАЗАД
+                                </button>
+                                <button class="btn-news next" @click="$emit('next')">
+                                    ВПЕРЕД
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="btn-next-back-wrapper text-[#006AFF] dark:text-white">
-                        <button class="btn-news back" @click="$emit('prev')">
-                            НАЗАД
-                        </button>
-                        <button class="btn-news next" @click="$emit('next')">
-                            ВПЕРЕД
-                        </button>
-                    </div>
+                    <NewsBlock
+                        :key="id"
+                        class="news-block"
+                        :news-tag="category"
+                        :news-title="headline"
+                        :news-date="date"
+                        :news-image="
+                            url && url.length > 0
+                                ? `https://security-jwt.onrender.com/api/v1/image?fileName=${url[0].filename}&imageType=NewsImage`
+                                : ''
+                        "
+                        :news-description="''"
+                        :news-show-summary="false"
+                        :block-width="'540px'"
+                        :block-height="'395px'"
+                        @click="navigateToNews(id)"
+                    />
                 </div>
-                <NewsBlock
-                    :key="id"
-                    class="news-block"
-                    :news-tag="category"
-                    :news-title="headline"
-                    :news-date="date"
-                    :news-image="
-                        url && url.length > 0
-                            ? `https://security-jwt.onrender.com/api/v1/image?fileName=${url[0].filename}&imageType=NewsImage`
-                            : ''
-                    "
-                    :news-description="''"
-                    :news-show-summary="false"
-                    :block-width="'540px'"
-                    :block-height="'395px'"
-                    @click="navigateToNews(id)"
-                />
             </div>
 
             <div v-else class="error-message">
@@ -264,10 +274,10 @@ onBeforeUnmount(() => {
 }
 .description-text-news {
     font-family: JetBrainsMono;
-    margin-left: 45px;
+    /* padding-left: 45px; */
     display: flex;
     align-items: center;
-    margin-top: -10px;
+    padding-top: -10px;
     width: 350px;
     height: 200px;
     font-size: 20px;
@@ -275,10 +285,16 @@ onBeforeUnmount(() => {
     text-align: center;
 }
 .general-block-description-news {
+    width: 450px;
+    height: 210px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.description-text-news-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 450px;
+    width: 500px;
     height: 210px;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -286,8 +302,8 @@ onBeforeUnmount(() => {
 .container-news {
     width: 100%;
     display: flex;
+    justify-content: center;
     flex-direction: row;
-    justify-content: space-between;
 }
 .news-wrapper {
     height: 700px;
@@ -327,5 +343,12 @@ onBeforeUnmount(() => {
 
 .dark-theme-bg {
     background-image: url('../../assets/News/border_light.png');
+}
+.capybara_wrapper {
+    display: flex;
+}
+.capybara_NewsBlock-wrapper {
+    display: flex;
+    gap: 8rem;
 }
 </style>

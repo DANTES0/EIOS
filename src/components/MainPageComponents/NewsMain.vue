@@ -87,11 +87,11 @@
 }
 .description-text-news {
     font-family: JetBrainsMono;
-    margin-left: 45px;
-    margin-top: 50px;
+    padding-left: 45px;
+    padding-top: 50px;
     width: 350px;
     height: 200px;
-    font-size: 20px;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #999999;
     text-align: center;
