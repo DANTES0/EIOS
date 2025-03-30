@@ -122,7 +122,7 @@ onBeforeUnmount(() => {
                     </div>
                     <NewsBlock
                         :key="id"
-                        class="news-block"
+                        class="news-block bg-white dark:bg-[#1f1f1f]"
                         :news-tag="category"
                         :news-title="headline"
                         :news-date="date"

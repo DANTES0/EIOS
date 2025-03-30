@@ -176,7 +176,7 @@ onBeforeUnmount(() => {
     <div v-if="typeInput === 'stairsInput'" ref="dropdownRef" class="relative w-full">
         <input
             v-model="searchText"
-            class="w-full bg-[#181818] border border-[#cccccc] outline-none font-light p-1 focus:border-[#1E66F5]"
+            class="w-full bg-white dark:bg-[#181818] border border-[#cccccc] outline-none font-light p-1 focus:border-[#1E66F5]"
             :placeholder="placeholderText"
             :class="inputClass"
             autocomplete="off"
@@ -192,13 +192,13 @@ onBeforeUnmount(() => {
         </div>
         <div
             v-if="showDropdown"
-            class="absolute z-10 w-full bg-[#181818] border border-[#1E66F5] mt-1"
+            class="absolute z-10 w-full bg-white dark:bg-[#181818] border border-[#1E66F5] mt-1"
         >
             <ul v-if="typeSearch === '' && !searchText.trim()">
                 <li
                     v-for="item in itemsType"
                     :key="item.id"
-                    class="p-1 hover:bg-[#333333] cursor-pointer"
+                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] cursor-pointer"
                     @click="
                         () => {
                             placeholderText = item.name;
@@ -215,7 +215,7 @@ onBeforeUnmount(() => {
                 <li
                     v-for="item in filteredTypes"
                     :key="item.id"
-                    class="p-1 hover:bg-[#333333] cursor-pointer"
+                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-black dark:text-white cursor-pointer"
                     @click="
                         () => {
                             if (props.items2.includes(item)) {
@@ -237,7 +237,7 @@ onBeforeUnmount(() => {
                 <li
                     v-for="item in filteredItems2"
                     :key="item.id"
-                    class="p-1 hover:bg-[#333333] cursor-pointer"
+                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-black dark:text-white cursor-pointer"
                     @click="selectItem(item)"
                 >
                     {{ item.name }}
@@ -249,7 +249,7 @@ onBeforeUnmount(() => {
                     !filteredItems2.length &&
                     !filteredTypes.length
                 "
-                class="p-1 text-gray-400"
+                class="p-1 text-black dark:text-gray-400"
             >
                 Ничего не найдено
             </div>

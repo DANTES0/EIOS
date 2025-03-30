@@ -7,6 +7,12 @@ export default {
         extend: {
             colors: {
                 'brand-blue': '#1E66F5',
+                'dp-primary': '#1E66F5',
+                'dp-primary-dark': '#3B82F6',
+                'dp-bg': '#FFFFFF',
+                'dp-bg-dark': '#1F1F1F',
+                'dp-text': '#0C2340',
+                'dp-text-dark': '#CCCCCC'
               }
         },
     },

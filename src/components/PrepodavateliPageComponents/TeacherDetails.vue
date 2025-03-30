@@ -32,7 +32,7 @@ onMounted(fetchTeacherDetails);
 <template>
     <div class="flex flex-col justify-center w-[90%] mt-[56px] ml-[96px]">
         <div
-            class="bg-[#181818] h-[380px] w-full flex flex-row border-[1.5px] border-[#2B2B2B] items-center"
+            class="bg-[#0C2340] dark:bg-[#181818] h-[380px] w-full flex flex-row border-[1.5px] border-[#2B2B2B] dark:border-[#2B2B2B] items-center"
         >
             <div class="flex items-center justify-center h-full ml-[104px]">
                 <div
@@ -102,12 +102,12 @@ onMounted(fetchTeacherDetails);
                 </div>
             </div>
         </div>
-        <div class="flex flex-row text-white font-[JetBrainsMono] h-full mt-[44px]">
+        <div class="flex flex-row text-gray-700 dark:text-white font-[JetBrainsMono] h-full mt-[44px]">
             <div class="flex flex-col w-[48%]">
-                <div class="text-[28px] font-extrabold mb-[35px]">
+                <div class="text-[28px] font-extrabold text-gray-700 dark:text-white mb-[35px]">
                     Материалы по курсам
                 </div>
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-4 text-white dark:text-white">
                     <course-dropdown></course-dropdown>
                     <course-dropdown></course-dropdown>
                     <course-dropdown></course-dropdown>
@@ -116,7 +116,7 @@ onMounted(fetchTeacherDetails);
             </div>
             <div class="h-[300px] w-[1px] mt-[100px] bg-white"></div>
             <div class="flex flex-col w-[48%] ml-[70px]">
-                <div class="text-[28px] font-extrabold">Ближайшие консультации</div>
+                <div class="text-[28px] font-extrabold text-black dark:text-white">Ближайшие консультации</div>
                 <TeacherConsultations />
             </div>
         </div>

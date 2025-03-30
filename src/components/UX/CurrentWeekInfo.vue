@@ -26,7 +26,7 @@ onUnmounted(() => {
             выделена цветом
         </label>
 
-        <span class="color-box"></span>
+        <span class="color-box bg-gray-300 dark:bg-[#313131]"></span>
     </div>
 </template>
 
@@ -45,7 +45,6 @@ onUnmounted(() => {
     display: inline-block;
     width: 2.75rem;
     height: 1.75rem;
-    background-color: #313131;
     margin-left: 5px;
     border-radius: 2px;
 }
