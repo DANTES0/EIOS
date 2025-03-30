@@ -1,17 +1,17 @@
 <script setup></script>
 
 <template>
-    <div id="footer" class="footer-container">
+    <div id="footer" class="footer-container ">
         <div class="footer-title">
-            <div class="foorer-title-wrap">
-                <div class="title-voenmeh">БГТУ "ВОЕНМЕХ"</div>
-                <div class="title-kafedra-o7">
+            <div class="foorer-title-wrap bg-white dark:bg-[#1f1f1f]">
+                <div class="title-voenmeh text-[#0C2340] dark:text-white">БГТУ "ВОЕНМЕХ"</div>
+                <div class="title-kafedra-o7 text-[#0C2340] dark:text-white">
                     Кафедра O7
                     <!-- <span style="color: #ccc">О</span>7 -->
                 </div>
             </div>
         </div>
-        <div class="footer-description">
+        <div class="footer-description bg-[#0C2340] dark:bg-[#181818] border-r border-white dark:border-[#2b2b2b]">
             <div style="margin-top: 66px" class="footer-description-content">
                 <img
                     src="../assets/footer/location.svg"
@@ -61,9 +61,9 @@
                 </a>
             </div>
         </div>
-        <div class="footer-reference">
+        <div class="footer-reference bg-white dark:bg-[#1f1f1f]">
             <div class="footer-reference-wrap">
-                <div class="footer-reference-title">Социальные сети:</div>
+                <div class="footer-reference-title text-[#0C2340] dark:text-white">Социальные сети:</div>
                 <div class="footer-ref-a">
                     <a href="" class="footer-reference-ref vk"></a>
                     <a href="" class="footer-reference-ref discord"></a>
@@ -95,7 +95,6 @@
 .footer-description-text {
     font-weight: 300;
     font-size: 16px;
-    color: #cccccc; /* Цвет текста */
     text-decoration: none; /* Убираем подчеркивание */
 }
 .footer-description-text:hover {
@@ -133,7 +132,6 @@
 .footer-reference-title {
     margin-left: 16px;
     font-weight: 700;
-    color: white;
 }
 .footer-reference-ref {
     width: 40px;
@@ -151,14 +149,12 @@
 .title-kafedra-o7 {
     font-family: JetBrainsMono;
     font-size: 30px;
-    color: white;
     font-weight: 700;
     /* margin-right: 54px; */
 }
 .title-voenmeh {
     font-family: JetBrainsMono;
     font-size: 30px;
-    color: white;
     font-weight: 700;
     margin-left: 18px;
 }
@@ -166,7 +162,6 @@
     width: 100%;
     /* height: 429px; */
     font-family: JetBrainsMono;
-    color: #cccccc;
     font-size: 30px;
     /* margin-top: 1    50px; */
     /* background-color: #0d101f; */
@@ -174,7 +169,6 @@
 .footer-back {
     width: 100%;
     height: 202px;
-    background-color: #181818;
     border: 1px solid white;
     border-right: none;
     border-left: none;
@@ -186,7 +180,6 @@
 .footer-title {
     width: 485px;
     height: 75px;
-    background-color: #191919;
     border: 1px solid #1e66f5;
     position: absolute;
     z-index: 3;
@@ -202,13 +195,11 @@
     border-top: 1px solid white;
     /* border-bottom: 1px solid white; */
     z-index: 2;
-    background-color: #1f1f1f;
 }
 .footer-reference {
     position: absolute;
     width: 580px;
     height: 75px;
-    background-color: #191919;
     border: 1px solid #1e66f5;
     z-index: 3;
     /* bottom: 70px; */
