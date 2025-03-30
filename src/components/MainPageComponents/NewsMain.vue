@@ -32,8 +32,8 @@
                 </div>
 
                 <!-- <NewsBlock
-          :blockWidth="'540px'" 
-          :blockHeight="'395px'" 
+          :blockWidth="'540px'"
+          :blockHeight="'395px'"
           :foregroundWidth="'402px'"
           :foregroundHeight="'276px'"
         >

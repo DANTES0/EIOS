@@ -1,11 +1,12 @@
 <script setup>
 import ProgressSpinner from 'primevue/progressspinner';
-import { defineProps } from 'vue';
+import { defineProps, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue';
 import NewsBlock from '/src/components/NewsPageComponents/NewsBlock.vue';
 import { useRouter } from 'vue-router';
+import theme from 'tailwindcss/defaultTheme.js';
 
 const router = useRouter();
-
+const currentTheme = ref(localStorage.getItem('theme') || 'light'); // Инициализация из localStorage
 const props = defineProps({
     id: String,
     headline: String,
@@ -19,17 +20,46 @@ const props = defineProps({
 function navigateToNews(newsId) {
     router.push(`/news/get/${newsId}`);
 }
+
+// Автоматическое отслеживание изменений
+watchEffect(() => {
+    document.documentElement.classList.toggle('dark', currentTheme.value === 'dark');
+});
+
+// Обработчик изменений в localStorage
+const handleStorageChange = (event) => {
+    if (event.key === 'theme') {
+        currentTheme.value = event.newValue || 'light';
+    }
+};
+
+// Обработчик кастомного события смены темы
+const handleThemeChange = () => {
+    currentTheme.value = localStorage.getItem('theme') || 'light';
+};
+
+onMounted(() => {
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('theme-changed', handleThemeChange); // Слушаем кастомное событие
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('storage', handleStorageChange);
+    window.removeEventListener('theme-changed', handleThemeChange);
+});
 </script>
 
 <template>
-    <div class="news-wrapper">
-        <div class="numbers-wrapper">
+    <div class="news-wrapper text-[#0C2340] dark:text-[#999999]">
+        <div class="numbers-wrapper text-[#0C2340] dark:text-[#999999]">
             <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
         </div>
-        <div id="news" class="content-news-wrapper">
-            <div class="title-news-wrapper">
+        <div id="news" class="content-news-wrapper bg-white dark:bg-[#1f1f1f]">
+            <div class="title-news-wrapper text-black dark:text-white">
                 <h1 class="title-news"><span style="color: #1e66f5">#</span>НОВОСТИ</h1>
-                <label class="line-dashed">---------</label>
+                <label class="line-dashed text-[#006AFF] dark:text-white"
+                    >---------</label
+                >
             </div>
             <div v-if="areLoading" class="spinner-container">
                 <progress-spinner class="custom-spinner" />
@@ -37,17 +67,22 @@ function navigateToNews(newsId) {
 
             <div v-else-if="areLoaded" class="container-news">
                 <img
-                    src="../../assets/News/kapybars_in_circle.png"
-                    alt=""
-                    class="kapybaras"
+                    v-if="currentTheme !== 'dark'"
+                    src="../../assets/News/kapybars_in_circle_dark.png"
                 />
-                <div class="description-news">
-                    <div class="general-block-description-news">
+                <img v-else src="../../assets/News/kapybars_in_circle.png" />
+                <div class="description-news text-black dark:text-white">
+                    <div
+                        class="general-block-description-news"
+                        :class="
+                            currentTheme !== 'dark' ? 'dark-theme-bg' : 'light-theme-bg'
+                        "
+                    >
                         <div class="description-text-news">
                             {{ headline }}
                         </div>
                     </div>
-                    <div class="btn-next-back-wrapper">
+                    <div class="btn-next-back-wrapper text-[#006AFF] dark:text-white">
                         <button class="btn-news back" @click="$emit('prev')">
                             НАЗАД
                         </button>
@@ -211,11 +246,9 @@ function navigateToNews(newsId) {
 .btn-news {
     font-family: JetBrainsMono;
     font-size: 24px;
-    color: #cccccc;
     width: 100px;
     height: 29x;
     border: 1px solid #999999;
-    background-color: transparent;
     text-align: center;
     cursor: pointer;
 }
@@ -239,7 +272,6 @@ function navigateToNews(newsId) {
     height: 200px;
     font-size: 20px;
     font-weight: 700;
-    color: #999999;
     text-align: center;
 }
 .general-block-description-news {
@@ -248,7 +280,6 @@ function navigateToNews(newsId) {
     align-items: center;
     width: 450px;
     height: 210px;
-    background-image: url('../../assets/News/border.png');
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -261,7 +292,6 @@ function navigateToNews(newsId) {
 .news-wrapper {
     height: 700px;
     width: 100%;
-    background-color: #191919;
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -271,7 +301,6 @@ function navigateToNews(newsId) {
     font-size: 48px;
     font-family: JetBrainsMono;
     font-weight: 200;
-    color: white;
     margin-left: 128px;
     margin-top: 18px;
     width: 230px;
@@ -289,8 +318,14 @@ function navigateToNews(newsId) {
     left: 70px;
     font-size: 48px;
     font-weight: 500;
-    color: white;
     letter-spacing: 8px;
     user-select: none;
+}
+.light-theme-bg {
+    background-image: url('../../assets/News/border.png');
+}
+
+.dark-theme-bg {
+    background-image: url('../../assets/News/border_light.png');
 }
 </style>

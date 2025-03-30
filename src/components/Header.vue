@@ -3,8 +3,22 @@
 import HeaderAnchor from './HeaderAnchor.vue';
 import { authState } from '../authState';
 import { useStore } from 'vuex';
+import { ref, onMounted } from 'vue';
 
 const store = useStore();
+const theme = ref(localStorage.getItem('theme') || 'light');
+
+onMounted(() => {
+    if (
+        theme.value === 'dark' ||
+        (!localStorage.getItem('theme') &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+});
 
 const toggleAuthVisibility = () => {
     authState.isVisible = !authState.isVisible;
@@ -12,25 +26,19 @@ const toggleAuthVisibility = () => {
 };
 
 const changeTheme = () => {
-    // localStorage.theme = 'light';
+    theme.value = theme.value === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', theme.value);
+    window.dispatchEvent(new CustomEvent('theme-changed'));
 
-    if (localStorage.theme === 'light') {
-        localStorage.theme = 'dark';
-    } else if (localStorage.theme === 'dark') {
-        localStorage.theme = 'light';
-    }
-
-    if (
-        localStorage.theme === 'dark' ||
-        (!('theme' in localStorage) &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
+    if (theme.value === 'dark') {
         document.documentElement.classList.add('dark');
+
     } else {
         document.documentElement.classList.remove('dark');
     }
 
-    store.dispatch('logout');
+    // Если нужно разлогинить при смене темы, оставь эту строку
+    // store.dispatch('logout');
 };
 </script>
 
