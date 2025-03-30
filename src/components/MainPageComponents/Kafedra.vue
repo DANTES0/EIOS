@@ -1,5 +1,6 @@
 <script setup>
 import KafedraText from './KafedraText.vue';
+import SectionTitle from './SectionTitle.vue';
 
 const TextKafedra = [
     {
@@ -32,14 +33,7 @@ const TextKafedra = [
             </div>
         </div>
         <div id="kafedra" class="content-kafedra-wrapper">
-            <div class="title-kafedra-wrapper">
-                <h1 class="title-kafedra text-black dark:text-white">
-                    <span style="color: #1e66f5">#</span>КАФЕДРА
-                </h1>
-                <label class="line-dashed text-[#006AFF] dark:text-white"
-                    >---------</label
-                >
-            </div>
+            <SectionTitle title="КАФЕДРА" />
             <KafedraText
                 v-for="(value, index) in TextKafedra"
                 :id="index"

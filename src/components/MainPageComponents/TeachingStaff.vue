@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import PrepodavateliKafedriCarousel from './TeachingStaffСarousel.vue';
+import SectionTitle from './SectionTitle.vue';
 
 let flag = ref(false);
 
@@ -22,14 +23,7 @@ const resetAnimation = () => {
             <div v-for="i in 22" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="prepod" class="content-prepod-wrapper bg-white dark:bg-[#1f1f1f]">
-            <div class="title-prepod-wrapper text-black dark:text-white">
-                <h1 class="title-prepod">
-                    <span style="color: #1e66f5">#</span>ПРЕПОДАВАТЕЛИ КАФЕДРЫ
-                </h1>
-                <label class="line-dashed text-[#006AFF] dark:text-white"
-                    >------------------------</label
-                >
-            </div>
+            <SectionTitle title="ПРЕПОДАВАТЕЛИ КАФЕДРЫ" :base-length="13" />
             <PrepodavateliKafedriCarousel></PrepodavateliKafedriCarousel>
         </div>
     </div>

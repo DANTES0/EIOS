@@ -1,6 +1,7 @@
 <script setup>
 import { ref, reactive } from 'vue';
 import ProgressSpinner from 'primevue/progressspinner';
+import SectionTitle from './SectionTitle.vue';
 
 let prop = defineProps({
     id_photo: Number,
@@ -57,13 +58,7 @@ const imageIsLoaded = (index) => {
             <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div class="content-gallery-wrapper bg-white dark:bg-[#1f1f1f]">
-            <div class="title-gallery-wrapper text-black dark:text-white">
-                <h1 class="title-gallery">
-                    <span style="color: #1e66f5">#</span>ФОТОГАЛЕРЕЯ
-                </h1>
-                <label class="line-dashed-gallery text-[#006AFF] dark:text-white">-------------</label>
-            </div>
-
+            <SectionTitle title="ФОТОГАЛЕРЕЯ" :base-length="7" />
             <div v-if="isLoading" class="spinner-container">
                 <progress-spinner class="custom-spinner" />
             </div>

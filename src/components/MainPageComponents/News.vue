@@ -4,6 +4,7 @@ import { defineProps, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue';
 import NewsBlock from '/src/components/NewsPageComponents/NewsBlock.vue';
 import { useRouter } from 'vue-router';
 import theme from 'tailwindcss/defaultTheme.js';
+import SectionTitle from './SectionTitle.vue';
 
 const blockWidth = ref('540px');
 const blockHeight = ref('395px');
@@ -79,12 +80,7 @@ onBeforeUnmount(() => {
             <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="news" class="content-news-wrapper bg-white dark:bg-[#1f1f1f]">
-            <div class="title-news-wrapper text-black dark:text-white">
-                <h1 class="title-news"><span style="color: #1e66f5">#</span>НОВОСТИ</h1>
-                <label class="line-dashed text-[#006AFF] dark:text-white"
-                    >---------</label
-                >
-            </div>
+            <SectionTitle title="НОВОСТИ" />
             <div v-if="areLoading" class="spinner-container">
                 <progress-spinner class="custom-spinner" />
             </div>

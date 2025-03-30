@@ -1,4 +1,6 @@
 <script setup>
+import SectionTitle from './SectionTitle.vue';
+
 const cifri = [
     {
         title: '1000+',
@@ -21,10 +23,7 @@ const cifri = [
             <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
         </div>
         <div id="cifri" class="content-cifri-wrapper bg-white dark:bg-[#1f1f1f]">
-            <div class="title-cifri-wrapper text-black dark:text-white">
-                <h1 class="title-cifri"><span style="color: #1e66f5">#</span>ЦИФРЫ</h1>
-                <label class="line-dashed-cifri text-[#006AFF] dark:text-white">-------</label>
-            </div>
+            <SectionTitle title="КАФЕДРА В ЦИФРАХ" :base-length="10" />
             <div class="cifri-frame pl-16">
                 <div v-for="(item, i) in cifri" :key="i" class="cifri-block">
                     <div class="image-block-cifri">
