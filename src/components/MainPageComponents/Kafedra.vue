@@ -89,7 +89,7 @@ const TextKafedra = [
     font-weight: 500;
     letter-spacing: 8px;
     user-select: none;
-    width: 14rem;
+    width: 15rem;
 }
 .cathedra span {
     font-weight: 700;
@@ -97,7 +97,7 @@ const TextKafedra = [
     color: white;
 }
 
-@media (min-width: 1280px) and (max-width: 1440px) {
+@media (min-width: 1024px) and (max-width: 1440px) {
     .wrapper {
         /* padding: 40px 60px; */
         padding-left: 1rem;
@@ -114,6 +114,17 @@ const TextKafedra = [
     .line-dashed {
         font-size: 2rem;
         padding: 0.5rem 2.5rem 0 0;
+    }
+}
+
+@media (min-width: 1441px) {
+    .line-dashed {
+        font-size: 3rem;
+        padding: 0.5rem 2.5rem 0 0;
+        width: 18rem;
+    }
+    .title-kafedra {
+        width: 18rem;
     }
 }
 </style>
