@@ -25,6 +25,7 @@ const newsData = defineProps({
     blockHeight: { type: String, default: '319px' },
     foregroundWidth: { type: String, default: '85%' },
     foregroundHeight: { type: String, default: '85%' },
+    fontSize: { type: String, default: '16px' },
 });
 
 const processedDescription = () => {
@@ -77,10 +78,12 @@ const imageLoaded = () => {
             <div class="news-block-tag-and-date-wrapper text-black dark:text-white">
                 <div class="news-block-tag">
                     <img src="../../assets/News/image.svg" alt="" class="tag-icon" />
-                    <div class="tag">{{ newsData.newsTag }}</div>
+                    <div class="tag" :style="{ fontSize: newsData.fontSize }">
+                        {{ newsData.newsTag }}
+                    </div>
                 </div>
 
-                <div class="news-block-date">
+                <div class="news-block-date" :style="{ fontSize: newsData.fontSize }">
                     {{ format(newsData.newsDate, 'dd/MM/yyyy') }}
                 </div>
             </div>
@@ -130,6 +133,11 @@ const imageLoaded = () => {
     src: url('../../assets/Rubik.ttf');
 }
 /* размеры блока */
+.news-block {
+    transition:
+        width 0.3s ease,
+        height 0.3s ease;
+}
 .news-block-wrapper {
     /* margin-right: 71px; */
 
@@ -162,9 +170,8 @@ const imageLoaded = () => {
 }
 .tag {
     font-family: Rubik;
-    font-size: 18;
+    font-size: 18px;
     font-weight: 800;
-
 }
 .news-block-date {
     margin-top: 3px;
@@ -222,5 +229,7 @@ const imageLoaded = () => {
     text-align: justify;
 
     margin-top: 10px;
+}
+@media (min-width: 1024px) and (max-width: 1920px) {
 }
 </style>

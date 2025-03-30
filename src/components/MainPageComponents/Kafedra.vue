@@ -89,6 +89,7 @@ const TextKafedra = [
     font-weight: 500;
     letter-spacing: 8px;
     user-select: none;
+    width: 14rem;
 }
 .cathedra span {
     font-weight: 700;
@@ -96,7 +97,7 @@ const TextKafedra = [
     color: white;
 }
 
-@media (min-width: 1024px) and (max-width: 1440px) {
+@media (min-width: 1280px) and (max-width: 1440px) {
     .wrapper {
         /* padding: 40px 60px; */
         padding-left: 1rem;

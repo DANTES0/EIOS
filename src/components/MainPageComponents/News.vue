@@ -5,6 +5,27 @@ import NewsBlock from '/src/components/NewsPageComponents/NewsBlock.vue';
 import { useRouter } from 'vue-router';
 import theme from 'tailwindcss/defaultTheme.js';
 
+const blockWidth = ref('540px');
+const blockHeight = ref('395px');
+const fontSize = ref('18px');
+
+function updateDimensions() {
+    if (window.matchMedia('(min-width: 1024px) and (max-width: 1279px)').matches) {
+        blockWidth.value = '300px';
+        blockHeight.value = '210px';
+        fontSize.value = '13px';
+    } else if (window.matchMedia('(min-width: 1280px) and (max-width: 1440px)').matches) {
+        blockWidth.value = '340px';
+        blockHeight.value = '240px';
+    } else if (window.matchMedia('(min-width: 1441px) and (max-width: 1920px)').matches) {
+        blockWidth.value = '410px';
+        blockHeight.value = '280px';
+    } else {
+        blockWidth.value = '540px';
+        blockHeight.value = '395px';
+    }
+}
+
 const router = useRouter();
 const currentTheme = ref(localStorage.getItem('theme') || 'light'); // Инициализация из localStorage
 const props = defineProps({
@@ -39,6 +60,8 @@ const handleThemeChange = () => {
 };
 
 onMounted(() => {
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('theme-changed', handleThemeChange); // Слушаем кастомное событие
 });
@@ -46,6 +69,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
     window.removeEventListener('storage', handleStorageChange);
     window.removeEventListener('theme-changed', handleThemeChange);
+    window.removeEventListener('resize', updateDimensions);
 });
 </script>
 
@@ -113,8 +137,9 @@ onBeforeUnmount(() => {
                         "
                         :news-description="''"
                         :news-show-summary="false"
-                        :block-width="'540px'"
-                        :block-height="'395px'"
+                        :block-width="blockWidth"
+                        :block-height="blockHeight"
+                        :font-size="fontSize"
                         @click="navigateToNews(id)"
                     />
                 </div>
@@ -350,5 +375,96 @@ onBeforeUnmount(() => {
 .capybara_NewsBlock-wrapper {
     display: flex;
     gap: 8rem;
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .capybara_wrapper img {
+        height: 12rem;
+        width: 12rem;
+    }
+
+    .description-news {
+        margin: 2.5rem 0 0 0;
+        font-size: 0.5rem;
+    }
+
+    .description-text-news {
+        font-size: 0.65rem;
+    }
+
+    .title-news {
+        font-size: 2.3rem;
+    }
+
+    .line-dashed {
+        font-size: 2rem;
+        padding: 0.5rem 2.5rem 0 0;
+    }
+
+    .general-block-description-news {
+        width: 15rem;
+        height: 6.8rem;
+    }
+
+    .description-text-news-wrapper {
+        width: 15rem;
+        height: 6rem;
+        padding-left: 1.5rem;
+    }
+
+    .capybara_NewsBlock-wrapper {
+        gap: 1.5rem;
+    }
+    .btn-next-back-wrapper button {
+        font-size: 1rem;
+        width: 4rem;
+    }
+    .back {
+        margin-left: 28px;
+    }
+    .news-block {
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1920px) {
+    .capybara_wrapper img {
+        height: 16rem;
+        width: 16rem;
+    }
+
+    .description-news {
+        margin: 3.2rem 0 0 0;
+        font-size: 0.5rem;
+    }
+
+    .description-text-news {
+        font-size: 0.9rem;
+    }
+
+    .title-news {
+        font-size: 2.3rem;
+    }
+
+    .line-dashed {
+        font-size: 2rem;
+        padding: 0.5rem 2.5rem 0 0;
+    }
+
+    .general-block-description-news {
+        width: 20rem;
+        height: 9rem;
+    }
+
+    .description-text-news-wrapper {
+        width: 20rem;
+        height: 9rem;
+        padding-left: 2.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .capybara_NewsBlock-wrapper {
+        gap: 1.5rem;
+    }
 }
 </style>
