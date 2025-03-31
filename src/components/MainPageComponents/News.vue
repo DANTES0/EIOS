@@ -165,11 +165,11 @@ onBeforeUnmount(() => {
     padding-bottom: 120px;
 }
 .spinner-container {
-    min-height: 58.5vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 120px;
+    padding-bottom: 6rem;
 }
 .custom-spinner {
     --p-progressspinner-color-1: rgb(0, 84, 255);
@@ -253,6 +253,7 @@ onBeforeUnmount(() => {
 }
 .content-news-wrapper {
     width: 100%;
+    height: 550px;
 }
 .card-news-block {
     margin-right: 71px;

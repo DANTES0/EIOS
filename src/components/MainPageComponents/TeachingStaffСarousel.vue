@@ -135,6 +135,7 @@ onMounted(() => {
             <div v-if="teachersAreLoading" class="spinner-container">
                 <progress-spinner class="custom-spinner" />
             </div>
+
             <div v-else-if="teachersAreLoaded" class="prepod-image-block">
                 <div
                     style=""
@@ -195,7 +196,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 120px;
+    padding-bottom: 4rem;
 }
 .custom-spinner {
     --p-progressspinner-color-1: rgb(0, 84, 255);
