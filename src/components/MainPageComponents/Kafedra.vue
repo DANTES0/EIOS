@@ -1,6 +1,7 @@
 <script setup>
 import KafedraText from './KafedraText.vue';
 import SectionTitle from './SectionTitle.vue';
+import NumberColumn from './NumberColumn.vue';
 
 const TextKafedra = [
     {
@@ -23,6 +24,13 @@ const TextKafedra = [
 
 <template>
     <div class="wrapper flex flex-col md:flex-row items-start">
+        <!-- <NumberColumn
+            :item-height="36"
+            :vertical-padding="20"
+            :horizontal-padding="10"
+            :gap="8"
+            :max-numbers="50"
+        /> -->
         <div class="numbers-wrapper">
             <div
                 v-for="i in 25"
