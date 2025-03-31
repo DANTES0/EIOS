@@ -55,9 +55,12 @@ const imageLoaded = () => {
                 @load="imageLoaded"
             />
         </div>
-        <div v-if="id === currentIndex" class="prepod-description-block text-black dark:text-white border-l-[1px] border-r-[1px] border-gray-300 dark:border-white">
-            <h1 class="name-prepod ">{{ name }}</h1>
-            <h2 class="spec-prepod info-prepod " style="margin-bottom: 10px">
+        <div
+            v-if="id === currentIndex"
+            class="prepod-description-block text-black dark:text-white border-l-[1px] border-r-[1px] border-gray-300 dark:border-white"
+        >
+            <h1 class="name-prepod">{{ name }}</h1>
+            <h2 class="spec-prepod info-prepod" style="margin-bottom: 10px">
                 {{ post }}
             </h2>
             <h2 class="stepen-prepod info-prepod">{{ rank }}</h2>
@@ -108,11 +111,6 @@ const imageLoaded = () => {
     background-color: #1e66f5;
     /* transition: anima 2s linear; */
 }
-.prepod-image-arrow:hover {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
-        hue-rotate(146deg) brightness(122%) contrast(120%);
-    cursor: pointer;
-}
 .circle-prepod {
     width: 16px;
     height: 16px;
@@ -131,8 +129,8 @@ const imageLoaded = () => {
 }
 .name-prepod {
     font-family: JetBrainsMono;
-    font-size: 36;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 600;
     margin-bottom: 39px;
 }
 .info-prepod {
@@ -186,18 +184,60 @@ const imageLoaded = () => {
 .content-prepod-wrapper {
     width: 100%;
 }
-.content-wrapper-prepod {
-    height: 700px;
-    width: 1450px;
-    border-top: 1px solid #1e66f5;
-    border-bottom: 1px solid #1e66f5;
-    margin-left: 52px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 .wrap-destroy {
     display: none;
+}
+.spec-prepod,
+.stepen-prepod {
+    font-size: 1.25rem;
+}
+@media (max-width: 1786px) {
+    .prepod-image {
+        width: 11rem;
+        height: 11rem;
+    }
+
+    .main-prepod-image {
+        width: 16rem;
+        height: 16rem;
+    }
+
+    .prepod-description-block {
+        width: 420px;
+    }
+
+    .name-prepod {
+        font-size: 1.15rem;
+    }
+
+    .spec-prepod,
+    .stepen-prepod {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 1440px) {
+    .prepod-image {
+        width: 9rem;
+        height: 9rem;
+    }
+
+    .main-prepod-image {
+        width: 13.2rem;
+        height: 13.2rem;
+    }
+
+    .prepod-description-block {
+        width: 375px;
+    }
+
+    .name-prepod {
+        font-size: 0.95rem;
+    }
+
+    .spec-prepod,
+    .stepen-prepod {
+        font-size: 0.85rem;
+    }
 }
 </style>

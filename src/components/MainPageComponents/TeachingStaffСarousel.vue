@@ -319,19 +319,48 @@ onMounted(() => {
     margin: 0;
     padding: 0;
     display: block;
+    padding-left: 62px;
+    padding-right: 62px;
 }
 .content-wrapper-prepod {
     height: 700px;
     width: 100%; /* Занимает всю доступную ширину */
     max-width: 1450px; /* Ограничение максимальной ширины (опционально) */
-    border-top: 1px solid #1e66f5;
-    border-bottom: 1px solid #1e66f5;
     margin: 0 auto; /* Центрирование блока, если max-width задан */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0 20px; /* Добавьте отступы по бокам, если нужно */
-    box-sizing: border-box; /* Чтобы padding не увеличивал общую ширину */
+    box-sizing: border-box;
+
+    border-top: 1px solid #1e66f5;
+    border-bottom: 1px solid #1e66f5;
+
+    /* padding-left:; */
+}
+
+@media (max-width: 1786px) {
+    .content-wrapper-prepod {
+        height: 550px;
+    }
+
+    .next-image-arrow,
+    .back-image-arrow {
+        width: 78px;
+        height: 56px;
+    }
+}
+
+@media (max-width: 1440px) {
+    .content-wrapper-prepod {
+        height: 475px;
+        overflow-y: hidden;
+    }
+
+    .next-image-arrow,
+    .back-image-arrow {
+        width: 63px;
+        height: 41px;
+    }
 }
 </style>
