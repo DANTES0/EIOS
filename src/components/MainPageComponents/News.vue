@@ -11,15 +11,11 @@ const blockHeight = ref('395px');
 const fontSize = ref('18px');
 
 function updateDimensions() {
-    if (window.matchMedia('(max-width: 1024px)').matches) {
+    if (window.matchMedia('(min-width: 1024px) and (max-width: 1279px)').matches) {
         blockWidth.value = '300px';
         blockHeight.value = '210px';
         fontSize.value = '13px';
-    } else if (window.matchMedia('(max-width: 1280px)').matches) {
-        blockWidth.value = '340px';
-        blockHeight.value = '240px';
-        fontSize.value = '16px';
-    } else if (window.matchMedia('(max-width: 1440px)').matches) {
+    } else if (window.matchMedia('(min-width: 1280px) and (max-width: 1440px)').matches) {
         blockWidth.value = '340px';
         blockHeight.value = '240px';
         fontSize.value = '16px';
