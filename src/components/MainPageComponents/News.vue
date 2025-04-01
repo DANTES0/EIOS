@@ -426,7 +426,7 @@ onBeforeUnmount(() => {
     }
 
     .description-news {
-        margin: 3.2rem 0 0 0;
+        margin: 2.8rem 0 0 0;
         font-size: 0.5rem;
     }
 
@@ -506,7 +506,7 @@ onBeforeUnmount(() => {
     }
 
     .description-news {
-        margin: 3.2rem 0 0 0;
+        margin: 4rem 0 0 0;
         font-size: 1rem;
     }
 
@@ -520,10 +520,10 @@ onBeforeUnmount(() => {
     }
 
     .description-text-news-wrapper {
-        width: 25rem;
+        width: 20.4rem;
         height: 10rem;
-        padding-left: 0rem;
-        padding-right: 0.5rem;
+        padding-left: 3.4rem;
+        padding-right: 0rem;
     }
 
     .back {
@@ -547,7 +547,7 @@ onBeforeUnmount(() => {
     }
 
     .description-news {
-        margin: 3.2rem 0 0 0;
+        margin: 5rem 0 0 0;
         font-size: 1rem;
     }
 
@@ -562,11 +562,11 @@ onBeforeUnmount(() => {
     }
 
     .description-text-news-wrapper {
-        width: 30rem;
+        width: 28rem;
         height: 12rem;
         padding-top: 2rem;
         padding-bottom: 2rem;
-        padding-left: 0rem;
+        padding-left: 3.4rem;
         padding-right: 0rem;
     }
 
