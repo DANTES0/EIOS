@@ -405,7 +405,7 @@ onBeforeUnmount(() => {
     }
 
     .capybara_NewsBlock-wrapper {
-        gap: 1.5rem;
+        gap: 1rem;
     }
     .btn-next-back-wrapper button {
         font-size: 0.85rem;
@@ -495,7 +495,7 @@ onBeforeUnmount(() => {
     }
 
     .capybara_NewsBlock-wrapper {
-        gap: 1.5rem;
+        gap: 2rem;
     }
 }
 
@@ -531,7 +531,7 @@ onBeforeUnmount(() => {
     }
 
     .capybara_NewsBlock-wrapper {
-        gap: 1.5rem;
+        gap: 2.5rem;
     }
 
     .btn-next-back-wrapper button {
@@ -575,7 +575,7 @@ onBeforeUnmount(() => {
     }
 
     .capybara_NewsBlock-wrapper {
-        gap: 1.5rem;
+        gap: 3.5rem;
     }
 
     .btn-next-back-wrapper button {
