@@ -11,15 +11,15 @@ const blockHeight = ref('395px');
 const fontSize = ref('18px');
 
 function updateDimensions() {
-    if (window.matchMedia('(min-width: 1024px) and (max-width: 1279px)').matches) {
+    if (window.matchMedia('(min-width: 1024px)').matches) {
         blockWidth.value = '300px';
         blockHeight.value = '210px';
         fontSize.value = '13px';
-    } else if (window.matchMedia('(min-width: 1280px) and (max-width: 1440px)').matches) {
+    } else if (window.matchMedia('(min-width: 1280px)').matches) {
         blockWidth.value = '340px';
         blockHeight.value = '240px';
         fontSize.value = '16px';
-    } else if (window.matchMedia('(min-width: 1441px) and (max-width: 1920px)').matches) {
+    } else if (window.matchMedia('(min-width: 1440px) and (max-width: 1920px)').matches) {
         blockWidth.value = '410px';
         blockHeight.value = '280px';
         fontSize.value = '18px';
@@ -378,7 +378,7 @@ onBeforeUnmount(() => {
     align-items: center;
 }
 
-@media (min-width: 1024px) and (max-width: 1200px) {
+@media (min-width: 1024px) {
     .capybara_wrapper img {
         height: 12rem;
         width: 12rem;
@@ -419,7 +419,7 @@ onBeforeUnmount(() => {
     }
 }
 
-@media (min-width: 1201px) and (max-width: 1279px) {
+@media (min-width: 1279px) {
     .capybara_wrapper img {
         height: 14rem;
         width: 14rem;
@@ -463,7 +463,7 @@ onBeforeUnmount(() => {
     }
 }
 
-@media (min-width: 1280px) and (max-width: 1440px) {
+@media (min-width: 1440px) {
     .capybara_wrapper img {
         height: 16rem;
         width: 16rem;
@@ -499,7 +499,7 @@ onBeforeUnmount(() => {
     }
 }
 
-@media (min-width: 1440px) and (max-width: 1920px) {
+@media (min-width: 1920px) {
     .capybara_wrapper img {
         height: 18rem;
         width: 18rem;

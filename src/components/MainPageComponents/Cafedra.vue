@@ -1,5 +1,5 @@
 <script setup>
-import KafedraText from './KafedraText.vue';
+import KafedraText from './CafedraText.vue';
 import SectionTitle from './SectionTitle.vue';
 import NumberColumn from './NumberColumn.vue';
 

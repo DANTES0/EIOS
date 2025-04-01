@@ -1,9 +1,9 @@
 <script setup>
-import Kafedra from '../components/MainPageComponents/Kafedra.vue';
+import Kafedra from '../components/MainPageComponents/Cafedra.vue';
 import News from '../components/MainPageComponents/News.vue';
 import Tabs from '../components/Tabs.vue';
 import PrepodavateliKafedri from '../components/MainPageComponents/TeachingStaff.vue';
-import KafedraCifri from '../components/MainPageComponents/KafedraCifri.vue';
+import KafedraCifri from '../components/MainPageComponents/CafedraInNumbers.vue';
 import PhotoGallery from '../components/MainPageComponents/PhotoGallery.vue';
 import Footer from '../components/Footer.vue';
 import Terminal from '../components/Terminal.vue';
