@@ -11,15 +11,19 @@ const blockHeight = ref('395px');
 const fontSize = ref('18px');
 
 function updateDimensions() {
-    if (window.matchMedia('(min-width: 1024px)').matches) {
+    if (window.matchMedia('(max-width: 1024px)').matches) {
         blockWidth.value = '300px';
         blockHeight.value = '210px';
         fontSize.value = '13px';
-    } else if (window.matchMedia('(min-width: 1280px)').matches) {
+    } else if (window.matchMedia('(max-width: 1280px)').matches) {
         blockWidth.value = '340px';
         blockHeight.value = '240px';
         fontSize.value = '16px';
-    } else if (window.matchMedia('(min-width: 1440px) and (max-width: 1920px)').matches) {
+    } else if (window.matchMedia('(max-width: 1440px)').matches) {
+        blockWidth.value = '340px';
+        blockHeight.value = '240px';
+        fontSize.value = '16px';
+    } else if (window.matchMedia('(min-width: 1441px) and (max-width: 1920px)').matches) {
         blockWidth.value = '410px';
         blockHeight.value = '280px';
         fontSize.value = '18px';
