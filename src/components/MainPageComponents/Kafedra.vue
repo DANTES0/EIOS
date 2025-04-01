@@ -108,28 +108,8 @@ const TextKafedra = [
     .numbers {
         margin-left: 0;
     }
-
-    .title-kafedra {
-        font-size: 2.3rem;
-    }
-
-    .line-dashed {
-        font-size: 2rem;
-        padding: 0.5rem 2.5rem 0 3rem;
-    }
 }
 
 @media (min-width: 1441px) {
-    .line-dashed {
-        font-size: 3rem;
-        padding: 0.5rem 2.5rem 0 0;
-        width: 18rem;
-    }
-    .title-kafedra {
-        width: 18rem;
-    }
-    .title-kafedra-wrapper {
-        padding-left: 10rem;
-    }
 }
 </style>

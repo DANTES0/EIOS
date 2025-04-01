@@ -44,7 +44,7 @@ const dashLine = computed(() => {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .section-title {
@@ -73,6 +73,20 @@ const dashLine = computed(() => {
 }
 
 /* Адаптивность */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 28px;
+        padding-left: 50px;
+    }
+
+    .dashed-line {
+        font-size: 28px;
+        top: -20px;
+        left: 30px;
+        letter-spacing: 5px;
+    }
+}
+
 @media (max-width: 1024px) {
     .section-title {
         font-size: 36px;
@@ -87,17 +101,42 @@ const dashLine = computed(() => {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .section-title {
-        font-size: 28px;
-        padding-left: 50px;
+        font-size: 36px;
+        padding-left: 80px;
     }
 
     .dashed-line {
-        font-size: 28px;
-        top: -20px;
-        left: 30px;
-        letter-spacing: 5px;
+        font-size: 30px;
+        padding-left: 5rem;
+        letter-spacing: 0.6rem;
+    }
+}
+
+@media (max-width: 1440px) {
+    .section-title {
+        font-size: 36px;
+        padding-left: 80px;
+    }
+
+    .dashed-line {
+        font-size: 30px;
+        padding-left: 5rem;
+        letter-spacing: 0.6rem;
+    }
+}
+
+@media (max-width: 1920px) {
+    .section-title {
+        font-size: 36px;
+        padding-left: 80px;
+    }
+
+    .dashed-line {
+        font-size: 30px;
+        padding-left: 5rem;
+        letter-spacing: 0.8rem;
     }
 }
 </style>
