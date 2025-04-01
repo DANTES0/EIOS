@@ -18,12 +18,15 @@ function updateDimensions() {
     } else if (window.matchMedia('(min-width: 1280px) and (max-width: 1440px)').matches) {
         blockWidth.value = '340px';
         blockHeight.value = '240px';
+        fontSize.value = '16px';
     } else if (window.matchMedia('(min-width: 1441px) and (max-width: 1920px)').matches) {
         blockWidth.value = '410px';
         blockHeight.value = '280px';
+        fontSize.value = '18px';
     } else {
         blockWidth.value = '540px';
         blockHeight.value = '395px';
+        fontSize.value = '22px';
     }
 }
 
@@ -372,9 +375,10 @@ onBeforeUnmount(() => {
 .capybara_NewsBlock-wrapper {
     display: flex;
     gap: 8rem;
+    align-items: center;
 }
 
-@media (min-width: 1024px) and (max-width: 1279px) {
+@media (min-width: 1024px) and (max-width: 1200px) {
     .capybara_wrapper img {
         height: 12rem;
         width: 12rem;
@@ -389,18 +393,9 @@ onBeforeUnmount(() => {
         font-size: 0.65rem;
     }
 
-    .title-news {
-        font-size: 2.3rem;
-    }
-
-    .line-dashed {
-        font-size: 2rem;
-        padding: 0.5rem 2.5rem 0 0;
-    }
-
     .general-block-description-news {
         width: 15rem;
-        height: 6.8rem;
+        height: 6.7rem;
     }
 
     .description-text-news-wrapper {
@@ -413,8 +408,8 @@ onBeforeUnmount(() => {
         gap: 1.5rem;
     }
     .btn-next-back-wrapper button {
-        font-size: 1rem;
-        width: 4rem;
+        font-size: 0.85rem;
+        width: 4.5rem;
     }
     .back {
         margin-left: 28px;
@@ -424,7 +419,51 @@ onBeforeUnmount(() => {
     }
 }
 
-@media (min-width: 1280px) and (max-width: 1920px) {
+@media (min-width: 1201px) and (max-width: 1279px) {
+    .capybara_wrapper img {
+        height: 14rem;
+        width: 14rem;
+    }
+
+    .description-news {
+        margin: 3.2rem 0 0 0;
+        font-size: 0.5rem;
+    }
+
+    .description-text-news {
+        font-size: 0.85rem;
+    }
+
+    .general-block-description-news {
+        width: 18rem;
+        height: 8rem;
+    }
+
+    .description-text-news-wrapper {
+        width: 18rem;
+        height: 8rem;
+        padding-left: 2.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .back {
+        margin-left: 30px;
+    }
+
+    .capybara_NewsBlock-wrapper {
+        gap: 1.75rem;
+    }
+
+    .btn-next-back-wrapper button {
+        font-size: 1.2rem;
+        width: 6rem;
+    }
+    .back {
+        margin-left: 32px;
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1440px) {
     .capybara_wrapper img {
         height: 16rem;
         width: 16rem;
@@ -439,15 +478,6 @@ onBeforeUnmount(() => {
         font-size: 0.9rem;
     }
 
-    .title-news {
-        font-size: 2.3rem;
-    }
-
-    .line-dashed {
-        font-size: 2rem;
-        padding: 0.5rem 2.5rem 0 0;
-    }
-
     .general-block-description-news {
         width: 20rem;
         height: 9rem;
@@ -459,41 +489,98 @@ onBeforeUnmount(() => {
         padding-left: 2.5rem;
         padding-right: 0.5rem;
     }
+
     .back {
         margin-left: 35px;
     }
+
     .capybara_NewsBlock-wrapper {
         gap: 1.5rem;
     }
 }
 
-@media (min-width: 1440px) {
-    .line-dashed {
-        font-size: 3rem;
-        padding: 0.5rem 2.5rem 0 0;
+@media (min-width: 1440px) and (max-width: 1920px) {
+    .capybara_wrapper img {
+        height: 18rem;
         width: 18rem;
     }
-    .title-news {
-        width: 18rem;
-        font-size: 3.3rem;
+
+    .description-news {
+        margin: 3.2rem 0 0 0;
+        font-size: 1rem;
     }
-    .title-news-wrapper {
-        padding-left: 3rem;
+
+    .description-text-news {
+        font-size: 1rem;
+    }
+
+    .general-block-description-news {
+        width: 22rem;
+        height: 9.9rem;
+    }
+
+    .description-text-news-wrapper {
+        width: 25rem;
+        height: 10rem;
+        padding-left: 0rem;
+        padding-right: 0.5rem;
+    }
+
+    .back {
+        margin-left: 38px;
+    }
+
+    .capybara_NewsBlock-wrapper {
+        gap: 1.5rem;
+    }
+
+    .btn-next-back-wrapper button {
+        font-size: 1.35rem;
+        width: 7rem;
     }
 }
 
 @media (min-width: 1921px) {
-    .line-dashed {
-        font-size: 3rem;
-        padding: 0.5rem 2.5rem 0 0;
-        width: 18rem;
+    .capybara_wrapper img {
+        height: 23rem;
+        width: 23rem;
     }
-    .title-news {
-        width: 18rem;
-        font-size: 3.3rem;
+
+    .description-news {
+        margin: 3.2rem 0 0 0;
+        font-size: 1rem;
     }
-    .title-news-wrapper {
-        padding-left: 3rem;
+
+    .description-text-news {
+        font-size: 1.25rem;
+        width: 85%;
+    }
+
+    .general-block-description-news {
+        width: 28rem;
+        height: 13rem;
+    }
+
+    .description-text-news-wrapper {
+        width: 30rem;
+        height: 12rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+
+    .back {
+        margin-left: 50px;
+    }
+
+    .capybara_NewsBlock-wrapper {
+        gap: 1.5rem;
+    }
+
+    .btn-next-back-wrapper button {
+        font-size: 1.7rem;
+        width: 8rem;
     }
 }
 </style>
