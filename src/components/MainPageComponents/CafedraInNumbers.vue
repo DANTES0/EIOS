@@ -24,7 +24,7 @@ const cifri = [
         </div>
         <div id="cifri" class="content-cifri-wrapper bg-white dark:bg-[#1f1f1f]">
             <SectionTitle title="КАФЕДРА В ЦИФРАХ" :base-length="10" />
-            <div class="cifri-frame pl-16">
+            <div class="cifri-frame">
                 <div v-for="(item, i) in cifri" :key="i" class="cifri-block">
                     <div class="image-block-cifri">
                         <h1 class="title-cifri">{{ item.title }}</h1>
@@ -39,8 +39,8 @@ const cifri = [
 <style scoped>
 .description-cifri {
     font-family: JetBrainsMono;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 500;
     width: 180px;
     height: 41px;
     text-align: center;
@@ -48,42 +48,40 @@ const cifri = [
 }
 .image-block-cifri h1 {
     /* margin: 0; */
-    width: 110px;
-    height: 41px;
     font-size: 29px;
     font-family: Ubuntu-Bold;
     margin: 0 auto;
     text-align: center;
+    width: 100%;
 }
 .image-block-cifri {
     background-image: url('../../assets/KafedraCifri/cifri_file.svg');
-    height: 202px;
-    width: 168px;
     background-repeat: no-repeat;
     background-size: contain;
+    width: 100%;
+    height: 202px;
     display: flex;
     justify-content: start;
     align-items: center;
 }
 .cifri-block {
-    width: 168px;
-    height: 256px;
-    margin-right: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .content-cifri-wrapper {
     width: 100%;
 }
 .cifri-frame {
-    width: 1024px;
-    height: 482px;
-    background-image: url('../../assets/KafedraCifri/frame.png');
-    background-size: contain;
+    width: 80%; /* Занимает 90% ширины родителя */
+    min-height: 470px; /* Минимальная высота */
+    background: url('../../assets/KafedraCifri/frame.png') no-repeat center / contain;
     margin: 0 auto;
-    margin-top: 20px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap; /* Перенос блоков при нехватке места */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    gap: 1rem; /* Отступ между блоками */
 }
 .line-dashed-cifri {
     position: relative;
@@ -128,5 +126,25 @@ const cifri = [
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 1280px) {
+    .cifri-frame {
+        min-height: 300px;
+        gap: 0rem;
+    }
+
+    .image-block-cifri {
+        width: 65%;
+        height: 138px;
+    }
+
+    .image-block-cifri h1 {
+        font-size: 1.2rem;
+    }
+
+    .description-cifri {
+        font-size: 0.9rem;
+    }
 }
 </style>
