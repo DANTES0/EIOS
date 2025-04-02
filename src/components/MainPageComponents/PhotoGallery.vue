@@ -185,7 +185,11 @@ const imageIsLoaded = (index) => {
 }
 
 .spinner-container {
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -256,8 +260,9 @@ const imageIsLoaded = (index) => {
 
 /* Основные стили для контейнеров */
 .content-gallery-wrapper {
+    position: relative; /* Добавляем для позиционирования потомка */
     width: 100%;
-    min-height: 550px; /* Минимальная высота */
+    min-height: 550px;
     padding: 20px 0;
 }
 
