@@ -60,7 +60,7 @@ const imageIsLoaded = (index) => {
         <div class="content-gallery-wrapper bg-white dark:bg-[#1f1f1f]">
             <SectionTitle title="ФОТОГАЛЕРЕЯ" :base-length="7" />
 
-            <div v-if="isLoading" class="spinner-container">
+            <div v-if="true" class="spinner-container">
                 <progress-spinner class="custom-spinner" />
             </div>
 
@@ -185,11 +185,7 @@ const imageIsLoaded = (index) => {
 }
 
 .spinner-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -260,10 +256,13 @@ const imageIsLoaded = (index) => {
 
 /* Основные стили для контейнеров */
 .content-gallery-wrapper {
-    position: relative; /* Добавляем для позиционирования потомка */
     width: 100%;
-    min-height: 550px;
+    min-height: 550px; /* Минимальная высота */
     padding: 20px 0;
+}
+
+:deep(.p-progressspinner-spin) {
+    position: static !important;
 }
 
 .content-wrapper-gallery {
