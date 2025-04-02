@@ -5,11 +5,11 @@ import LessonsTimetable from '../components/TimetablePageComponents/LessonsTimet
 </script>
 
 <template>
+    <Tabs title="Расписание" :show-icon="false" />
     <div class="timetable-page">
-        <Tabs title="Расписание" :show-icon="false" />
         <LessonsTimetable />
-        <Terminal />
     </div>
+    <!-- <Terminal /> -->
 </template>
 
 <style scoped>

@@ -48,10 +48,14 @@ onMounted(() => {
     <table class="schedule-table text-black dark:text-white">
         <thead>
             <tr>
-                <th class="border border-gray-300 dark:border-[#ddd] p-2 text-center font-bold min-w-[115px]">Время</th>
-                <th 
-                    v-for="day in days" 
-                    :key="day" 
+                <th
+                    class="border border-gray-300 dark:border-[#ddd] p-2 text-center font-bold min-w-[115px]"
+                >
+                    Время
+                </th>
+                <th
+                    v-for="day in days"
+                    :key="day"
                     class="border border-gray-300 dark:border-[#ddd] p-2 text-center font-bold"
                 >
                     {{ day }}
@@ -64,13 +68,15 @@ onMounted(() => {
                 v-show="!showCurrentWeek || (isEven !== null && isEven === (i % 2 !== 0))"
                 :key="i"
                 :class="{
-                'bg-gray-300 dark:bg-[#313131]': isEven !== null && isEven === (i % 2 !== 0),
+                    'bg-gray-300 dark:bg-[#313131]':
+                        isEven !== null && isEven === (i % 2 !== 0),
                 }"
             >
                 <td
                     class="time-slot bg-white dark:bg-[#1f1f1f] border border-gray-400 dark:border-[#ddd] p-2 text-center"
                     :class="{
-                        'bg-[#d1d5db] dark:bg-[#313131] border border-gray-400 dark:border-[#ddd]': isEven !== null && isEven === (i % 2 !== 0),
+                        'bg-[#d1d5db] dark:bg-[#313131] border border-gray-400 dark:border-[#ddd]':
+                            isEven !== null && isEven === (i % 2 !== 0),
                     }"
                 >
                     <div>{{ timeSlots[Math.floor(i / 2)] }}</div>
@@ -78,7 +84,11 @@ onMounted(() => {
                         {{ i % 2 === 0 ? 'Нечет' : 'Чет' }}
                     </div>
                 </td>
-                <td v-for="(lesson, j) in row" :key="j" class="border border-gray-400 dark:border-[#ddd] p-2 text-center">
+                <td
+                    v-for="(lesson, j) in row"
+                    :key="j"
+                    class="border border-gray-400 dark:border-[#ddd] p-2 text-center"
+                >
                     <LessonCell
                         :lesson="lesson"
                         :is-teacher-schedule="scheduleType === 'teacher'"
@@ -122,5 +132,4 @@ onMounted(() => {
 .week-type {
     font-size: 20px;
 }
-
 </style>
