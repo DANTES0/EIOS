@@ -60,7 +60,7 @@ const imageIsLoaded = (index) => {
         <div class="content-gallery-wrapper bg-white dark:bg-[#1f1f1f]">
             <SectionTitle title="ФОТОГАЛЕРЕЯ" :base-length="7" />
 
-            <div v-if="true" class="spinner-container">
+            <div v-if="isLoading" class="spinner-container">
                 <progress-spinner class="custom-spinner" />
             </div>
 
