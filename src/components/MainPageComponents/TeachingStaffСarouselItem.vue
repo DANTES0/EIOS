@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 // import { createRequire } from 'module';
 // const require = createRequire(import.meta.url);
@@ -16,20 +16,6 @@ const props = defineProps({
     nextId: Number,
     prevId: Number,
 });
-
-// console.log(props.countObject)
-function next_prepodavatel() {
-    flag.value = true;
-    setTimeout(() => {
-        flag.value = false; // Удаляем класс .anima
-    }, 2000); // Короткий интервал времени
-}
-
-const resetAnimation = () => {
-    flag.value = false;
-};
-
-let temp = ref(0);
 
 const isImageLoaded = ref(false);
 

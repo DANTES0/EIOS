@@ -1,20 +1,6 @@
 <script setup>
-import { ref } from 'vue';
 import PrepodavateliKafedriCarousel from './TeachingStaffСarousel.vue';
 import SectionTitle from './SectionTitle.vue';
-
-let flag = ref(false);
-
-function next_prepodavatel() {
-    flag.value = true;
-    setTimeout(() => {
-        flag.value = false; // Удаляем класс .anima
-    }, 2000); // Короткий интервал времени
-}
-
-const resetAnimation = () => {
-    flag.value = false;
-};
 </script>
 
 <template>

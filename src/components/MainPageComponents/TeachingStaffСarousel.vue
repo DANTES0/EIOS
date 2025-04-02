@@ -4,7 +4,7 @@
 import { useFetch } from '@vueuse/core';
 import { computed, ref } from 'vue';
 import { onMounted } from 'vue';
-import PrepodavateliKafedriItem from './TeachingStaffСarouselItem.vue';
+import TeachingStaffСarouselItem from './TeachingStaffСarouselItem.vue';
 import ProgressSpinner from 'primevue/progressspinner';
 import config from '../../config.js';
 import router from '../../router/routes.js';
@@ -143,7 +143,7 @@ onMounted(() => {
                     @click="prev"
                 ></div>
                 <div class="PrepodavateliKafedriItem-wrap">
-                    <PrepodavateliKafedriItem
+                    <TeachingStaffСarouselItem
                         v-for="(prepod, index) in temp_array"
                         :id="prepod.id"
                         :key="prepod.id"
@@ -238,10 +238,16 @@ onMounted(() => {
     margin-top: 30px;
     /* transition: anima 2s linear; */
 }
+
+.prepod-image-arrow {
+    transition: transform 0.3s ease;
+}
+
 .prepod-image-arrow:hover {
     filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
         hue-rotate(146deg) brightness(122%) contrast(120%);
     cursor: pointer;
+    transform: scale(1.1);
 }
 .circle-prepod {
     width: 16px;

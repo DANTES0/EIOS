@@ -81,13 +81,13 @@ const imageIsLoaded = (index) => {
                     <div
                         v-show="!loadedImages[1].value"
                         class="image-placeholder"
-                        style="left: 5%"
+                        style="left: 15%"
                     ></div>
                     <img
                         v-show="loadedImages[1].value"
                         v-lazy="photo[first]"
                         class="gallery-image"
-                        style="left: 5%"
+                        style="left: 15%"
                         loading="eager"
                         @load="imageIsLoaded(1)"
                     />
@@ -95,13 +95,11 @@ const imageIsLoaded = (index) => {
                     <div
                         v-show="!loadedImages[2].value"
                         class="image-placeholder main-image-placeholder"
-                        style="left: 24%"
                     ></div>
                     <img
                         v-show="loadedImages[2].value"
                         v-lazy="photo[second]"
                         class="gallery-image main-image-gallery"
-                        style="left: 24%"
                         loading="eager"
                         @load="imageIsLoaded(2)"
                     />
@@ -109,13 +107,13 @@ const imageIsLoaded = (index) => {
                     <div
                         v-show="!loadedImages[3].value"
                         class="image-placeholder"
-                        style="right: 5%"
+                        style="right: 15%"
                     ></div>
                     <img
                         v-show="loadedImages[3].value"
                         v-lazy="photo[third]"
                         class="gallery-image"
-                        style="right: 5%"
+                        style="right: 15%"
                         loading="eager"
                         @load="imageIsLoaded(3)"
                     />
@@ -156,6 +154,7 @@ const imageIsLoaded = (index) => {
     height: 360px;
     position: absolute;
 }
+
 .main-image-placeholder {
     width: 750px;
     height: 500px;
@@ -163,12 +162,15 @@ const imageIsLoaded = (index) => {
     opacity: 1;
     transition: 0.3s ease;
 }
+
 .main-image-placeholder:hover {
     transform: scale(1.22);
 }
+
 .hidden-image {
     display: none;
 }
+
 .error-message {
     display: flex;
     justify-content: center;
@@ -181,6 +183,7 @@ const imageIsLoaded = (index) => {
     min-height: 58.5vh;
     padding-bottom: 120px;
 }
+
 .spinner-container {
     height: 100%;
     display: flex;
@@ -188,122 +191,27 @@ const imageIsLoaded = (index) => {
     align-items: center;
     padding-bottom: 6rem;
 }
+
 .custom-spinner {
     --p-progressspinner-color-1: rgb(0, 84, 255);
     --p-progressspinner-color-2: rgb(0, 84, 255);
     --p-progressspinner-color-3: rgb(0, 84, 255);
     --p-progressspinner-color-4: rgb(0, 84, 255);
 }
+
 .line-gradient {
     height: 2px;
     width: 300px;
-    /* background-color: #1e66f5; */
-    /* background: linear-gradient(to right, red, yellow); */
     background: linear-gradient(-45deg, #ccc, #1f1f1f, #1f1f1f);
     background-size: 400% 400%;
 }
-.gradient-active-left {
-    animation: gradient-left 1s ease;
-}
-.gradient-active {
-    /* animation: gradientAnimation 0.5s ease forwards; */
-    animation: gradient 1s ease;
-}
-@keyframes gradient {
-    0% {
-        background-position: 0% 0%;
-    }
-    50% {
-        background-position: -100% 0%;
-    }
-    100% {
-        background-position: 0% 0%;
-    }
-}
-@keyframes gradient-left {
-    0% {
-        background-position: -100% 0%;
-    }
-    50% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: -100% 0%;
-    }
-}
-@keyframes gradientAnimation {
-    0% {
-        background: linear-gradient(to right, red, yellow);
-    }
-    50% {
-        background: linear-gradient(to right, red, yellow);
-    }
-    100% {
-        background: linear-gradient(to left, red, yellow);
-    }
-}
+
 .gallery-image-arrow:hover {
     filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
         hue-rotate(146deg) brightness(122%) contrast(120%);
     cursor: pointer;
 }
-.circle_gallery_active {
-    width: 16px;
-    height: 16px;
-    border-radius: 100%;
-    margin-right: 5px;
-    background-color: blue;
-}
-.circle_gallery {
-    width: 16px;
-    height: 16px;
-    border-radius: 100%;
-    border: 1px solid white;
-    margin-right: 5px;
-    background-color: transparent;
-}
-.gallery-circle-block {
-    width: auto;
-    height: 16px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 80px;
-}
-.name-gallery {
-    font-family: JetBrainsMono;
-    font-size: 36;
-    font-weight: 500;
-    margin-bottom: 39px;
-}
-.info-gallery {
-    font-family: JetBrainsMono;
-    font-size: 30;
-    font-weight: 300;
-}
-.gallery-description-block {
-    margin-top: 40px;
-    width: 642px;
-    height: 218px;
-    border-left: 1px solid #ffffff;
-    border-right: 1px solid #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-.gallery-image {
-    width: 500px;
-    height: 360px;
-    object-fit: cover; /* Чтобы изображение заполняло блок */
-    position: absolute;
-    opacity: 0.33;
-    will-change: transform, opacity;
-    transition:
-        transform 0.1s ease-in-out,
-        opacity 0.1s ease-in-out;
-}
+
 .back-image-arrow {
     background-image: url('../../assets/PrepodavateliKafedri/arrow_back.svg');
     width: 70px;
@@ -311,10 +219,12 @@ const imageIsLoaded = (index) => {
     background-repeat: no-repeat;
     background-size: contain;
 }
+
 .main-gallery-image {
     width: 330px;
     height: 330px;
 }
+
 .next-image-arrow {
     background-image: url('../../assets/PrepodavateliKafedri/arrow_next.svg');
     width: 70px;
@@ -322,37 +232,7 @@ const imageIsLoaded = (index) => {
     background-repeat: no-repeat;
     background-size: contain;
 }
-.gallery-image-block {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 450px;
-    /* margin-top: 30px; */
-    position: relative;
-}
-/* высота всего компонента фиксированная */
-/* ширина заполняет всё пространство */
-/* высоту наверное сделать на минимум или максимум */
-.content-gallery-wrapper {
-    width: 100%;
-    height: 550px;
-}
-/* ширина контента фиксированная (желательно сделать фиксированной) */
-/* высоту заполняет автоматически */
-.content-wrapper-gallery {
-    height: 100%;
-    width: 1450px;
-    border-top: 1px solid #1e66f5;
-    border-bottom: 1px solid #1e66f5;
-    margin-left: 52px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-}
+
 .wrapper-gallery {
     /* height: 850px; */
     width: 100%;
@@ -361,30 +241,7 @@ const imageIsLoaded = (index) => {
     justify-content: start;
     align-items: start;
 }
-.title-gallery {
-    font-size: 48px;
-    font-family: JetBrainsMono;
-    font-weight: 200;
-    margin-left: 128px;
-    margin-top: 18px;
-    width: 650px;
-}
-.title-gallery-wrapper {
-    width: 650px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.line-dashed-gallery {
-    position: relative;
-    top: -38px;
-    left: -85px;
-    font-size: 48px;
-    font-weight: 500;
-    letter-spacing: 8px;
-    user-select: none;
-}
+
 .main-image-gallery {
     width: 750px;
     height: 500px;
@@ -392,7 +249,191 @@ const imageIsLoaded = (index) => {
     opacity: 1;
     transition: 0.3s ease;
 }
+
 .main-image-gallery:hover {
     transform: scale(1.22);
+}
+
+/* Основные стили для контейнеров */
+.content-gallery-wrapper {
+    width: 100%;
+    min-height: 550px; /* Минимальная высота */
+    padding: 20px 0;
+}
+
+.content-wrapper-gallery {
+    width: 90%;
+    max-width: 1450px;
+    margin: 0 auto;
+    border-top: 1px solid #1e66f5;
+    border-bottom: 1px solid #1e66f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.gallery-image-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 500px; /* Минимальная высота блока */
+}
+
+/* Стили для изображений */
+.gallery-image {
+    position: absolute;
+    object-fit: cover;
+    opacity: 0.33;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    /* Базовые размеры и соотношение */
+    width: 25%;
+    height: auto;
+    aspect-ratio: 500/360;
+}
+
+.main-image-gallery {
+    width: 40%;
+    aspect-ratio: 750/500;
+    z-index: 10;
+    opacity: 1;
+}
+
+/* Позиционирование изображений */
+.gallery-image:nth-child(1) {
+    left: 0;
+    transform: translateX(-30%);
+}
+.gallery-image:nth-child(2) {
+    left: 15%;
+}
+.gallery-image:nth-child(3) {
+    left: 50%;
+    transform: translateX(-50%);
+}
+.gallery-image:nth-child(4) {
+    right: 15%;
+}
+.gallery-image:nth-child(5) {
+    right: 0;
+    transform: translateX(30%);
+}
+
+/* Стили для стрелок */
+.gallery-image-arrow {
+    position: absolute;
+    z-index: 20;
+    cursor: pointer;
+    width: 70px;
+    height: 81px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: transform 0.3s ease;
+}
+
+.back-image-arrow {
+    left: 8%;
+    background-image: url('../../assets/PrepodavateliKafedri/arrow_back.svg');
+}
+
+.next-image-arrow {
+    right: 8%;
+    background-image: url('../../assets/PrepodavateliKafedri/arrow_next.svg');
+}
+
+.gallery-image-arrow:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 1440px) {
+    .gallery-image {
+        width: 20%;
+        aspect-ratio: 400/288;
+    }
+
+    .main-image-gallery {
+        width: 35%;
+        aspect-ratio: 600/400;
+    }
+
+    .gallery-image-arrow {
+        width: 60px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .content-wrapper-gallery {
+        width: 95%;
+    }
+
+    .gallery-image {
+        width: 25%;
+        opacity: 0.6;
+    }
+
+    .main-image-gallery {
+        width: 40%;
+        opacity: 1;
+    }
+
+    .gallery-image-arrow {
+        width: 50px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-image-block {
+        min-height: 400px;
+    }
+
+    .gallery-image {
+        width: 80%;
+        position: static;
+        margin: 10px auto;
+        opacity: 1;
+        display: none;
+    }
+
+    .main-image-gallery {
+        width: 90%;
+        display: block !important;
+        margin: 0 auto;
+        position: relative;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+    }
+
+    .gallery-image-arrow {
+        width: 40px;
+        height: 50px;
+    }
+
+    .back-image-arrow {
+        left: 10px;
+    }
+
+    .next-image-arrow {
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-image-gallery {
+        width: 95%;
+    }
+
+    .gallery-image-arrow {
+        width: 30px;
+        height: 40px;
+    }
 }
 </style>
