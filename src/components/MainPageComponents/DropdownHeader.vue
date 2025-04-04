@@ -194,7 +194,7 @@ function showDropDown() {
 
 .dropdown-content-a {
     /* width: 220px; */
-    height: 28px;
+    height: 32px;
     display: flex;
     /* flex-direction: row;
     justify-content: start;*/
@@ -209,9 +209,9 @@ function showDropDown() {
     cursor: pointer;
 }
 
-@media screen and (min-width: 1921  px) {
+@media screen and (min-width: 1921px) {
     .dropdown-content-a {
-        height: 1.2vw;
+        height: 1.4vw;
     }
 }
 d .dropdown-content-a:hover {
