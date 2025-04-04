@@ -108,44 +108,46 @@ function convertToShortNameWithoutNbsp(fullName) {
 </template>
 
 <style scoped>
-.green-background {
-    color: #00c279 !important; /* Светло-зеленый цвет */
-    font-weight: bold;
-}
 .lesson-cell {
     padding: 8px;
     text-align: center;
-    height: 180px;
-    font-size: 18px;
+    height: calc(180px + 1vw);
+    font-size: calc(18px + 0.3vw);
     font-weight: 100;
     text-align: left;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
 }
 
 .empty {
     background: transparent;
-    height: 180px;
-    width: 215px;
+    height: calc(180px + 1vw);
+    /* width: 215px; */
 }
 
 .title {
     font-weight: 700;
+    word-break: break-word;
 }
 
 .teacher,
 .group {
     margin-top: auto;
     margin-bottom: 22px;
+    word-break: break-word;
 }
 
 .details {
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
 }
 
 .room {
-    font-size: 20px;
+    font-size: calc(20px + 0.3vw);
     font-weight: 900;
     color: #1e66f5;
 }
