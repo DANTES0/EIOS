@@ -28,17 +28,16 @@ function showDropDown() {
             alt=""
             class="w-[1.8vw] desktop:w-[24px] aspect-square"
         />
-        <label
-            id="dropbtn"
-            class="dropbtn text-[1.3vw] desktop:text-[16px] text-white dark:text-[#cccccc]"
-        >
+        <label id="dropbtn" class="dropbtn text-[1.3vw] text-white dark:text-[#cccccc]">
             Главная страница
         </label>
     </div>
     <Transition name="slide-fade">
         <div v-if="isShowDropDown" id="myDropdown" class="dropdown-content">
             <div class="dropdown-content-line"></div>
-            <div class="dropdown-content-content text-white dark:text-[#cccccc]">
+            <div
+                class="dropdown-content-content text-white dark:text-[#cccccc] text-[0.95vw] desktop:text-[18px]"
+            >
                 <a href="#kafedra" class="dropdown-content-a">
                     <img
                         src="../../assets/anchor_header/html.svg"
@@ -195,7 +194,7 @@ function showDropDown() {
 
 .dropdown-content-a {
     /* width: 220px; */
-    height: 28px;
+    height: 32px;
     display: flex;
     /* flex-direction: row;
     justify-content: start;*/
@@ -205,11 +204,17 @@ function showDropDown() {
     text-decoration: none;
     font-family: Nunito;
     font-weight: 200;
-    font-size: 0.95vw;
+
     /* margin-right: 15px; */
     cursor: pointer;
 }
-.dropdown-content-a:hover {
+
+@media screen and (min-width: 1921px) {
+    .dropdown-content-a {
+        height: 1.4vw;
+    }
+}
+d .dropdown-content-a:hover {
     color: #ffffff;
     background-color: #1f1f21;
 }
