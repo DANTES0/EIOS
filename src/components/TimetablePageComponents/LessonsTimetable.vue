@@ -37,96 +37,125 @@ async function checkWeek() {
     isEven.value = await currentWeekIsEven();
 }
 
-const tableWidth = computed(() => {
-    if (window.innerWidth >= 2560) return '2560px';
-    if (window.innerWidth >= 1920) return '100%';
+const scaleFactor = computed(() => {
+    const screenWidth = window.innerWidth;
 
-    return '1412px';
+    if (screenWidth >= 2560) return 1.2;
+    if (screenWidth >= 1920) return 1;
+    if (screenWidth >= 1600) return 0.9;
+    if (screenWidth >= 1366) return 0.8;
+    if (screenWidth >= 1280) return 0.75;
+
+    return 0.7;
+});
+
+const tableWidth = computed(() => {
+    const baseWidth = 1412;
+
+    return `${baseWidth * scaleFactor.value}px`;
 });
 
 const fontSize = computed(() => {
-    if (window.innerWidth >= 2560) return '28px';
-    if (window.innerWidth >= 1920) return 'calc(16px + 0.3vw)';
+    const baseSize = 24;
 
-    return '24px';
+    return `${baseSize * scaleFactor.value}px`;
 });
 
 const cellHeight = computed(() => {
-    if (window.innerWidth >= 2560) return '60px';
-    if (window.innerWidth >= 1920) return 'calc(50px + 0.3vw)';
+    const baseHeight = 50;
 
-    return '50px';
+    return `${baseHeight * scaleFactor.value}px`;
+});
+
+const headerFontSize = computed(() => {
+    const baseSize = 24;
+
+    return `${baseSize * scaleFactor.value}px`;
 });
 
 watch(selectedOption, loadSchedule);
 onMounted(() => {
     loadSchedule();
     checkWeek();
+    window.addEventListener('resize', () => {
+        scaleFactor.value; // Force reactivity update
+    });
 });
 </script>
 
 <template>
-    <div class="table-wrapper">
-        <div class="table-container">
-            <table class="schedule-table text-black dark:text-white">
-                <thead>
-                    <tr>
-                        <th class="time-header">Время</th>
-                        <th v-for="day in days" :key="day" class="day-header">
-                            {{ day }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        v-for="(row, i) in scheduleGrid"
-                        v-show="
-                            !showCurrentWeek ||
-                            (isEven !== null && isEven === (i % 2 !== 0))
-                        "
-                        :key="i"
-                        :class="{
-                            'bg-gray-300 dark:bg-[#313131]':
-                                isEven !== null && isEven === (i % 2 !== 0),
-                        }"
-                    >
-                        <td
-                            class="time-slot bg-white dark:bg-[#1f1f1f]"
+    <div class="timetable-container">
+        <div class="table-wrapper">
+            <div class="table-scroll-container">
+                <table class="schedule-table text-black dark:text-white">
+                    <thead>
+                        <tr>
+                            <th class="time-header">Время</th>
+                            <th v-for="day in days" :key="day" class="day-header">
+                                {{ day }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="(row, i) in scheduleGrid"
+                            v-show="
+                                !showCurrentWeek ||
+                                (isEven !== null && isEven === (i % 2 !== 0))
+                            "
+                            :key="i"
                             :class="{
-                                'bg-[#d1d5db] dark:bg-[#313131]':
+                                'bg-gray-300 dark:bg-[#313131]':
                                     isEven !== null && isEven === (i % 2 !== 0),
                             }"
                         >
-                            <div>{{ timeSlots[Math.floor(i / 2)] }}</div>
-                            <div class="week-type text-black dark:text-white">
-                                {{ i % 2 === 0 ? 'Нечет' : 'Чет' }}
-                            </div>
-                        </td>
-                        <td v-for="(lesson, j) in row" :key="j" class="">
-                            <LessonCell
-                                :lesson="lesson"
-                                :is-teacher-schedule="scheduleType === 'teacher'"
-                            />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            <td
+                                class="time-slot bg-white dark:bg-[#1f1f1f]"
+                                :class="{
+                                    'bg-[#d1d5db] dark:bg-[#313131]':
+                                        isEven !== null && isEven === (i % 2 !== 0),
+                                }"
+                            >
+                                <div>{{ timeSlots[Math.floor(i / 2)] }}</div>
+                                <div class="week-type text-black dark:text-white">
+                                    {{ i % 2 === 0 ? 'Нечет' : 'Чет' }}
+                                </div>
+                            </td>
+                            <td v-for="(lesson, j) in row" :key="j" class="lesson-cell">
+                                <LessonCell
+                                    :lesson="lesson"
+                                    :is-teacher-schedule="scheduleType === 'teacher'"
+                                    :scale-factor="scaleFactor"
+                                />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+.timetable-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
 .table-wrapper {
     width: 100%;
+    flex: 1;
     display: flex;
     justify-content: center;
     overflow: hidden;
-    /* padding: 20px 0; */
 }
 
-.table-container {
+.table-scroll-container {
     width: 100%;
-    max-height: 99vh;
+    /* max-height: calc(100vh - 150px); */
     overflow: auto;
     position: relative;
 }
@@ -134,7 +163,7 @@ onMounted(() => {
 .schedule-table {
     width: v-bind(tableWidth);
     max-width: 2560px;
-    min-width: 1412px;
+    min-width: 900px;
     border-collapse: collapse;
     font-family: JetBrainsMono;
     table-layout: fixed;
@@ -143,65 +172,52 @@ onMounted(() => {
 
 .schedule-table tr {
     height: v-bind(cellHeight);
-    font-size: v-bind(fontSize);
 }
-
-/* ЦВЕТ ТУТ */
 
 .time-header {
     position: sticky;
     left: 0;
     z-index: 20;
     background-color: #4b6cab;
-    /* border: 1px solid #ddd; */
     padding: 8px;
     text-align: center;
     font-weight: bold;
-    min-width: 115px;
-    width: 115px;
+    min-width: calc(115px * v-bind(scaleFactor));
+    width: calc(115px * v-bind(scaleFactor));
     top: 0;
+    font-size: v-bind(headerFontSize);
 }
-
-/* ЦВЕТ ТУТ */
 
 .day-header {
     position: sticky;
     top: 0;
     z-index: 15;
     background-color: #4b88ab;
-    /* border: 1px solid #ddd; */
     padding: 8px;
     text-align: center;
     font-weight: bold;
-    min-width: 215px;
-    width: 215px;
+    min-width: calc(215px * v-bind(scaleFactor));
+    width: calc(215px * v-bind(scaleFactor));
+    font-size: v-bind(headerFontSize);
 }
-
-/* ТУТ ЦВЕТ */
 
 .time-slot {
     position: sticky;
     left: 0;
     z-index: 10;
-    /* border: 1px solid #ddd; */
     padding: 8px;
     text-align: center;
     font-weight: bold;
-    min-width: 115px;
-    width: 115px;
-    background-color: #4bab91;
-}
-
-tr {
-    box-sizing: border-box;
+    min-width: calc(115px * v-bind(scaleFactor));
+    width: calc(115px * v-bind(scaleFactor));
+    font-size: v-bind(fontSize);
 }
 
 .lesson-cell {
-    border: 1px solid #ddd;
-    padding: 10px;
-    min-width: 215px;
-    /* width: 215px; */
-    /* height: 100%; */
+    border: 1px solid rgba(221, 221, 221, 0.2);
+    padding: calc(10px * v-bind(scaleFactor));
+    min-width: calc(215px * v-bind(scaleFactor));
+    width: calc(215px * v-bind(scaleFactor));
     vertical-align: top;
 }
 
@@ -209,11 +225,10 @@ tr {
     font-size: calc(v-bind(fontSize) - 4px);
 }
 
-/* Для экранов меньше 1920px */
-@media (max-width: 1280px) {
-    .table-container {
+@media (max-width: 1919px) {
+    .table-scroll-container {
         overflow-x: auto;
-        overflow-y: hidden;
+        overflow-y: auto;
     }
 
     .time-header,
@@ -223,15 +238,10 @@ tr {
     }
 }
 
-/* Для экранов 1920px и больше */
-@media (min-width: 1783px) {
-    .table-container {
+@media (min-width: 1920px) {
+    .table-scroll-container {
         overflow-x: hidden;
         overflow-y: auto;
-    }
-
-    .schedule-table {
-        width: 100%;
     }
 }
 </style>
