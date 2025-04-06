@@ -78,20 +78,35 @@ function navigateToNews(newsId) {
     router.push(`/news/get/${newsId}`);
 }
 
-const toggleSelectMode = () => {
-    console.log(selectMode.value);
-    selectMode.value = !selectMode.value;
+// Методы для переключения режимов
+const handleSelectMode = () => {
+    if (!selectMode.value) {
+        selectMode.value = true;
+    }
 };
 
-const toggleEditMode = () => {
-    console.log(editMode.value);
-    editMode.value = !editMode.value;
+const handleEditMode = () => {
+    if (!editMode.value) {
+        editMode.value = true;
+        selectMode.value = true; // Включаем selectMode при активации editMode
+    }
+};
+
+const cancelActions = () => {
+    selectMode.value = false;
+    editMode.value = false;
+    forceDelete.value = false;
+};
+
+const confirmActions = () => {
+    console.log('Подтверждение действий');
+    toggleForceDelete();
+    cancelActions(); // После подтверждения сбрасываем все режимы
 };
 
 const toggleForceDelete = () => {
-    console.log('forceDelete');
-    console.log(forceDelete.value);
     forceDelete.value = !forceDelete.value;
+    console.log('forceDelete:', forceDelete.value);
 };
 
 function addNews() {
@@ -101,33 +116,35 @@ function addNews() {
 
 <template>
     <div class="news-page-container">
+        <!-- Кнопка добавления новости -->
         <div class="button1">
             <button class="addNews" @click="addNews">Добавить новость</button>
         </div>
-        <button v-if="!selectMode" class="addNews" @click="toggleSelectMode">
+
+        <!-- Кнопка редактирования новости -->
+        <button v-if="!editMode" class="addNews" @click="handleEditMode">
             Редактировать новость
         </button>
-        <button v-if="!selectMode" class="addNews" @click="toggleSelectMode, toggleEditMode">
+
+        <!-- Кнопка удаления новостей -->
+        <button v-if="!selectMode" class="addNews" @click="handleSelectMode">
             Удаление новостей
         </button>
-        <div v-if="selectMode && !editMode" class="button3 flex gap-4">
-            <button class="addNews" @click="toggleSelectMode">Отменить</button>
-            <button
-                class="addNews"
-                @click="
-                    () => {
-                        toggleSelectMode();
-                        toggleForceDelete();
-                    }
-                "
-            >
+
+        <!-- Панель управления (отмена/подтверждение) -->
+        <div v-if="selectMode" class="button3 flex gap-4">
+            <button class="addNews" @click="cancelActions">Отменить</button>
+            <button v-if="!editMode" class="addNews" @click="confirmActions">
                 Подтвердить
             </button>
         </div>
     </div>
+
+    <!-- Компонент новостей -->
     <div class="news-list">
         <news-page
             v-model:select-mode="selectMode"
+            v-model:edit-mode="editMode"
             v-model:force-delete="forceDelete"
             :show-tabs="false"
         />

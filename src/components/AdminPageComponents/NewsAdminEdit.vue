@@ -6,12 +6,11 @@ import VueSelect from 'vue3-select-component';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import config from '../../config';
-import { QuillEditor } from '@vueup/vue-quill';
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import router from '../../router/routes.js';
 import { authState } from '../../authState.js';
 import { useRoute } from 'vue-router';
 import { parse } from 'date-fns';
+import QuillEditorComponent from './quillEditorComponent.vue';
 
 const array = ref([]);
 const categories = ref([
@@ -103,22 +102,26 @@ const newsId = route.params.id;
 
 const fetchNews = async () => {
     try {
-        const response = await fetch(
-            `${config.ServerURL}/api/v1/news/${newsId}`,
-            {
-                method: 'GET',
-            },
-        );
+        const response = await fetch(`${config.ServerURL}/api/v1/news/${newsId}`, {
+            method: 'GET',
+        });
+
         if (response.ok) {
             const data = await response.json();
+
             headLine.value = data.headline;
             mainInfo.value = data.mainInformation;
             category.value = data.category;
             dateStart.value = parseDate(data.date); // Преобразуем дату в объект
+
             if (data.images && data.images.length > 0) {
                 imagesArr.value = data.images;
-                images.value = data.images.map(img => `https://security-jwt.onrender.com/api/v1/image?fileName=${img.filename}&imageType=NewsImage`);
+                images.value = data.images.map(
+                    (img) =>
+                        `https://security-jwt.onrender.com/api/v1/image?fileName=${img.filename}&imageType=NewsImage`,
+                );
             }
+
             if (data.cover) {
                 mainImageIndex.value = data.cover;
             }
@@ -129,6 +132,7 @@ const fetchNews = async () => {
         console.error('Ошибка запроса:', error);
     }
 };
+
 onMounted(() => {
     fetchNews();
 });
@@ -250,7 +254,6 @@ const handleOptionSelected = (option) => {
                 v-model:content="mainInfo"
                 content-type="html"
                 theme="snow"
-                toolbar="full"
             ></QuillEditor>
         </div>
         <div class="editPhoto">
@@ -463,7 +466,8 @@ const handleOptionSelected = (option) => {
 .EditMainText {
     width: 90%;
     background-color: #181818;
-    height: 658px;
+    min-height: 20vh; /* Минимальная высота — 20% от высоты окна */
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -25,6 +25,7 @@
         "normalize.css": "^8.0.1",
         "npm": "^10.8.1",
         "primevue": "^4.2.5",
+        "quill": "^2.0.3",
         "vue": "^3.4.15",
         "vue-flux": "^7.0.0-beta.5",
         "vue-lazyload": "^3.0.0",

@@ -19,6 +19,7 @@ const route = useRoute();
 const router = useRouter();
 const selectMode = defineModel('selectMode', { type: Boolean });
 const forceDelete = defineModel('forceDelete', { type: Boolean });
+const editMode = defineModel('editMode', { type: Boolean });
 const newsDelete = ref([]);
 const urlAddress = config.ServerURL;
 
@@ -75,6 +76,8 @@ function navigateToNews(newsId) {
 
     if (!selectMode.value) {
         router.push(`/news/get/${newsId}`);
+    } else if (editMode.value) {
+        router.push(`/news/get/admin/${newsId}`);
     } else {
         console.log('test11');
 
