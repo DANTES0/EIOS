@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted, computed } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import {
     fetchSchedule,
     currentWeekIsEven,
@@ -37,50 +37,10 @@ async function checkWeek() {
     isEven.value = await currentWeekIsEven();
 }
 
-const scaleFactor = computed(() => {
-    const screenWidth = window.innerWidth;
-
-    // if (screenWidth >= 2560) return 1;
-    // if (screenWidth >= 1920) return 1;
-    // if (screenWidth >= 1600) return 0.9;
-    // if (screenWidth >= 1366) return 0.75;
-    // if (screenWidth >= 1280) return 0.72;
-
-    // return 0.7;
-    return 1;
-});
-
-const tableWidth = computed(() => {
-    const baseWidth = 1412;
-
-    return `${baseWidth * scaleFactor.value}px`;
-});
-
-const fontSize = computed(() => {
-    const baseSize = 24;
-
-    return `${baseSize * scaleFactor.value}px`;
-});
-
-const cellHeight = computed(() => {
-    const baseHeight = 50;
-
-    return `${baseHeight * scaleFactor.value}px`;
-});
-
-const headerFontSize = computed(() => {
-    const baseSize = 24;
-
-    return `${baseSize * scaleFactor.value}px`;
-});
-
 watch(selectedOption, loadSchedule);
 onMounted(() => {
     loadSchedule();
     checkWeek();
-    window.addEventListener('resize', () => {
-        scaleFactor.value; // Force reactivity update
-    });
 });
 </script>
 
@@ -209,8 +169,8 @@ onMounted(() => {
     padding: 8px;
     text-align: center;
     font-weight: bold;
-    min-width: calc(115px * v-bind(scaleFactor));
-    width: calc(115px * v-bind(scaleFactor));
+    min-width: 115px;
+    width: 115px;
     font-size: v-bind(fontSize);
     /* border: 1px solid rgba(221, 221, 221, 0.2); */
     border-left: 1px solid rgba(221, 221, 221, 0.2);
@@ -219,33 +179,159 @@ onMounted(() => {
 
 .lesson-cell {
     border: 1px solid rgba(221, 221, 221, 0.2);
-    padding: calc(10px * v-bind(scaleFactor));
-    min-width: calc(215px * v-bind(scaleFactor));
-    width: calc(215px * v-bind(scaleFactor));
-    vertical-align: top;
+    padding: 6px;
+    min-width: 215px;
+    width: 215px;
 }
 
 .week-type {
     font-size: calc(v-bind(fontSize) - 4px);
 }
 
-@media (max-width: 1919px) {
-    .table-scroll-container {
-        overflow-x: auto;
-        overflow-y: auto;
+.timetable-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-wrapper {
+    width: 100%;
+    flex: 1;
+    overflow: auto;
+}
+
+.table-scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.schedule-table {
+    width: 100%;
+    height: 100%;
+    min-width: 900px; /* Минимальная ширина для читаемости */
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.time-header {
+    width: 10%; /* Фиксированная ширина для колонки времени */
+}
+
+@media (min-width: 1920px) {
+    .time-slot {
+        font-size: 1.4rem;
     }
 
-    .time-header,
-    .time-slot {
-        position: sticky;
-        left: 0;
+    .time-header {
+        font-size: 1.5rem;
+    }
+
+    .day-header {
+        font-size: 1.5rem;
     }
 }
 
-/* @media (min-width: 1920px) {
-    .table-scroll-container {
-        overflow-x: hidden;
-        overflow-y: auto;
+@media (min-width: 1440px) {
+    .time-slot {
+        font-size: 1.4rem;
     }
-} */
+
+    .time-header {
+        font-size: 1.5rem;
+    }
+
+    .day-header {
+        font-size: 1.5rem;
+    }
+
+    :deep(.details) {
+        font-size: 1.2rem;
+    }
+
+    :deep(.teacher) {
+        font-size: 1.2rem;
+    }
+
+    :deep(.group) {
+        font-size: 1.2rem;
+    }
+
+    :deep(.title) {
+        font-size: 1.2rem;
+    }
+
+    :deep(.room) {
+        font-size: 1.4rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    .time-slot {
+        font-size: 1.6rem;
+    }
+
+    .time-header {
+        font-size: 1.8rem;
+    }
+
+    .day-header {
+        font-size: 1.8rem;
+    }
+
+    :deep(.details) {
+        font-size: 1.3rem;
+    }
+
+    :deep(.teacher) {
+        font-size: 1.3rem;
+    }
+
+    :deep(.group) {
+        font-size: 1.3rem;
+    }
+
+    :deep(.title) {
+        font-size: 1.4rem;
+    }
+
+    :deep(.room) {
+        font-size: 1.4rem;
+    }
+}
+
+@media (min-width: 2560px) {
+    .time-slot {
+        font-size: 2rem;
+    }
+
+    .time-header {
+        font-size: 2.2rem;
+    }
+
+    .day-header {
+        font-size: 2.2rem;
+    }
+
+    :deep(.details) {
+        font-size: 1.5rem;
+    }
+
+    :deep(.teacher) {
+        font-size: 1.5rem;
+    }
+
+    :deep(.group) {
+        font-size: 1.5rem;
+    }
+
+    :deep(.title) {
+        font-size: 1.5rem;
+    }
+
+    :deep(.room) {
+        font-size: 1.7rem;
+    }
+}
 </style>

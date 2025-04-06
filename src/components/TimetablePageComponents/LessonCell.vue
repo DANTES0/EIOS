@@ -59,7 +59,7 @@ function convertToShortNameWithoutNbsp(fullName) {
 </script>
 
 <template>
-    <div v-if="lesson">
+    <div v-if="lesson" class="filled">
         <div class="title">{{ lesson.subjectName }}</div>
 
         <!-- Если отображаем расписание препода, показываем группу -->
@@ -112,48 +112,39 @@ function convertToShortNameWithoutNbsp(fullName) {
 </template>
 
 <style scoped>
-.lesson-cell {
-    padding: calc(8px * v-bind('scaleFactor'));
-    text-align: center;
-    height: calc(180px * v-bind('scaleFactor'));
-    font-size: calc(18px * v-bind('scaleFactor'));
-    font-weight: 100;
-    text-align: left;
+.filled {
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
+    justify-content: space-between;
 }
-
 .empty {
     background: transparent;
-    height: calc(180px * v-bind('scaleFactor'));
+    height: 180px;
 }
 
 .title {
     font-weight: 700;
     word-break: break-word;
-    font-size: calc(18px * v-bind('scaleFactor'));
+    font-size: 18px;
 }
 
 .teacher,
 .group {
-    margin-top: auto;
-    margin-bottom: calc(22px * v-bind('scaleFactor'));
+    margin-top: 22px;
+    margin-bottom: 22px;
     word-break: break-word;
-    font-size: calc(16px * v-bind('scaleFactor'));
+    font-size: 16px;
 }
 
 .details {
     display: flex;
     justify-content: space-between;
     margin-top: auto;
-    font-size: calc(16px * v-bind('scaleFactor'));
+    font-size: 16px;
 }
 
 .room {
-    font-size: calc(20px * v-bind('scaleFactor'));
+    font-size: 18px;
     font-weight: 900;
     color: #1e66f5;
 }
@@ -162,5 +153,11 @@ function convertToShortNameWithoutNbsp(fullName) {
     color: #1e66f5;
     font-weight: bold;
     cursor: pointer;
+}
+
+@media (max-width: 1919px) {
+    .details {
+        display: block;
+    }
 }
 </style>
