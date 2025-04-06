@@ -146,7 +146,7 @@ watch(forceDelete, (newVal) => {
             <div
                 v-for="newsItem in newsData"
                 :key="newsItem.id"
-                class="news-block "
+                class="news-block"
                 :class="{ selected: newsDelete.includes(newsItem.id) }"
                 @click="navigateToNews(newsItem.id)"
             >
@@ -181,51 +181,55 @@ watch(forceDelete, (newVal) => {
     justify-content: center;
     align-items: center;
     min-height: 200px;
-    font-size: 18px;
+    font-size: clamp(16px, 2vw, 18px);
     font-family: Nunito;
     font-weight: 200;
-
-    min-height: inherit;
-    max-height: inherit;
+    padding: 20px;
+    text-align: center;
 }
+
 .news-page-container {
-    display: block;
-    margin: auto auto;
-    width: 1422px;
-
-    min-height: 674px;
-    max-height: 2420px;
-
-    margin-top: 30px;
-    margin-bottom: 78px;
+    width: 90%;
+    max-width: 1422px;
+    margin: 30px auto 78px;
+    min-height: calc(100vh - 200px);
 }
+
 .news-page-content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px 74px;
-
-    padding-bottom: 50px;
+    grid-template-columns: repeat(auto-fit, 425px);
+    justify-content: center;
+    gap: 30px;
+    padding: 20px 0;
+    width: 100%;
 }
+
 .news-block {
     cursor: pointer;
-    width: 425px;
-    height: 532px;
+    width: 100%;
+    max-width: 425px;
+    height: auto;
+    min-height: 400px;
     transition: transform 0.2s ease-in-out;
+    break-inside: avoid;
 }
+
 .news-block:hover {
-    transform: scale(1.04);
+    transform: scale(1.02);
 }
+
 .pagination-wrapper {
-    margin: 0 auto;
-    width: 1064px;
+    width: 100%;
+    max-width: 1064px;
     height: 92px;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .news-select {
-    margin: auto 2%;
+    margin-left: 10px;
 }
 
 .selected {
@@ -240,30 +244,75 @@ watch(forceDelete, (newVal) => {
     justify-content: center;
     align-items: center;
 }
+
 .custom-spinner {
     --p-progressspinner-color-1: rgb(0, 84, 255);
     --p-progressspinner-color-2: rgb(0, 84, 255);
     --p-progressspinner-color-3: rgb(0, 84, 255);
     --p-progressspinner-color-4: rgb(0, 84, 255);
 }
+
 .select-pages-amount {
-    left: 10px;
     display: flex;
-    justify-content: flex-end; /* Выравниваем по правому краю */
-    width: 100%; /* Занимает всю ширину родителя */
+    justify-content: flex-end;
+    width: 100%;
     margin-bottom: 25px;
 }
 
 .select-pages-amount-wrapper {
-    display: flex; /* Делаем flex-контейнером */
-    align-items: center; /* Выравниваем элементы по вертикали */
-    gap: 10px; /* Отступ между элементами */
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .select-pages-amount-wrapper label {
     font-family: Nunito;
-    width: 180px;
-    text-align: right;
     font-weight: 300;
+    font-size: clamp(14px, 1.5vw, 16px);
+}
+
+/* Адаптация для планшетов */
+@media (max-width: 1024px) {
+    .news-page-content {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .news-page-container {
+        width: 95%;
+        margin: 20px auto 50px;
+    }
+
+    .select-pages-amount {
+        justify-content: center;
+    }
+
+    .select-pages-amount-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .news-select {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-page-content {
+        grid-template-columns: 1fr;
+    }
+
+    .news-block {
+        min-height: 350px;
+    }
+
+    .pagination-wrapper {
+        height: auto;
+        padding: 20px 0;
+    }
 }
 </style>
