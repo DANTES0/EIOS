@@ -40,13 +40,14 @@ async function checkWeek() {
 const scaleFactor = computed(() => {
     const screenWidth = window.innerWidth;
 
-    if (screenWidth >= 2560) return 1.2;
-    if (screenWidth >= 1920) return 1;
-    if (screenWidth >= 1600) return 0.9;
-    if (screenWidth >= 1366) return 0.8;
-    if (screenWidth >= 1280) return 0.75;
+    // if (screenWidth >= 2560) return 1;
+    // if (screenWidth >= 1920) return 1;
+    // if (screenWidth >= 1600) return 0.9;
+    // if (screenWidth >= 1366) return 0.75;
+    // if (screenWidth >= 1280) return 0.72;
 
-    return 0.7;
+    // return 0.7;
+    return 1;
 });
 
 const tableWidth = computed(() => {
@@ -211,6 +212,9 @@ onMounted(() => {
     min-width: calc(115px * v-bind(scaleFactor));
     width: calc(115px * v-bind(scaleFactor));
     font-size: v-bind(fontSize);
+    /* border: 1px solid rgba(221, 221, 221, 0.2); */
+    border-left: 1px solid rgba(221, 221, 221, 0.2);
+    border-bottom: 1px solid rgba(221, 221, 221, 0.2);
 }
 
 .lesson-cell {
@@ -238,10 +242,10 @@ onMounted(() => {
     }
 }
 
-@media (min-width: 1920px) {
+/* @media (min-width: 1920px) {
     .table-scroll-container {
         overflow-x: hidden;
         overflow-y: auto;
     }
-}
+} */
 </style>
