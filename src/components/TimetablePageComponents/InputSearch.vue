@@ -116,7 +116,7 @@ function onSelectedItemChange(item) {
       :searchable="true"
     /> -->
 
-        <div class="input-search w-[80%] ml-[22px] mt-[10px]">
+        <div class="input-search w-[80%] ml-[22px] mt-[10px] text-[#0c2340] dark:text-gray-400">
             <v-timetable-input
                 v-model="selectedItem.name"
                 :items="array"

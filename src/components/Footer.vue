@@ -7,10 +7,10 @@
         <!-- Верхняя часть футера -->
         <div class="footer-top bg-white dark:bg-[#1f1f1f]">
             <div class="footer-title">
-                <span class="title-voenmeh text-[#0C2340] dark:text-white"
+                <span class="title-voenmeh text-[#0c2340] dark:text-white"
                     >БГТУ "ВОЕНМЕХ"</span
                 >
-                <span class="title-kafedra-o7 text-[#0C2340] dark:text-white"
+                <span class="title-kafedra-o7 text-[#0c2340] dark:text-white"
                     >Кафедра O7</span
                 >
             </div>
@@ -113,6 +113,7 @@
     border: 1px solid #1e66f5;
     border-top: 1px solid #1e66f5;
     border-right: 1px solid #1e66f5;
+    border-radius: 10px;
     position: relative;
     z-index: 2;
     max-width: 500px;
@@ -306,6 +307,7 @@
     align-items: center;
     gap: 30px;
     border: 1px solid #1e66f5;
+    border-radius: 10px;
     min-width: 300px;
     height: 100%; /* Занимает всю доступную высоту */
     box-sizing: border-box; /* Учитываем padding в высоте */

@@ -56,10 +56,10 @@ watch(searchedValue, filterTeacher);
 </script>
 
 <template>
-    <div class="h-full">
+    <div class="h-full bg-gray-200 dark:bg-[#1f1f1f]">
         <Tabs title="Преподаватели" :show-icon="false" />
         <div
-            class="flex flex-wrap mt-[30px] ml-[30px] mr-[30px] items-center justify-center gap-14"
+            class="flex flex-wrap mt-[30px] items-center justify-center gap-14 bg-gray-200 dark:bg-[#1f1f1f]"
         >
             <teacher-card
                 v-for="(item, index) in filteredArray"

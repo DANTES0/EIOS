@@ -191,7 +191,7 @@ onBeforeUnmount(() => {
     <div v-if="typeInput === 'stairsInput'" ref="dropdownRef" class="relative w-full">
         <input
             v-model="searchText"
-            class="w-full bg-white dark:bg-[#181818] border border-[#cccccc] outline-none font-light p-1 focus:border-[#1E66F5]"
+            class="w-full bg-white dark:bg-[#181818] border border-[#cccccc] outline-none font-light p-1 focus:border-[#1E66F5] placeholder:text-[#0c2340] dark:placeholder:text-gray-300"
             :placeholder="placeholderText"
             :class="inputClass"
             autocomplete="off"
@@ -213,7 +213,7 @@ onBeforeUnmount(() => {
                 <li
                     v-for="item in itemsType"
                     :key="item.id"
-                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-black dark:text-white cursor-pointer"
+                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-[#0c2340] dark:text-white cursor-pointer"
                     @click="
                         () => {
                             placeholderText = item.name;
@@ -230,7 +230,7 @@ onBeforeUnmount(() => {
                 <li
                     v-for="item in filteredTypes"
                     :key="item.id"
-                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-black dark:text-white cursor-pointer"
+                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333]"
                     @click="
                         () => {
                             if (props.items2.includes(item)) {
@@ -261,7 +261,7 @@ onBeforeUnmount(() => {
                 <li
                     v-for="item in filteredItems2"
                     :key="item.id"
-                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-black dark:text-white cursor-pointer"
+                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-[#0c2340] dark:text-white cursor-pointer"
                     @click="selectItem(item)"
                 >
                     {{ item.name }}
@@ -278,7 +278,7 @@ onBeforeUnmount(() => {
                 <li
                     v-for="item in filteredItems"
                     :key="item.id"
-                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-black dark:text-white cursor-pointer"
+                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-[#0c2340] dark:text-white cursor-pointer"
                     @click="selectItem(item)"
                 >
                     {{ item.name }}
@@ -311,9 +311,9 @@ onBeforeUnmount(() => {
 /* .selected-text {
     color: #1e66f5 !important;
 } */
-input.custom-placeholder::placeholder {
-    color: #fbfbfe;
-}
+/*input.custom-placeholder::placeholder {
+    color: #5e5e5e;
+}*/
 div {
     font-family: Nunito;
 }

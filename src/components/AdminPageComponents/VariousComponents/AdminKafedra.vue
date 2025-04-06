@@ -4,7 +4,7 @@ import KafedraListAdminVue from './KafedraListAdmin.vue';
 
 <template>
     <div
-        class="flex flex-col w-full text-black dark:text-white font-[JetBrainsMono] font-bold text-[24px]"
+        class="flex flex-col w-full text-[#0c2340] dark:text-white font-[JetBrainsMono] font-bold text-[24px]"
     >
         <div
             class="w-full h-[82px] dark:bg-[#181818] flex items-center border-b border-l border-[#2B2B2B]"

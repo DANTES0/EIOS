@@ -78,11 +78,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="news-wrapper text-[#0C2340] dark:text-[#999999]">
-        <div class="numbers-wrapper text-[#0C2340] dark:text-[#999999]">
-            <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
+    <div class="news-wrapper bg-gray-200 dark:bg-[#181818]">
+        <div class="numbers-wrapper">
+            <div v-for="i in 18" :key="i" class="numbers text-[#0C2340] dark:text-[#999999]">{{ i }}</div>
         </div>
-        <div id="news" class="content-news-wrapper bg-white dark:bg-[#1f1f1f]">
+        <div id="news" class="content-news-wrapper">
             <SectionTitle title="НОВОСТИ" />
             <div v-if="areLoading" class="spinner-container">
                 <progress-spinner class="custom-spinner" />
@@ -96,7 +96,7 @@ onBeforeUnmount(() => {
                             src="../../assets/News/kapybars_in_circle_dark.png"
                         />
                         <img v-else src="../../assets/News/kapybars_in_circle.png" />
-                        <div class="description-news text-black dark:text-white">
+                        <div class="description-news text-[#0c2340] dark:text-white">
                             <div
                                 class="general-block-description-news"
                                 :class="
@@ -114,10 +114,10 @@ onBeforeUnmount(() => {
                             <div
                                 class="btn-next-back-wrapper text-[#006AFF] dark:text-white"
                             >
-                                <button class="btn-news back" @click="$emit('prev')">
+                                <button class="btn-news back border-[1px] border-[#006AFF] dark:border-[#999999]" @click="$emit('prev')">
                                     НАЗАД
                                 </button>
-                                <button class="btn-news next" @click="$emit('next')">
+                                <button class="btn-news next border-[1px] border-[#006AFF] dark:border-[#999999]" @click="$emit('next')">
                                     ВПЕРЕД
                                 </button>
                             </div>
@@ -125,7 +125,7 @@ onBeforeUnmount(() => {
                     </div>
                     <NewsBlock
                         :key="id"
-                        class="news-block bg-white dark:bg-[#1f1f1f]"
+                        class="news-block"
                         :news-tag="category"
                         :news-title="headline"
                         :news-date="date"
@@ -283,7 +283,6 @@ onBeforeUnmount(() => {
     font-size: 24px;
     width: 100px;
     height: 29x;
-    border: 1px solid #999999;
     text-align: center;
     cursor: pointer;
 }

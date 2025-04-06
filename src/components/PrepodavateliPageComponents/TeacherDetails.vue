@@ -116,7 +116,7 @@ onMounted(fetchTeacherDetails);
             </div>
             <div class="h-[300px] w-[1px] mt-[100px] bg-white"></div>
             <div class="flex flex-col w-[48%] ml-[70px]">
-                <div class="text-[28px] font-extrabold text-black dark:text-white">Ближайшие консультации</div>
+                <div class="text-[28px] font-extrabold text-[#0c2340] dark:text-white">Ближайшие консультации</div>
                 <TeacherConsultations />
             </div>
         </div>

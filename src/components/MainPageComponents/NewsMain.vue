@@ -5,7 +5,7 @@
 <template>
     <div class="news-wrapper">
         <div class="numbers-wrapper">
-            <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
+            <div v-for="i in 18" :key="i" class="numbers text-[#0C2340] dark:text-[#999999]">{{ i }}</div>
         </div>
         <div id="news" class="content-news-wrapper">
             <div class="title-news-wrapper">
@@ -115,7 +115,6 @@
 .news-wrapper {
     height: 664px;
     width: 100%;
-    background-color: #191919;
     margin-top: 50px;
     display: flex;
     flex-direction: row;

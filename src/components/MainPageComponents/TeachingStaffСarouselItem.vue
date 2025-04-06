@@ -43,13 +43,13 @@ const imageLoaded = () => {
         </div>
         <div
             v-if="id === currentIndex"
-            class="prepod-description-block text-black dark:text-white border-l-[1px] border-r-[1px] border-gray-300 dark:border-white"
+            class="prepod-description-block text-[#0c2340] dark:text-white border-l-[1px] border-r-[1px] border-gray-300 dark:border-white"
         >
             <h1 class="name-prepod">{{ name }}</h1>
-            <h2 class="spec-prepod info-prepod" style="margin-bottom: 10px">
+            <h2 class="spec-prepod info-prepod text-[#0c2340] text-opacity-75 dark:text-white dark:text-opacity-75" style="margin-bottom: 10px">
                 {{ post }}
             </h2>
-            <h2 class="stepen-prepod info-prepod">{{ rank }}</h2>
+            <h2 class="stepen-prepod info-prepod text-[#0c2340] text-opacity-75 dark:text-white dark:text-opacity-75">{{ rank }}</h2>
         </div>
     </div>
 </template>

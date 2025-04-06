@@ -15,7 +15,10 @@ function toggleCheckbox() {
 
 <template>
     <div class="custom-checkbox-wrapper" @click="toggleCheckbox">
-        <div class="checkbox" :class="{ checkedValue: props.modelValue }">
+        <div
+            class="checkbox w-5 h-5 border border-[#cccccc] dark:border-[#808080] flex items-center justify-center cursor-pointer"
+            :class="{ checkedValue: props.modelValue }"
+        >
             <input type="checkbox" :checked="props.modelValue" />
             <IconTick
                 v-if="props.modelValue"
@@ -24,7 +27,12 @@ function toggleCheckbox() {
                 height="14"
             />
         </div>
-        <span id="checkbox-category">{{ label }}</span>
+        <span
+            id="checkbox-category"
+            class="text-[#cccccc] dark:text-[#808080] font-nunito text-base font-light cursor-pointer"
+        >
+            {{ label }}
+        </span>
     </div>
 </template>
 
@@ -32,7 +40,6 @@ function toggleCheckbox() {
 #checkbox-category {
     margin-left: 10px;
     user-select: none;
-    color: rgb(134, 134, 134);
     font-family: Nunito;
     font-size: 1rem;
     font-weight: 300;
@@ -45,7 +52,6 @@ function toggleCheckbox() {
     position: relative;
     width: 20px;
     height: 20px;
-    border: 1px solid rgb(128, 128, 128);
     display: flex;
     align-items: center;
     justify-content: center;

@@ -176,7 +176,7 @@ onBeforeUnmount(() => {
     <div v-if="typeInput === 'stairsInput'" ref="dropdownRef" class="relative w-full">
         <input
             v-model="searchText"
-            class="w-full bg-white dark:bg-[#181818] border border-[#cccccc] outline-none font-light p-1 focus:border-[#1E66F5]"
+            class="w-full bg-white dark:bg-[#181818] border border-[#cccccc] outline-none font-light p-1 focus:border-[#1E66F5] placeholder:text-[#0c2340] dark:placeholder:text-gray-300"
             :placeholder="placeholderText"
             :class="inputClass"
             autocomplete="off"
@@ -215,7 +215,7 @@ onBeforeUnmount(() => {
                 <li
                     v-for="item in filteredTypes"
                     :key="item.id"
-                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-black dark:text-white cursor-pointer"
+                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-[#0c2340] dark:text-white cursor-pointer"
                     @click="
                         () => {
                             if (props.items2.includes(item)) {
@@ -237,7 +237,7 @@ onBeforeUnmount(() => {
                 <li
                     v-for="item in filteredItems2"
                     :key="item.id"
-                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-black dark:text-white cursor-pointer"
+                    class="p-1 hover:bg-gray-400 hover:dark:bg-[#333333] text-[#0c2340] dark:text-white cursor-pointer"
                     @click="selectItem(item)"
                 >
                     {{ item.name }}
@@ -249,7 +249,7 @@ onBeforeUnmount(() => {
                     !filteredItems2.length &&
                     !filteredTypes.length
                 "
-                class="p-1 text-black dark:text-gray-400"
+                class="p-1 text-[#0c2340] dark:text-gray-400"
             >
                 Ничего не найдено
             </div>
@@ -269,9 +269,9 @@ onBeforeUnmount(() => {
 /* .selected-text {
     color: #1e66f5 !important;
 } */
-input.custom-placeholder::placeholder {
+/*input.custom-placeholder::placeholder {
     color: #fbfbfe;
-}
+}*/
 div {
     font-family: Nunito;
 }

@@ -1,5 +1,6 @@
 <script setup>
 import SectionTitle from './SectionTitle.vue';
+import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue';
 
 const cifri = [
     {
@@ -15,21 +16,54 @@ const cifri = [
         description: 'преподавателей',
     },
 ];
+
+const currentTheme = ref(localStorage.getItem('theme') || 'light'); // Инициализация из localStorage
+
+watchEffect(() => {
+    document.documentElement.classList.toggle('dark', currentTheme.value === 'dark');
+});
+
+// Обработчик изменений в localStorage
+const handleStorageChange = (event) => {
+    if (event.key === 'theme') {
+        currentTheme.value = event.newValue || 'light';
+    }
+};
+
+// Обработчик кастомного события смены темы
+const handleThemeChange = () => {
+    currentTheme.value = localStorage.getItem('theme') || 'light';
+};
+
+onMounted(() => {
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('theme-changed', handleThemeChange); // Слушаем кастомное событие
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('storage', handleStorageChange);
+    window.removeEventListener('theme-changed', handleThemeChange);
+});
 </script>
 
 <template>
-    <div class="wrapper-cifri text-[#0C2340] dark:text-[#999999]">
-        <div class="numbers-wrapper text-[#0C2340] dark:text-[#999999]">
-            <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
+    <div
+        class="wrapper-cifri bg-gray-200 dark:bg-[#181818]"
+    >
+        <div class="numbers-wrapper">
+            <div v-for="i in 18" :key="i" class="numbers text-[#3D3C3C] dark:text-[#999999]">{{ i }}</div>
         </div>
-        <div id="cifri" class="content-cifri-wrapper bg-white dark:bg-[#1f1f1f]">
+        <div id="cifri" class="content-cifri-wrapper">
             <SectionTitle title="КАФЕДРА В ЦИФРАХ" :base-length="10" />
-            <div class="cifri-frame">
+            <div
+                class="cifri-frame"
+                :class="currentTheme !== 'dark' ? 'bg-light-frame' : 'bg-dark-frame'"
+            >
                 <div v-for="(item, i) in cifri" :key="i" class="cifri-block">
                     <div class="image-block-cifri">
-                        <h1 class="title-cifri">{{ item.title }}</h1>
+                        <h1 class="title-cifri text-[#3D3C3C] dark:text-white">{{ item.title }}</h1>
                     </div>
-                    <h2 class="description-cifri">{{ item.description }}</h2>
+                    <h2 class="description-cifri text-[#3D3C3C] dark:text-white">{{ item.description }}</h2>
                 </div>
             </div>
         </div>
@@ -75,7 +109,6 @@ const cifri = [
 .cifri-frame {
     width: 80%; /* Занимает 90% ширины родителя */
     min-height: 470px; /* Минимальная высота */
-    background: url('../../assets/KafedraCifri/frame.png') no-repeat center / contain;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap; /* Перенос блоков при нехватке места */
@@ -83,6 +116,15 @@ const cifri = [
     align-items: center; /* Центрирование по вертикали */
     gap: 1rem; /* Отступ между блоками */
 }
+.bg-light-frame {
+    background: url('../../assets/KafedraCifri/frame-light.png') no-repeat center /
+        contain;
+}
+
+.bg-dark-frame {
+    background: url('../../assets/KafedraCifri/frame.png') no-repeat center / contain;
+}
+
 .line-dashed-cifri {
     position: relative;
     top: -38px;

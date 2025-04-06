@@ -48,11 +48,13 @@ onMounted(() => {
     <div class="timetable-container">
         <div class="table-wrapper">
             <div class="table-scroll-container">
-                <table class="schedule-table text-black dark:text-white">
+                <table class="schedule-table text-[#0c2340] dark:text-white border-separate border-spacing-0">
                     <thead>
                         <tr>
-                            <th class="time-header">Время</th>
-                            <th v-for="day in days" :key="day" class="day-header">
+                            <th class="time-header bg-white dark:bg-[#1f1f1f] border !border-[#0C2340] dark:!border-[#cccccc]" z>
+                                Время
+                            </th>
+                            <th v-for="day in days" :key="day" class="day-header bg-white dark:bg-[#1f1f1f] border !border-[#0C2340] dark:!border-[#cccccc]">
                                 {{ day }}
                             </th>
                         </tr>
@@ -71,18 +73,24 @@ onMounted(() => {
                             }"
                         >
                             <td
-                                class="time-slot bg-white dark:bg-[#1f1f1f]"
+                                class="time-slot border !border-[#0C2340] dark:!border-[#cccccc] p-1.5 min-w-[215px] w-[215px]"
                                 :class="{
-                                    'bg-[#d1d5db] dark:bg-[#313131]':
+                                    'bg-white dark:bg-[#1f1f1f]':
+                                        isEven === null || isEven !== (i % 2 !== 0),
+                                    'bg-gray-300 dark:bg-[#313131]':
                                         isEven !== null && isEven === (i % 2 !== 0),
                                 }"
                             >
                                 <div>{{ timeSlots[Math.floor(i / 2)] }}</div>
-                                <div class="week-type text-black dark:text-white">
+                                <div class="week-type text-[#0c2340] dark:text-white">
                                     {{ i % 2 === 0 ? 'Нечет' : 'Чет' }}
                                 </div>
                             </td>
-                            <td v-for="(lesson, j) in row" :key="j" class="lesson-cell">
+                            <td
+                                v-for="(lesson, j) in row"
+                                :key="j"
+                                class="lesson-cell border border-[#0C2340] dark:!border-[#cccccc] p-1.5 min-w-[215px] w-[215px]"
+                            >
                                 <LessonCell
                                     :lesson="lesson"
                                     :is-teacher-schedule="scheduleType === 'teacher'"
@@ -125,7 +133,6 @@ onMounted(() => {
     width: v-bind(tableWidth);
     max-width: 2560px;
     min-width: 900px;
-    border-collapse: collapse;
     font-family: JetBrainsMono;
     table-layout: fixed;
     margin: 0 auto;
@@ -139,7 +146,6 @@ onMounted(() => {
     position: sticky;
     left: 0;
     z-index: 20;
-    background-color: #4b6cab;
     padding: 8px;
     text-align: center;
     font-weight: bold;
@@ -153,7 +159,6 @@ onMounted(() => {
     position: sticky;
     top: 0;
     z-index: 15;
-    background-color: #4b88ab;
     padding: 8px;
     text-align: center;
     font-weight: bold;
@@ -178,7 +183,6 @@ onMounted(() => {
 }
 
 .lesson-cell {
-    border: 1px solid rgba(221, 221, 221, 0.2);
     padding: 6px;
     min-width: 215px;
     width: 215px;

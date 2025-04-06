@@ -53,9 +53,15 @@ const imageIsLoaded = (index) => {
 </script>
 
 <template>
-    <div class="wrapper-gallery text-[#0C2340] dark:text-[#999999]">
-        <div class="numbers-wrapper text-[#0C2340] dark:text-[#999999]">
-            <div v-for="i in 18" :key="i" class="numbers">{{ i }}</div>
+    <div class="wrapper-gallery">
+        <div class="numbers-wrapper">
+            <div
+                v-for="i in 18"
+                :key="i"
+                class="numbers text-[#0C2340] dark:text-[#999999]"
+            >
+                {{ i }}
+            </div>
         </div>
         <div class="content-gallery-wrapper bg-white dark:bg-[#1f1f1f]">
             <SectionTitle title="ФОТОГАЛЕРЕЯ" :base-length="7" />
@@ -133,11 +139,11 @@ const imageIsLoaded = (index) => {
                 </div>
 
                 <div
-                    class="line-gradient"
+                    class="line-gradient bg-gradient-to-r from-[#ccc] via-[#1f1f1f] to-[#1f1f1f] dark:from-[#000000] dark:via-[#ffffff] dark:to-[#ffffff]"
                     :class="{
-                        'gradient-active': gradientActive,
-                        'gradient-active-left': gradientActiveLeft,
-                    }"
+        'gradient-active': gradientActive,
+        'gradient-active-left': gradientActiveLeft,
+    }"
                 ></div>
             </div>
 
@@ -202,13 +208,12 @@ const imageIsLoaded = (index) => {
 .line-gradient {
     height: 2px;
     width: 300px;
-    background: linear-gradient(-45deg, #ccc, #1f1f1f, #1f1f1f);
     background-size: 400% 400%;
 }
 
 .gallery-image-arrow:hover {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
-        hue-rotate(146deg) brightness(122%) contrast(120%);
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(3534%)
+        hue-rotate(146deg) brightness(70%) contrast(60%);
     cursor: pointer;
 }
 

@@ -138,7 +138,6 @@ onMounted(() => {
 
             <div v-else-if="teachersAreLoaded" class="prepod-image-block">
                 <div
-                    style=""
                     class="prepod-image-arrow back-image-arrow"
                     @click="prev"
                 ></div>
@@ -244,8 +243,8 @@ onMounted(() => {
 }
 
 .prepod-image-arrow:hover {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(3534%)
-        hue-rotate(146deg) brightness(122%) contrast(120%);
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(3534%)
+        hue-rotate(146deg) brightness(70%) contrast(60%);
     cursor: pointer;
     transform: scale(1.1);
 }

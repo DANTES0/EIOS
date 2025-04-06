@@ -4,9 +4,9 @@ import SectionTitle from './SectionTitle.vue';
 </script>
 
 <template>
-    <div class="wrapper-prepod text-[#0C2340] dark:text-[#999999]">
-        <div class="numbers-wrapper text-[#0C2340] dark:text-[#999999]">
-            <div v-for="i in 22" :key="i" class="numbers">{{ i }}</div>
+    <div class="wrapper-prepod">
+        <div class="numbers-wrapper">
+            <div v-for="i in 22" :key="i" class="numbers text-[#0C2340] dark:text-[#999999]">{{ i }}</div>
         </div>
         <div id="prepod" class="content-prepod-wrapper bg-white dark:bg-[#1f1f1f]">
             <SectionTitle title="ПРЕПОДАВАТЕЛИ КАФЕДРЫ" :base-length="13" />

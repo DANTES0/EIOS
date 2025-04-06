@@ -32,7 +32,7 @@ function getImageUrl() {
                 alt="icon"
                 class="tabs-image"
             />
-            <label class="tabs-title text-black dark:text-[#cccccc]">{{
+            <label class="tabs-title text-[#0c2340] dark:text-[#cccccc]">{{
                 props.title
             }}</label>
         </div>

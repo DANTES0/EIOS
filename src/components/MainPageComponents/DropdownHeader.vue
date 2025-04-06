@@ -34,7 +34,7 @@ function showDropDown() {
     </div>
     <Transition name="slide-fade">
         <div v-if="isShowDropDown" id="myDropdown" class="dropdown-content">
-            <div class="dropdown-content-line"></div>
+            <div class="dropdown-content-line bg-white dark:bg-[#1e66f5]"></div>
             <div
                 class="dropdown-content-content text-white dark:text-[#cccccc] text-[0.95vw] desktop:text-[18px]"
             >
@@ -134,7 +134,6 @@ function showDropDown() {
     margin-left: 21px;
     width: 2px;
     height: calc(28px * 6 + 10px);
-    background-color: #787878;
 }
 .arrow_down {
     /* padding-left: 10px; */

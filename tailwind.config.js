@@ -12,7 +12,8 @@ export default {
                 'dp-bg': '#FFFFFF',
                 'dp-bg-dark': '#1F1F1F',
                 'dp-text': '#0C2340',
-                'dp-text-dark': '#CCCCCC'
+                'dp-text-dark': '#CCCCCC',
+                'voen-blue': '#0077C8',
               }
         },
     },

@@ -72,10 +72,10 @@ const imageLoaded = () => {
 <template>
     <div @click="$emit('click')">
         <div
-            class="news-block-wrapper text-black dark:text-white"
+            class="news-block-wrapper text-[#0c2340] dark:text-white"
             :style="{ width: newsData.blockWidth, height: newsData.blockHeight }"
         >
-            <div class="news-block-tag-and-date-wrapper text-black dark:text-white">
+            <div class="news-block-tag-and-date-wrapper">
                 <div class="news-block-tag">
                     <img src="../../assets/News/image.svg" alt="" class="tag-icon" />
                     <div class="tag" :style="{ fontSize: newsData.fontSize }">
@@ -112,11 +112,11 @@ const imageLoaded = () => {
         </div>
 
         <div v-if="newsData.newsShowSummary" class="news-block-summary">
-            <div class="news-block-title text-black dark:text-white">
+            <div class="news-block-title text-[#0c2340] dark:text-white">
                 {{ processedTitle() }}
             </div>
 
-            <div class="news-block-description text-black dark:text-white">
+            <div class="news-block-description text-[#0c2340] dark:text-white">
                 {{ processedDescription() }}
             </div>
         </div>
@@ -169,13 +169,13 @@ const imageLoaded = () => {
     margin-left: 12px;
 }
 .tag {
-    font-family: Rubik;
+    font-family: JetBrainsMono;
     font-size: 18px;
     font-weight: 800;
 }
 .news-block-date {
     margin-top: 3px;
-    font-family: Rubik;
+    font-family: JetBrainsMono;
     font-size: 18px;
     font-weight: 800;
     margin-right: 53px;

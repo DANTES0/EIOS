@@ -30,10 +30,10 @@ const dashLine = computed(() => {
 
 <template>
     <div class="section-title-wrapper">
-        <h1 class="section-title text-black dark:text-white">
+        <h1 class="section-title text-[#0c2340] dark:text-white">
             <span class="hash-sign">#</span>{{ title }}
         </h1>
-        <div class="dashed-line text-[#006AFF] dark:text-white">
+        <div class="dashed-line text-[#1e66f5] dark:text-white">
             {{ dashLine }}
         </div>
     </div>
