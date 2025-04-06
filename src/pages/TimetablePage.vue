@@ -5,19 +5,28 @@ import LessonsTimetable from '../components/TimetablePageComponents/LessonsTimet
 </script>
 
 <template>
-    <Tabs title="Расписание" :show-icon="false" />
-    <div class="timetable-page">
-        <LessonsTimetable />
+    <div class="page-container">
+        <Tabs title="Расписание" :show-icon="false" />
+        <div class="timetable-page">
+            <LessonsTimetable />
+        </div>
+        <!-- <Terminal /> -->
     </div>
-    <!-- <Terminal /> -->
 </template>
 
 <style scoped>
+.page-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
 .timetable-page {
     width: 100%;
+    flex: 1;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    overflow: hidden;
 }
 </style>

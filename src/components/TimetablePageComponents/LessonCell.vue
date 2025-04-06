@@ -5,7 +5,11 @@ import eventBus from '../../eventBus.js';
 
 const props = defineProps({
     lesson: Object,
-    isTeacherSchedule: Boolean, // Новый пропс
+    isTeacherSchedule: Boolean,
+    scaleFactor: {
+        type: Number,
+        default: 1,
+    },
 });
 
 const teacherName = computed(
@@ -55,7 +59,7 @@ function convertToShortNameWithoutNbsp(fullName) {
 </script>
 
 <template>
-    <div v-if="lesson" class="lesson-cell">
+    <div v-if="lesson">
         <div class="title">{{ lesson.subjectName }}</div>
 
         <!-- Если отображаем расписание препода, показываем группу -->
@@ -104,48 +108,52 @@ function convertToShortNameWithoutNbsp(fullName) {
             </div>
         </div>
     </div>
-    <div v-else class="lesson-cell empty"></div>
+    <div v-else class="empty"></div>
 </template>
 
 <style scoped>
-.green-background {
-    color: #00c279 !important; /* Светло-зеленый цвет */
-    font-weight: bold;
-}
 .lesson-cell {
-    padding: 8px;
+    padding: calc(8px * v-bind('scaleFactor'));
     text-align: center;
-    height: 180px;
-    font-size: 18px;
+    height: calc(180px * v-bind('scaleFactor'));
+    font-size: calc(18px * v-bind('scaleFactor'));
     font-weight: 100;
     text-align: left;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
 }
 
 .empty {
     background: transparent;
-    height: 180px;
-    width: 215px;
+    height: calc(180px * v-bind('scaleFactor'));
 }
 
 .title {
     font-weight: 700;
+    word-break: break-word;
+    font-size: calc(18px * v-bind('scaleFactor'));
 }
 
 .teacher,
 .group {
     margin-top: auto;
-    margin-bottom: 22px;
+    margin-bottom: calc(22px * v-bind('scaleFactor'));
+    word-break: break-word;
+    font-size: calc(16px * v-bind('scaleFactor'));
 }
 
 .details {
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
+    font-size: calc(16px * v-bind('scaleFactor'));
 }
 
 .room {
-    font-size: 20px;
+    font-size: calc(20px * v-bind('scaleFactor'));
     font-weight: 900;
     color: #1e66f5;
 }
