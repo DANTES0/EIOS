@@ -158,6 +158,14 @@ function parseDate(dateStr) {
 }
 
 const isDarkTheme = ref();
+const themeInit = computed(() => {
+    const checkTheme = document.documentElement.classList.contains('dark');
+
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+    isDarkTheme.value = checkTheme;
+
+    return checkTheme;
+});
 
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
@@ -171,6 +179,14 @@ const observer = new MutationObserver((mutations) => {
 });
 
 observer.observe(document.documentElement, { attributes: true });
+
+watch(
+    themeInit,
+    (newVal) => {
+        console.log('Текущая тема:', newVal ? 'dark' : 'light');
+    },
+    { immediate: true },
+);
 </script>
 
 <template>
@@ -238,7 +254,11 @@ observer.observe(document.documentElement, { attributes: true });
                                 ? 'custom-dp-input dark-theme'
                                 : 'custom-dp-input light-theme'
                         "
-                        calendar-class-name="custom-dp-calendar"
+                        :calendar-class-name="
+                            isDarkTheme
+                                ? 'custom-dp-calendar dark-theme'
+                                : 'custom-dp-calendar light-theme'
+                        "
                         hide-input-icon
                         @update:model-value="handleStartDate"
                     >
@@ -258,9 +278,12 @@ observer.observe(document.documentElement, { attributes: true });
                                 ? 'custom-dp-input dark-theme'
                                 : 'custom-dp-input light-theme'
                         "
-                        calendar-class-name="custom-dp-calendar"
+                        :calendar-class-name="
+                            isDarkTheme
+                                ? 'custom-dp-calendar dark-theme'
+                                : 'custom-dp-calendar light-theme'
+                        "
                         hide-input-icon
-                        :input-style="{ 'user-select': 'none' }"
                         @update:model-value="handleEndDate"
                     >
                         <template #action-preview=""></template>
