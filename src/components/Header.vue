@@ -175,12 +175,14 @@ const changeTheme = () => {
     font-family: Russo-One;
     src: url('../assets/RussoOne-Regular.ttf');
 }
+
 :deep(.popper) {
-    background-color: #181818 !important;
+    @apply bg-[#cccccc] text-black dark:bg-[#181818] dark:text-white !important;
     padding: 10px !important;
     border: 1px solid #ccc !important;
     border-radius: 6px !important;
 }
+
 #main {
     background-image: url('../assets/header/home.svg');
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)

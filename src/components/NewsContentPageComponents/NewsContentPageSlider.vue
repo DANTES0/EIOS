@@ -82,7 +82,7 @@ const vfRscs = computed(() =>
     opacity: 1 !important;
 }
 .photo-slider {
-    width: 70%;
+    width: 50%;
 }
 
 :deep(.flux-button:hover > svg polyline) {

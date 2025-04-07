@@ -18,7 +18,7 @@ const newsHeaderData = defineProps({
 </script>
 
 <template>
-    <div class="header-container">
+    <div class="header-container bg-[#0C2340] dark:bg-[#181818]">
         <div class="header-box1">
             <div class="title-news1">
                 <div class="news-title-text">
@@ -51,7 +51,6 @@ const newsHeaderData = defineProps({
     border: solid 1px #2b2b2b;
     display: flex;
     flex-direction: column;
-    background-color: #181818;
 }
 
 .header-box1 {
@@ -70,7 +69,7 @@ const newsHeaderData = defineProps({
 .title-news1 {
     width: 45%;
     min-height: 400px;
-    border-right: solid 1px #2b2b2b;
+    border-right: solid 1px #555555;
     background-image: url('../../assets/NewsContent/blue-wave.svg');
     background-size: contain;
     background-repeat: no-repeat;
@@ -81,7 +80,6 @@ const newsHeaderData = defineProps({
     margin: 40px;
     font-family: Calibri;
     font-weight: bold;
-    color: white;
     font-size: 44px;
 }
 
@@ -92,7 +90,6 @@ const newsHeaderData = defineProps({
 .text-news-text {
     margin: 40px 30px 40px 30px;
     font-family: Calibri;
-    color: white;
     font-size: 28px;
 }
 
@@ -103,11 +100,10 @@ const newsHeaderData = defineProps({
 }
 
 .news-teg1 {
-    border-right: solid 1px #2b2b2b;
+    border-right: solid 1px #555555;
     font-family: Nunito;
     font-size: 24px;
     padding: 10px;
-    color: white;
 }
 
 .news-date1-container {
@@ -121,6 +117,5 @@ const newsHeaderData = defineProps({
     font-family: Nunito;
     font-size: 24px;
     padding: 10px;
-    color: white;
 }
 </style>

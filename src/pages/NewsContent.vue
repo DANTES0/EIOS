@@ -33,22 +33,23 @@ onMounted(() => {
 </script>
 
 <template>
-    <div v-if="newsData" class="page-container">
-        <div class="page-container-header">
-            <NewsContentHeader
-                :news-header-headline="newsData.headline"
-                :news-header-main-info="newsData.fullInformation"
-                :news-header-category="newsData.category"
-                :news-header-date="newsData.date"
-            />
-        </div>
+    <div v-if="newsData" class="page-container bg-gray-200 dark:bg-[#1f1f1f]">
+        <!-- Главный обертывающий блок -->
+        <div class="content-wrapper">
+            <!-- Header -->
+            <div class="page-container-header">
+                <NewsContentHeader
+                    :news-header-headline="newsData.headline"
+                    :news-header-main-info="newsData.fullInformation"
+                    :news-header-category="newsData.category"
+                    :news-header-date="newsData.date"
+                />
+            </div>
 
-        <!-- <div class="page-container-base">
-            <NewsContentBase :news-full-info="''" />
-        </div> -->
-
-        <div class="page-container-base-slider">
-            <NewsContentPageSlider :news-images="newsData.images" />
+            <!-- Slider -->
+            <div class="page-container-base-slider bg-gray-200 dark:bg-[#1f1f1f]">
+                <NewsContentPageSlider :news-images="newsData.images" />
+            </div>
         </div>
     </div>
     <div v-else>
@@ -57,33 +58,52 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.page-container-header {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
+* {
+    box-sizing: border-box;
 }
 
-.page-container-base {
+.page-container {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
 }
+
+.content-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: inherit;
+}
+
+.page-container-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
 .page-container-base-slider {
     padding-top: 40px;
     width: 90%;
-    background-color: #181818;
     display: flex;
     align-items: center;
     justify-content: center;
     height: auto;
     margin: 0 auto;
     padding-bottom: 50px;
-    margin-bottom: 50px;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .page-container-base-slider {
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 }
 </style>
