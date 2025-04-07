@@ -19,7 +19,6 @@
         "date-fns": "^4.1.0",
         "inputmask": "^5.0.9",
         "jsonwebtoken": "^9.0.2",
-        "jwt-decode": "^4.0.0",
         "mitt": "^3.0.1",
         "modern-normalize": "^3.0.1",
         "normalize.css": "^8.0.1",

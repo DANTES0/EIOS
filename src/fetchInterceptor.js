@@ -6,11 +6,10 @@ async function refreshAccessToken() {
     const refreshToken = store.getters.refreshToken;
 
     if (!refreshToken) {
-        // store.dispatch('logout');
-        // throw new Error('No refresh token available');
+        // Если нет refreshToken, делаем лог-аут
+        store.dispatch('logout');
+        throw new Error('No refresh token available');
     }
-
-    //console.log('А сюда', refreshToken);
 
     const response = await fetch(`${config.ServerURL}/api/auth/token`, {
         method: 'POST',
@@ -25,7 +24,6 @@ async function refreshAccessToken() {
     }
 
     const data = await response.json();
-    // console.log("Перед диспатчем", data )
 
     store.dispatch('login', {
         accessToken: data.accessToken,

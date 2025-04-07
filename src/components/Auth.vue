@@ -51,6 +51,7 @@ const authorize = async () => {
         const { accessToken, refreshToken } = data.value;
 
         store.dispatch('login', { accessToken, refreshToken });
+        await store.dispatch('fetchCurrentUser');
         authState.isVisible = false;
     } catch (error) {
         console.error('Ошибка при отправке запроса:', error);
@@ -63,7 +64,7 @@ document.documentElement.classList.add('modal-open');
 <template>
     <div v-if="authState.isVisible" class="auth-wrapp" @click="hideAuth">
         <div class="auth-container">
-            <div class="auth-block">
+            <div class="auth-block bg-[#0C2340] dark:bg-[#181818]">
                 <div class="auth-title">
                     <span style="color: #1e66f5">#</span>АВТОРИЗАЦИЯ
                 </div>
@@ -73,7 +74,7 @@ document.documentElement.classList.add('modal-open');
                         v-model="login"
                         placeholder="Логин...."
                         type="text"
-                        class="input-login-text input"
+                        class="input-login-text input placeholder:text-gray-400 dark:placeholder:text-gray-400"
                         :class="{ error: loginError }"
                         @click="loginError = false"
                     />
@@ -84,7 +85,7 @@ document.documentElement.classList.add('modal-open');
                         v-model="password"
                         placeholder="Пароль...."
                         type="password"
-                        class="input-password-text input"
+                        class="input-password-text input placeholder:text-gray-400 dark:placeholder:text-gray-400"
                     />
                 </div>
                 <div class="not-auth">не могу войти</div>
@@ -114,17 +115,17 @@ document.documentElement.classList.add('modal-open');
 .not-auth {
     font-size: 14px;
     font-weight: 300;
-    color: #7d7d7d;
-    margin-top: 8px;
+    color: #c8c8c8;
+    margin-top: 25px;
     margin-left: 250px;
     cursor: pointer;
     transition: color 0.3s ease;
 }
 .not-auth:hover {
-    color: #8a8a8a;
+    color: #efeeee;
 }
 .not-auth:active {
-    color: #cccccc;
+    color: #efeeee;
 }
 .enter-auth {
     width: 186px;
@@ -164,7 +165,6 @@ document.documentElement.classList.add('modal-open');
     transition: border-color 0.3s ease;
 }
 .input::placeholder {
-    color: #5c5c5c;
     font-family: JetBrainsMono;
     font-size: 18px;
 }

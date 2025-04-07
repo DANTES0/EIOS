@@ -12,6 +12,7 @@ import config from '../../config';
 import { computed, ref } from 'vue';
 import { useFetch } from '@vueuse/core';
 import TeacherConsultations from './TeacherConsultations.vue';
+import useRoles from '../../store/useRoles.js';
 
 const route = useRoute();
 const url = computed(() => {
@@ -25,6 +26,8 @@ const fetchTeacherDetails = async () => {
 
     console.log(response.data.value);
 };
+
+const { hasAnyRole } = useRoles();
 
 onMounted(fetchTeacherDetails);
 </script>
@@ -55,7 +58,7 @@ onMounted(fetchTeacherDetails);
                             <li>{{ items.rank }}</li>
                         </ul>
                     </div>
-                    <div>
+                    <div v-if="!hasAnyRole">
                         <div class="flex flex-col w-[18%] mt-[37px]">
                             <div class="font-extrabold text-[20px]">Контакты</div>
                             <div class="w-full bg-[#0054FF] h-[2px]"></div>
@@ -102,9 +105,13 @@ onMounted(fetchTeacherDetails);
                 </div>
             </div>
         </div>
-        <div class="flex flex-row text-gray-700 dark:text-white font-[JetBrainsMono] h-full mt-[44px]">
-            <div class="flex flex-col w-[48%]">
-                <div class="text-[28px] font-extrabold text-gray-700 dark:text-white mb-[35px]">
+        <div
+            class="flex flex-row text-gray-700 dark:text-white font-[JetBrainsMono] h-full mt-[44px]"
+        >
+            <div v-if="!hasAnyRole" class="flex flex-col w-[48%]">
+                <div
+                    class="text-[28px] font-extrabold text-gray-700 dark:text-white mb-[35px]"
+                >
                     Материалы по курсам
                 </div>
                 <div class="flex flex-col gap-4 text-white dark:text-white">
@@ -114,9 +121,11 @@ onMounted(fetchTeacherDetails);
                     <course-dropdown></course-dropdown>
                 </div>
             </div>
-            <div class="h-[300px] w-[1px] mt-[100px] bg-white"></div>
+            <div v-if="!hasAnyRole" class="h-[300px] w-[1px] mt-[100px] bg-white"></div>
             <div class="flex flex-col w-[48%] ml-[70px]">
-                <div class="text-[28px] font-extrabold text-[#0c2340] dark:text-white">Ближайшие консультации</div>
+                <div class="text-[28px] font-extrabold text-[#0c2340] dark:text-white">
+                    Ближайшие консультации
+                </div>
                 <TeacherConsultations />
             </div>
         </div>

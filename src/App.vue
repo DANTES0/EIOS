@@ -4,43 +4,9 @@ import Auth from './components/Auth.vue';
 import { authState } from './authState';
 import useAuthenticatedFetch from './fetchInterceptor';
 import config from './config';
-import { computed, onMounted } from 'vue';
-import * as jwt_decode from 'jwt-decode'; // если используете npm или import
+import { onMounted } from 'vue';
+import store from './store/index.js';
 
-const decodeJwt = computed(() => {
-    const token = localStorage.accessToken;
-
-    if (token) {
-        try {
-            const decodedPayload = jwt_decode(token);
-
-            return decodedPayload;
-        } catch (error) {
-            console.error('Invalid token:', error);
-        }
-    } else {
-        console.error('No token found in localStorage');
-    }
-
-    return null;
-});
-
-const fetch = async () => {
-    const { statusCode } = await useAuthenticatedFetch(
-        `${config.ServerURL}/api/v1/admin`,
-    ).get();
-
-    console.log(statusCode);
-
-    if (statusCode.value == '200') {
-        authState.isAccess = true;
-        console.log(authState.isAccess);
-    }
-
-    console.log('ЗАПРОС');
-};
-
-fetch();
 onMounted(() => {
     if (
         localStorage.theme === 'dark' ||
@@ -53,6 +19,27 @@ onMounted(() => {
         document.documentElement.classList.remove('dark');
         localStorage.theme = 'light';
     }
+
+    console.log('Восстановление пользователя из localStorage...');
+
+    store
+        .dispatch('restoreUserFromLocalStorage')
+        .then(() => {
+            const accessToken = store.getters.accessToken;
+            const refreshToken = store.getters.refreshToken;
+
+            console.log('Токены из store:', accessToken, refreshToken);
+
+            if (accessToken && refreshToken) {
+                console.log('Токены найдены, выполняем логин...');
+                store.dispatch('login', { accessToken, refreshToken });
+            } else {
+                console.log('Токены не найдены, редирект на страницу входа...');
+            }
+        })
+        .catch((err) => {
+            console.error('Ошибка восстановления пользователя:', err);
+        });
 });
 </script>
 

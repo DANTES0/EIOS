@@ -1,6 +1,6 @@
 <script setup>
 import { useStore } from 'vuex';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onBeforeMount } from 'vue';
 import { authState } from '../authState';
 import useAuthenticatedFetch from '../fetchInterceptor';
 import LeftAdminMenu from '../components/AdminPageComponents/LeftAdminMenu.vue';
@@ -13,52 +13,18 @@ import UserTeachers from '../components/AdminPageComponents/UserTeachers.vue';
 import TeachersChange from '../components/AdminPageComponents/TeachersChange.vue';
 import config from '../config';
 
-let isVisibleChangePhotoGallery = ref(false);
-
 import UserAll from '../components/AdminPageComponents/UsersAll.vue';
 import Various from '../components/AdminPageComponents/Various.vue';
 import UserAdmin from '../components/AdminPageComponents/UserAdmin.vue';
 import AddUserModalComponent from '../components/AdminPageComponents/AddUserModalComponent.vue';
 import EditUserModalComponent from '../components/AdminPageComponents/EditUserModalComponent.vue';
 
-let visible = ref(true);
-const store = useStore();
 
-async function fetchData() {
-    // await fetch('http://25.59.204.137:8080/admin', {
-    //     method: 'GET',
-    //     headers: {Authorization: `Bearer`+' eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2l6YXIiLCJleHAiOjE3MTYwNjQ0NDYsInJvbGVzIjpbeyJpZCI6MSwibmFtZSI6IlJPTEVfQURNSU4ifV19.VoMXIWD-RxJjbRGHd3BosqAIvIXEfQ5vLM6P1z-3hrP7LLvNHfGqErtlH8-xkIRPe6fOsvKmk_A8mN9nHxQAjA'}
-    // })
-    const { data, error, isFetching, statusCode } = await useAuthenticatedFetch(
-        `${config.ServerURL}/api/v1/admin`,
-    ).get();
+onMounted(() => {
+    localStorage.setItem('theme', 'dark');  // Сохраняем тему как 'dark' в localStorage
+    document.body.classList.add('dark');    // Применяем класс 'dark' на body
+});
 
-    console.log(statusCode);
-    console.log(store.getters.accessToken);
-
-    if (
-        statusCode.value == '403' ||
-        (statusCode.value == '401' && !store.getters.accessToken)
-    ) {
-        authState.isVisible = true;
-        // visible.value = false
-    } else {
-        // visible.value = true
-    }
-
-    if (error.value) {
-        // console.error('Failed to fetch data:', error.value);
-    } else {
-        console.log('Data:', data.value);
-    }
-
-    if (!store.getters.isLoggedIn) {
-        authState.isVisible = true;
-        // visible.value = false
-    }
-}
-
-fetchData();
 </script>
 
 <template>

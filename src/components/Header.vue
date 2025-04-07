@@ -4,9 +4,12 @@ import HeaderAnchor from './HeaderAnchor.vue';
 import { authState } from '../authState';
 import { useStore } from 'vuex';
 import { ref, onMounted } from 'vue';
+import useRoles from '../store/useRoles.js';
 
 const store = useStore();
 const theme = ref(localStorage.getItem('theme') || 'light');
+
+const { isAdminOrTeacher } = useRoles();
 
 onMounted(() => {
     if (
@@ -26,19 +29,19 @@ const toggleAuthVisibility = () => {
 };
 
 const changeTheme = () => {
-    theme.value = theme.value === 'light' ? 'dark' : 'light';
-    localStorage.setItem('theme', theme.value);
-    window.dispatchEvent(new CustomEvent('theme-changed'));
-
     if (theme.value === 'dark') {
-        document.documentElement.classList.add('dark');
-
+        localStorage.setItem('theme', 'light');
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+        theme.value = 'light';
     } else {
-        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'dark');
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+        theme.value = 'dark';
     }
 
-    // Если нужно разлогинить при смене темы, оставь эту строку
-    // store.dispatch('logout');
+    window.dispatchEvent(new CustomEvent('theme-changed'));
 };
 </script>
 
@@ -95,15 +98,13 @@ const changeTheme = () => {
                 </Popper>
                 <Popper :placement="'right'" :hover="true" content="Админ-панель">
                     <a
-                        v-if="authState.isAccess"
+                        v-if="authState.isAccess && isAdminOrTeacher"
                         id="e"
                         class="page"
-                        data-title="Комиссия"
+                        data-title="Админ-панель"
                         @click="$router.push('/admin')"
                     ></a>
                 </Popper>
-
-                <a id="t" class="page" @click="$router.push('/gallery')"></a>
             </div>
             <div class="page-header-bottom">
                 <a
@@ -117,7 +118,12 @@ const changeTheme = () => {
                         id="profile"
                         class="page"
                         data-title="Профиль"
-                        @click="toggleAuthVisibility"
+                        @click="
+                            () => {
+                                toggleAuthVisibility();
+                                store.dispatch('logout');
+                            }
+                        "
                     ></a>
                 </Popper>
                 <Popper :placement="'right'" :hover="true" content="Главный сайт">
@@ -186,7 +192,7 @@ const changeTheme = () => {
 #main {
     background-image: url('../assets/header/home.svg');
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
     margin-top: 15px;
     display: block;
 }
@@ -248,7 +254,7 @@ const changeTheme = () => {
     background-repeat: no-repeat;
     transform: scale(1.4);
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
 }
 #mailvoenmeh {
     background-image: url('../assets/header/mail.svg');
@@ -256,33 +262,33 @@ const changeTheme = () => {
     background-position: 50%;
     transform: scale(1.1);
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
 }
 #moodle {
     background-image: url('../assets/header/bottom/moodle.svg');
     background-size: contain;
     transform: scale(1.3);
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
 }
 #settings {
     background-image: url('../assets/header/bottom/settings.svg');
     background-size: contain;
     transform: scale(1.3);
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
 }
 #profile {
     background-image: url('../assets/header/bottom/profile.svg');
     background-size: contain;
     /* transform: scale(1); */
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
 }
 #q {
     background-image: url('../assets/header/second.svg');
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
     display: block;
 }
 .page-header-bottom {
@@ -294,20 +300,20 @@ const changeTheme = () => {
 #w {
     background-image: url('../assets/header/third.svg');
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
     display: block;
 }
 #e {
     background-image: url('../assets/header/fourth.svg');
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
     display: block;
 }
 #f {
     background-image: url('../assets/header/prepod.svg');
     background-size: contain;
     filter: invert(100%) sepia(10%) saturate(7%) hue-rotate(220deg) brightness(70%)
-    contrast(90%);
+        contrast(90%);
     display: block;
     transform: scale(1.3);
 }
