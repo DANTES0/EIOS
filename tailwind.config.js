@@ -14,11 +14,13 @@ export default {
                 'dp-text': '#0C2340',
                 'dp-text-dark': '#CCCCCC',
                 'voen-blue': '#0077C8',
+                'custom-light-bg': '#cccccc',
+                'custom-dark-bg': '#181818',
             },
         },
     },
     plugins: [],
-    darkMode: 'selector',
+    darkMode: 'class',
 };
 //ИСПОЛЬЗОВАНИЕ ТЕМЫ
 //localStorage.theme = 'dark' - Включение тюмного режима
