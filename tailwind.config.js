@@ -16,7 +16,7 @@ export default {
                 'voen-blue': '#0077C8',
                 'custom-light-bg': '#cccccc',
                 'custom-dark-bg': '#181818',
-              }
+            },
         },
     },
     plugins: [],
