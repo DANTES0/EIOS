@@ -24,59 +24,34 @@
     font-display: swap;
 }
 
-.dp__theme_dark {
-    --dp-primary-color: rgb(0, 84, 255);
-    --dp-text-color: #cccccc;
-    --dp-secondary-color: #787878;
-    --dp-border-color: rgb(128, 128, 128);
-}
-
-:root {
-    --dp-font-family: Nunito;
-    --dp-font-size: 0.75rem;
-    --dp-border-radius: 0px;
-    --dp-cell-border-radius: 0px;
-    --dp-cell-size: 30px;
-    --dp-menu-min-width: 225px;
-
-    --p-select-color: #ececec !important;
-    --p-select-focus-border-color: #9d9da6 !important;
-    --p-select-hover-border-color: #9d9da6 !important;
-    --p-select-background: transparent !important;
-    --p-select-border-radius: 0 !important;
-    --p-select-overlay-background: #1f1f1f !important;
-    --p-select-overlay-border-radius: 0 !important;
-    --p-select-overlay-border-color: #9d9da6 !important;
-    --p-select-option-selected-background: rgb(0, 84, 255) !important;
-    --p-select-option-focus-background: #343437 !important;
-    --p-select-option-selected-focus-background: rgb(0, 84, 255) !important;
-    --p-overlay-select-background: #27272a !important;
-    --p-select-option-group-background: 0 !important;
-    --p-select-option-border-radius: 0 !important;
-}
-
+/* Базовые стили */
 * {
     margin: 0;
     padding: 0;
 }
+
 html {
     background-color: #151a31;
 }
+
 .modal-open {
     overflow: hidden;
 }
+
 .tabs {
     width: 100%;
     height: 28px;
 }
+
 .numbers {
-    color: #999999;
+    color: #999;
     margin-top: 14px;
     font-size: 16px;
     font-family: JetBrainsMono;
     font-weight: 100;
     margin-left: 26px;
 }
+
 .numbers-wrapper {
     display: flex;
     flex-direction: column;
@@ -84,4 +59,112 @@ html {
 
 body * {
     @apply transition-colors duration-300;
+}
+
+:root {
+    --p-select-color: #ececec;
+    --p-select-focus-border-color: #9d9da6;
+    --p-select-hover-border-color: #9d9da6;
+    --p-select-background: transparent;
+    --p-select-border-radius: 0;
+    --p-select-overlay-background: #1f1f1f;
+    --p-select-overlay-border-radius: 0;
+    --p-select-overlay-border-color: #9d9da6;
+    --p-select-option-selected-background: rgb(0, 84, 255);
+    --p-select-option-focus-background: #343437;
+    --p-select-option-selected-focus-background: rgb(0, 84, 255);
+    --p-overlay-select-background: #27272a;
+    --p-select-option-group-background: 0;
+    --p-select-option-border-radius: 0;
+
+    /* Стили для DatePicker в светлой теме */
+    --dp-primary-color: rgb(0, 84, 255);
+    --dp-text-color: purple; /*не работает*/
+    --dp-secondary-color: yellow; /*не работает*/
+    --dp-border-color: green; /*не работает*/
+
+    --dp-hover-color: blue; /*не работает*/
+
+    --dp-font-family: Nunito;
+    --dp-font-size: 0.85rem;
+    --dp-border-radius: 0;
+    --dp-cell-border-radius: 0;
+    --dp-cell-size: 32px;
+    --dp-menu-min-width: 225px;
+}
+
+:root.dark {
+    /* Стили для DatePicker в тёмной теме */
+    --dp-primary-color: rgb(0, 84, 255); /*не работает*/
+    --dp-text-color: red; /*не работает*/
+    --dp-secondary-color: #787878; /*не работает*/
+    --dp-border-color: #444; /*не работает*/
+    --dp-hover-color: #333; /*не работает*/
+}
+
+.custom-dp-input {
+    background-color: var(--dp-bg-color);
+    color: var(--dp-text-color);
+    border: 1px solid #ccc;
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 300;
+    width: 156px;
+    height: 37px;
+    border-radius: 0;
+    transition: border-color 0.1s;
+    user-select: none !important;
+}
+
+/* Стили для тёмной темы */
+.custom-dp-input.dark-theme {
+    --dp-text-color: #ccc;
+    border: 1px solid #808080;
+    --dp-bg-color: #1f1f1f;
+    user-select: none !important;
+}
+
+/* Стили для светлой темы */
+.custom-dp-input.light-theme {
+    --dp-text-color: #d4d1d1;
+    border: 1px solid #808080;
+    --dp-bg-color: #ffffff09;
+    user-select: none !important;
+}
+
+.custom-dp-input.dark-theme:hover {
+    border-color: #0054ff; /*не работает*/
+    user-select: none !important;
+}
+
+.custom-dp-input.light-theme:hover {
+    border-color: #0054ff; /*не работает*/
+    user-select: none !important;
+}
+
+.custom-dp-input.dark-theme:focus-visible {
+    outline: none; /*не работает*/
+    user-select: none !important;
+}
+
+.custom-dp-input.light-theme:focus-visible {
+    outline: none; /*не работает*/
+    user-select: none !important;
+}
+
+.custom-dp-calendar {
+    background-color: pink; /*работает только мне это не нужно, потому что он навсегда меняет цвет на любой теме*/
+    color: var(--dp-text-color); /*не работает*/
+    border: 1px solid var(--dp-border-color); /*работает*/
+    font-family: Rubik;
+    user-select: none !important;
+}
+
+.dp__cell_inner:hover {
+    background-color: orange; /*работает только мне это не нужно, потому что он навсегда меняет цвет на любой теме*/
+    color: red; /*работает только мне это не нужно, потому что он навсегда меняет цвет на любой теме*/
+}
+
+.dp__action_button {
+    color: saddlebrown; /*работает только мне это не нужно, потому что он навсегда меняет цвет на любой теме*/
 }

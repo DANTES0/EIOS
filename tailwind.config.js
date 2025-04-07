@@ -14,7 +14,7 @@ export default {
                 'dp-text': '#0C2340',
                 'dp-text-dark': '#CCCCCC',
                 'voen-blue': '#0077C8',
-              }
+            },
         },
     },
     plugins: [],

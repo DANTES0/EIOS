@@ -156,6 +156,21 @@ function parseDate(dateStr) {
 
     return new Date(year, month - 1, day);
 }
+
+const isDarkTheme = ref();
+
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            const isDark = document.documentElement.classList.contains('dark');
+
+            console.log('Текущая тема:', isDark ? 'dark' : 'light');
+            isDarkTheme.value = isDark;
+        }
+    });
+});
+
+observer.observe(document.documentElement, { attributes: true });
 </script>
 
 <template>
@@ -213,39 +228,42 @@ function parseDate(dateStr) {
                     <span class="data-start">С</span>
                     <VueDatePicker
                         v-model="dateStart"
-                        dark
+                        :dark="isDarkTheme"
                         :enable-time-picker="false"
-                        :format="format"
                         locale="ru"
                         cancel-text="Отмена"
                         select-text="Выбрать"
-                        input-class-name="datapicker-input"
-                        calendar-class-name="dp-custom-calendar"
-                        calendar-cell-class-name="dp-custom-cell"
+                        :input-class-name="
+                            isDarkTheme
+                                ? 'custom-dp-input dark-theme'
+                                : 'custom-dp-input light-theme'
+                        "
+                        calendar-class-name="custom-dp-calendar"
                         hide-input-icon
                         @update:model-value="handleStartDate"
                     >
-                        <!-- убрать предварительную дату -->
-                        <template #action-preview=""> </template>
+                        <template #action-preview=""></template>
                     </VueDatePicker>
 
                     <span class="data-end">По</span>
                     <VueDatePicker
                         v-model="dateEnd"
-                        dark
+                        :dark="isDarkTheme"
                         :enable-time-picker="false"
-                        :format="format"
                         locale="ru"
                         cancel-text="Отмена"
                         select-text="Выбрать"
-                        input-class-name="datapicker-input"
-                        calendar-class-name="dp-custom-calendar"
-                        calendar-cell-class-name="dp-custom-cell"
+                        :input-class-name="
+                            isDarkTheme
+                                ? 'custom-dp-input dark-theme'
+                                : 'custom-dp-input light-theme'
+                        "
+                        calendar-class-name="custom-dp-calendar"
                         hide-input-icon
+                        :input-style="{ 'user-select': 'none' }"
                         @update:model-value="handleEndDate"
                     >
-                        <!-- убрать предварительную дату -->
-                        <template #action-preview=""> </template>
+                        <template #action-preview=""></template>
                     </VueDatePicker>
                 </div>
             </div>
@@ -340,32 +358,6 @@ function parseDate(dateStr) {
     font-family: Nunito;
     font-weight: 200;
     font-size: 16px;
-}
-
-:deep(.datapicker-input) {
-    color: #cccccc;
-    font-family: Rubik;
-    font-size: 16px;
-    font-weight: 300;
-    width: 156px;
-    height: 37px;
-    border-radius: 0px;
-}
-
-:deep(.datapicker-input:hover) {
-    border-color: rgb(0, 84, 255);
-}
-
-:deep(.dp-custom-calendar .dp__calendar_item) {
-    font-family: Rubik;
-}
-
-:deep(.dp-custom-cell:hover) {
-    background-color: rgb(0, 84, 255);
-}
-
-:deep(.dp__action_button) {
-    --dp-action-button-height: 25px;
 }
 
 .arrow-down-button {
