@@ -249,16 +249,8 @@ watch(
                         locale="ru"
                         cancel-text="Отмена"
                         select-text="Выбрать"
-                        :input-class-name="
-                            isDarkTheme
-                                ? 'custom-dp-input dark-theme'
-                                : 'custom-dp-input light-theme'
-                        "
-                        :calendar-class-name="
-                            isDarkTheme
-                                ? 'custom-dp-calendar dark-theme'
-                                : 'custom-dp-calendar light-theme'
-                        "
+                        input-class-name="custom-dp-input"
+                        calendar-class-name="custom-dp-calendar"
                         hide-input-icon
                         @update:model-value="handleStartDate"
                     >
@@ -273,16 +265,8 @@ watch(
                         locale="ru"
                         cancel-text="Отмена"
                         select-text="Выбрать"
-                        :input-class-name="
-                            isDarkTheme
-                                ? 'custom-dp-input dark-theme'
-                                : 'custom-dp-input light-theme'
-                        "
-                        :calendar-class-name="
-                            isDarkTheme
-                                ? 'custom-dp-calendar dark-theme'
-                                : 'custom-dp-calendar light-theme'
-                        "
+                        input-class-name="custom-dp-input"
+                        calendar-class-name="custom-dp-calendar"
                         hide-input-icon
                         @update:model-value="handleEndDate"
                     >

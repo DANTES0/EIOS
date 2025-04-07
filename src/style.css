@@ -57,10 +57,6 @@ html {
     flex-direction: column;
 }
 
-body * {
-    @apply transition-colors duration-300;
-}
-
 :root {
     --p-select-color: #ececec;
     --p-select-focus-border-color: #9d9da6;
@@ -100,35 +96,35 @@ body * {
     transition: border-color 0.1s;
 }
 
-.custom-dp-input.dark-theme {
+html.dark .custom-dp-input {
     --dp-text-color: #ccc;
     border: 1px solid #808080;
     --dp-bg-color: #1f1f1f;
 }
 
-.custom-dp-input.light-theme {
+.custom-dp-input {
     --dp-text-color: #d4d1d1;
     border: 1px solid #808080;
     --dp-bg-color: #ffffff09;
 }
 
-.custom-dp-input.dark-theme:hover {
+html.dark .custom-dp-input:hover {
     border-color: #0054ff;
 }
 
-.custom-dp-input.light-theme:hover {
+.custom-dp-input:hover {
     border-color: #0054ff;
 }
 
-.custom-dp-input.dark-theme:focus-visible {
+html.dark .custom-dp-input:focus-visible {
     outline: none;
 }
 
-.custom-dp-input.light-theme:focus-visible {
+.custom-dp-input:focus-visible {
     outline: none;
 }
 
-.custom-dp-calendar.dark-theme {
+html.dark .custom-dp-calendar {
     background-color: rgb(143, 143, 143) 7e7;
     font-family: Rubik;
 }
