@@ -131,7 +131,9 @@ watch(forceDelete, (newVal) => {
             class="select-pages-amount"
         >
             <div class="select-pages-amount-wrapper">
-                <label>Новостей на странице</label>
+                <label class="text-[#0c2340] dark:text-[#ffff]"
+                    >Новостей на странице</label
+                >
                 <Select
                     v-model="newsPerPage"
                     :options="newsPerPageOptions"
@@ -230,6 +232,42 @@ watch(forceDelete, (newVal) => {
 
 .news-select {
     margin-left: 10px;
+}
+
+.news-select {
+    margin-left: 10px;
+
+    --p-select-color: #0c2340;
+    --p-select-focus-border-color: #9d9da6;
+    --p-select-hover-border-color: #0c2340;
+    --p-select-background: transparent;
+    --p-select-border-radius: 0;
+    --p-select-overlay-background: red;
+    --p-select-overlay-border-radius: 0;
+    --p-select-overlay-border-color: red;
+    --p-select-option-selected-background: red;
+    --p-select-option-focus-background: red;
+    --p-select-option-selected-focus-background: red;
+    --p-overlay-select-background: red;
+    --p-select-option-group-background: 0;
+    --p-select-option-border-radius: 0;
+}
+
+html.dark .news-select {
+    --p-select-color: #ececec;
+    --p-select-focus-border-color: #9d9da6;
+    --p-select-hover-border-color: #9d9da6;
+    --p-select-background: transparent;
+    --p-select-border-radius: 0;
+    --p-select-overlay-background: #1f1f1f;
+    --p-select-overlay-border-radius: 0;
+    --p-select-overlay-border-color: #9d9da6;
+    --p-select-option-selected-background: rgb(0, 84, 255);
+    --p-select-option-focus-background: #343437;
+    --p-select-option-selected-focus-background: rgb(0, 84, 255);
+    --p-overlay-select-background: #27272a;
+    --p-select-option-group-background: 0;
+    --p-select-option-border-radius: 0;
 }
 
 .selected {
