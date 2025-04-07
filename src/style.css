@@ -58,6 +58,11 @@ html {
 }
 
 :root {
+    --p-progressspinner-color-one: rgb(0, 84, 255) !important;
+    --p-progressspinner-color-two: rgb(0, 84, 255) !important;
+    --p-progressspinner-color-three: rgb(0, 84, 255) !important;
+    --p-progressspinner-color-four: rgb(0, 84, 255) !important;
+
     --p-select-color: #ececec !important;
     --p-select-focus-border-color: #9d9da6 !important;
     --p-select-hover-border-color: #9d9da6 !important;
