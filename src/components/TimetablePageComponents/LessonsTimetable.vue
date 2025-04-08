@@ -152,20 +152,20 @@ onMounted(() => {
 
 .time-header {
     position: sticky;
-    left: 0;
+    left: -0.5px;
+    top: -0.5px;
     z-index: 20;
     padding: 8px;
     text-align: center;
     font-weight: bold;
     min-width: calc(115px * v-bind(scaleFactor));
     width: calc(115px * v-bind(scaleFactor));
-    top: 0;
     font-size: v-bind(headerFontSize);
 }
 
 .day-header {
     position: sticky;
-    top: 0;
+    top: -0.5px;
     z-index: 15;
     padding: 8px;
     text-align: center;
@@ -177,7 +177,7 @@ onMounted(() => {
 
 .time-slot {
     position: sticky;
-    left: 0;
+    left: -0.5px;
     z-index: 10;
     padding: 8px;
     text-align: center;
