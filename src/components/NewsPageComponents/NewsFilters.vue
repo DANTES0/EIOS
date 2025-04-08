@@ -4,6 +4,7 @@ import CustomCheckbox from './CustomCheckbox.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { useRouter, useRoute } from 'vue-router';
 import '@vuepic/vue-datepicker/dist/main.css';
+import { he } from 'date-fns/locale';
 
 const dateStart = ref(null);
 const dateEnd = ref(null);
@@ -198,7 +199,8 @@ watch(
 
     <!-- фильтры -->
     <div v-if="isShowFilters" class="filters">
-        <div class="filters-line" :style="{ height: filtersContentHeight + 'px' }"></div>
+        <!-- <div class="filters-line" :style="{ height: filtersContentHeight + 'px' }"></div> -->
+        <div class="filters-line"></div>
 
         <div class="filters-content">
             <!-- кнопка отрытия категорий -->
@@ -288,7 +290,7 @@ watch(
 .categories-line {
     margin-left: 17px;
     width: 1px;
-    height: 342px;
+    /* height: 342px; */
     background-color: rgb(0, 84, 255);
 }
 .data-line {

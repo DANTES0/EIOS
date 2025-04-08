@@ -48,13 +48,21 @@ onMounted(() => {
     <div class="timetable-container">
         <div class="table-wrapper">
             <div class="table-scroll-container">
-                <table class="schedule-table text-[#0c2340] dark:text-white border-separate border-spacing-0">
+                <table
+                    class="schedule-table text-[#0c2340] dark:text-white border-separate border-spacing-0"
+                >
                     <thead>
                         <tr>
-                            <th class="time-header bg-white dark:bg-[#1f1f1f] border !border-[#0C2340] dark:!border-[#cccccc]" z>
+                            <th
+                                class="time-header bg-white dark:bg-[#1f1f1f] border !border-[#0C2340] dark:!border-[#cccccc]"
+                            >
                                 Время
                             </th>
-                            <th v-for="day in days" :key="day" class="day-header bg-white dark:bg-[#1f1f1f] border !border-[#0C2340] dark:!border-[#cccccc]">
+                            <th
+                                v-for="day in days"
+                                :key="day"
+                                class="day-header bg-white dark:bg-[#1f1f1f] border !border-[#0C2340] dark:!border-[#cccccc]"
+                            >
                                 {{ day }}
                             </th>
                         </tr>
@@ -178,8 +186,8 @@ onMounted(() => {
     width: 115px;
     font-size: v-bind(fontSize);
     /* border: 1px solid rgba(221, 221, 221, 0.2); */
-    border-left: 1px solid rgba(221, 221, 221, 0.2);
-    border-bottom: 1px solid rgba(221, 221, 221, 0.2);
+    /* border-left: 1px solid rgba(221, 221, 221, 0.2);
+    border-bottom: 1px solid rgba(221, 221, 221, 0.2); */
 }
 
 .lesson-cell {
