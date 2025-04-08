@@ -5,14 +5,16 @@
 <template>
     <footer id="footer" class="footer">
         <!-- Верхняя часть футера -->
-        <div class="footer-top bg-white dark:bg-[#1f1f1f]">
-            <div class="footer-title">
-                <span class="title-voenmeh text-[#0c2340] dark:text-white"
-                    >БГТУ "ВОЕНМЕХ"</span
-                >
-                <span class="title-kafedra-o7 text-[#0c2340] dark:text-white"
-                    >Кафедра O7</span
-                >
+        <div class="footer-top-wrapper">
+            <div class="footer-top bg-white dark:bg-[#1f1f1f]">
+                <div class="footer-title">
+                    <span class="title-voenmeh text-[#0c2340] dark:text-white"
+                        >БГТУ "ВОЕНМЕХ"</span
+                    >
+                    <span class="title-kafedra-o7 text-[#0c2340] dark:text-white"
+                        >Кафедра O7</span
+                    >
+                </div>
             </div>
         </div>
 
@@ -100,12 +102,17 @@
     position: relative;
     margin-top: 80px;
     font-family: 'JetBrainsMono', monospace;
+    --footer-content-max-width: 1200px;
 }
 
 /* Верхняя часть с 
 названиями */
+.footer-top-wrapper {
+    display: block;
+    margin: 0 auto;
+    max-width: var(--footer-content-max-width);
+}
 .footer-top {
-    left: 35px;
     top: 40px;
     padding: 20px;
     display: flex;
@@ -140,15 +147,6 @@
     /* border-top-right-radius: 115px; */
     /* border-right: 1px solid white; */
     border-top: 1px solid white;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: space-between;
 }
 
 /* Контакты */
@@ -292,7 +290,7 @@
 }
 
 .footer-content {
-    max-width: 1200px;
+    max-width: var(--footer-content-max-width);
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
