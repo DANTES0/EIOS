@@ -20,13 +20,15 @@ const newsSliderImages = defineProps({
     },
 });
 
-const transitions = shallowReactive([{
-    component: Slide,
-    options: shallowReactive({
-        totalDuration: 1400,
-        easing: 'ease-in-out',
-    }),
-}]);
+const transitions = shallowReactive([
+    {
+        component: Slide,
+        options: shallowReactive({
+            totalDuration: 1400,
+            easing: 'ease-in-out',
+        }),
+    },
+]);
 
 const $vueFlux = ref();
 
@@ -36,10 +38,11 @@ const vfOptions = shallowReactive({
 
 // Создаем массив ресурсов из пропсов с динамически генерируемыми URL
 const vfRscs = computed(() =>
-    newsSliderImages.newsImages.map(image => {
+    newsSliderImages.newsImages.map((image) => {
         const imageUrl = `https://security-jwt.onrender.com/api/v1/image?fileName=${image.filename}&imageType=NewsImage`;
-        return new Img(imageUrl);  // Используем сформированный URL вместо импортированного пути
-    })
+
+        return new Img(imageUrl); // Используем сформированный URL вместо импортированного пути
+    }),
 );
 </script>
 

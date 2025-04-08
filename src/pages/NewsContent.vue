@@ -43,13 +43,14 @@ onMounted(() => {
                     :news-header-main-info="newsData.fullInformation"
                     :news-header-category="newsData.category"
                     :news-header-date="newsData.date"
+                    :news-images="newsData.images"
                 />
             </div>
 
             <!-- Slider -->
-            <div class="page-container-base-slider bg-gray-200 dark:bg-[#1f1f1f]">
+            <!-- <div class="page-container-base-slider bg-gray-200 dark:bg-[#1f1f1f]">
                 <NewsContentPageSlider :news-images="newsData.images" />
-            </div>
+            </div> -->
         </div>
     </div>
     <div v-else>
@@ -84,7 +85,8 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
 .page-container-base-slider {
