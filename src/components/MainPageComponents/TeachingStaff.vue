@@ -1,19 +1,19 @@
 <script setup>
 import PrepodavateliKafedriCarousel from './TeachingStaffСarousel.vue';
 import SectionTitle from './SectionTitle.vue';
+import NumberColumn from './NumberColumn.vue';
 </script>
 
 <template>
-    <div class="wrapper-prepod">
-        <div class="numbers-wrapper">
-            <div
-                v-for="i in 22"
-                :key="i"
-                class="numbers text-[#0C2340] dark:text-[#999999]"
-            >
-                {{ i }}
-            </div>
-        </div>
+    <div ref="wrapper" class="wrapper-prepod">
+        <NumberColumn
+            :item-height="36"
+            :vertical-padding="15"
+            :horizontal-padding="5"
+            :gap="0"
+            :max-numbers="50"
+            :observe-target="wrapper"
+        />
         <div id="prepod" class="content-prepod-wrapper bg-white dark:bg-[#1f1f1f]">
             <SectionTitle title="ПРЕПОДАВАТЕЛИ КАФЕДРЫ" :base-length="13" />
             <PrepodavateliKafedriCarousel></PrepodavateliKafedriCarousel>

@@ -315,7 +315,7 @@ onUnmounted(() => {
             />
         </div>
         <Footer />
-        <!-- <Terminal /> -->
+        <Terminal/>
         <div ref="contactsBlock" data-block-name="contacts" class="clp-cont"></div>
     </div>
 </template>

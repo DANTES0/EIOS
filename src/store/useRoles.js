@@ -27,6 +27,6 @@ export default function useRoles() {
         isAdmin,
         isStudent,
         isAdminOrTeacher,
-        isAnyRole
+        isAnyRole,
     };
 }

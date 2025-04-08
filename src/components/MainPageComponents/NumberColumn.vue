@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const props = defineProps({
     itemHeight: {
@@ -8,98 +8,71 @@ const props = defineProps({
     },
     verticalPadding: {
         type: Number,
-        default: 20, // Вертикальный отступ в px
+        default: 15, // Вертикальный отступ в px
     },
     horizontalPadding: {
         type: Number,
-        default: 10, // Горизонтальный отступ в px
+        default: 5, // Горизонтальный отступ в px
     },
     gap: {
         type: Number,
-        default: 8, // Отступ между числами в px
+        default: 0, // Отступ между числами в px
     },
     maxNumbers: {
         type: Number,
         default: 50, // Максимальное количество чисел
     },
-    // Новый параметр: множитель количества чисел при уменьшении экрана
     responsiveMultiplier: {
         type: Number,
-        default: 1.2, // Увеличиваем количество чисел на 20% при адаптивности
+        default: 1.2, // Множитель для адаптивности
+    },
+    observeTarget: {
+        type: Object, // ref на HTMLElement
+        default: null,
     },
 });
 
 const numbers = ref([]);
 const wrapperRef = ref(null);
-const windowWidth = ref(window.innerWidth);
-let resizeObserver = null;
-
-// Отслеживаем изменение ширины окна
-const updateWindowWidth = () => {
-    windowWidth.value = window.innerWidth;
-};
 
 // Рассчитываем количество чисел с учетом адаптивности
 const updateNumbers = () => {
-    if (!wrapperRef.value?.parentElement) return;
+    const target = props.observeTarget?.value || wrapperRef.value?.parentElement;
+    if (!target) return;
 
-    const parent = wrapperRef.value.parentElement;
-    const parentHeight = parent.clientHeight;
+    // Получаем высоту родительского блока с помощью getBoundingClientRect
+    const parentHeight = target.getBoundingClientRect().height;
+    console.log('👀 Родительская высота:', parentHeight);
 
-    // Доступная высота для чисел (общая высота минус отступы)
+    // Общая доступная высота, за вычетом вертикальных отступов
     const availableHeight = parentHeight - props.verticalPadding * 2;
+    console.log('📏 Доступная высота:', availableHeight);
 
-    // Базовое количество чисел без адаптивности
-    let numbersCount = Math.floor(availableHeight / (props.itemHeight + props.gap));
+    // Вычисляем количество элементов в зависимости от доступной высоты
+    let numbersCount = Math.floor(availableHeight / (props.itemHeight + props.gap +  props.verticalPadding));
+    console.log('📊 Количество элементов до округления:', availableHeight / (props.itemHeight + props.gap));
+    console.log('📏 Количество элементов (после округления):', numbersCount);
 
-    // Если экран узкий, увеличиваем количество чисел
-    if (windowWidth.value < 1024) {
-        // Например, для мобильных и планшетов
-        numbersCount = Math.floor(numbersCount * props.responsiveMultiplier);
-    }
-
-    // Ограничиваем максимумом
+    // Ограничиваем количество чисел максимальным значением
     numbersCount = Math.min(numbersCount, props.maxNumbers);
 
-    // Создаем массив чисел
-    numbers.value = Array.from({ length: numbersCount }, (_, i) => i + 1);
+    // Если вычисленное количество чисел меньше maxNumbers, заполняем массив
+    numbers.value = Array.from({ length: numbersCount + 1 }, (_, i) => i + 1);
+
+    console.log('⚙️ Числа обновлены:', numbers.value);
 };
 
 onMounted(() => {
-    updateNumbers();
-    window.addEventListener('resize', updateWindowWidth);
-
-    resizeObserver = new ResizeObserver(() => {
-        updateNumbers();
-    });
-
-    if (wrapperRef.value?.parentElement) {
-        resizeObserver.observe(wrapperRef.value.parentElement);
-    }
+    updateNumbers(); // Изначально обновляем числа только один раз
 });
-
-onUnmounted(() => {
-    window.removeEventListener('resize', updateWindowWidth);
-    resizeObserver?.disconnect();
-});
-
-// Следим за изменением ширины окна и обновляем числа
-watch(windowWidth, updateNumbers);
 </script>
 
 <template>
-    <div
-        ref="wrapperRef"
-        class="numbers-wrapper"
-        :style="{
-            padding: `${verticalPadding}px ${horizontalPadding}px`,
-            gap: `${gap}px`,
-        }"
-    >
+    <div ref="wrapperRef" class="numbers-wrapper">
         <div
             v-for="number in numbers"
             :key="number"
-            class="number-item"
+            class="number-item numbers text-[#0C2340] dark:text-[#999999]"
             :style="{ height: `${itemHeight}px` }"
         >
             {{ number }}
@@ -118,7 +91,7 @@ watch(windowWidth, updateNumbers);
 .number-item {
     display: flex;
     align-items: center;
-    font-family: monospace;
+    font-family: "JetBrainsMono";
     color: #0c2340;
 }
 
