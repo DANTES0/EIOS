@@ -16,6 +16,9 @@ export default function useRoles() {
 
     const isAdminOrTeacher = hasAnyRole(['ROLE_ADMIN', 'ROLE_TEACHER']);
 
+    const isAnyRole = hasAnyRole(['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']);
+
+
     return {
         roles,
         hasRole,
@@ -24,5 +27,6 @@ export default function useRoles() {
         isAdmin,
         isStudent,
         isAdminOrTeacher,
+        isAnyRole
     };
 }

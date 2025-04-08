@@ -27,7 +27,7 @@ const fetchTeacherDetails = async () => {
     console.log(response.data.value);
 };
 
-const { hasAnyRole } = useRoles();
+const { isAnyRole } = useRoles();
 
 onMounted(fetchTeacherDetails);
 </script>
@@ -58,7 +58,7 @@ onMounted(fetchTeacherDetails);
                             <li>{{ items.rank }}</li>
                         </ul>
                     </div>
-                    <div v-if="!hasAnyRole">
+                    <div v-if="isAnyRole">
                         <div class="flex flex-col w-[18%] mt-[37px]">
                             <div class="font-extrabold text-[20px]">Контакты</div>
                             <div class="w-full bg-[#0054FF] h-[2px]"></div>
@@ -108,7 +108,7 @@ onMounted(fetchTeacherDetails);
         <div
             class="flex flex-row text-gray-700 dark:text-white font-[JetBrainsMono] h-full mt-[44px]"
         >
-            <div v-if="!hasAnyRole" class="flex flex-col w-[48%]">
+            <div v-if="isAnyRole" class="flex flex-col w-[48%]">
                 <div
                     class="text-[28px] font-extrabold text-gray-700 dark:text-white mb-[35px]"
                 >
@@ -121,7 +121,7 @@ onMounted(fetchTeacherDetails);
                     <course-dropdown></course-dropdown>
                 </div>
             </div>
-            <div v-if="!hasAnyRole" class="h-[300px] w-[1px] mt-[100px] bg-white"></div>
+            <div v-if="isAnyRole" class="h-[300px] w-[1px] mt-[100px] bg-white"></div>
             <div class="flex flex-col w-[48%] ml-[70px]">
                 <div class="text-[28px] font-extrabold text-[#0c2340] dark:text-white">
                     Ближайшие консультации
