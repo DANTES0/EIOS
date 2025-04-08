@@ -47,11 +47,15 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div
-        class="wrapper-cifri bg-gray-200 dark:bg-[#181818]"
-    >
+    <div class="wrapper-cifri bg-gray-200 dark:bg-[#181818]">
         <div class="numbers-wrapper">
-            <div v-for="i in 18" :key="i" class="numbers text-[#3D3C3C] dark:text-[#999999]">{{ i }}</div>
+            <div
+                v-for="i in 18"
+                :key="i"
+                class="numbers text-[#3D3C3C] dark:text-[#999999]"
+            >
+                {{ i }}
+            </div>
         </div>
         <div id="cifri" class="content-cifri-wrapper">
             <SectionTitle title="КАФЕДРА В ЦИФРАХ" :base-length="10" />
@@ -61,9 +65,13 @@ onBeforeUnmount(() => {
             >
                 <div v-for="(item, i) in cifri" :key="i" class="cifri-block">
                     <div class="image-block-cifri">
-                        <h1 class="title-cifri text-[#3D3C3C] dark:text-white">{{ item.title }}</h1>
+                        <h1 class="title-cifri text-[#3D3C3C] dark:text-white">
+                            {{ item.title }}
+                        </h1>
                     </div>
-                    <h2 class="description-cifri text-[#3D3C3C] dark:text-white">{{ item.description }}</h2>
+                    <h2 class="description-cifri text-[#3D3C3C] dark:text-white">
+                        {{ item.description }}
+                    </h2>
                 </div>
             </div>
         </div>
@@ -152,7 +160,8 @@ onBeforeUnmount(() => {
     flex-direction: row;
     justify-content: start;
     align-items: start;
-    margin-top: 90px;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
 }
 .title-cifri {
     font-size: 48px;

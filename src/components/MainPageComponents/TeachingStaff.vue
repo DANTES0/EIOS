@@ -6,7 +6,13 @@ import SectionTitle from './SectionTitle.vue';
 <template>
     <div class="wrapper-prepod">
         <div class="numbers-wrapper">
-            <div v-for="i in 22" :key="i" class="numbers text-[#0C2340] dark:text-[#999999]">{{ i }}</div>
+            <div
+                v-for="i in 22"
+                :key="i"
+                class="numbers text-[#0C2340] dark:text-[#999999]"
+            >
+                {{ i }}
+            </div>
         </div>
         <div id="prepod" class="content-prepod-wrapper bg-white dark:bg-[#1f1f1f]">
             <SectionTitle title="ПРЕПОДАВАТЕЛИ КАФЕДРЫ" :base-length="13" />
@@ -23,6 +29,8 @@ import SectionTitle from './SectionTitle.vue';
     flex-direction: row;
     justify-content: start;
     align-items: start;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
 }
 .title-prepod {
     font-size: 48px;

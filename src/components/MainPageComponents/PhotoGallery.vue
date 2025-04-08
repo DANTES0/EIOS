@@ -141,9 +141,9 @@ const imageIsLoaded = (index) => {
                 <div
                     class="line-gradient bg-gradient-to-r from-[#ccc] via-[#1f1f1f] to-[#1f1f1f] dark:from-[#000000] dark:via-[#ffffff] dark:to-[#ffffff]"
                     :class="{
-        'gradient-active': gradientActive,
-        'gradient-active-left': gradientActiveLeft,
-    }"
+                        'gradient-active': gradientActive,
+                        'gradient-active-left': gradientActiveLeft,
+                    }"
                 ></div>
             </div>
 
@@ -245,6 +245,8 @@ const imageIsLoaded = (index) => {
     flex-direction: row;
     justify-content: start;
     align-items: start;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
 }
 
 .main-image-gallery {
@@ -263,7 +265,6 @@ const imageIsLoaded = (index) => {
 .content-gallery-wrapper {
     width: 100%;
     min-height: 550px; /* Минимальная высота */
-    padding: 20px 0;
 }
 
 :deep(.p-progressspinner-spin) {

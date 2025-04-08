@@ -80,7 +80,13 @@ onBeforeUnmount(() => {
 <template>
     <div class="news-wrapper bg-gray-200 dark:bg-[#181818]">
         <div class="numbers-wrapper">
-            <div v-for="i in 18" :key="i" class="numbers text-[#0C2340] dark:text-[#999999]">{{ i }}</div>
+            <div
+                v-for="i in 18"
+                :key="i"
+                class="numbers text-[#0C2340] dark:text-[#999999]"
+            >
+                {{ i }}
+            </div>
         </div>
         <div id="news" class="content-news-wrapper">
             <SectionTitle title="НОВОСТИ" />
@@ -114,10 +120,16 @@ onBeforeUnmount(() => {
                             <div
                                 class="btn-next-back-wrapper text-[#006AFF] dark:text-white"
                             >
-                                <button class="btn-news back border-[1px] border-[#006AFF] dark:border-[#999999]" @click="$emit('prev')">
+                                <button
+                                    class="btn-news back border-[1px] border-[#006AFF] dark:border-[#999999]"
+                                    @click="$emit('prev')"
+                                >
                                     НАЗАД
                                 </button>
-                                <button class="btn-news next border-[1px] border-[#006AFF] dark:border-[#999999]" @click="$emit('next')">
+                                <button
+                                    class="btn-news next border-[1px] border-[#006AFF] dark:border-[#999999]"
+                                    @click="$emit('next')"
+                                >
                                     ВПЕРЕД
                                 </button>
                             </div>
@@ -330,12 +342,14 @@ onBeforeUnmount(() => {
     flex-direction: row;
 }
 .news-wrapper {
-    height: 700px;
+    /* height: 700px; */
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: start;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
 }
 .title-news {
     font-size: 48px;

@@ -58,7 +58,8 @@ const TextKafedra = [
     width: 100%;
 }
 .wrapper {
-    padding-top: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1.25rem;
     height: auto; /* Уберите фиксированную высоту */
     min-height: 850px; /* Если нужно минимальное значение */
     width: 100%; /* Замените на 100vw для учета окна просмотра */
