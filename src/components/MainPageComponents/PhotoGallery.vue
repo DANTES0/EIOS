@@ -2,6 +2,7 @@
 import { ref, reactive } from 'vue';
 import ProgressSpinner from 'primevue/progressspinner';
 import SectionTitle from './SectionTitle.vue';
+import NumberColumn from './NumberColumn.vue';
 
 let prop = defineProps({
     id_photo: Number,
@@ -53,16 +54,15 @@ const imageIsLoaded = (index) => {
 </script>
 
 <template>
-    <div class="wrapper-gallery">
-        <div class="numbers-wrapper">
-            <div
-                v-for="i in 18"
-                :key="i"
-                class="numbers text-[#0C2340] dark:text-[#999999]"
-            >
-                {{ i }}
-            </div>
-        </div>
+    <div ref="wrapper" class="wrapper-gallery">
+        <NumberColumn
+            :item-height="36"
+            :vertical-padding="15"
+            :horizontal-padding="5"
+            :gap="0"
+            :max-numbers="50"
+            :observe-target="wrapper"
+        />
         <div class="content-gallery-wrapper bg-white dark:bg-[#1f1f1f]">
             <SectionTitle title="ФОТОГАЛЕРЕЯ" :base-length="7" />
 

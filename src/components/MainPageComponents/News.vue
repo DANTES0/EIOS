@@ -5,6 +5,7 @@ import NewsBlock from '/src/components/NewsPageComponents/NewsBlock.vue';
 import { useRouter } from 'vue-router';
 import theme from 'tailwindcss/defaultTheme.js';
 import SectionTitle from './SectionTitle.vue';
+import NumberColumn from './NumberColumn.vue';
 
 const blockWidth = ref('540px');
 const blockHeight = ref('395px');
@@ -78,16 +79,15 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="news-wrapper bg-gray-200 dark:bg-[#181818]">
-        <div class="numbers-wrapper">
-            <div
-                v-for="i in 18"
-                :key="i"
-                class="numbers text-[#0C2340] dark:text-[#999999]"
-            >
-                {{ i }}
-            </div>
-        </div>
+    <div ref="wrapper" class="news-wrapper bg-gray-200 dark:bg-[#181818]">
+        <NumberColumn
+            :item-height="36"
+            :vertical-padding="15"
+            :horizontal-padding="5"
+            :gap="0"
+            :max-numbers="50"
+            :observe-target="wrapper"
+        />
         <div id="news" class="content-news-wrapper">
             <SectionTitle title="НОВОСТИ" />
             <div v-if="areLoading" class="spinner-container">

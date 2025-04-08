@@ -32,16 +32,20 @@ const changeTheme = () => {
     if (theme.value === 'dark') {
         localStorage.setItem('theme', 'light');
         document.body.classList.remove('dark');
-        document.body.classList.add('light');
+        document.documentElement.classList.remove('dark'); // Убираем с html
+        console.log(localStorage.getItem('theme'));
         theme.value = 'light';
+        window.dispatchEvent(new CustomEvent('theme-changed'));
     } else {
         localStorage.setItem('theme', 'dark');
-        document.body.classList.remove('light');
-        document.body.classList.add('dark');
+        console.log(localStorage.getItem('theme'));
+        setTimeout(() => {
+            document.body.classList.add('dark');
+            document.documentElement.classList.add('dark'); // Добавляем к html
+        }, 0);
         theme.value = 'dark';
+        window.dispatchEvent(new CustomEvent('theme-changed'));
     }
-
-    window.dispatchEvent(new CustomEvent('theme-changed'));
 };
 </script>
 

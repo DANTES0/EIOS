@@ -1,6 +1,7 @@
 <script setup>
 import SectionTitle from './SectionTitle.vue';
 import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue';
+import NumberColumn from './NumberColumn.vue';
 
 const cifri = [
     {
@@ -47,16 +48,15 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="wrapper-cifri bg-gray-200 dark:bg-[#181818]">
-        <div class="numbers-wrapper">
-            <div
-                v-for="i in 18"
-                :key="i"
-                class="numbers text-[#3D3C3C] dark:text-[#999999]"
-            >
-                {{ i }}
-            </div>
-        </div>
+    <div ref="wrapper" class="wrapper-cifri bg-gray-200 dark:bg-[#181818]">
+        <NumberColumn
+            :item-height="36"
+            :vertical-padding="15"
+            :horizontal-padding="5"
+            :gap="0"
+            :max-numbers="50"
+            :observe-target="wrapper"
+        />
         <div id="cifri" class="content-cifri-wrapper">
             <SectionTitle title="КАФЕДРА В ЦИФРАХ" :base-length="10" />
             <div

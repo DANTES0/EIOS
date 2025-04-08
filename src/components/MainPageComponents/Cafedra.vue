@@ -2,6 +2,9 @@
 import KafedraText from './CafedraText.vue';
 import SectionTitle from './SectionTitle.vue';
 import NumberColumn from './NumberColumn.vue';
+import { ref } from 'vue';
+
+const wrapper = ref(null);
 
 const TextKafedra = [
     {
@@ -23,23 +26,15 @@ const TextKafedra = [
 </script>
 
 <template>
-    <div class="wrapper flex flex-col md:flex-row items-start">
-        <!-- <NumberColumn
+    <div ref="wrapper" class="wrapper flex flex-col md:flex-row items-start">
+        <NumberColumn
             :item-height="36"
-            :vertical-padding="20"
-            :horizontal-padding="10"
-            :gap="8"
+            :vertical-padding="15"
+            :horizontal-padding="5"
+            :gap="0"
             :max-numbers="50"
-        /> -->
-        <div class="numbers-wrapper">
-            <div
-                v-for="i in 25"
-                :key="i"
-                class="numbers text-[#0C2340] dark:text-[#999999]"
-            >
-                {{ i }}
-            </div>
-        </div>
+            :observe-target="wrapper"
+        />
         <div id="kafedra" class="content-kafedra-wrapper">
             <SectionTitle title="КАФЕДРА" />
             <KafedraText
