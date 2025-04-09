@@ -102,7 +102,7 @@
     position: relative;
     margin-top: 80px;
     font-family: 'JetBrainsMono', monospace;
-    --footer-content-max-width: 1200px;
+    --footer-content-max-width: 1100px;
 }
 
 /* Верхняя часть с 
