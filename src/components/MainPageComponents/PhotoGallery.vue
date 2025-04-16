@@ -138,13 +138,13 @@ const imageIsLoaded = (index) => {
                     ></div>
                 </div>
 
-                <div
+                <!-- <div
                     class="line-gradient bg-gradient-to-r from-[#ccc] via-[#1f1f1f] to-[#1f1f1f] dark:from-[#000000] dark:via-[#ffffff] dark:to-[#ffffff]"
                     :class="{
                         'gradient-active': gradientActive,
                         'gradient-active-left': gradientActiveLeft,
                     }"
-                ></div>
+                ></div> -->
             </div>
 
             <div v-else class="error-message">

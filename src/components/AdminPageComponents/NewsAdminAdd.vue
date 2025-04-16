@@ -1,5 +1,5 @@
 <script setup>
-import NewsContentHeader from '../NewsContentPageComponents/NewsContentHeader.vue';
+import NewsContentHeader from '../NewsContentPageComponents/NewsContentHeaderOLD.vue';
 import { ref } from 'vue';
 import 'vue3-select-component/dist/style.css';
 import VueSelect from 'vue3-select-component';
@@ -124,6 +124,7 @@ const giveMeAllArea = async () => {
 
     // Логируем содержимое formData для отладки
     console.log('Отправляемые данные:');
+
     for (const [key, value] of formData.entries()) {
         if (value instanceof File) {
             console.log(`${key}: [File] ${value.name}`);

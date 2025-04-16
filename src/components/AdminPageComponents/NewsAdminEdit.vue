@@ -1,5 +1,5 @@
 <script setup>
-import NewsContentHeader from '../NewsContentPageComponents/NewsContentHeader.vue';
+import NewsContentHeader from '../NewsContentPageComponents/NewsContentHeaderOLD.vue';
 import { onMounted, ref } from 'vue';
 import 'vue3-select-component/dist/style.css';
 import VueSelect from 'vue3-select-component';
@@ -10,7 +10,8 @@ import router from '../../router/routes.js';
 import { authState } from '../../authState.js';
 import { useRoute } from 'vue-router';
 import { parse } from 'date-fns';
-import QuillEditorComponent from './quillEditorComponent.vue';
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const array = ref([]);
 const categories = ref([
@@ -211,7 +212,9 @@ const handleOptionSelected = (option) => {
             <div class="headerAddEdit">
                 <div class="headerArticle">
                     <div class="title-header">Заголовок</div>
-                    <textarea v-model="headLine" type="text" class="inputArticle input">{{ headLine }}</textarea>
+                    <textarea v-model="headLine" type="text" class="inputArticle input">{{
+                        headLine
+                    }}</textarea>
                 </div>
             </div>
             <div class="category-date">
@@ -252,8 +255,9 @@ const handleOptionSelected = (option) => {
         <div class="EditMainText">
             <QuillEditor
                 v-model:content="mainInfo"
-                content-type="html"
+                content-type="text"
                 theme="snow"
+                toolbar="full"
             ></QuillEditor>
         </div>
         <div class="editPhoto">
@@ -281,7 +285,7 @@ const handleOptionSelected = (option) => {
         <div class="enterBlo">
             <div class="checkNews">
                 <div class="checkNewsTitle">Отображать новость на главной странице?</div>
-                <input type="checkbox" v-model="cover" class="checkbox" />
+                <input v-model="cover" type="checkbox" class="checkbox" />
             </div>
             <div class="buttons">
                 <button class="btn" @click="router.back()">Отменить</button>

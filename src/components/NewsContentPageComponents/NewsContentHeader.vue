@@ -27,7 +27,6 @@ const newsHeaderData = defineProps({
     newsHeaderDate: { type: Date, default: new Date() },
     newsImages: {
         type: Array,
-        required: true, // Убедимся, что пропс обязателен
     },
 });
 
