@@ -54,14 +54,14 @@ onMounted(() => {
                     <thead>
                         <tr>
                             <th
-                                class="time-header bg-white dark:bg-[#1f1f1f] border !border-[#0C2340] dark:!border-[#cccccc]"
+                                class="time-header bg-white dark:bg-[#1f1f1f] !border-[#0C2340] dark:!border-[#cccccc]"
                             >
                                 Время
                             </th>
                             <th
                                 v-for="day in days"
                                 :key="day"
-                                class="day-header bg-white dark:bg-[#1f1f1f] border !border-[#0C2340] dark:!border-[#cccccc]"
+                                class="day-header bg-white dark:bg-[#1f1f1f] !border-[#0C2340] dark:!border-[#cccccc]"
                             >
                                 {{ day }}
                             </th>
@@ -81,7 +81,7 @@ onMounted(() => {
                             }"
                         >
                             <td
-                                class="time-slot border !border-[#0C2340] dark:!border-[#cccccc] p-1.5 min-w-[215px] w-[215px]"
+                                class="time-slot !border-[#0C2340] dark:!border-[#cccccc] p-1.5 min-w-[215px] w-[215px]"
                                 :class="{
                                     'bg-white dark:bg-[#1f1f1f]':
                                         isEven === null || isEven !== (i % 2 !== 0),
@@ -97,7 +97,7 @@ onMounted(() => {
                             <td
                                 v-for="(lesson, j) in row"
                                 :key="j"
-                                class="lesson-cell border border-[#0C2340] dark:!border-[#cccccc] p-1.5 min-w-[215px] w-[215px]"
+                                class="lesson-cell border-[#0C2340] dark:!border-[#cccccc] p-1.5 min-w-[215px] w-[215px]"
                             >
                                 <LessonCell
                                     :lesson="lesson"
@@ -151,9 +151,13 @@ onMounted(() => {
 }
 
 .time-header {
+    /* ==================================== */
     position: sticky;
-    left: -0.5px;
-    top: -0.5px;
+    left: 0px;
+    top: 0px;
+    border: solid 1px;
+    /* ==================================== */
+
     z-index: 20;
     padding: 8px;
     text-align: center;
@@ -164,8 +168,13 @@ onMounted(() => {
 }
 
 .day-header {
+    /* ==================================== */
     position: sticky;
-    top: -0.5px;
+    top: 0px;
+    border: solid 1px;
+    border-left: 0;
+    /* ==================================== */
+
     z-index: 15;
     padding: 8px;
     text-align: center;
@@ -176,8 +185,13 @@ onMounted(() => {
 }
 
 .time-slot {
+    /* ==================================== */
     position: sticky;
-    left: -0.5px;
+    left: 0;
+    border: solid 1px;
+    border-top: none;
+    /* ==================================== */
+
     z-index: 10;
     padding: 8px;
     text-align: center;
@@ -191,6 +205,12 @@ onMounted(() => {
 }
 
 .lesson-cell {
+    /* ==================================== */
+    border: solid 1px;
+    border-top: none;
+    border-left: none;
+    /* ==================================== */
+
     padding: 6px;
     min-width: 215px;
     width: 215px;
@@ -223,7 +243,6 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     min-width: 900px; /* Минимальная ширина для читаемости */
-    border-collapse: collapse;
     table-layout: fixed;
 }
 
